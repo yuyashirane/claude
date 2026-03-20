@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find /c/Users/yuya_/claude -type f -name *accounting* -o -name *tax* -name *finance* -o -name *consumption* -o -name *audit*)",
+      "mcp__freee__freee_auth_status",
+      "mcp__freee__freee_current_user",
+      "mcp__freee-mcp__freee_auth_status",
+      "mcp__freee-mcp__freee_current_user",
+      "mcp__freee__freee_api_list_paths",
+      "mcp__freee__freee_list_companies",
+      "mcp__freee__freee_api_get",
+      "mcp__freee-mcp__freee_set_current_company",
+      "Bash(npm init:*)",
+      "Bash(npm install:*)",
+      "Bash(node -e \":*)",
+      "Bash(node scripts/generate-audit-report.js)",
+      "Bash(node scripts/03-analyze-financials.js data/474381/2026-03-20)",
+      "Bash(node scripts/04-generate-report.js data/474381/2026-03-20)",
+      "Bash(node scripts/02-analyze-transactions.js data/474381/2026-03-20)",
+      "Read(//c/tmp/**)",
+      "Bash(npm list:*)",
+      "Bash(node create_audit.js)"
+    ]
+  }
+}
