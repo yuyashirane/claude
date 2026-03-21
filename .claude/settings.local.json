@@ -19,7 +19,16 @@
       "Bash(node scripts/02-analyze-transactions.js data/474381/2026-03-20)",
       "Read(//c/tmp/**)",
       "Bash(npm list:*)",
-      "Bash(node create_audit.js)"
+      "Bash(node create_audit.js)",
+      "mcp__freee__freee_clear_auth",
+      "mcp__freee__freee_authenticate",
+      "mcp__freee__freee_set_current_company",
+      "Bash(find /c/Users/yuya_/claude -type f -name *SKILL* -o -name *skill*)",
+      "Bash(find /c/Users/yuya_/claude -type f -name *.md)",
+      "Bash(find /c/Users/yuya_/claude -type f \\\\\\(-name *.md -o -name *.txt \\\\\\))",
+      "Bash(xargs grep:*)",
+      "Bash(node -c scripts/lib/overseas-services.js)",
+      "Bash(node -c scripts/05-check-overseas-services.js)"
     ]
   }
 }
