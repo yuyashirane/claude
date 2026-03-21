@@ -2,16 +2,20 @@
 /**
  * daily-standup.js
  * 毎朝の業務開始時に使うデイリースタンドアップアシスタント。
- * Claude と会話しながら今日の仕事を整理できます。
+ * Google カレンダー（SY_白根 / _共通）の予定を取得して Claude と一緒に1日を整理します。
  *
  * 使い方: node scripts/daily-standup.js
  * 終了:   "quit" または "exit" と入力
+ *
+ * 初回セットアップ（Google Calendar 連携）:
+ *   → scripts/lib/google-calendar.js のコメントを参照
  */
 
 "use strict";
 
 const readline = require("readline");
 const Anthropic = require("@anthropic-ai/sdk");
+const { getEventsForDate, formatEventsAsText } = require("./lib/google-calendar");
 
 const client = new Anthropic.default();
 
@@ -20,11 +24,13 @@ const SYSTEM_PROMPT = `あなたは毎朝の業務開始を支援する「デイ
 
 【役割】
 1. スタンドアップ進行: 昨日の振り返り・今日のタスク・ブロッカーをヒアリングして整理する
-2. タスク優先度の整理: 今日やるべきことを重要度・緊急度で整理してアドバイスする
-3. ディスカッションパートナー: 迷っていることや悩みを一緒に考える
+2. カレンダー活用: 提供された今日のスケジュールをもとに、会議の準備や時間の使い方をアドバイスする
+3. タスク優先度の整理: 今日やるべきことを重要度・緊急度で整理してアドバイスする
+4. ディスカッションパートナー: 迷っていることや悩みを一緒に考える
 
 【進め方】
-- セッション開始時は挨拶と今日の日付・曜日を伝え、スタンドアップの3つの質問を案内する
+- セッション開始時は挨拶と今日の日付・曜日を伝え、カレンダー情報があれば自然に触れる
+- スタンドアップの3つの質問（昨日・今日・ブロッカー）を案内する
 - ユーザーの回答に応じて自然に深掘りしたり、別の視点を提供する
 - タスクが出揃ったら「本日のサマリー」として整理して見せる
 - ユーザーが「サマリー」「まとめて」「今日の予定」などと言ったらいつでもサマリーを出す
@@ -61,6 +67,26 @@ async function streamResponse(messages) {
   return fullText;
 }
 
+/**
+ * Google カレンダーから今日の予定を取得してテキストに変換する。
+ * 認証情報がない場合や取得失敗時は null を返す（スタンドアップは続行する）。
+ */
+async function fetchTodayCalendar(date) {
+  try {
+    const { events, calendarNames } = await getEventsForDate(date);
+    return formatEventsAsText(date, events, calendarNames);
+  } catch (err) {
+    if (err.message.includes("credentials.json")) {
+      console.warn("\n⚠️  Google Calendar 未設定: " + err.message.split("\n")[0]);
+      console.warn("カレンダー連携なしでスタンドアップを続行します。\n");
+    } else {
+      console.warn("\n⚠️  カレンダー取得エラー:", err.message);
+      console.warn("カレンダー連携なしでスタンドアップを続行します。\n");
+    }
+    return null;
+  }
+}
+
 async function main() {
   const rl = readline.createInterface({
     input: process.stdin,
@@ -70,13 +96,11 @@ async function main() {
 
   const conversationHistory = [];
 
-  // 入力を1行ずつ取得するためのPromiseラッパー
   const askUser = (prompt) =>
     new Promise((resolve) => {
       if (process.stdin.isTTY) {
         rl.question(prompt, resolve);
       } else {
-        // 非TTY（パイプ等）の場合
         rl.once("line", resolve);
         process.stdout.write(prompt);
       }
@@ -87,19 +111,29 @@ async function main() {
   console.log("=".repeat(60));
   console.log('終了するには "quit" または "exit" と入力してください。\n');
 
-  // 今日の日付を渡して最初の挨拶を生成
-  const today = new Date().toLocaleDateString("ja-JP", {
+  const today = new Date();
+  const todayStr = today.toLocaleDateString("ja-JP", {
     year: "numeric",
     month: "long",
     day: "numeric",
     weekday: "long",
   });
 
-  const openingMessage = {
-    role: "user",
-    content: `今日は${today}です。デイリースタンドアップを始めてください。`,
-  };
-  conversationHistory.push(openingMessage);
+  // カレンダー取得（失敗してもスタンドアップは続行）
+  process.stdout.write("📅 カレンダーを取得中...");
+  const calendarText = await fetchTodayCalendar(today);
+  if (calendarText) {
+    process.stdout.write(" 完了\n\n");
+  } else {
+    process.stdout.write("\n");
+  }
+
+  // 最初のメッセージにカレンダー情報を含める
+  const openingContent = calendarText
+    ? `今日は${todayStr}です。\n\n以下が今日のカレンダー情報です:\n${calendarText}\nデイリースタンドアップを始めてください。`
+    : `今日は${todayStr}です。デイリースタンドアップを始めてください。`;
+
+  conversationHistory.push({ role: "user", content: openingContent });
 
   const opening = await streamResponse(conversationHistory);
   conversationHistory.push({ role: "assistant", content: opening });
