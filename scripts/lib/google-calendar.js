@@ -2,104 +2,34 @@
  * google-calendar.js
  * Google Calendar API ヘルパー
  *
- * 初回セットアップ:
- *   1. https://console.cloud.google.com/ でプロジェクトを作成
- *   2. Google Calendar API を有効化
- *   3. OAuth2 認証情報（デスクトップアプリ）を作成し credentials.json をこのリポジトリのルートに置く
- *   4. 初回実行時にブラウザで認証 → token.json が自動生成される
+ * 認証は google-auth.js の共通モジュールを使用。
+ * 対象カレンダー: SY_白根 / _共通
  */
 
 "use strict";
 
-const fs = require("fs");
-const path = require("path");
 const { google } = require("googleapis");
-const readline = require("readline");
-
-const ROOT = path.join(__dirname, "..", "..");
-const CREDENTIALS_PATH = path.join(ROOT, "credentials.json");
-const TOKEN_PATH = path.join(ROOT, "token.json");
+const { getAuthClient } = require("./google-auth");
 
 // 取得する予定の対象カレンダー名（部分一致）
 const TARGET_CALENDAR_NAMES = ["SY_白根", "_共通"];
 
-const SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
-
 /**
- * OAuth2 クライアントを初期化して返す
- */
-async function getAuthClient() {
-  if (!fs.existsSync(CREDENTIALS_PATH)) {
-    throw new Error(
-      `credentials.json が見つかりません: ${CREDENTIALS_PATH}\n` +
-        "Google Cloud Console で OAuth2 認証情報を作成し、credentials.json をリポジトリルートに置いてください。\n" +
-        "詳細: https://developers.google.com/calendar/api/quickstart/nodejs"
-    );
-  }
-
-  const credentials = JSON.parse(fs.readFileSync(CREDENTIALS_PATH, "utf8"));
-  const { client_secret, client_id, redirect_uris } =
-    credentials.installed || credentials.web;
-  const oAuth2Client = new google.auth.OAuth2(
-    client_id,
-    client_secret,
-    redirect_uris[0]
-  );
-
-  if (fs.existsSync(TOKEN_PATH)) {
-    oAuth2Client.setCredentials(JSON.parse(fs.readFileSync(TOKEN_PATH, "utf8")));
-    return oAuth2Client;
-  }
-
-  return await authorizeNewToken(oAuth2Client);
-}
-
-/**
- * 初回認証フロー（ブラウザ → コード入力）
- */
-async function authorizeNewToken(oAuth2Client) {
-  const authUrl = oAuth2Client.generateAuthUrl({
-    access_type: "offline",
-    scope: SCOPES,
-  });
-
-  console.log("\n[Google Calendar 認証]\nブラウザで以下のURLを開いてください:\n");
-  console.log(authUrl);
-  console.log();
-
-  const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
-  const code = await new Promise((resolve) => {
-    rl.question("認証後に表示されたコードを入力してください: ", (c) => {
-      rl.close();
-      resolve(c.trim());
-    });
-  });
-
-  const { tokens } = await oAuth2Client.getToken(code);
-  oAuth2Client.setCredentials(tokens);
-  fs.writeFileSync(TOKEN_PATH, JSON.stringify(tokens));
-  console.log("認証完了。token.json を保存しました。\n");
-  return oAuth2Client;
-}
-
-/**
- * カレンダー一覧を取得し、ターゲット名に一致するものを返す
+ * カレンダー一覧からターゲット名に一致するものを返す
  */
 async function getTargetCalendars(auth) {
   const calendar = google.calendar({ version: "v3", auth });
   const res = await calendar.calendarList.list();
   const items = res.data.items || [];
   return items.filter((cal) =>
-    TARGET_CALENDAR_NAMES.some((name) =>
-      (cal.summary || "").includes(name)
-    )
+    TARGET_CALENDAR_NAMES.some((name) => (cal.summary || "").includes(name))
   );
 }
 
 /**
  * 指定日の予定一覧を取得する
  * @param {Date} date - 対象日
- * @returns {Array<{calendar, title, start, end, allDay, location, description}>}
+ * @returns {{events: Array, calendarNames: string[]}}
  */
 async function getEventsForDate(date) {
   const auth = await getAuthClient();
