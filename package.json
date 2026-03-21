@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/yuyashirane/claude#readme",
   "dependencies": {
+    "@anthropic-ai/sdk": "^0.80.0",
     "exceljs": "^4.4.0"
   }
 }
