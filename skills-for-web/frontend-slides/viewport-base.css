@@ -1,0 +1,260 @@
+/*
+ * viewport-base.css
+ * Base styles for viewport-relative slide layouts.
+ * Inline this entire block inside <style> in the generated HTML.
+ *
+ * Design constraints:
+ *   - Slides are 16:9 aspect ratio, full-viewport
+ *   - All sizing uses clamp() with vw/vh anchors so the deck looks
+ *     identical at any screen size without media queries
+ *   - Font sizes fall back to px minimums for very small viewports
+ */
+
+/* ── Reset ──────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  font-family: var(--font, system-ui, sans-serif);
+  background: var(--bg, #0d0d0d);
+  color: var(--text, #f0f0f0);
+}
+
+/* ── Slide Stage ────────────────────────────────────────── */
+.stage {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Individual Slide ───────────────────────────────────── */
+.slide {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: clamp(2rem, 5vw, 6rem) clamp(2.5rem, 7vw, 8rem);
+  background: var(--bg, #0d0d0d);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  will-change: opacity, transform;
+}
+
+.slide.active {
+  opacity: 1;
+  pointer-events: auto;
+  z-index: 1;
+}
+
+/* ── Typography ─────────────────────────────────────────── */
+.slide h1 {
+  font-size: var(--heading-size, clamp(2rem, 4vw, 3.5rem));
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--text, #f0f0f0);
+  margin-bottom: clamp(0.75rem, 1.5vh, 1.5rem);
+  max-width: 85%;
+}
+
+.slide h2 {
+  font-size: clamp(1.4rem, 3vw, 2.4rem);
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--text, #f0f0f0);
+  margin-bottom: clamp(0.5rem, 1vh, 1rem);
+}
+
+.slide h3 {
+  font-size: clamp(1.1rem, 2.2vw, 1.8rem);
+  font-weight: 600;
+  color: var(--accent, #6c63ff);
+  margin-bottom: clamp(0.4rem, 0.8vh, 0.8rem);
+}
+
+.slide p,
+.slide li {
+  font-size: var(--body-size, clamp(1rem, 1.8vw, 1.4rem));
+  line-height: 1.65;
+  color: var(--text, #f0f0f0);
+  max-width: 72ch;
+}
+
+.slide ul,
+.slide ol {
+  padding-left: 1.4em;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.4rem, 0.8vh, 0.9rem);
+  margin-top: clamp(0.5rem, 1vh, 1.2rem);
+}
+
+.slide li::marker {
+  color: var(--accent, #6c63ff);
+}
+
+.slide .label {
+  font-size: clamp(0.7rem, 1.2vw, 0.9rem);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent, #6c63ff);
+  margin-bottom: clamp(0.5rem, 1vh, 1rem);
+}
+
+/* ── Accent / Highlight ─────────────────────────────────── */
+.accent  { color: var(--accent, #6c63ff); }
+.muted   { color: var(--text-muted, #888); }
+.em      { font-style: italic; }
+.strong  { font-weight: 700; }
+
+mark {
+  background: var(--accent, #6c63ff);
+  color: var(--bg, #0d0d0d);
+  padding: 0 0.25em;
+  border-radius: 3px;
+}
+
+/* ── Code ───────────────────────────────────────────────── */
+code {
+  font-family: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', monospace;
+  font-size: 0.85em;
+  background: var(--surface, #1a1a1a);
+  border: 1px solid var(--border, #2e2e2e);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+}
+
+pre {
+  background: var(--surface, #1a1a1a);
+  border: 1px solid var(--border, #2e2e2e);
+  border-radius: var(--radius, 12px);
+  padding: clamp(1rem, 2vw, 2rem);
+  overflow-x: auto;
+  font-size: clamp(0.75rem, 1.3vw, 1rem);
+  line-height: 1.6;
+  width: 100%;
+  max-width: 100%;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* ── Cards / Surface ────────────────────────────────────── */
+.card {
+  background: var(--surface, #1a1a1a);
+  border: 1px solid var(--border, #2e2e2e);
+  border-radius: var(--radius, 12px);
+  padding: clamp(1rem, 2vw, 2rem);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(clamp(160px, 22vw, 280px), 1fr));
+  gap: clamp(0.75rem, 1.5vw, 1.5rem);
+  width: 100%;
+  margin-top: clamp(1rem, 2vh, 2rem);
+}
+
+/* ── Two-column split ───────────────────────────────────── */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 4vw, 5rem);
+  width: 100%;
+  align-items: start;
+}
+
+.split.wide-left  { grid-template-columns: 3fr 2fr; }
+.split.wide-right { grid-template-columns: 2fr 3fr; }
+
+/* ── Full-bleed image ───────────────────────────────────── */
+.slide.image-right {
+  flex-direction: row;
+}
+
+.slide.image-right .content {
+  flex: 0 0 55%;
+  padding-right: clamp(2rem, 3vw, 4rem);
+}
+
+.slide.image-right .image {
+  flex: 1;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius, 12px);
+}
+
+/* ── Slide number ───────────────────────────────────────── */
+.slide-number {
+  position: fixed;
+  bottom: clamp(1rem, 2vh, 1.8rem);
+  right: clamp(1.2rem, 2.5vw, 2rem);
+  font-size: clamp(0.65rem, 1vw, 0.85rem);
+  color: var(--text-muted, #888);
+  z-index: 100;
+  letter-spacing: 0.06em;
+}
+
+/* ── Navigation buttons ─────────────────────────────────── */
+.nav {
+  position: fixed;
+  bottom: clamp(1rem, 2vh, 1.8rem);
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: clamp(0.5rem, 1vw, 1rem);
+  z-index: 100;
+}
+
+.nav button {
+  background: var(--surface, #1a1a1a);
+  border: 1px solid var(--border, #2e2e2e);
+  color: var(--text, #f0f0f0);
+  padding: clamp(0.4rem, 0.8vh, 0.7rem) clamp(0.8rem, 1.5vw, 1.4rem);
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: clamp(0.75rem, 1.2vw, 1rem);
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.nav button:hover {
+  background: var(--accent, #6c63ff);
+  border-color: var(--accent, #6c63ff);
+}
+
+/* ── Progress bar ───────────────────────────────────────── */
+.progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: var(--accent, #6c63ff);
+  transition: width 0.4s ease;
+  z-index: 200;
+}
+
+/* ── Utility ────────────────────────────────────────────── */
+.text-center { text-align: center; align-items: center; }
+.text-right  { text-align: right;  align-items: flex-end; }
+.full-width  { width: 100%; }
+.gap-sm      { gap: clamp(0.5rem, 1vh, 0.8rem); }
+.gap-md      { gap: clamp(1rem, 2vh, 1.5rem); }
+.gap-lg      { gap: clamp(1.5rem, 3vh, 2.5rem); }
+.mt-sm       { margin-top: clamp(0.5rem, 1vh, 0.8rem); }
+.mt-md       { margin-top: clamp(1rem, 2vh, 1.5rem); }
+.mt-lg       { margin-top: clamp(1.5rem, 3vh, 2.5rem); }
