@@ -109,7 +109,7 @@ class ReportGenerator {
     // ============================================================
     // ファイル保存
     // ============================================================
-    const outputDir = path.join('C:', 'Users', 'yuya_', 'claude', 'reports');
+    const outputDir = path.join(this.dataDir, '..', '..', '..', 'reports');
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
