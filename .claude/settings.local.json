@@ -28,7 +28,15 @@
       "Bash(find /c/Users/yuya_/claude -type f \\\\\\(-name *.md -o -name *.txt \\\\\\))",
       "Bash(xargs grep:*)",
       "Bash(node -c scripts/lib/overseas-services.js)",
-      "Bash(node -c scripts/05-check-overseas-services.js)"
+      "Bash(node -c scripts/05-check-overseas-services.js)",
+      "Bash(python3 -c:*)",
+      "Bash(node -e:*)",
+      "Bash(cp \"/c/Users/yuya_/claude/tmp_bookkeeping_skill.md\" \"/c/Users/yuya_/.claude/skills/bookkeeping-checklist/SKILL.md\")",
+      "Bash(cp \"/c/Users/yuya_/claude/tmp_tax_rules_skill.md\" \"/c/Users/yuya_/.claude/skills/tax-rules/SKILL.md\")",
+      "Bash(cp \"/c/Users/yuya_/claude/tmp_finance_skill.md\" \"/c/Users/yuya_/.claude/skills/finance-analyzer/SKILL.md\")",
+      "Bash(ls -la \"/c/Users/yuya_/.claude/skills/\"*/SKILL.md)",
+      "Bash(explorer.exe \"C:\\\\Users\\\\yuya_\\\\claude\\\\skills-for-web\")",
+      "Bash(cmd.exe /c \"explorer C:\\\\Users\\\\yuya_\\\\claude\\\\skills-for-web\")"
     ]
   }
 }
