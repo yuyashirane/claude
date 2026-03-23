@@ -36,7 +36,8 @@
       "Bash(cp \"/c/Users/yuya_/claude/tmp_finance_skill.md\" \"/c/Users/yuya_/.claude/skills/finance-analyzer/SKILL.md\")",
       "Bash(ls -la \"/c/Users/yuya_/.claude/skills/\"*/SKILL.md)",
       "Bash(explorer.exe \"C:\\\\Users\\\\yuya_\\\\claude\\\\skills-for-web\")",
-      "Bash(cmd.exe /c \"explorer C:\\\\Users\\\\yuya_\\\\claude\\\\skills-for-web\")"
+      "Bash(cmd.exe /c \"explorer C:\\\\Users\\\\yuya_\\\\claude\\\\skills-for-web\")",
+      "Bash(claude mcp:*)"
     ]
   }
 }
