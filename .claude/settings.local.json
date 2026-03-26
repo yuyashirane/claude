@@ -1,0 +1,41 @@
+{
+  "permissions": {
+    "allow": [
+      "mcp__freee__freee_get_current_company",
+      "Bash(node -e \":*)",
+      "Bash(pip install:*)",
+      "Bash(python create_report.py)",
+      "Bash(where python:*)",
+      "Bash(where python3:*)",
+      "Bash(pip --version)",
+      "Bash(pip3 --version)",
+      "Bash(/c/Users/yuya_/AppData/Local/Programs/Python/Python*/python.exe)",
+      "Bash(--version)",
+      "Read(//c/Users/yuya_/AppData/Local/Programs/**)",
+      "Bash(ls /c/Python*)",
+      "Read(//c/Users/yuya_/.pyenv/pyenv-win/**)",
+      "Read(//c/Users/yuya_/**)",
+      "Bash(node create_report.js)",
+      "Bash(node create_report_v2.js)",
+      "Bash(SKILLS_DIR=\"$APPDATA/Claude/local-agent-mode-sessions/skills-plugin/7d89b70e-fbee-43eb-bee7-794cfaf02d29/c430c047-4705-439e-b92a-b51bb55cf74c/skills\")",
+      "Read(//c/Users/yuya_/claude/**)",
+      "Bash(where py:*)",
+      "Bash(python create_review_report.py)",
+      "Bash(py create_review_report.py)",
+      "Bash(py -3 create_review_report.py)",
+      "Bash(node create_review_report.js)",
+      "Bash(pandoc \"C:\\\\Users\\\\yuya_\\\\Downloads\\\\税務顧問サービスのご提案.docx\" -o /tmp/proposal.md)",
+      "Bash(python scripts/office/unpack.py \"C:\\\\Users\\\\yuya_\\\\Downloads\\\\税務顧問サービスのご提案.docx\" /tmp/proposal_unpacked/)",
+      "Bash(python -m pip install defusedxml)",
+      "Bash(npm list:*)",
+      "Bash(npm install:*)",
+      "Bash(node \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\proposal\\\\create_proposal.js\")",
+      "Bash(npm init:*)",
+      "Bash(python scripts/office/validate.py \"C:\\\\Users\\\\yuya_\\\\Downloads\\\\税務顧問サービスのご提案_あしたの会計事務所.docx\")",
+      "Bash(python -m pip install lxml)",
+      "Bash(python scripts/office/soffice.py --headless --convert-to pdf \"C:\\\\Users\\\\yuya_\\\\Downloads\\\\税務顧問サービスのご提案_あしたの会計事務所.docx\" --outdir \"C:\\\\Users\\\\yuya_\\\\Downloads\")",
+      "Bash(where soffice:*)",
+      "Read(//c/Program Files/LibreOffice/program/**)"
+    ]
+  }
+}
