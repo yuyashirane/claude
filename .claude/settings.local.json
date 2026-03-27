@@ -35,7 +35,18 @@
       "Bash(python -m pip install lxml)",
       "Bash(python scripts/office/soffice.py --headless --convert-to pdf \"C:\\\\Users\\\\yuya_\\\\Downloads\\\\税務顧問サービスのご提案_あしたの会計事務所.docx\" --outdir \"C:\\\\Users\\\\yuya_\\\\Downloads\")",
       "Bash(where soffice:*)",
-      "Read(//c/Program Files/LibreOffice/program/**)"
+      "Read(//c/Program Files/LibreOffice/program/**)",
+      "Bash(python scripts/office/unpack.py \"G:/共有ドライブ/06_見込み客/_見積書改善/税務顧問サービスのご提案_あしたの会計事務所_テンプレート.docx\" /tmp/proposal_template/)",
+      "Bash(pandoc \"G:/共有ドライブ/06_見込み客/_見積書改善/税務顧問サービスのご提案_あしたの会計事務所_テンプレート.docx\" -o /tmp/proposal_template.md)",
+      "Bash(python -c \":*)",
+      "Bash(python -m pip install python-docx)",
+      "Bash(node create_proposal.js sample_config.json)",
+      "Bash(node create_proposal.js config_kobayu.json)",
+      "Bash(node create_proposal.js config_bangkok_solar.json)",
+      "Bash(node create_proposal.js config_mega_solar.json)",
+      "Bash(node create_proposal.js config_nihon_ample.json)",
+      "Bash(node create_proposal.js config_kigyo_keiei.json)",
+      "Bash(node create_proposal.js config_takeichi.json)"
     ]
   }
 }
