@@ -46,7 +46,8 @@
       "Bash(node create_proposal.js config_mega_solar.json)",
       "Bash(node create_proposal.js config_nihon_ample.json)",
       "Bash(node create_proposal.js config_kigyo_keiei.json)",
-      "Bash(node create_proposal.js config_takeichi.json)"
+      "Bash(node create_proposal.js config_takeichi.json)",
+      "Bash(ls -d /c/Users/yuya_/claude/office/freee-auto/.claude/skills/*/)"
     ]
   }
 }

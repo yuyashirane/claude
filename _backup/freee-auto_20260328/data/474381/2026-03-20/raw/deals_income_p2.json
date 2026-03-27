@@ -1,0 +1,4232 @@
+{
+  "deals": [
+    {
+      "id": 2802778945,
+      "company_id": 474381,
+      "issue_date": "2025-05-07",
+      "due_date": null,
+      "amount": 149600,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 3554601,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7604828024,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 75444795,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 17600,
+          "vat": 1600,
+          "description": "月次顧問報酬",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7604828027,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193667141,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 132000,
+          "vat": 12000,
+          "description": "確定申告報酬",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7604828028,
+          "date": "2025-05-07",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 149600
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2802774846,
+      "company_id": 474381,
+      "issue_date": "2025-05-02",
+      "due_date": null,
+      "amount": 89980,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 3554601,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7604816381,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 75444795,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 13200,
+          "vat": 1200,
+          "description": "月次顧問報酬",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7604816383,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193667141,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 76780,
+          "vat": 6980,
+          "description": "確定申告報酬",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7604816385,
+          "date": "2025-05-02",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 89980
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2797432822,
+      "company_id": 474381,
+      "issue_date": "2025-05-01",
+      "due_date": null,
+      "amount": 5289,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7589846247,
+          "account_item_id": 74633374,
+          "tax_code": 23,
+          "item_id": 75444794,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 6245,
+          "vat": 0,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7589846249,
+          "account_item_id": 74633396,
+          "tax_code": 2,
+          "item_id": 152691017,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 956,
+          "vat": 0,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7589846251,
+          "date": "2025-05-01",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 5289
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777071883,
+      "company_id": 474381,
+      "issue_date": "2025-04-30",
+      "due_date": null,
+      "amount": 5500,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 8309413,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7531607605,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 152532144,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 5500,
+          "vat": 500,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7531607615,
+          "date": "2025-04-30",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 5500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2985349615,
+      "company_id": 474381,
+      "issue_date": "2025-04-18",
+      "due_date": null,
+      "amount": 14916,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 5030513,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8122552343,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 14916,
+          "vat": 1356,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8122552345,
+          "date": "2025-04-18",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 14916
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2803776393,
+      "company_id": 474381,
+      "issue_date": "2025-04-16",
+      "due_date": "2025-05-15",
+      "amount": 159500,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 96486523,
+      "partner_code": null,
+      "ref_number": "ZI-20250416202",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7607671713,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 75444795,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 49500,
+          "vat": 4500,
+          "description": "経理サポート報酬（2024年12月～2025年4月分）",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7607671715,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 75444795,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 22000,
+          "vat": 2000,
+          "description": "初期指導報酬",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7607671718,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193667141,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 88000,
+          "vat": 8000,
+          "description": "所得税申告報酬（2024年度分）",
+          "entry_side": "credit"
+        }
+      ],
+      "renews": [
+        {
+          "id": 3417910236,
+          "update_date": "2025-09-10",
+          "renew_target_id": 7607667509,
+          "renew_target_type": "accrual",
+          "details": [
+            {
+              "id": 8359106426,
+              "account_item_id": 74633321,
+              "tax_code": 129,
+              "item_id": 75444795,
+              "section_id": null,
+              "tag_ids": [],
+              "amount": 89500,
+              "vat": 8136,
+              "description": "",
+              "entry_side": "debit"
+            }
+          ]
+        }
+      ],
+      "payments": [
+        {
+          "id": 7607673496,
+          "date": "2025-05-19",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 70000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777072130,
+      "company_id": 474381,
+      "issue_date": "2025-04-15",
+      "due_date": null,
+      "amount": 1000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 8309413,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7531608529,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 152532144,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 1000,
+          "vat": 90,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7531608531,
+          "date": "2025-04-15",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 1000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777116730,
+      "company_id": 474381,
+      "issue_date": "2025-04-14",
+      "due_date": null,
+      "amount": 447,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 4436058,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7531751045,
+          "account_item_id": 74633378,
+          "tax_code": 2,
+          "item_id": 243376007,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 447,
+          "vat": 0,
+          "description": "freeeポイント充当",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7531751048,
+          "date": "2025-04-14",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1754759,
+          "amount": 447
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2797437093,
+      "company_id": 474381,
+      "issue_date": "2025-04-08",
+      "due_date": "2025-04-25",
+      "amount": 151800,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 32689286,
+      "partner_code": null,
+      "ref_number": "ZI-20250408201",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7589857305,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 151800,
+          "vat": 13800,
+          "description": "法人税・消費税申告報酬",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7589862485,
+          "date": "2025-04-15",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 151800
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777101458,
+      "company_id": 474381,
+      "issue_date": "2025-04-08",
+      "due_date": null,
+      "amount": 4840,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 62671070,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7531696566,
+          "account_item_id": 74633346,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 4840,
+          "vat": 440,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7531696569,
+          "date": "2025-04-08",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 4840
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2802576200,
+      "company_id": 474381,
+      "issue_date": "2025-04-04",
+      "due_date": null,
+      "amount": 6942461,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 3554601,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7604276719,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 75444795,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 4085310,
+          "vat": 371391,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7604276721,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193667141,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 2842400,
+          "vat": 258400,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7604276723,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 65879,
+          "vat": 5989,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7604276724,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 106257796,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 51128,
+          "vat": 4648,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7604276725,
+          "date": "2025-04-04",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 6942461
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2797445022,
+      "company_id": 474381,
+      "issue_date": "2025-04-03",
+      "due_date": "2025-04-25",
+      "amount": 88000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 59754715,
+      "partner_code": null,
+      "ref_number": "ZI-20250403200",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7589877979,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 66000,
+          "vat": 6000,
+          "description": "法人税申告書作成報酬（丸投げプラン）, ボリューム値引き（期中取引ほぼなし）, 顧問値引き・出精値引き, 複数社値引",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7589877981,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 22000,
+          "vat": 2000,
+          "description": "消費税申告書作成報酬（2割特例）",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7591012981,
+          "date": "2025-04-30",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 88000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2797379707,
+      "company_id": 474381,
+      "issue_date": "2025-04-03",
+      "due_date": "2025-04-25",
+      "amount": 55000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 46994863,
+      "partner_code": null,
+      "ref_number": "ZI-20250403195",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7589686182,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 55000,
+          "vat": 5000,
+          "description": "決算書・申告書作成報酬（不動産所得・丸投げ・青色申告10万円控除）, ボリューム値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7589688129,
+          "date": "2025-04-24",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 55000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2796646251,
+      "company_id": 474381,
+      "issue_date": "2025-04-03",
+      "due_date": "2025-04-25",
+      "amount": 38500,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 60147319,
+      "partner_code": null,
+      "ref_number": "ZI-20250403197",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7587688200,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 38500,
+          "vat": 3500,
+          "description": "確定申告基本報酬, 不動産所得（事業的規模に該当しない）, 出精値引, 雑所得（暗号資産）, 雑所得（暗号資産）ご自身で計算値引",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587690032,
+          "date": "2025-04-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 38500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2796645949,
+      "company_id": 474381,
+      "issue_date": "2025-04-03",
+      "due_date": "2025-04-25",
+      "amount": 38500,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 60147646,
+      "partner_code": null,
+      "ref_number": "ZI-20250403198",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7587687345,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 38500,
+          "vat": 3500,
+          "description": "確定申告基本報酬, 給与所得（源泉徴収票）, 分離課税譲渡所得（株式譲渡）特定口座, 顧問値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587690049,
+          "date": "2025-04-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 38500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2796641363,
+      "company_id": 474381,
+      "issue_date": "2025-04-03",
+      "due_date": "2025-04-25",
+      "amount": 132000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 92303767,
+      "partner_code": null,
+      "ref_number": "ZI-20250403194",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7587673605,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 132000,
+          "vat": 12000,
+          "description": "所得税確定申告書作成報酬スタンダードプラン（年一決算・売上1000万円未満）, 特別値引き, 帳簿レビュー・修正報酬",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587674899,
+          "date": "2025-04-13",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 132000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2796637342,
+      "company_id": 474381,
+      "issue_date": "2025-04-03",
+      "due_date": "2025-04-25",
+      "amount": 29700,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 60148501,
+      "partner_code": null,
+      "ref_number": "ZI-20250403196",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7587662397,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 29700,
+          "vat": 2700,
+          "description": "確定申告基本報酬, 給与所得（源泉徴収票）, 雑所得集計報酬, 顧問値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587664067,
+          "date": "2025-04-10",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 29700
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2796626678,
+      "company_id": 474381,
+      "issue_date": "2025-04-03",
+      "due_date": "2025-04-21",
+      "amount": 113300,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 45950868,
+      "partner_code": null,
+      "ref_number": "ZI-20250403193",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7587631184,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 113300,
+          "vat": 10300,
+          "description": "決算書 ･ 申告書作成報酬（不動産所得 ･ 丸投げ） , ご継続値引き, 分離課税譲渡所得申告書作成報酬, 出精値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587633271,
+          "date": "2025-04-04",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 113300
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2796621190,
+      "company_id": 474381,
+      "issue_date": "2025-04-03",
+      "due_date": "2025-04-25",
+      "amount": 85360,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 45953247,
+      "partner_code": null,
+      "ref_number": "ZI-20250403199",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7587614932,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 85360,
+          "vat": 7760,
+          "description": "確定申告書作成報酬（ライトプラン）, ご継続値引き, 記帳代行報酬（売上・経費取引）, 給与所得（源泉徴収票）, 医療費控除（100枚まで）, ストックオプション所得集計報酬, 分離課税譲渡所得（ストックオプション）申告書作成報酬, 出精値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587617938,
+          "date": "2025-04-04",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 85360
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2796612971,
+      "company_id": 474381,
+      "issue_date": "2025-04-03",
+      "due_date": "2025-04-21",
+      "amount": 111100,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 45957692,
+      "partner_code": null,
+      "ref_number": "ZI-20250403192",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7587593797,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 111100,
+          "vat": 10100,
+          "description": "決算書 ･ 申告書作成報酬（事業所得 ･ スタンダードプラン）, 消費税申告書作成報酬（簡易課税・2割特例）, 給与所得（源泉徴収票1枚につき）, ご継続値引き ･ 出精値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587603322,
+          "date": "2025-04-03",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 111100
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2985346462,
+      "company_id": 474381,
+      "issue_date": "2025-04-02",
+      "due_date": null,
+      "amount": 20063,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 28338636,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8122544977,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 20063,
+          "vat": 1823,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8122544979,
+          "date": "2025-04-02",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 20063
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2797431086,
+      "company_id": 474381,
+      "issue_date": "2025-04-01",
+      "due_date": null,
+      "amount": 4633,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7589841529,
+          "account_item_id": 74633374,
+          "tax_code": 23,
+          "item_id": 75444794,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 5470,
+          "vat": 0,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7589841533,
+          "account_item_id": 74633396,
+          "tax_code": 2,
+          "item_id": 152691017,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 837,
+          "vat": 0,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7589841536,
+          "date": "2025-04-01",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 4633
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2717937043,
+      "company_id": 474381,
+      "issue_date": "2025-04-01",
+      "due_date": "2025-04-25",
+      "amount": 23100,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 60326582,
+      "partner_code": null,
+      "ref_number": "ZI-20250401185",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7359845768,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 22000,
+          "vat": 2000,
+          "description": "確定申告基本料金",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7359845771,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 3300,
+          "vat": 300,
+          "description": "給与所得（源泉徴収票1枚につき）",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7359845774,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 3300,
+          "vat": 300,
+          "description": "寄付金控除（10枚まで3,000円、10枚を超える分は1枚につき100円）",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7359845776,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 5500,
+          "vat": 500,
+          "description": "顧問値引き",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587694265,
+          "date": "2025-05-12",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 23100
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2802749376,
+      "company_id": 474381,
+      "issue_date": "2025-03-31",
+      "due_date": null,
+      "amount": 109340,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 3554349,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7604742306,
+          "account_item_id": 74633344,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 110000,
+          "vat": 10000,
+          "description": "LINE集客コンサル費用（返金）",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7604742307,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 660,
+          "vat": 60,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7609953882,
+          "date": "2025-04-30",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 109340
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2797341565,
+      "company_id": 474381,
+      "issue_date": "2025-03-31",
+      "due_date": "2025-04-25",
+      "amount": 180400,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 73523488,
+      "partner_code": null,
+      "ref_number": "ZI-20250331190",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7589580958,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 180400,
+          "vat": 16400,
+          "description": "決算書・申告書作成報酬（事業所得・丸投げプラン）, 出精値引き, 顧問値引き, ボリューム値引き（1月-4月分のみ）, 消費税等申告書作成報酬",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7590932299,
+          "date": "2025-05-12",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 180400
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2797339007,
+      "company_id": 474381,
+      "issue_date": "2025-03-31",
+      "due_date": "2025-04-25",
+      "amount": 19800,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 45955267,
+      "partner_code": null,
+      "ref_number": "ZI-20250331189",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7589573320,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 19800,
+          "vat": 1800,
+          "description": "確定申告基本料金, 給与所得（源泉徴収票1枚につき）, 寄付金控除（10枚まで3,000円、10枚を超える分は1枚につき100円）, 出精値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7589574198,
+          "date": "2025-04-04",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 19800
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2796642977,
+      "company_id": 474381,
+      "issue_date": "2025-03-31",
+      "due_date": "2025-04-25",
+      "amount": 113300,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 90495485,
+      "partner_code": null,
+      "ref_number": "ZI-20250331187",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7587678612,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 113300,
+          "vat": 10300,
+          "description": "確定申告基本報酬, 事業所得（丸投げプラン・青色申告特別控除10万円）, ボリューム値引き, 不動産所得, 給与所得（源泉徴収票）, 消費税申告書作成報酬（簡易課税）, 顧問値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7590958139,
+          "date": "2025-04-17",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 113300
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2796633979,
+      "company_id": 474381,
+      "issue_date": "2025-03-31",
+      "due_date": "2025-04-25",
+      "amount": 173800,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 91754704,
+      "partner_code": null,
+      "ref_number": "ZI-20250331186",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7587652813,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 173800,
+          "vat": 15800,
+          "description": "確定申告基本料金, 給与所得（源泉徴収票1枚につき）, 分離譲渡所得（土地・建物/8,000万円未満）, 出精値引き, 顧問値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587655071,
+          "date": "2025-04-06",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 173800
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2796625175,
+      "company_id": 474381,
+      "issue_date": "2025-03-31",
+      "due_date": "2025-04-25",
+      "amount": 124300,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 46994863,
+      "partner_code": null,
+      "ref_number": "ZI-20250331191",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7587626613,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 124300,
+          "vat": 11300,
+          "description": "確定申告基本報酬（事業所得）, 出精値引き, 不動産所得レビュー, 給与所得（源泉徴収票）, 消費税申告書作成報酬（簡易課税）, 顧問値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587629010,
+          "date": "2025-04-04",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 124300
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2796619315,
+      "company_id": 474381,
+      "issue_date": "2025-03-31",
+      "due_date": "2025-04-25",
+      "amount": 96800,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 45959056,
+      "partner_code": null,
+      "ref_number": "ZI-20250331188",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7587609300,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 63800,
+          "vat": 5800,
+          "description": "確定申告書作成報酬（スタンダードプラン）, 寄附金控除, ご継続値引き",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7587609302,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 33000,
+          "vat": 3000,
+          "description": "消費税等申告書作成報酬（簡易課税）",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587611755,
+          "date": "2025-04-04",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 96800
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777072456,
+      "company_id": 474381,
+      "issue_date": "2025-03-30",
+      "due_date": null,
+      "amount": 5500,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 8309413,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7531609335,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 152532144,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 5500,
+          "vat": 500,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7531609338,
+          "date": "2025-03-30",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 5500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3071621642,
+      "company_id": 474381,
+      "issue_date": "2025-03-28",
+      "due_date": null,
+      "amount": 3512,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 4436027,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8365536385,
+          "account_item_id": 74633378,
+          "tax_code": 2,
+          "item_id": 243376007,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 3512,
+          "vat": 0,
+          "description": "利子補助",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8365536386,
+          "date": "2025-03-28",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 3942069,
+          "amount": 3512
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2806747403,
+      "company_id": 474381,
+      "issue_date": "2025-03-28",
+      "due_date": null,
+      "amount": 98778,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 4436027,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7616063329,
+          "account_item_id": 74633378,
+          "tax_code": 2,
+          "item_id": 217950089,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 98778,
+          "vat": 0,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7616063331,
+          "date": "2025-03-28",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474946,
+          "amount": 98778
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2710508620,
+      "company_id": 474381,
+      "issue_date": "2025-03-26",
+      "due_date": "2025-04-11",
+      "amount": 33000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 95570641,
+      "partner_code": null,
+      "ref_number": "ZI-20250326184",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7338015066,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 33000,
+          "vat": 3000,
+          "description": "税務・会計に関する意見書作成業務報酬",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587590054,
+          "date": "2025-04-02",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 33000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2845191356,
+      "company_id": 474381,
+      "issue_date": "2025-03-24",
+      "due_date": "2025-03-31",
+      "amount": 94600,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 29690873,
+      "partner_code": null,
+      "ref_number": "ZI-20250324183",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7725803073,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 94600,
+          "vat": 8600,
+          "description": "決算書・申告書作成報酬（事業所得・スタンダードプラン）, 給与所得（源泉徴収票1枚につき）, 雑所得集計報酬（暗号通貨取引）, 出精値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7725804624,
+          "date": "2025-03-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 94600
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2796602037,
+      "company_id": 474381,
+      "issue_date": "2025-03-19",
+      "due_date": "2025-03-31",
+      "amount": 84920,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 58539188,
+      "partner_code": null,
+      "ref_number": "ZI-20250319182",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7587565227,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 84920,
+          "vat": 7720,
+          "description": "確定申告基本報酬, 給与所得（源泉徴収票1枚につき）, 決算書 ･ 申告書作成報酬（不動産所得）, 不動産事業における新規資産取得検討費用（初年度のみ）, 寄付金控除（10枚まで3,000円、10枚を超える分は1枚につき100円）, 顧問値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587566522,
+          "date": "2025-03-20",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 84920
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698908337,
+      "company_id": 474381,
+      "issue_date": "2025-03-18",
+      "due_date": "2025-03-31",
+      "amount": 138600,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 70349840,
+      "partner_code": null,
+      "ref_number": "ZI-20250318181",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7305728909,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 138600,
+          "vat": 12600,
+          "description": "決算書・申告書作成報酬（事業所得・スタンダードプラン）, 給与所得（源泉徴収票）, ご紹介値引き, 調整値引き, 消費税等申告書作成報酬（本則課税・還付申告）, 出精値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587579650,
+          "date": "2025-03-24",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 138600
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698671979,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": "2025-03-31",
+      "amount": 58300,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 74122389,
+      "partner_code": null,
+      "ref_number": "ZI-20250317168",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7305022528,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 58300,
+          "vat": 5300,
+          "description": "確定申告基本料金, 給与所得（源泉徴収票1枚につき）, 住宅ローン控除（初年度）",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7590865228,
+          "date": "2025-05-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 58300
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698671274,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": "2025-03-31",
+      "amount": 58300,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 92811766,
+      "partner_code": null,
+      "ref_number": "ZI-20250317169",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7305020609,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 58300,
+          "vat": 5300,
+          "description": "確定申告基本料金, 給与所得（源泉徴収票1枚につき）, 住宅ローン控除（初年度）",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7590863716,
+          "date": "2025-05-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 58300
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698670551,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": "2025-03-31",
+      "amount": 113300,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 45962393,
+      "partner_code": null,
+      "ref_number": "ZI-20250317170",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7305018886,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 113300,
+          "vat": 10300,
+          "description": "決算書・申告書作成報酬(丸投げプラン), ご継続値引き, 消費税申告書作成報酬(簡易課税)",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7616194516,
+          "date": "2025-05-26",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 113300
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698669624,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": "2025-03-31",
+      "amount": 30800,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 92911531,
+      "partner_code": null,
+      "ref_number": "ZI-20250317171",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7305016462,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 30800,
+          "vat": 2800,
+          "description": "確定申告基本報酬, 給与所得（源泉徴収票1枚につき）, 株式譲渡所得・配当所得申告要否検討報酬, ご紹介値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7590865569,
+          "date": "2025-05-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 30800
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698668857,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": "2025-03-31",
+      "amount": 38500,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 92574817,
+      "partner_code": null,
+      "ref_number": "ZI-20250317172",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7305014761,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 38500,
+          "vat": 3500,
+          "description": "確定申告基本報酬, 事業所得（100取引未満）, 給与所得（源泉徴収票1枚につき）, 医療費控除（領収書100枚以内 ※以降100枚ごとに+5,000円） , 顧問値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7310502718,
+          "date": "2025-03-18",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 38500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698665361,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": "2025-03-31",
+      "amount": 40700,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 55451363,
+      "partner_code": null,
+      "ref_number": "ZI-20250317179",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7305005113,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 40700,
+          "vat": 3700,
+          "description": "確定申告基本報酬, 給与所得（源泉徴収票1枚につき） , 分離譲渡所得（株式等）, 配当所得, 顧問値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7590865874,
+          "date": "2025-05-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 40700
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698664763,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": "2025-03-31",
+      "amount": 17600,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 43952802,
+      "partner_code": null,
+      "ref_number": "ZI-20250317180",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7305003217,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 17600,
+          "vat": 1600,
+          "description": "決算書・申告書作成報酬（基本報酬）, 給与所得（源泉徴収票1枚につき）, 顧問値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587588482,
+          "date": "2025-03-31",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 17600
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698617640,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": "2025-03-31",
+      "amount": 126500,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 88176556,
+      "partner_code": null,
+      "ref_number": "ZI-20250317167",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304869753,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 126500,
+          "vat": 11500,
+          "description": "事業所得（売上1,000万円未満・青色65万円控除・丸投げ）, ボリューム値引き, 給与所得（源泉徴収票1枚につき）, 株式等の申告分離課税, 雑所得（仮想通貨）, 寄付金控除（10枚まで3,000円、10枚を超える分は1枚につき100円）, 出精値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304870940,
+          "date": "2025-03-18",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 126500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698615823,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": "2025-03-31",
+      "amount": 105600,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 45958311,
+      "partner_code": null,
+      "ref_number": "ZI-20250317175",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304863452,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 105600,
+          "vat": 9600,
+          "description": "確定申告基本報酬（事業所得）, ご継続値引き, 給与所得・公的年金（源泉徴収票1枚につき）, 医療費控除（領収書100枚以内）, 記帳チェック報酬（100仕訳につき）, 記帳修正報酬（100仕訳につき）, 記帳修正ボリューム値引, 追加領収書登録（領収書100枚につき）, 出精値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304866033,
+          "date": "2025-03-18",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 105600
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698600264,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": "2025-03-31",
+      "amount": 54780,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 46390829,
+      "partner_code": null,
+      "ref_number": "ZI-20250317164",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304821285,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 54780,
+          "vat": 4980,
+          "description": "決算書・申告書作成報酬(事業所得・スタンダードプラン), ご継続値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304871263,
+          "date": "2025-03-17",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 54780
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2695349944,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": "2025-03-31",
+      "amount": 11000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 75297005,
+      "partner_code": null,
+      "ref_number": "ZI-20250317178",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7297299148,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 11000,
+          "vat": 1000,
+          "description": "確定申告基本料金, 給与所得（源泉徴収票1枚につき）, 出精値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587581166,
+          "date": "2025-03-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 11000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2695310550,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": "2025-03-31",
+      "amount": 85800,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 45948890,
+      "partner_code": null,
+      "ref_number": "ZI-20250317177",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7305006999,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 85800,
+          "vat": 7800,
+          "description": "決算書・申告書作成報酬（事業所得・スタンダードプラン）, ご継続値引",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7995127352,
+          "date": "2025-06-24",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 85800
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2695287694,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": "2025-03-31",
+      "amount": 60500,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 45948649,
+      "partner_code": null,
+      "ref_number": "ZI-20250317176",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7305008639,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 60500,
+          "vat": 5500,
+          "description": "決算書・申告書作成報酬（事業所得 ･ スタンダードプラン ･ ⻘⾊ 申告10万円控除）, ご継続値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587577563,
+          "date": "2025-03-22",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 60500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2694186174,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": "2025-03-31",
+      "amount": 110000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 45946850,
+      "partner_code": null,
+      "ref_number": "ZI-20250317166",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7294380240,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 110000,
+          "vat": 10000,
+          "description": "決算書・申告書作成報酬（事業所得・丸投げ）, 決算書・申告書作成報酬（不動産所得）, 記帳代行追加報酬（300取引追加）, キャンペーン割引, ご継続値引, 出精値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587567883,
+          "date": "2025-03-21",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 110000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2694129918,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": null,
+      "amount": 126500,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 42552759,
+      "partner_code": null,
+      "ref_number": "ZI-20250317165",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7294311030,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 126500,
+          "vat": 11500,
+          "description": "決算書・所得税申告書作成報酬（丸投げプラン・ご継続価格）, 消費税申告書作成報酬（2割特例・簡易課税）",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587563838,
+          "date": "2025-03-19",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 126500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2694043032,
+      "company_id": 474381,
+      "issue_date": "2025-03-17",
+      "due_date": "2025-03-31",
+      "amount": 107800,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 45944858,
+      "partner_code": null,
+      "ref_number": "ZI-20250317163",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7294010672,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 118800,
+          "vat": 10800,
+          "description": "決算書・申告書作成報酬（事業所得・スタンダードプラン・青色申告10万円控除）, ご継続値引き, 消費税申告書作成報酬（原則課税）",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7294010686,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 11000,
+          "vat": 1000,
+          "description": "出精値引き",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7587576445,
+          "date": "2025-03-21",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 107800
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777072576,
+      "company_id": 474381,
+      "issue_date": "2025-03-15",
+      "due_date": null,
+      "amount": 1000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 8309413,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7531609798,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 152532144,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 1000,
+          "vat": 90,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7531609799,
+          "date": "2025-03-15",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 1000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2797409048,
+      "company_id": 474381,
+      "issue_date": "2025-03-14",
+      "due_date": null,
+      "amount": 29150,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 3554601,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7589780398,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 75444795,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 11550,
+          "vat": 1050,
+          "description": "月次サポート報酬",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7589780405,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193667141,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 17600,
+          "vat": 1600,
+          "description": "年末調整報酬",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7589780410,
+          "date": "2025-03-14",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 29150
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2677960642,
+      "company_id": 474381,
+      "issue_date": "2025-03-14",
+      "due_date": "2025-03-31",
+      "amount": 33000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 44144196,
+      "partner_code": null,
+      "ref_number": "ZI-20250314162",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7257757427,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 33000,
+          "vat": 3000,
+          "description": "確定申告基本報酬, 給与所得（源泉徴収票1枚につき）, 配当所得, 寄附金控除, 分離譲渡所得（株式等/特定口座）, 顧問値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304871535,
+          "date": "2025-03-14",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 33000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2677806228,
+      "company_id": 474381,
+      "issue_date": "2025-03-14",
+      "due_date": "2025-03-31",
+      "amount": 11000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 44147558,
+      "partner_code": null,
+      "ref_number": "ZI-20250314161",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7257367195,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 11000,
+          "vat": 1000,
+          "description": "確定申告基本報酬, 給与所得（源泉徴収票1枚につき）, 配当所得, 寄附金控除（10枚まで）, 顧問値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304866395,
+          "date": "2025-03-18",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 11000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698632789,
+      "company_id": 474381,
+      "issue_date": "2025-03-11",
+      "due_date": "2025-03-16",
+      "amount": 85800,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 93368760,
+      "partner_code": null,
+      "ref_number": "ZI-20250311155",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304914669,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 85800,
+          "vat": 7800,
+          "description": "決算書・申告書作成報酬（事業所得・スタンダードプラン）, 給与所得（源泉徴収票）, ボリューム値引き, ご紹介値引き, 消費税等申告書作成報酬（簡易課税・2割特例）",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304917063,
+          "date": "2025-03-12",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 85800
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698632298,
+      "company_id": 474381,
+      "issue_date": "2025-03-11",
+      "due_date": "2025-03-31",
+      "amount": 55000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 92697559,
+      "partner_code": null,
+      "ref_number": "ZI-20250311157",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304912590,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 55000,
+          "vat": 5000,
+          "description": "決算書・申告書作成報酬（不動産所得・丸投げ）, ボリューム値引き・ご紹介値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304915517,
+          "date": "2025-03-14",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 55000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698631373,
+      "company_id": 474381,
+      "issue_date": "2025-03-11",
+      "due_date": "2025-03-31",
+      "amount": 38500,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 78460773,
+      "partner_code": null,
+      "ref_number": "ZI-20250311159",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304909504,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 38500,
+          "vat": 3500,
+          "description": "確定申告基本料金, 雑所得, 一時所得, 医療費控除, 出精値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304910691,
+          "date": "2025-03-14",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 38500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698623664,
+      "company_id": 474381,
+      "issue_date": "2025-03-11",
+      "due_date": "2025-03-31",
+      "amount": 55000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 75018730,
+      "partner_code": null,
+      "ref_number": "ZI-20250311160",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304885570,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 55000,
+          "vat": 5000,
+          "description": "決算書・申告書作成報酬（不動産所得・丸投げ）, ボリューム値引き・継続値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304886385,
+          "date": "2025-03-14",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 55000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698622462,
+      "company_id": 474381,
+      "issue_date": "2025-03-11",
+      "due_date": "2025-03-31",
+      "amount": 55000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 50551569,
+      "partner_code": null,
+      "ref_number": "ZI-20250311158",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304882200,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 55000,
+          "vat": 5000,
+          "description": "決算書・申告書作成報酬（不動産所得・丸投げ）, ボリューム値引き・継続値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304882910,
+          "date": "2025-03-14",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 55000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2660029256,
+      "company_id": 474381,
+      "issue_date": "2025-03-11",
+      "due_date": "2025-03-31",
+      "amount": 88000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 93227490,
+      "partner_code": null,
+      "ref_number": "ZI-20250311154",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7214781846,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 88000,
+          "vat": 8000,
+          "description": "確定申告基本報酬, 分離譲渡所得（土地・建物・3,000万円未満）, 雑所得（公的年金等）, ご紹介値引き等",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304917943,
+          "date": "2025-03-11",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 88000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2660013510,
+      "company_id": 474381,
+      "issue_date": "2025-03-11",
+      "due_date": "2025-03-31",
+      "amount": 121000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 94345441,
+      "partner_code": null,
+      "ref_number": "ZI-20250311156",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7214744936,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 121000,
+          "vat": 11000,
+          "description": "確定申告基本報酬, 分離譲渡所得（土地・建物・3,000万円未満）, 納税管理人報酬（所得税）, ご紹介値引き等",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304917532,
+          "date": "2025-03-11",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 121000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2806745488,
+      "company_id": 474381,
+      "issue_date": "2025-03-10",
+      "due_date": null,
+      "amount": 1151,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 3554360,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7616057365,
+          "account_item_id": 74633374,
+          "tax_code": 23,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 1359,
+          "vat": 0,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7616057367,
+          "account_item_id": 74633396,
+          "tax_code": 2,
+          "item_id": 152691017,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 208,
+          "vat": 0,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7616057370,
+          "date": "2025-03-10",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474946,
+          "amount": 1151
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2655129729,
+      "company_id": 474381,
+      "issue_date": "2025-03-10",
+      "due_date": "2025-03-16",
+      "amount": 60500,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 45951093,
+      "partner_code": null,
+      "ref_number": "ZI-20250310153",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7203096981,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 60500,
+          "vat": 5500,
+          "description": "確定申告書作成サービス（500万円未満）",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304916696,
+          "date": "2025-03-14",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 60500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2807855223,
+      "company_id": 474381,
+      "issue_date": "2025-03-09",
+      "due_date": null,
+      "amount": 230,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 87636575,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7619325249,
+          "account_item_id": 74633374,
+          "tax_code": 23,
+          "item_id": 75444794,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 271,
+          "vat": 0,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7619325250,
+          "account_item_id": 74633396,
+          "tax_code": 2,
+          "item_id": 152691017,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 41,
+          "vat": 0,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7619325251,
+          "date": "2025-03-09",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 3942069,
+          "amount": 230
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2804630252,
+      "company_id": 474381,
+      "issue_date": "2025-03-07",
+      "due_date": null,
+      "amount": 103830,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 57178892,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7609896635,
+          "account_item_id": 74633268,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 93000,
+          "vat": 0,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7609896636,
+          "account_item_id": 74633405,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 59230,
+          "vat": 0,
+          "description": "個別支払分 加入金",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7609896637,
+          "account_item_id": 74633405,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 48400,
+          "vat": 0,
+          "description": "原状回復費",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7609896638,
+          "date": "2025-03-07",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 103830
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777243489,
+      "company_id": 474381,
+      "issue_date": "2025-03-07",
+      "due_date": null,
+      "amount": 12121926,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 3554601,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7532123421,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 75444795,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 4055280,
+          "vat": 368661,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7532123423,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193667141,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 7922420,
+          "vat": 720220,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7532123427,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 197466,
+          "vat": 17951,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7532123431,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 106257796,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 53240,
+          "vat": 4840,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7532123432,
+          "date": "2025-03-07",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 12121926
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777073601,
+      "company_id": 474381,
+      "issue_date": "2025-03-03",
+      "due_date": null,
+      "amount": 22000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 30246181,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7531614132,
+          "account_item_id": 74633342,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 22000,
+          "vat": 2000,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7531614133,
+          "date": "2025-03-03",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 22000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698636746,
+      "company_id": 474381,
+      "issue_date": "2025-03-03",
+      "due_date": "2025-03-17",
+      "amount": 148280,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 44358188,
+      "partner_code": null,
+      "ref_number": "ZI-20250303152",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304929096,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 148280,
+          "vat": 13480,
+          "description": "法人税申告書作成報酬(スタンダードプラン 売上1,000万円未満), ご継続値引き, 消費税申告書作成報酬(簡易課税), 仮想通貨関係会計処理等検討報酬, 帳簿修正報酬, 出精値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304930747,
+          "date": "2025-03-04",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 148280
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698635109,
+      "company_id": 474381,
+      "issue_date": "2025-03-02",
+      "due_date": "2025-03-31",
+      "amount": 80000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 44411847,
+      "partner_code": null,
+      "ref_number": "ZI-20250302151",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304921367,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 80000,
+          "vat": 7272,
+          "description": "決算書 ･ 申告書作成報酬（不動産所得 ･ 丸投げ）",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304922884,
+          "date": "2025-03-06",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 80000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777236753,
+      "company_id": 474381,
+      "issue_date": "2025-03-01",
+      "due_date": null,
+      "amount": 1719,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7532099920,
+          "account_item_id": 74633374,
+          "tax_code": 23,
+          "item_id": 75444794,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 2029,
+          "vat": 0,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7532099922,
+          "account_item_id": 74633396,
+          "tax_code": 2,
+          "item_id": 152691017,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 310,
+          "vat": 0,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7532099924,
+          "date": "2025-03-01",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 1719
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777234456,
+      "company_id": 474381,
+      "issue_date": "2025-02-28",
+      "due_date": null,
+      "amount": 38500,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 5030163,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7532091134,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 75444795,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 11000,
+          "vat": 1000,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7532091140,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193667141,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 27500,
+          "vat": 2500,
+          "description": "年末調整報酬等",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7532091143,
+          "date": "2025-02-28",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 38500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777073708,
+      "company_id": 474381,
+      "issue_date": "2025-02-28",
+      "due_date": null,
+      "amount": 5500,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 8309413,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7531614389,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 152532144,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 5500,
+          "vat": 500,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7531614390,
+          "date": "2025-02-28",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 5500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698641020,
+      "company_id": 474381,
+      "issue_date": "2025-02-25",
+      "due_date": "2025-03-11",
+      "amount": 122100,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 44116020,
+      "partner_code": null,
+      "ref_number": "ZI-20250221150",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304939525,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 122100,
+          "vat": 11100,
+          "description": "法人税・地方税申告書作成報酬(1,000万円未満), 会計帳簿作成報酬, 給与修正対応報酬, データ作成値引き, ご継続値引き, 出精値引き",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304941941,
+          "date": "2025-02-26",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 122100
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698747574,
+      "company_id": 474381,
+      "issue_date": "2025-02-19",
+      "due_date": "2025-03-14",
+      "amount": 11000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 43611072,
+      "partner_code": null,
+      "ref_number": "ZI-20250219145",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7305250067,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 11000,
+          "vat": 1000,
+          "description": "法定調書作成・申告報酬（支払調書5枚以下）",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7589461722,
+          "date": "2025-05-20",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 11000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698649574,
+      "company_id": 474381,
+      "issue_date": "2025-02-19",
+      "due_date": "2025-03-14",
+      "amount": 40700,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 43612002,
+      "partner_code": null,
+      "ref_number": "ZI-20250219148",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304961727,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 40700,
+          "vat": 3700,
+          "description": "年末調整・源泉徴収関係書類作成報酬（5名以下）, 法定調書作成・申告報酬（支払調書5枚以下）, 給与支払報告書作成報酬, 予定納税電子納税対応報酬",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304963073,
+          "date": "2025-02-19",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 40700
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698647457,
+      "company_id": 474381,
+      "issue_date": "2025-02-19",
+      "due_date": "2025-03-14",
+      "amount": 53900,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 54143688,
+      "partner_code": null,
+      "ref_number": "ZI-20250219149",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304956504,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 53900,
+          "vat": 4900,
+          "description": "年末調整・源泉徴収関係書類作成報酬（5名以下）, 給与支払報告書作成報酬, 償却資産申告書報酬（1自治体5明細まで）, 法定調書作成・申告報酬（支払調書5枚以下）",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304958386,
+          "date": "2025-02-20",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 53900
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698644294,
+      "company_id": 474381,
+      "issue_date": "2025-02-19",
+      "due_date": "2025-03-14",
+      "amount": 35200,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 36348171,
+      "partner_code": null,
+      "ref_number": "ZI-20250219147",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304946928,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 35200,
+          "vat": 3200,
+          "description": "年末調整・源泉徴収関係書類作成報酬（5名以下）, 法定調書作成・申告報酬（支払調書5枚以下）, 給与支払報告書作成報酬",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304951141,
+          "date": "2025-02-21",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 35200
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777073765,
+      "company_id": 474381,
+      "issue_date": "2025-02-15",
+      "due_date": null,
+      "amount": 1000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 8309413,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7531614566,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 152532144,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 1000,
+          "vat": 90,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7531614568,
+          "date": "2025-02-15",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 1000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777226448,
+      "company_id": 474381,
+      "issue_date": "2025-02-14",
+      "due_date": null,
+      "amount": 161700,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 5030163,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7532069431,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 75444795,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 29700,
+          "vat": 2700,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7532069433,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193667141,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 132000,
+          "vat": 12000,
+          "description": "法人税申告報酬",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7532069435,
+          "date": "2025-02-14",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 161700
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2806779890,
+      "company_id": 474381,
+      "issue_date": "2025-02-13",
+      "due_date": null,
+      "amount": 38571,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": null,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7616153351,
+          "account_item_id": 74633245,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 38571,
+          "vat": 0,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7616153354,
+          "date": "2025-02-13",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 38571
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777219437,
+      "company_id": 474381,
+      "issue_date": "2025-02-12",
+      "due_date": null,
+      "amount": 237380,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 5030163,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7532051651,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 75444795,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 39380,
+          "vat": 3580,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7532051652,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193667141,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 198000,
+          "vat": 18000,
+          "description": "法人税・消費税申告報酬",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7532051655,
+          "date": "2025-02-12",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 237380
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777167688,
+      "company_id": 474381,
+      "issue_date": "2025-02-04",
+      "due_date": null,
+      "amount": 6114686,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 3554601,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7531908703,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 75444795,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 3909310,
+          "vat": 355391,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7531908706,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193667141,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 2131941,
+          "vat": 193812,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7531908710,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 41261,
+          "vat": 3751,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7531908714,
+          "account_item_id": 74633239,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 83160,
+          "vat": 0,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7531908716,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 106257796,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 50986,
+          "vat": 4635,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7531908719,
+          "date": "2025-02-04",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 6114686
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777074321,
+      "company_id": 474381,
+      "issue_date": "2025-02-04",
+      "due_date": null,
+      "amount": 22000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 30246181,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7531616223,
+          "account_item_id": 74633342,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 22000,
+          "vat": 2000,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7531616226,
+          "date": "2025-02-04",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 22000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698655452,
+      "company_id": 474381,
+      "issue_date": "2025-02-04",
+      "due_date": "2025-02-28",
+      "amount": 132000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 42553555,
+      "partner_code": null,
+      "ref_number": "ZI-20250121136",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304976842,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 132000,
+          "vat": 12000,
+          "description": "法⼈税申告書作成報酬（スタンダードプラン）, ボリューム値引, 消費税申告書作成報酬（簡易課税・2割特例）",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304977526,
+          "date": "2025-02-04",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 132000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2797808094,
+      "company_id": 474381,
+      "issue_date": "2025-02-03",
+      "due_date": "2025-02-28",
+      "amount": 140800,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 91688798,
+      "partner_code": null,
+      "ref_number": "ZI-20250203141",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7591000787,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 140800,
+          "vat": 12800,
+          "description": "法人税・事業税等申告報酬, 税理士こう様 ご紹介値引き, 消費税申告書作成報酬（簡易課税・2割特例）",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7591020666,
+          "date": "2025-03-21",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 88000
+        },
+        {
+          "id": 7591023236,
+          "date": "2025-05-15",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 52800
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2797806489,
+      "company_id": 474381,
+      "issue_date": "2025-02-03",
+      "due_date": "2025-02-28",
+      "amount": 35200,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 91688798,
+      "partner_code": null,
+      "ref_number": "ZI-20250203142",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7590997280,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 35200,
+          "vat": 3200,
+          "description": "年末調整報酬（5名まで）, 法定調書報酬（5名まで）, 給与支払報告書（提出1自治体につき）",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7591023219,
+          "date": "2025-05-15",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 35200
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777164723,
+      "company_id": 474381,
+      "issue_date": "2025-02-03",
+      "due_date": null,
+      "amount": 25300,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 5030163,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7531900160,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 75444795,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 25300,
+          "vat": 2300,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7531900161,
+          "date": "2025-02-03",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 25300
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777159503,
+      "company_id": 474381,
+      "issue_date": "2025-02-01",
+      "due_date": null,
+      "amount": 2067,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7531884829,
+          "account_item_id": 74633374,
+          "tax_code": 23,
+          "item_id": 75444794,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 2440,
+          "vat": 0,
+          "description": "",
+          "entry_side": "credit"
+        },
+        {
+          "id": 7531884830,
+          "account_item_id": 74633396,
+          "tax_code": 2,
+          "item_id": 152691017,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 373,
+          "vat": 0,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7531884831,
+          "date": "2025-02-01",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 2067
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2806778460,
+      "company_id": 474381,
+      "issue_date": "2025-01-30",
+      "due_date": null,
+      "amount": 36723,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": null,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7616149295,
+          "account_item_id": 74633245,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 36723,
+          "vat": 0,
+          "description": null,
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7616149296,
+          "date": "2025-01-30",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 36723
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2733653427,
+      "company_id": 474381,
+      "issue_date": "2025-01-30",
+      "due_date": null,
+      "amount": 665,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 4436058,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "freeeカードで経理",
+      "details": [
+        {
+          "id": 7405499871,
+          "account_item_id": 74633378,
+          "tax_code": 2,
+          "item_id": 243376007,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 665,
+          "vat": 0,
+          "description": "freeeポイント充当",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7405499874,
+          "date": "2025-01-30",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1754759,
+          "amount": 665
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2535519484,
+      "company_id": 474381,
+      "issue_date": "2025-01-30",
+      "due_date": null,
+      "amount": 5500,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 8309413,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 6899376113,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 152532144,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 5500,
+          "vat": 500,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 6899376117,
+          "date": "2025-01-30",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 5500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2529443210,
+      "company_id": 474381,
+      "issue_date": "2025-01-29",
+      "due_date": "2025-02-28",
+      "amount": 11000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 43611220,
+      "partner_code": null,
+      "ref_number": "ZI-20250129140",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 6881900708,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 11000,
+          "vat": 1000,
+          "description": "法定調書作成・申告報酬（支払調書5枚以下）",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304932512,
+          "date": "2025-02-28",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 11000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2807847061,
+      "company_id": 474381,
+      "issue_date": "2025-01-28",
+      "due_date": null,
+      "amount": 47483,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 4436027,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7619302189,
+          "account_item_id": 74633378,
+          "tax_code": 2,
+          "item_id": 217950089,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 47483,
+          "vat": 0,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7619302190,
+          "date": "2025-01-28",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 3942069,
+          "amount": 47483
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2777157497,
+      "company_id": 474381,
+      "issue_date": "2025-01-28",
+      "due_date": null,
+      "amount": 79200,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 5030163,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7531879182,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193667141,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 79200,
+          "vat": 7200,
+          "description": "2024年11月期法人税申告書作成報酬 140,800円の一部入金",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7531879185,
+          "date": "2025-01-28",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 79200
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698793472,
+      "company_id": 474381,
+      "issue_date": "2025-01-22",
+      "due_date": "2025-02-28",
+      "amount": 35200,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 91042335,
+      "partner_code": null,
+      "ref_number": "ZI-20250122138",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7305395278,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 35200,
+          "vat": 3200,
+          "description": "年末調整事務手続報酬, 法定調書事務手続報酬, 給与支払報告書事務手続報酬",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7725693220,
+          "date": "2025-05-30",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 35200
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2698657620,
+      "company_id": 474381,
+      "issue_date": "2025-01-22",
+      "due_date": "2025-01-31",
+      "amount": 107800,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 91042335,
+      "partner_code": null,
+      "ref_number": "ZI-20250122137",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 7304981982,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193669039,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 107800,
+          "vat": 9800,
+          "description": "法人税等申告書作成報酬",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7304982927,
+          "date": "2025-01-31",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 107800
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 2806735971,
+      "company_id": 474381,
+      "issue_date": "2025-01-20",
+      "due_date": null,
+      "amount": 6000000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": null,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 7616026786,
+          "account_item_id": 416617736,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 6000000,
+          "vat": 0,
+          "description": "",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 7616026788,
+          "date": "2025-01-20",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474946,
+          "amount": 6000000
+        }
+      ],
+      "receipts": []
+    }
+  ],
+  "meta": {
+    "total_count": 255
+  }
+}
