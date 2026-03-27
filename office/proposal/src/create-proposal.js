@@ -488,8 +488,8 @@ contentChildren.push(
 
 const defaultSteps = [
   ["1", "本提案書のご確認・ご契約", "内容にご同意いただければ契約へ。"],
-  ["2", "履歴事項全部証明書PDFのご提供", "貴社にてご手配をお願いいたします。"],
-  ["3", "顧問契約書の締結", "当事務所よりドラフトをお送りします。"],
+  ["2", "顧問契約書の締結", "当事務所よりドラフトをお送りします。"],
+  ["3", "履歴事項全部証明書PDFのご提供", "貴社にてご手配をお願いいたします。"],
   ["4", "設立届出・青色申告承認申請書提出", "当事務所にて対応いたします。"],
   ["5", "freeeアカウント設定・連携", "口座連携・勘定科目マッピングを設定。"],
   ["6", "役員報酬額の決定", "設立3ヶ月以内に事業計画を踏まえて決定。"],
@@ -526,8 +526,7 @@ contentChildren.push(
 const officeInfo = [
   ["事務所名", "あしたの会計事務所 税理士法人"],
   ["所在地", "〒110-0016 東京都台東区台東4-13-20 ハクセンビル4階"],
-  ["電話番号", "03-6231-7314"],
-  ["FAX", "03-4571-0519"],
+  ["e-mail", "[mail@ashitak.com]"],
   ["コンセプト", "つながりを大切にする 次世代型の会計事務所"],
 ];
 const officeColWidths = [2500, CONTENT_W - 2500];
@@ -553,12 +552,7 @@ contentChildren.push(
   new Paragraph({
     alignment: AlignmentType.CENTER,
     spacing: { after: 200 },
-    children: [new TextRun({ text: "本提案書の内容についてご不明な点がございましたら、", font: "Yu Gothic", size: 20, color: TEXT_DARK })],
-  }),
-  new Paragraph({
-    alignment: AlignmentType.CENTER,
-    spacing: { after: 200 },
-    children: [new TextRun({ text: "お気軽にご連絡ください。", font: "Yu Gothic", size: 20, color: TEXT_DARK })],
+    children: [new TextRun({ text: "本提案書の内容についてご不明な点がございましたら、お気軽にご連絡ください。", font: "Yu Gothic", size: 20, color: TEXT_DARK })],
   }),
   spacer(200),
   new Paragraph({
@@ -573,7 +567,7 @@ contentChildren.push(
   }),
   new Paragraph({
     alignment: AlignmentType.CENTER,
-    children: [new TextRun({ text: "Tel: 03-6231-7314  Fax: 03-4571-0519", font: "Yu Gothic", size: 18, color: TEXT_LIGHT })],
+    children: [new TextRun({ text: "E-mail: mail@ashitak.com", font: "Yu Gothic", size: 18, color: TEXT_LIGHT })],
   }),
 );
 

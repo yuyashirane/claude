@@ -51,7 +51,8 @@
       "Bash(mkdir -p .claude/skills/proposal-generator references/pricing templates/proposals src docs tmp logs)",
       "Bash(mv create_proposal.js src/create-proposal.js)",
       "Bash(mv pricing_table.json references/pricing/pricing-table.json)",
-      "Bash(mv config_bangkok_solar.json config_kigyo_keiei.json config_kobayu.json config_mega_solar.json config_nihon_ample.json config_takeichi.json references/pricing/)"
+      "Bash(mv config_bangkok_solar.json config_kigyo_keiei.json config_kobayu.json config_mega_solar.json config_nihon_ample.json config_takeichi.json references/pricing/)",
+      "Bash(ls C:/Users/yuya_/claude/office/freee-auto/create_report* C:/Users/yuya_/claude/office/freee-auto/create_review* C:/Users/yuya_/claude/office/freee-auto/deal_details.json)"
     ]
   }
 }
