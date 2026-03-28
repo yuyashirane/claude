@@ -1,6 +1,11 @@
 node_modules/
 .env
 logs/
+tmp/
 
 credentials.json
 token.json
+
+# Kintone送信ログ（dry-run結果等）
+data/**/kintone_dry_run.json
+data/**/kintone_send_log.json

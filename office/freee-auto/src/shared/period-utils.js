@@ -101,6 +101,69 @@ function getFiscalYearParam(date, fiscalYearEndMonth) {
   return year;
 }
 
+/**
+ * 会計年度の開始日・終了日を返す
+ * @param {string|Date} date - 対象日付
+ * @param {number} fiscalEndMonth - 決算月 (1-12)
+ * @returns {{ start: string, end: string }} YYYY-MM-DD形式
+ */
+function getFiscalYear(date, fiscalEndMonth) {
+  const d = typeof date === "string" ? new Date(date) : date;
+  const month = d.getMonth() + 1;
+  const year = d.getFullYear();
+
+  let endYear, startYear;
+  if (month <= fiscalEndMonth) {
+    endYear = year;
+  } else {
+    endYear = year + 1;
+  }
+  startYear = endYear - 1;
+
+  const startMonth = fiscalEndMonth + 1 > 12 ? 1 : fiscalEndMonth + 1;
+  const startYearActual = fiscalEndMonth === 12 ? endYear : startYear;
+
+  const start = `${startYearActual}-${String(startMonth).padStart(2, "0")}-01`;
+  const lastDay = new Date(endYear, fiscalEndMonth, 0).getDate();
+  const end = `${endYear}-${String(fiscalEndMonth).padStart(2, "0")}-${String(lastDay).padStart(2, "0")}`;
+
+  return { start, end };
+}
+
+/**
+ * 文字列をDateオブジェクトに変換
+ * YYYY-MM-DD, YYYY/MM/DD, 和暦（令和X年X月X日）等に対応
+ * @param {string} str
+ * @returns {Date|null}
+ */
+function parseDate(str) {
+  if (!str) return null;
+  const s = String(str).trim()
+    .replace(/[０-９]/g, (c) => String.fromCharCode(c.charCodeAt(0) - 0xfee0));
+
+  // YYYY-MM-DD or YYYY/MM/DD
+  const isoMatch = s.match(/^(\d{4})[/-](\d{1,2})[/-](\d{1,2})$/);
+  if (isoMatch) {
+    return new Date(Number(isoMatch[1]), Number(isoMatch[2]) - 1, Number(isoMatch[3]));
+  }
+
+  // 和暦（令和）
+  const reMatch = s.match(/令和(\d+)[年/.-](\d+)[月/.-](\d+)/);
+  if (reMatch) {
+    return new Date(2018 + Number(reMatch[1]), Number(reMatch[2]) - 1, Number(reMatch[3]));
+  }
+
+  // 和暦（平成）
+  const hsMatch = s.match(/平成(\d+)[年/.-](\d+)[月/.-](\d+)/);
+  if (hsMatch) {
+    return new Date(1988 + Number(hsMatch[1]), Number(hsMatch[2]) - 1, Number(hsMatch[3]));
+  }
+
+  // フォールバック
+  const d = new Date(s);
+  return isNaN(d.getTime()) ? null : d;
+}
+
 function formatDate(d) {
   return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 }
@@ -113,6 +176,8 @@ module.exports = {
   calculateThreePeriods,
   getMonthlyPeriods,
   getFiscalYearParam,
+  getFiscalYear,
+  parseDate,
   formatDate,
   formatDateShort,
 };

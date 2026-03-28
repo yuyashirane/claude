@@ -52,7 +52,16 @@
       "Bash(mv create_proposal.js src/create-proposal.js)",
       "Bash(mv pricing_table.json references/pricing/pricing-table.json)",
       "Bash(mv config_bangkok_solar.json config_kigyo_keiei.json config_kobayu.json config_mega_solar.json config_nihon_ample.json config_takeichi.json references/pricing/)",
-      "Bash(ls C:/Users/yuya_/claude/office/freee-auto/create_report* C:/Users/yuya_/claude/office/freee-auto/create_review* C:/Users/yuya_/claude/office/freee-auto/deal_details.json)"
+      "Bash(ls C:/Users/yuya_/claude/office/freee-auto/create_report* C:/Users/yuya_/claude/office/freee-auto/create_review* C:/Users/yuya_/claude/office/freee-auto/deal_details.json)",
+      "Bash(find /c/Users/yuya_/claude/office/freee-auto -type d -not -path */node_modules*)",
+      "Bash(node src/review/kintone-sender.js data/474381/2026-03-20 --dry-run)",
+      "Bash(grep -E \"\\\\.\\(csv|xlsx?|xls\\)$\")",
+      "Bash(node tests/test-pipeline.js)",
+      "mcp__freee-mcp__freee_get_current_company",
+      "Bash(node tests/test-deal-creator.js)",
+      "Bash(node tests/test-processing-report.js)",
+      "Bash(npm test:*)",
+      "Bash(node -e \"const pkg = require\\(''./package.json''\\); console.log\\(JSON.stringify\\(Object.keys\\(pkg.dependencies || {}\\), null, 2\\)\\)\")"
     ]
   }
 }

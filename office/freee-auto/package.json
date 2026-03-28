@@ -4,7 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node tests/test-pipeline.js && node tests/test-deal-creator.js && node tests/test-processing-report.js",
+    "test:pipeline": "node tests/test-pipeline.js",
+    "test:deal": "node tests/test-deal-creator.js",
+    "test:report": "node tests/test-processing-report.js",
+    "freee:register": "node src/register/deal-creator.js",
+    "freee:register:dry": "node src/register/deal-creator.js",
+    "report": "node src/verify/processing-report.js",
+    "kintone:test": "node src/review/kintone-connection-test.js",
+    "kintone:send": "node src/review/kintone-sender.js",
+    "kintone:send:dry": "node src/review/kintone-sender.js --dry-run"
   },
   "repository": {
     "type": "git",
@@ -20,7 +29,10 @@
   "homepage": "https://github.com/yuyashirane/claude#readme",
   "dependencies": {
     "@anthropic-ai/sdk": "^0.80.0",
+    "@kintone/rest-api-client": "^6.1.3",
+    "dotenv": "^17.3.1",
     "exceljs": "^4.4.0",
-    "googleapis": "^171.4.0"
+    "googleapis": "^171.4.0",
+    "iconv-lite": "^0.7.2"
   }
 }

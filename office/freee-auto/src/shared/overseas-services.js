@@ -368,9 +368,46 @@ const TAX_TREATMENT_TO_FREEE_CODES = {
 // 消費者向け・未登録国外事業者の少額特例閾値（税込）
 const SMALL_AMOUNT_THRESHOLD = 10000;
 
+/**
+ * 摘要テキストから海外サービスを検出する
+ * @param {string} description - 摘要・取引先名
+ * @returns {{ service: Object, matchedKeyword: string } | null}
+ */
+function detectOverseasService(description) {
+  if (!description) return null;
+  const lower = description.toLowerCase();
+
+  for (const svc of OVERSEAS_SERVICES) {
+    // キーワードマッチ
+    for (const kw of svc.keywords) {
+      if (lower.includes(kw.toLowerCase())) {
+        return { service: svc, matchedKeyword: kw };
+      }
+    }
+    // 取引先名マッチ
+    if (svc.partnerKeywords) {
+      for (const pk of svc.partnerKeywords) {
+        if (lower.includes(pk.toLowerCase())) {
+          return { service: svc, matchedKeyword: pk };
+        }
+      }
+    }
+  }
+
+  // 広告キーワードでの追加検出（サービス特定できないが広告関連と判定）
+  for (const kw of ADVERTISING_KEYWORDS) {
+    if (lower.includes(kw.toLowerCase())) {
+      return null; // サービス特定はできないが、呼び出し側で広告判定に使える
+    }
+  }
+
+  return null;
+}
+
 module.exports = {
   OVERSEAS_SERVICES,
   ADVERTISING_KEYWORDS,
   TAX_TREATMENT_TO_FREEE_CODES,
   SMALL_AMOUNT_THRESHOLD,
+  detectOverseasService,
 };
