@@ -1,272 +1,232 @@
 /**
  * processing-report.js のテスト
  *
- * テスト用の処理結果データからExcelレポートを生成し、
- * ファイルが正しく作成されるか確認する。
+ * Excel生成, 4シート確認, サマリー内容, 除外データ
+ * 期待: 9テスト通過
+ *
+ * 使い方: node tests/test-processing-report.js
  */
 
-const path = require("path");
+const assert = require("assert");
 const fs = require("fs");
+const path = require("path");
+const ExcelJS = require("exceljs");
 const { generateReport } = require("../src/verify/processing-report");
 
-// テスト用の処理結果データ（実際のパイプライン出力を模擬）
+let passed = 0;
+let failed = 0;
+
+function test(name, fn) {
+  try {
+    fn();
+    passed++;
+    console.log(`  ✅ ${name}`);
+  } catch (err) {
+    failed++;
+    console.error(`  ❌ ${name}`);
+    console.error(`     ${err.message}`);
+  }
+}
+
+async function asyncTest(name, fn) {
+  try {
+    await fn();
+    passed++;
+    console.log(`  ✅ ${name}`);
+  } catch (err) {
+    failed++;
+    console.error(`  ❌ ${name}`);
+    console.error(`     ${err.message}`);
+  }
+}
+
+// --------------------------------------------------
+// テスト用処理結果データ（新フォーマット: kintone_staff/kintone_senior分離）
+// --------------------------------------------------
 const TEST_RESULT = {
   metadata: {
     processed_at: "2026-03-28T10:00:00.000Z",
     company_id: 474381,
-    input_file: "test_wallet_txns.json",
-    total_wallet_txns: 8,
+    total_input: 10,
     rule_matched_skipped: 2,
-    processed_count: 6,
+    processed_count: 8,
   },
   summary: {
-    total: 6,
-    auto_register: 1,
-    kintone_review: 4,
-    exclude: 1,
-    by_view: { "若手レビュー": 2, "経験者レビュー": 2 },
-    by_rank: { High: 1, Medium: 3, Low: 2 },
-    total_amount: 587025,
+    total: 8,
+    auto_register: 2,
+    kintone_staff: 3,
+    kintone_senior: 1,
+    exclude: 2,
+    by_rank: { High: 3, Medium: 3, Low: 1, Excluded: 1 },
+    total_amount: 587500,
+    tax_flags_count: 1,
+    special_flags_count: 1,
   },
   auto_register: {
-    count: 1,
+    count: 2,
     items: [
       {
-        transaction: {
-          date: "2026-03-15",
-          amount: -5500,
-          description: "タクシー代 渋谷→新宿",
-          partner_name: "",
-          debit_credit: "expense",
-        },
-        classification: {
-          estimated_account: "旅費交通費",
-          estimated_tax_class: "課税10%",
-          confidence_rank: "High",
-          confidence_score: 85,
-          tax_flags: [],
-          special_flags: [],
-        },
-        routing: {
-          decision: "auto_register",
-          reason: "高確度（85点）: 自動登録対象",
-        },
+        transaction: { date: "2026-03-01", amount: -3500, description: "タクシー代 渋谷→新宿", partner_name: "" },
+        classification: { estimated_account: "旅費交通費", estimated_tax_class: "課税10%", confidence_rank: "High", confidence_score: 85, matched_keyword: "タクシー", invoice_class: "不要", tax_flags: [], special_flags: [] },
+        routing: { decision: "auto_register", reason: "高確度（85点）" },
         _freee: { wallet_txn_id: 12345 },
+      },
+      {
+        transaction: { date: "2026-03-02", amount: -8800, description: "Amazon 文具セット", partner_name: "Amazon" },
+        classification: { estimated_account: "消耗品費", estimated_tax_class: "課税10%", confidence_rank: "High", confidence_score: 80, matched_keyword: "Amazon", invoice_class: "要確認", tax_flags: [], special_flags: [] },
+        routing: { decision: "auto_register", reason: "高確度（80点）" },
+        _freee: { wallet_txn_id: 12346 },
       },
     ],
     deal_payloads: [
-      {
-        company_id: 474381,
-        issue_date: "2026-03-15",
-        type: "expense",
-        details: [
-          {
-            account_item_id: 738954738,
-            tax_code: 136,
-            amount: 5500,
-            description: "タクシー代 渋谷→新宿",
-          },
-        ],
-        _meta: {
-          wallet_txn_id: 12345,
-          confidence_score: 85,
-          confidence_rank: "High",
-          routing_reason: "高確度（85点）: 自動登録対象",
-        },
-      },
+      { issue_date: "2026-03-01", type: "expense", details: [{ account_item_id: 100, tax_code: 136, amount: 3500, description: "タクシー" }], _meta: { confidence_rank: "High", confidence_score: 85, wallet_txn_id: 12345 } },
+      { issue_date: "2026-03-02", type: "expense", details: [{ account_item_id: 101, tax_code: 136, amount: 8800, description: "Amazon" }], _meta: { confidence_rank: "High", confidence_score: 80, wallet_txn_id: 12346 } },
     ],
   },
   kintone_review: {
-    count: 4,
-    items: [
+    staff: [
       {
-        transaction: {
-          date: "2026-03-01",
-          amount: -165000,
-          description: "3月分 事務所家賃",
-          partner_name: "東京不動産株式会社",
-          debit_credit: "expense",
-        },
-        classification: {
-          estimated_account: "地代家賃",
-          estimated_tax_class: "課税10%",
-          confidence_rank: "Medium",
-          confidence_score: 67,
-          tax_flags: [],
-          special_flags: [],
-        },
-        routing: {
-          decision: "kintone_review",
-          reason: "中確度（67点）: 若手レビュー対象",
-          kintone_view: "若手レビュー",
-        },
+        transaction: { date: "2026-03-03", amount: -150000, description: "PC修理代金", partner_name: "PCショップ" },
+        classification: { estimated_account: "修繕費", estimated_tax_class: "課税10%", confidence_rank: "High", confidence_score: 80, tax_flags: [], special_flags: ["資本的支出確認（20万円以上→要確認）"] },
+        routing: { decision: "kintone_staff", reason: "高確度だが10万以上", assignee: "スタッフ" },
       },
       {
-        transaction: {
-          date: "2026-03-15",
-          amount: -2680,
-          description: "Claude Pro月額利用料",
-          partner_name: "Anthropic",
-          debit_credit: "expense",
-        },
-        classification: {
-          estimated_account: "雑費",
-          estimated_tax_class: "要確認",
-          confidence_rank: "Low",
-          confidence_score: 18,
-          tax_flags: ["R08"],
-          special_flags: [],
-        },
-        routing: {
-          decision: "kintone_review",
-          reason: "低確度（18点）: 経験者レビュー対象",
-          kintone_view: "経験者レビュー",
-        },
+        transaction: { date: "2026-03-05", amount: -1080, description: "弁当代 打合せ用", partner_name: "セブン" },
+        classification: { estimated_account: "会議費", estimated_tax_class: "課税8%（軽減）", confidence_rank: "Medium", confidence_score: 60, tax_flags: ["R04"], special_flags: [] },
+        routing: { decision: "kintone_staff", reason: "R04 軽減税率", assignee: "スタッフ" },
       },
       {
-        transaction: {
-          date: "2026-03-20",
-          amount: -25000,
-          description: "事務所火災保険料 3月分",
-          partner_name: "損害保険ジャパン",
-          debit_credit: "expense",
-        },
-        classification: {
-          estimated_account: "保険料",
-          estimated_tax_class: "非課税",
-          confidence_rank: "Medium",
-          confidence_score: 50,
-          tax_flags: [],
-          special_flags: [],
-        },
-        routing: {
-          decision: "kintone_review",
-          reason: "中確度（50点）: 若手レビュー対象",
-          kintone_view: "若手レビュー",
-        },
+        transaction: { date: "2026-03-10", amount: -25000, description: "保険料 3月分", partner_name: "損保" },
+        classification: { estimated_account: "保険料", estimated_tax_class: "非課税", confidence_rank: "Medium", confidence_score: 65, tax_flags: [], special_flags: [] },
+        routing: { decision: "kintone_staff", reason: "中確度", assignee: "スタッフ" },
       },
+    ],
+    senior: [
       {
-        transaction: {
-          date: "2026-03-20",
-          amount: -8800,
-          description: "カード払い",
-          partner_name: "",
-          debit_credit: "expense",
-        },
-        classification: {
-          estimated_account: "雑費",
-          estimated_tax_class: "課税10%",
-          confidence_rank: "Low",
-          confidence_score: 11,
-          tax_flags: [],
-          special_flags: [],
-        },
-        routing: {
-          decision: "kintone_review",
-          reason: "低確度（11点）: 経験者レビュー対象",
-          kintone_view: "経験者レビュー",
-        },
+        transaction: { date: "2026-03-15", amount: -30000, description: "不明な支払い", partner_name: "" },
+        classification: { estimated_account: "雑費", estimated_tax_class: "課税10%", confidence_rank: "Low", confidence_score: 15, tax_flags: [], special_flags: [] },
+        routing: { decision: "kintone_senior", reason: "低確度（15点）", assignee: "シニア" },
       },
     ],
   },
   exclude: {
-    count: 1,
-    items: [
+    routing_excluded: [
       {
-        transaction: {
-          date: "2026-03-25",
-          amount: -500000,
-          description: "口座間振替 普通→定期",
-          partner_name: "",
-          debit_credit: "expense",
-        },
-        classification: {
-          estimated_account: "雑費",
-          estimated_tax_class: "課税10%",
-          confidence_rank: "Low",
-          confidence_score: 11,
-          tax_flags: [],
-          special_flags: [],
-        },
-        routing: {
-          decision: "exclude",
-          reason: "除外キーワード「振替」に該当",
-        },
+        transaction: { date: "2026-03-11", amount: -500000, description: "口座間振替" },
+        classification: { excluded: true, exclude_reason: "除外キーワード「口座間」" },
+        routing: { decision: "exclude", reason: "除外キーワード" },
       },
     ],
-  },
-  freee_rule_matched: {
-    count: 2,
-    note: "freeeの自動登録ルールでマッチ済み。Claude Code処理対象外。",
+    freee_skipped: [
+      { id: 9999, date: "2026-03-12", amount: -10000, description: "ルールマッチ済", skip_reason: "rule_matched=true" },
+    ],
   },
 };
 
-async function runTest() {
-  console.log("╔══════════════════════════════════════════════╗");
-  console.log("║  processing-report テスト                    ║");
-  console.log("╚══════════════════════════════════════════════╝\n");
+const REGISTER_RESULT = {
+  summary: { registered: 0, failed: 0, skipped: 2, dry_run: true },
+  registered: [],
+  failed: [],
+  skipped: [{ index: 0 }, { index: 1 }],
+};
 
-  const tmpDir = path.resolve("tmp");
-  if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
+// ==================================================
+// テスト実行
+// ==================================================
+(async () => {
 
-  const testFile = path.join(tmpDir, "test_processing_result_report.json");
-  fs.writeFileSync(testFile, JSON.stringify(TEST_RESULT, null, 2), "utf-8");
+console.log("\n━━━ processing-report テスト ━━━");
 
-  // テスト: Excelレポート生成
-  console.log("━━━ テスト1: Excelレポート生成 ━━━");
-  const reportPath = await generateReport(testFile, tmpDir);
+let reportPath = null;
+let workbook = null;
 
-  const check1 = fs.existsSync(reportPath);
-  console.log(`  ${check1 ? "✅" : "❌"} Excelファイルが作成される`);
+// Excelファイル生成
+await asyncTest("P01: generateReportでExcelファイル生成", async () => {
+  reportPath = await generateReport(TEST_RESULT, { registerResult: REGISTER_RESULT });
+  assert.ok(reportPath, "パスが返される");
+  assert.ok(fs.existsSync(reportPath), "ファイルが存在");
+});
 
+await asyncTest("P02: ファイルサイズが1KB以上", async () => {
   const stats = fs.statSync(reportPath);
-  const check2 = stats.size > 1000; // 最低1KB以上
-  console.log(`  ${check2 ? "✅" : "❌"} ファイルサイズが妥当 (${(stats.size / 1024).toFixed(1)}KB)`);
+  assert.ok(stats.size > 1000, `サイズ: ${stats.size} bytes`);
+});
 
-  // ExcelJS で読み込み検証
-  const ExcelJS = require("exceljs");
-  const wb = new ExcelJS.Workbook();
-  await wb.xlsx.readFile(reportPath);
+// Excelファイル読み込み
+await asyncTest("P03: 4シート構成", async () => {
+  workbook = new ExcelJS.Workbook();
+  await workbook.xlsx.readFile(reportPath);
+  assert.strictEqual(workbook.worksheets.length, 4, `シート数: ${workbook.worksheets.length}`);
+});
 
-  const check3 = wb.worksheets.length === 4;
-  console.log(`  ${check3 ? "✅" : "❌"} 4シート構成 (実際: ${wb.worksheets.length}シート)`);
+await asyncTest("P04: シート名確認", async () => {
+  const names = workbook.worksheets.map((s) => s.name);
+  assert.ok(names.includes("サマリー"), "サマリーシート");
+  assert.ok(names.includes("自動登録詳細"), "自動登録詳細シート");
+  assert.ok(names.includes("Kintone確認"), "Kintone確認シート");
+  assert.ok(names.includes("除外一覧"), "除外一覧シート");
+});
 
-  const sheetNames = wb.worksheets.map((s) => s.name);
-  const check4 =
-    sheetNames.includes("サマリー") &&
-    sheetNames.includes("処理結果一覧") &&
-    sheetNames.includes("自動登録詳細") &&
-    sheetNames.includes("Kintone確認");
-  console.log(`  ${check4 ? "✅" : "❌"} シート名が正しい: ${sheetNames.join(", ")}`);
+// サマリーシートの内容検証
+test("P05: サマリーにタイトルが含まれる", () => {
+  const ws = workbook.getWorksheet("サマリー");
+  const title = ws.getCell("A1").value;
+  assert.ok(String(title).includes("処理結果レポート"), `タイトル: ${title}`);
+});
 
-  // 処理結果一覧シートの行数チェック（ヘッダー1行 + データ6行 = 7行以上）
-  const detailSheet = wb.getWorksheet("処理結果一覧");
-  const check5 = detailSheet.rowCount >= 7;
-  console.log(`  ${check5 ? "✅" : "❌"} 処理結果一覧に${detailSheet.rowCount - 1}件のデータ行`);
+// 自動登録詳細シート
+test("P06: 自動登録詳細に2件のデータ行", () => {
+  const ws = workbook.getWorksheet("自動登録詳細");
+  // ヘッダー1行 + データ2行 = 3行以上
+  assert.ok(ws.rowCount >= 3, `行数: ${ws.rowCount}`);
+});
 
-  // Kintone確認シートの行数チェック
-  const kintoneSheet = wb.getWorksheet("Kintone確認");
-  const check6 = kintoneSheet.rowCount >= 5; // ヘッダー1 + 4件
-  console.log(`  ${check6 ? "✅" : "❌"} Kintone確認に${kintoneSheet.rowCount - 1}件のデータ行`);
+// Kintone確認シート
+test("P07: Kintone確認にstaff+seniorの4件", () => {
+  const ws = workbook.getWorksheet("Kintone確認");
+  // ヘッダー1行 + 4件 = 5行以上
+  assert.ok(ws.rowCount >= 5, `行数: ${ws.rowCount}`);
+});
 
-  // 集計
-  const checks = [check1, check2, check3, check4, check5, check6];
-  const passed = checks.filter(Boolean).length;
-  console.log(`\n結果: ${passed}/${checks.length} テスト通過`);
+// 除外一覧シート
+test("P08: 除外一覧にデータあり", () => {
+  const ws = workbook.getWorksheet("除外一覧");
+  // ヘッダー1行 + 少なくとも1行
+  assert.ok(ws.rowCount >= 2, `行数: ${ws.rowCount}`);
+});
 
-  if (passed === checks.length) {
-    console.log("\n🎉 全テスト通過！");
-  } else {
-    console.log("\n⚠️ 一部テストが失敗しています。");
-    process.exit(1);
-  }
-
+// オブジェクト直接受け取り（後方互換: 文字列パスでも動作）
+await asyncTest("P09: 文字列パスでも動作（後方互換）", async () => {
+  const tmpDir = path.resolve(__dirname, "../tmp");
+  if (!fs.existsSync(tmpDir)) fs.mkdirSync(tmpDir, { recursive: true });
+  const jsonPath = path.join(tmpDir, "test_report_input.json");
+  fs.writeFileSync(jsonPath, JSON.stringify(TEST_RESULT, null, 2), "utf-8");
+  const outPath = path.join(tmpDir, "test_report_compat.xlsx");
+  const result = await generateReport(jsonPath, { outputPath: outPath });
+  assert.ok(fs.existsSync(result), "文字列パスからも生成可能");
   // クリーンアップ
-  fs.unlinkSync(testFile);
+  fs.unlinkSync(jsonPath);
+  fs.unlinkSync(result);
+});
+
+// クリーンアップ
+if (reportPath && fs.existsSync(reportPath)) {
   fs.unlinkSync(reportPath);
 }
 
-runTest().catch((err) => {
-  console.error("エラー:", err);
+// ==================================================
+// 結果
+// ==================================================
+console.log("\n" + "=".repeat(50));
+console.log(`テスト結果: ${passed} passed / ${failed} failed / ${passed + failed} total`);
+if (failed > 0) {
+  console.log("⚠️ 一部テストが失敗しました");
+  process.exit(1);
+} else {
+  console.log("✅ 全テスト通過！");
+}
+
+})().catch((err) => {
+  console.error("テストエラー:", err);
   process.exit(1);
 });
