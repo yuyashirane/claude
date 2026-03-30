@@ -64,7 +64,9 @@
       "Bash(node -e \"const pkg = require\\(''./package.json''\\); console.log\\(JSON.stringify\\(Object.keys\\(pkg.dependencies || {}\\), null, 2\\)\\)\")",
       "Bash(node tests/test-excel-csv-parser.js)",
       "Bash(find /c/Users/yuya_/claude/office/freee-auto/references -type f \\\\\\(-name *.md -o -name *.json -o -name *.js \\\\\\))",
-      "Bash(find /c/Users/yuya_/claude/office/freee-auto/src -type f -name *.js)"
+      "Bash(find /c/Users/yuya_/claude/office/freee-auto/src -type f -name *.js)",
+      "Bash(ls \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\references\\\\dictionaries\"\" 2>/dev/null; ls \"C:Usersyuya_claudeofficefreee-autoreferencesrules\"\")",
+      "Bash(ls \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\references\\\\operations\"\" 2>/dev/null; ls \"C:Usersyuya_claudeofficefreee-autodocs\"\")"
     ]
   }
 }
