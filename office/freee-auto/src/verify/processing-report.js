@@ -85,7 +85,9 @@ const STYLES = {
  *
  * @param {Object|string} result - 処理結果オブジェクト、またはJSONファイルパス
  * @param {Object} [options]
- * @param {string} [options.outputPath] - 出力先ファイルパス（省略時は reports/ に自動生成）
+ * @param {string} [options.outputPath] - 出力先ファイルパス（省略時は自動生成）
+ * @param {string} [options.baseDir] - ベースディレクトリ（省略時は REPORT_OUTPUT_DIR or ../../reports）
+ *                                    ※ {baseDir}/{company_id}/ にファイルを生成する
  * @param {Object} [options.registerResult] - deal-creator.js の登録結果（あれば反映）
  * @returns {Promise<string>} 出力ファイルパス
  */
@@ -98,7 +100,7 @@ async function generateReport(result, options = {}) {
     resultData = result;
   }
 
-  const { outputPath, registerResult } = options;
+  const { outputPath, baseDir, registerResult } = options;
 
   const workbook = new ExcelJS.Workbook();
   workbook.creator = "freee-auto (Claude Code)";
@@ -117,14 +119,17 @@ async function generateReport(result, options = {}) {
   createExcludeSheet(workbook, resultData);
 
   // 出力先決定
+  const companyId = resultData.metadata?.company_id || "unknown";
   let filePath;
   if (outputPath) {
     filePath = path.resolve(outputPath);
   } else {
-    const outDir = path.resolve(__dirname, "../../reports");
+    const resolvedBase = baseDir
+      || (process.env.REPORT_OUTPUT_DIR ? path.resolve(process.env.REPORT_OUTPUT_DIR) : null)
+      || path.resolve(__dirname, "../../reports");
+    const outDir = path.join(resolvedBase, String(companyId));
     if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
     const timestamp = new Date().toISOString().slice(0, 19).replace(/[:-]/g, "");
-    const companyId = resultData.metadata?.company_id || "unknown";
     filePath = path.join(outDir, `processing_report_${companyId}_${timestamp}.xlsx`);
   }
 
@@ -553,14 +558,8 @@ if (require.main === module) {
     process.exit(1);
   }
 
-  const outputPath = outputDir
-    ? path.join(
-      path.resolve(outputDir),
-      `processing_report_${new Date().toISOString().slice(0, 19).replace(/[:-]/g, "")}.xlsx`
-    )
-    : undefined;
-
-  generateReport(inputFile, { outputPath })
+  // outputDir 指定時はベースディレクトリとして渡す（company_id サブフォルダは generateReport 内で付与）
+  generateReport(inputFile, { baseDir: outputDir ? path.resolve(outputDir) : undefined })
     .then((filePath) => {
       console.log(`完了: ${filePath}`);
     })

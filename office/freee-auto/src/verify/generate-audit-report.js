@@ -602,7 +602,10 @@ async function generateReport() {
   // ============================================================
   // ファイル保存
   // ============================================================
-  const outputDir = path.join('C:', 'Users', 'yuya_', 'claude', 'reports');
+  const baseDir = process.env.REPORT_OUTPUT_DIR
+    ? path.resolve(process.env.REPORT_OUTPUT_DIR)
+    : path.resolve(__dirname, '../../reports');
+  const outputDir = path.join(baseDir, String(COMPANY_ID));
   if (!fs.existsSync(outputDir)) {
     fs.mkdirSync(outputDir, { recursive: true });
   }

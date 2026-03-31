@@ -71,7 +71,21 @@
       "Bash(node src/classify/unprocessed-processor.js tmp/wallet_txns_474381_2026-03-30.json tmp/)",
       "Bash(node src/verify/processing-report.js tmp/processing_result_20260330T221848.json reports/)",
       "Bash(node src/register/deal-creator.js tmp/processing_result_20260330T221848.json)",
-      "Bash(node src/review/kintone-sender.js tmp/processing_result_20260330T221848.json --dry-run)"
+      "Bash(node src/review/kintone-sender.js tmp/processing_result_20260330T221848.json --dry-run)",
+      "Bash(mkdir -p \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\data\\\\474381\\\\2026-03-31\\\\raw\")",
+      "Bash(mkdir -p \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\data\\\\474381\\\\2026-03-31\\\\analysis\")",
+      "Bash(ls \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\data\\\\474381\\\\2026-03-31\\\\raw\"\" 2>/dev/null && echo \"---\" && ls \"C:Usersyuya_claudeofficefreee-autodata4743812026-03-31analysis\"\")",
+      "Bash(ls \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\data\\\\474381\"\" 2>/dev/null || echo \"No data dir \")",
+      "Bash(node tmp/save-data.js)",
+      "Bash(node tmp/save-remaining.js)",
+      "Bash(node tmp/save-p6.js)",
+      "Bash(cd /c/Users/yuya_/claude/office/freee-auto node src/classify/02-analyze-transactions.js data/474381/2026-03-31)",
+      "Bash(node src/classify/02-analyze-transactions.js data/474381/2026-03-31)",
+      "Bash(node src/verify/05-check-overseas-services.js data/474381/2026-03-31 95)",
+      "Bash(node src/classify/03-analyze-financials.js data/474381/2026-03-31)",
+      "Bash(cd /c/Users/yuya_/claude/office/freee-auto node src/verify/04-generate-report.js data/474381/2026-03-31)",
+      "Bash(node tmp/send-findings-app2.js)",
+      "Bash(DRY_RUN=false node tmp/send-findings-app2.js)"
     ]
   }
 }

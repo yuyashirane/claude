@@ -1,0 +1,4254 @@
+{
+  "deals": [
+    {
+      "id": 3313272088,
+      "company_id": 474381,
+      "issue_date": "2026-02-25",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9020759253,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9020759254,
+          "date": "2026-02-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3313272035,
+      "company_id": 474381,
+      "issue_date": "2026-02-25",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9020759119,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9020759120,
+          "date": "2026-02-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441350297,
+      "company_id": 474381,
+      "issue_date": "2026-02-24",
+      "due_date": null,
+      "amount": 1100,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554601,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336065720,
+          "account_item_id": 74633321,
+          "tax_code": 129,
+          "item_id": 193667141,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 1100,
+          "vat": 100,
+          "description": "誤請求分返金",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336065724,
+          "date": "2026-02-24",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 1100
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3408985258,
+      "company_id": 474381,
+      "issue_date": "2026-02-24",
+      "due_date": null,
+      "amount": 8583,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 24533977,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9252078853,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 75444647,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 8583,
+          "vat": 780,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9252078856,
+          "date": "2026-02-24",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 8583
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3313271992,
+      "company_id": 474381,
+      "issue_date": "2026-02-24",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9020759007,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9020759008,
+          "date": "2026-02-24",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3313271940,
+      "company_id": 474381,
+      "issue_date": "2026-02-24",
+      "due_date": null,
+      "amount": 22000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 98264328,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9020758848,
+          "account_item_id": 74633341,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 22000,
+          "vat": 2000,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9020758853,
+          "date": "2026-02-24",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 22000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3301226096,
+      "company_id": 474381,
+      "issue_date": "2026-02-22",
+      "due_date": null,
+      "amount": 9108,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 106486604,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8990801030,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 9108,
+          "vat": 828,
+          "description": "CRMツール代",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8990801033,
+          "date": "2026-02-22",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 9108
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3408965522,
+      "company_id": 474381,
+      "issue_date": "2026-02-20",
+      "due_date": null,
+      "amount": 4400,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 106488865,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9252036154,
+          "account_item_id": 74633354,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 4400,
+          "vat": 400,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9252036155,
+          "date": "2026-02-20",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 4400
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3382543363,
+      "company_id": 474381,
+      "issue_date": "2026-02-20",
+      "due_date": null,
+      "amount": 10000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 60006874,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "手動",
+      "details": [
+        {
+          "id": 9190786265,
+          "account_item_id": 74633347,
+          "tax_code": 136,
+          "item_id": 75444793,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 10000,
+          "vat": 909,
+          "description": "Suicaチャージ代",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9190786267,
+          "date": "2026-02-20",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 141518,
+          "amount": 10000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3408981236,
+      "company_id": 474381,
+      "issue_date": "2026-02-19",
+      "due_date": null,
+      "amount": 2538,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554927,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9252070060,
+          "account_item_id": 74633351,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 2538,
+          "vat": 230,
+          "description": "名刺代",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9252070062,
+          "date": "2026-02-19",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 2538
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3287368462,
+      "company_id": 474381,
+      "issue_date": "2026-02-18",
+      "due_date": null,
+      "amount": 3387,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 62667584,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8956849694,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 3387,
+          "vat": 307,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8956849700,
+          "date": "2026-02-18",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1754759,
+          "amount": 3387
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3301226144,
+      "company_id": 474381,
+      "issue_date": "2026-02-17",
+      "due_date": null,
+      "amount": 52322,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 13211565,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8990801146,
+          "account_item_id": 74633354,
+          "tax_code": 136,
+          "item_id": 75444791,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 52322,
+          "vat": 4756,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8990801148,
+          "date": "2026-02-17",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 52322
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441346829,
+      "company_id": 474381,
+      "issue_date": "2026-02-16",
+      "due_date": null,
+      "amount": 2000000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": null,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336057082,
+          "account_item_id": 416617736,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 2000000,
+          "vat": 0,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336057084,
+          "date": "2026-02-16",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 2000000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3277992283,
+      "company_id": 474381,
+      "issue_date": "2026-02-16",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8932904196,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8932904200,
+          "date": "2026-02-16",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3382529289,
+      "company_id": 474381,
+      "issue_date": "2026-02-14",
+      "due_date": null,
+      "amount": 860,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 8218968,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "手動",
+      "details": [
+        {
+          "id": 9190750577,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 149115178,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 860,
+          "vat": 78,
+          "description": "アイデアロジック対応",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9190750581,
+          "date": "2026-02-14",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 141518,
+          "amount": 860
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3277657508,
+      "company_id": 474381,
+      "issue_date": "2026-02-13",
+      "due_date": null,
+      "amount": 39336,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 4436058,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8932007571,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 39336,
+          "vat": 3576,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8932007572,
+          "date": "2026-02-13",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 39336
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441117276,
+      "company_id": 474381,
+      "issue_date": "2026-02-12",
+      "due_date": null,
+      "amount": 33000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 114566606,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9335364825,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 33000,
+          "vat": 3000,
+          "description": "医療法人サポート業務",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9335364826,
+          "date": "2026-02-12",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 33000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3266878220,
+      "company_id": 474381,
+      "issue_date": "2026-02-12",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8904038877,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8904038878,
+          "date": "2026-02-12",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3266878154,
+      "company_id": 474381,
+      "issue_date": "2026-02-12",
+      "due_date": null,
+      "amount": 27500,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 4388246,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8904038677,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 124303966,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 27500,
+          "vat": 2500,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8904038682,
+          "date": "2026-02-12",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 27500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3278162011,
+      "company_id": 474381,
+      "issue_date": "2026-02-11",
+      "due_date": null,
+      "amount": 1080,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 13209974,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8933353798,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 1080,
+          "vat": 98,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8933353799,
+          "date": "2026-02-11",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 1080
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441450441,
+      "company_id": 474381,
+      "issue_date": "2026-02-10",
+      "due_date": null,
+      "amount": 8586,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3172854,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336344108,
+          "account_item_id": 74633357,
+          "tax_code": 37,
+          "item_id": 106257796,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 8586,
+          "vat": 0,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336344109,
+          "date": "2026-02-10",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 8586
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441117235,
+      "company_id": 474381,
+      "issue_date": "2026-02-10",
+      "due_date": null,
+      "amount": 82844,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 114566173,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9335364714,
+          "account_item_id": 74633342,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 82844,
+          "vat": 7531,
+          "description": "帳簿チェック業務等",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9335364715,
+          "date": "2026-02-10",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 82844
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3278162102,
+      "company_id": 474381,
+      "issue_date": "2026-02-10",
+      "due_date": null,
+      "amount": 6710,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 7269619,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8933354061,
+          "account_item_id": 74633342,
+          "tax_code": 136,
+          "item_id": 126872717,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 6710,
+          "vat": 610,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8933354070,
+          "date": "2026-02-10",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 6710
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3266878075,
+      "company_id": 474381,
+      "issue_date": "2026-02-10",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8904038451,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8904038455,
+          "date": "2026-02-10",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441449753,
+      "company_id": 474381,
+      "issue_date": "2026-02-09",
+      "due_date": null,
+      "amount": 6450,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554901,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336342366,
+          "account_item_id": 74633351,
+          "tax_code": 136,
+          "item_id": 75444673,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 6450,
+          "vat": 586,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336342367,
+          "date": "2026-02-09",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 5605179,
+          "amount": 6450
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441449305,
+      "company_id": 474381,
+      "issue_date": "2026-02-08",
+      "due_date": null,
+      "amount": 1650,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 6994084,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336341189,
+          "account_item_id": 74633351,
+          "tax_code": 136,
+          "item_id": 75444674,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 1650,
+          "vat": 150,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336341191,
+          "date": "2026-02-08",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 1650
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3408973590,
+      "company_id": 474381,
+      "issue_date": "2026-02-06",
+      "due_date": null,
+      "amount": 1080,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 4436047,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9252053731,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 1080,
+          "vat": 98,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9252053732,
+          "date": "2026-02-06",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 1080
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3278162274,
+      "company_id": 474381,
+      "issue_date": "2026-02-06",
+      "due_date": null,
+      "amount": 6022,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 4830481,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8933354588,
+          "account_item_id": 74633355,
+          "tax_code": 136,
+          "item_id": 159398138,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 6022,
+          "vat": 547,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8933354594,
+          "date": "2026-02-06",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 6022
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3257439774,
+      "company_id": 474381,
+      "issue_date": "2026-02-06",
+      "due_date": null,
+      "amount": 33000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554349,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8879548346,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 127918991,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 33000,
+          "vat": 3000,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8879548352,
+          "date": "2026-02-06",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 33000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3246896162,
+      "company_id": 474381,
+      "issue_date": "2026-02-05",
+      "due_date": null,
+      "amount": 6305,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 7269862,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8851521647,
+          "account_item_id": 74633351,
+          "tax_code": 136,
+          "item_id": 75444674,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 6305,
+          "vat": 573,
+          "description": "決算書ファイル",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8851521648,
+          "date": "2026-02-05",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 6305
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441345689,
+      "company_id": 474381,
+      "issue_date": "2026-02-04",
+      "due_date": null,
+      "amount": 464757,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": null,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336054321,
+          "account_item_id": 74633296,
+          "tax_code": 2,
+          "item_id": 75444749,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 464757,
+          "vat": 0,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336054323,
+          "date": "2026-02-04",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 464757
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441345395,
+      "company_id": 474381,
+      "issue_date": "2026-02-04",
+      "due_date": null,
+      "amount": 255400,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": null,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336053584,
+          "account_item_id": 74633296,
+          "tax_code": 2,
+          "item_id": 75444686,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 255400,
+          "vat": 0,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336053586,
+          "date": "2026-02-04",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 255400
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441345026,
+      "company_id": 474381,
+      "issue_date": "2026-02-04",
+      "due_date": null,
+      "amount": 255400,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": null,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336052610,
+          "account_item_id": 74633296,
+          "tax_code": 2,
+          "item_id": 75444686,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 255400,
+          "vat": 0,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336052612,
+          "date": "2026-02-04",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 255400
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3246896110,
+      "company_id": 474381,
+      "issue_date": "2026-02-04",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8851521530,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8851521532,
+          "date": "2026-02-04",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3246896069,
+      "company_id": 474381,
+      "issue_date": "2026-02-04",
+      "due_date": null,
+      "amount": 165000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554349,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8851521437,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 165000,
+          "vat": 15000,
+          "description": "LINE集客コンサル費用",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8851521438,
+          "date": "2026-02-04",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 165000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3246896018,
+      "company_id": 474381,
+      "issue_date": "2026-02-03",
+      "due_date": null,
+      "amount": 38500,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 62556430,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8851521301,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 106318799,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 38500,
+          "vat": 3500,
+          "description": "システム利用料",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8851521302,
+          "date": "2026-02-03",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 38500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3278162512,
+      "company_id": 474381,
+      "issue_date": "2026-02-02",
+      "due_date": null,
+      "amount": 3850,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 4830481,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8933355319,
+          "account_item_id": 74633355,
+          "tax_code": 136,
+          "item_id": 159398138,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 3850,
+          "vat": 350,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8933355321,
+          "date": "2026-02-02",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 3850
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3278162441,
+      "company_id": 474381,
+      "issue_date": "2026-02-02",
+      "due_date": null,
+      "amount": 11000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 9138181,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8933355119,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 11000,
+          "vat": 1000,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8933355124,
+          "date": "2026-02-02",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 11000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3278162361,
+      "company_id": 474381,
+      "issue_date": "2026-02-02",
+      "due_date": null,
+      "amount": 22000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 102376476,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8933354809,
+          "account_item_id": 74633342,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 22000,
+          "vat": 2000,
+          "description": "給与計算支援等",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8933354810,
+          "date": "2026-02-02",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 22000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3240206650,
+      "company_id": 474381,
+      "issue_date": "2026-02-02",
+      "due_date": null,
+      "amount": 22000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 102376476,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8833001177,
+          "account_item_id": 74633342,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 22000,
+          "vat": 2000,
+          "description": "給与計算支援等",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8833001178,
+          "date": "2026-02-02",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 22000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3240206641,
+      "company_id": 474381,
+      "issue_date": "2026-02-02",
+      "due_date": null,
+      "amount": 4950,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 28338636,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8833001159,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 4950,
+          "vat": 450,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8833001160,
+          "date": "2026-02-02",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 4950
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441448632,
+      "company_id": 474381,
+      "issue_date": "2026-02-01",
+      "due_date": null,
+      "amount": 26136,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 4436058,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336339466,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 26136,
+          "vat": 2376,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336339467,
+          "date": "2026-02-01",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 141521,
+          "amount": 26136
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3408975143,
+      "company_id": 474381,
+      "issue_date": "2026-02-01",
+      "due_date": null,
+      "amount": 237,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 4436047,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9252057032,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 237,
+          "vat": 21,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9252057035,
+          "date": "2026-02-01",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 237
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3408973634,
+      "company_id": 474381,
+      "issue_date": "2026-02-01",
+      "due_date": null,
+      "amount": 20900,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 4436047,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9252053823,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 20900,
+          "vat": 1900,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9252053824,
+          "date": "2026-02-01",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 20900
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3278162604,
+      "company_id": 474381,
+      "issue_date": "2026-02-01",
+      "due_date": null,
+      "amount": 13860,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 7269309,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8933355587,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 13860,
+          "vat": 1260,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8933355589,
+          "date": "2026-02-01",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 13860
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3234718800,
+      "company_id": 474381,
+      "issue_date": "2026-02-01",
+      "due_date": null,
+      "amount": 3188,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 4831367,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8818502870,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 75444647,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 3188,
+          "vat": 289,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8818502871,
+          "date": "2026-02-01",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1754759,
+          "amount": 3188
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441367916,
+      "company_id": 474381,
+      "issue_date": "2026-01-31",
+      "due_date": null,
+      "amount": 231759,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3175430,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336109475,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 231759,
+          "vat": 21069,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336109481,
+          "date": "2026-02-27",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 231759
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3307413216,
+      "company_id": 474381,
+      "issue_date": "2026-01-31",
+      "due_date": null,
+      "amount": 894268,
+      "due_amount": 894268,
+      "type": "expense",
+      "partner_id": null,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "unsettled",
+      "deal_origin_name": "給与計算",
+      "details": [
+        {
+          "id": 9005935057,
+          "account_item_id": 74633338,
+          "tax_code": 2,
+          "item_id": 75444698,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 186307,
+          "vat": 0,
+          "description": "健康保険料（事業主負担分）",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9005935058,
+          "account_item_id": 74633338,
+          "tax_code": 2,
+          "item_id": 75444678,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 19717,
+          "vat": 0,
+          "description": "介護保険料（事業主負担分）",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9005935060,
+          "account_item_id": 74633338,
+          "tax_code": 2,
+          "item_id": 75444712,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 236070,
+          "vat": 0,
+          "description": "厚生年金保険料（事業主負担分）",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9005935062,
+          "account_item_id": 74633338,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 10080,
+          "vat": 0,
+          "description": "子ども・子育て拠出金",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9005935065,
+          "account_item_id": 74633296,
+          "tax_code": 2,
+          "item_id": 75444699,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 186309,
+          "vat": 0,
+          "description": "健康保険料（預り分）",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9005935068,
+          "account_item_id": 74633296,
+          "tax_code": 2,
+          "item_id": 75444679,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 19715,
+          "vat": 0,
+          "description": "介護保険料（預り分）",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9005935071,
+          "account_item_id": 74633296,
+          "tax_code": 2,
+          "item_id": 75444713,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 236070,
+          "vat": 0,
+          "description": "厚生年金保険料（預り分）",
+          "entry_side": "debit"
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3307413179,
+      "company_id": 474381,
+      "issue_date": "2026-01-31",
+      "due_date": null,
+      "amount": 3197768,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 5030693,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "給与計算",
+      "details": [
+        {
+          "id": 9005934933,
+          "account_item_id": 74633332,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 2780000,
+          "vat": 0,
+          "description": "役員報酬",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9005934936,
+          "account_item_id": 74633296,
+          "tax_code": 2,
+          "item_id": 75444686,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 246600,
+          "vat": 0,
+          "description": "住民税",
+          "entry_side": "credit"
+        },
+        {
+          "id": 9005934941,
+          "account_item_id": 74633296,
+          "tax_code": 2,
+          "item_id": 75444699,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 186309,
+          "vat": 0,
+          "description": "健康保険料（預り分）",
+          "entry_side": "credit"
+        },
+        {
+          "id": 9005934944,
+          "account_item_id": 74633296,
+          "tax_code": 2,
+          "item_id": 75444679,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 19715,
+          "vat": 0,
+          "description": "介護保険料（預り分）",
+          "entry_side": "credit"
+        },
+        {
+          "id": 9005934947,
+          "account_item_id": 74633296,
+          "tax_code": 2,
+          "item_id": 75444713,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 236070,
+          "vat": 0,
+          "description": "厚生年金保険料（預り分）",
+          "entry_side": "credit"
+        },
+        {
+          "id": 9005934962,
+          "account_item_id": 74633296,
+          "tax_code": 2,
+          "item_id": 75444749,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 467463,
+          "vat": 0,
+          "description": "源泉所得税",
+          "entry_side": "credit"
+        },
+        {
+          "id": 9005934967,
+          "account_item_id": 74633359,
+          "tax_code": 23,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 138500,
+          "vat": 0,
+          "description": "社宅等使用料",
+          "entry_side": "credit"
+        },
+        {
+          "id": 9005934970,
+          "account_item_id": 74633334,
+          "tax_code": 2,
+          "item_id": 75444722,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 1227034,
+          "vat": 0,
+          "description": "基本給",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9005934975,
+          "account_item_id": 74633347,
+          "tax_code": 189,
+          "item_id": 75444783,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 22030,
+          "vat": 1602,
+          "description": "通勤手当",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9005934979,
+          "account_item_id": 74633334,
+          "tax_code": 2,
+          "item_id": 75444745,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 203902,
+          "vat": 0,
+          "description": "残業代",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9005934988,
+          "account_item_id": 74633338,
+          "tax_code": 2,
+          "item_id": 75444789,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 7313,
+          "vat": 0,
+          "description": "雇用保険料（預り分）",
+          "entry_side": "credit"
+        },
+        {
+          "id": 9005934993,
+          "account_item_id": 74633334,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 275000,
+          "vat": 0,
+          "description": "生涯設計手当",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9005934996,
+          "account_item_id": 74633334,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 3200,
+          "vat": 0,
+          "description": "在宅勤務手当",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9005934997,
+          "account_item_id": 74633334,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 16000,
+          "vat": 0,
+          "description": "資格手当",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9005934999,
+          "account_item_id": 679174994,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 15000,
+          "vat": 0,
+          "description": "確定拠出年金掛金",
+          "entry_side": "credit"
+        },
+        {
+          "id": 9005935004,
+          "account_item_id": 74633334,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 5000,
+          "vat": 0,
+          "description": "リーダー手当",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9005935010,
+          "account_item_id": 74633334,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 3000,
+          "vat": 0,
+          "description": "特別手当",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9005935013,
+          "account_item_id": 74633334,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 11489,
+          "vat": 0,
+          "description": "遅刻早退控除",
+          "entry_side": "credit"
+        },
+        {
+          "id": 9005935015,
+          "account_item_id": 74633334,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 8939,
+          "vat": 0,
+          "description": "欠勤控除",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336074457,
+          "date": "2026-02-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 466139
+        },
+        {
+          "id": 9336076614,
+          "date": "2026-02-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 500000
+        },
+        {
+          "id": 9336081506,
+          "date": "2026-02-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 764316
+        },
+        {
+          "id": 9336083508,
+          "date": "2026-02-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 69151
+        },
+        {
+          "id": 9336085568,
+          "date": "2026-02-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 46228
+        },
+        {
+          "id": 9336087409,
+          "date": "2026-02-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 216905
+        },
+        {
+          "id": 9336089665,
+          "date": "2026-02-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 291316
+        },
+        {
+          "id": 9336091459,
+          "date": "2026-02-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 116898
+        },
+        {
+          "id": 9336093195,
+          "date": "2026-02-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 94911
+        },
+        {
+          "id": 9336095214,
+          "date": "2026-02-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 185083
+        },
+        {
+          "id": 9336097144,
+          "date": "2026-02-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 70046
+        },
+        {
+          "id": 9336099562,
+          "date": "2026-02-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 223853
+        },
+        {
+          "id": 9336101002,
+          "date": "2026-02-25",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 152922
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3278160558,
+      "company_id": 474381,
+      "issue_date": "2026-01-31",
+      "due_date": null,
+      "amount": 17938,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 11956375,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8933349732,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 75444792,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 17938,
+          "vat": 1630,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8933349739,
+          "date": "2026-01-31",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 17938
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3278160468,
+      "company_id": 474381,
+      "issue_date": "2026-01-31",
+      "due_date": null,
+      "amount": 5091,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 11956375,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8933349535,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 75444792,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 5091,
+          "vat": 462,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8933349537,
+          "date": "2026-01-31",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 5091
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3236647085,
+      "company_id": 474381,
+      "issue_date": "2026-01-30",
+      "due_date": null,
+      "amount": 238,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3172854,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8823247143,
+          "account_item_id": 74633357,
+          "tax_code": 189,
+          "item_id": 106257796,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 238,
+          "vat": 17,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8823247144,
+          "date": "2026-01-30",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 238
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3236647075,
+      "company_id": 474381,
+      "issue_date": "2026-01-30",
+      "due_date": null,
+      "amount": 39336,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 4436058,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8823247125,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 39336,
+          "vat": 3576,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8823247126,
+          "date": "2026-01-30",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 1150075,
+          "amount": 39336
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441443203,
+      "company_id": 474381,
+      "issue_date": "2026-01-29",
+      "due_date": null,
+      "amount": 1631,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554901,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336324466,
+          "account_item_id": 74633351,
+          "tax_code": 136,
+          "item_id": 75444674,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 1631,
+          "vat": 148,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336324468,
+          "date": "2026-01-29",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 5605179,
+          "amount": 1631
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441442742,
+      "company_id": 474381,
+      "issue_date": "2026-01-29",
+      "due_date": null,
+      "amount": 4180,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554901,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336323223,
+          "account_item_id": 74633355,
+          "tax_code": 136,
+          "item_id": 75444742,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 4180,
+          "vat": 380,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336323224,
+          "date": "2026-01-29",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 5605179,
+          "amount": 4180
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441442205,
+      "company_id": 474381,
+      "issue_date": "2026-01-29",
+      "due_date": null,
+      "amount": 4070,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554901,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336321742,
+          "account_item_id": 74633355,
+          "tax_code": 136,
+          "item_id": 75444742,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 4070,
+          "vat": 370,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336321743,
+          "date": "2026-01-29",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 5605179,
+          "amount": 4070
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441441644,
+      "company_id": 474381,
+      "issue_date": "2026-01-29",
+      "due_date": null,
+      "amount": 2750,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554901,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336319529,
+          "account_item_id": 74633355,
+          "tax_code": 136,
+          "item_id": 75444742,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 2750,
+          "vat": 250,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336319530,
+          "date": "2026-01-29",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 5605179,
+          "amount": 2750
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3230251558,
+      "company_id": 474381,
+      "issue_date": "2026-01-29",
+      "due_date": null,
+      "amount": 356,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 60006874,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "手動",
+      "details": [
+        {
+          "id": 8805470917,
+          "account_item_id": 74633347,
+          "tax_code": 136,
+          "item_id": 75444793,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 356,
+          "vat": 32,
+          "description": "上野御徒町⇔森下 往復（Suica忘れ）",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8805470920,
+          "date": "2026-01-29",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 141518,
+          "amount": 356
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441440913,
+      "company_id": 474381,
+      "issue_date": "2026-01-28",
+      "due_date": null,
+      "amount": 320,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554901,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336317325,
+          "account_item_id": 74633355,
+          "tax_code": 136,
+          "item_id": 75444742,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 320,
+          "vat": 29,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336317326,
+          "date": "2026-01-28",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 5605179,
+          "amount": 320
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441440131,
+      "company_id": 474381,
+      "issue_date": "2026-01-28",
+      "due_date": null,
+      "amount": 575,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554901,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336315254,
+          "account_item_id": 74633355,
+          "tax_code": 136,
+          "item_id": 75444742,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 575,
+          "vat": 52,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336315255,
+          "date": "2026-01-28",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 5605179,
+          "amount": 575
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441344085,
+      "company_id": 474381,
+      "issue_date": "2026-01-27",
+      "due_date": null,
+      "amount": 65535,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 45810962,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336050345,
+          "account_item_id": 423490731,
+          "tax_code": 37,
+          "item_id": 198091075,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 36090,
+          "vat": 0,
+          "description": "従業員退職金積立プラン",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9336050350,
+          "account_item_id": 423490731,
+          "tax_code": 37,
+          "item_id": 198091135,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 29445,
+          "vat": 0,
+          "description": "従業員退職金積立プラン",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336050352,
+          "date": "2026-01-27",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 65535
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441343865,
+      "company_id": 474381,
+      "issue_date": "2026-01-27",
+      "due_date": null,
+      "amount": 280073,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 57178982,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336049759,
+          "account_item_id": 74633359,
+          "tax_code": 37,
+          "item_id": 212537183,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 280073,
+          "vat": 0,
+          "description": "2月分",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336049760,
+          "date": "2026-01-27",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 280073
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3408973533,
+      "company_id": 474381,
+      "issue_date": "2026-01-27",
+      "due_date": null,
+      "amount": 2900,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 4436047,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9252053616,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 2900,
+          "vat": 263,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9252053617,
+          "date": "2026-01-27",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 2900
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3278161023,
+      "company_id": 474381,
+      "issue_date": "2026-01-27",
+      "due_date": null,
+      "amount": 21600,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 4830713,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8933350960,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 149115178,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 21600,
+          "vat": 1963,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8933350965,
+          "date": "2026-01-27",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 21600
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3227841521,
+      "company_id": 474381,
+      "issue_date": "2026-01-27",
+      "due_date": null,
+      "amount": 5500,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 66205103,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8798972690,
+          "account_item_id": 74633357,
+          "tax_code": 189,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 5500,
+          "vat": 400,
+          "description": "補助金支援",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8798972692,
+          "date": "2026-01-27",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 5500
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3227841441,
+      "company_id": 474381,
+      "issue_date": "2026-01-27",
+      "due_date": null,
+      "amount": 4046,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 4830645,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8798972451,
+          "account_item_id": 74633351,
+          "tax_code": 136,
+          "item_id": 75444674,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 4046,
+          "vat": 367,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8798972458,
+          "date": "2026-01-27",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 4046
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3227841387,
+      "company_id": 474381,
+      "issue_date": "2026-01-27",
+      "due_date": null,
+      "amount": 49970,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 18841592,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8798972316,
+          "account_item_id": 74633362,
+          "tax_code": 37,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 49970,
+          "vat": 0,
+          "description": "全額損金",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8798972317,
+          "date": "2026-01-27",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 49970
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3227841357,
+      "company_id": 474381,
+      "issue_date": "2026-01-27",
+      "due_date": null,
+      "amount": 50440,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 18841592,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8798972217,
+          "account_item_id": 74633362,
+          "tax_code": 37,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 50440,
+          "vat": 0,
+          "description": "全額損金",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8798972219,
+          "date": "2026-01-27",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 50440
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3227841315,
+      "company_id": 474381,
+      "issue_date": "2026-01-27",
+      "due_date": null,
+      "amount": 33000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 35503407,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8798972059,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 124303966,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 33000,
+          "vat": 3000,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8798972061,
+          "date": "2026-01-27",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 33000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3227841268,
+      "company_id": 474381,
+      "issue_date": "2026-01-27",
+      "due_date": null,
+      "amount": 8250,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 85325813,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8798971890,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 8250,
+          "vat": 750,
+          "description": "システム保守契約",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8798971892,
+          "date": "2026-01-27",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 8250
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3227841235,
+      "company_id": 474381,
+      "issue_date": "2026-01-27",
+      "due_date": null,
+      "amount": 11000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 66270061,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8798971759,
+          "account_item_id": 74633341,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 11000,
+          "vat": 1000,
+          "description": "採用HP 運営管理費",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8798971762,
+          "date": "2026-01-27",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 11000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3227841194,
+      "company_id": 474381,
+      "issue_date": "2026-01-27",
+      "due_date": null,
+      "amount": 50000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 66271326,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8798971607,
+          "account_item_id": 74633304,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 50000,
+          "vat": 0,
+          "description": "HP制作費等返済",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8798971611,
+          "date": "2026-01-27",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 50000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3227618633,
+      "company_id": 474381,
+      "issue_date": "2026-01-27",
+      "due_date": null,
+      "amount": 4000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554901,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8798364347,
+          "account_item_id": 74633344,
+          "tax_code": 37,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 4000,
+          "vat": 0,
+          "description": "口コミお礼",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8798364351,
+          "date": "2026-01-27",
+          "from_walletable_type": "wallet",
+          "from_walletable_id": 5605179,
+          "amount": 4000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3441343191,
+      "company_id": 474381,
+      "issue_date": "2026-01-26",
+      "due_date": null,
+      "amount": 142190,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 57899117,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9336047926,
+          "account_item_id": 679174994,
+          "tax_code": 2,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 125000,
+          "vat": 0,
+          "description": "当月掛金 1月分",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9336047927,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 1460,
+          "vat": 132,
+          "description": "資産管理手数料 1月分",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9336047928,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 5500,
+          "vat": 500,
+          "description": "事務取次手数料（事業主手数料）12月分",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9336047929,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 3080,
+          "vat": 280,
+          "description": "事務取次手数料（加入者手数料）12月分",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9336047930,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 5500,
+          "vat": 500,
+          "description": "事業主手数料 12月分",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9336047932,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 1320,
+          "vat": 120,
+          "description": "加入者基本手数料 12月分",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9336047933,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 330,
+          "vat": 30,
+          "description": "収納代行手数料 1月分",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9336047935,
+          "date": "2026-01-26",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 142190
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3428811048,
+      "company_id": 474381,
+      "issue_date": "2026-01-26",
+      "due_date": null,
+      "amount": 1333,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 106469619,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9300394264,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 75444647,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 1333,
+          "vat": 121,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9300394265,
+          "date": "2026-01-26",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 141521,
+          "amount": 1333
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3278161110,
+      "company_id": 474381,
+      "issue_date": "2026-01-26",
+      "due_date": null,
+      "amount": 3960,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 106469619,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8933351188,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 75444647,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 3960,
+          "vat": 360,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8933351191,
+          "date": "2026-01-26",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 3960
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3278161201,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 720,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 9337758,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8933351468,
+          "account_item_id": 74633346,
+          "tax_code": 189,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 720,
+          "vat": 52,
+          "description": "オールドトライアングル㈱ 打合せ",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8933351472,
+          "date": "2026-01-23",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 720
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425850,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776040516,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776040517,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425803,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776040355,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776040356,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425761,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776040258,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776040261,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425724,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776040167,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776040168,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425676,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776040061,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776040062,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425627,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776039946,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776039948,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425577,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776039832,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776039834,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425538,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776039745,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776039747,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425494,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776039643,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776039646,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425434,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776039503,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776039505,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425379,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776039368,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776039370,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425319,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776039213,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776039215,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425255,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776039060,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776039062,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425198,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776038916,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776038918,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425140,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776038786,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776038787,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3219425087,
+      "company_id": 474381,
+      "issue_date": "2026-01-23",
+      "due_date": null,
+      "amount": 145,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 3554503,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8776038666,
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "item_id": 75444737,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 145,
+          "vat": 13,
+          "description": null,
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8776038671,
+          "date": "2026-01-23",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3434677326,
+      "company_id": 474381,
+      "issue_date": "2026-01-22",
+      "due_date": null,
+      "amount": 8584,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 24533977,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9316975876,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 75444647,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 8584,
+          "vat": 780,
+          "description": "1月分",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9316975879,
+          "date": "2026-01-22",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 8584
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3434676937,
+      "company_id": 474381,
+      "issue_date": "2026-01-22",
+      "due_date": null,
+      "amount": 2376,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 13353765,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9316974721,
+          "account_item_id": 74633339,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 2376,
+          "vat": 216,
+          "description": "社内用",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9316974723,
+          "date": "2026-01-22",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1754759,
+          "amount": 2376
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3278161282,
+      "company_id": 474381,
+      "issue_date": "2026-01-22",
+      "due_date": null,
+      "amount": 9108,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 106486604,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8933351679,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 9108,
+          "vat": 828,
+          "description": "CRMツール代",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8933351684,
+          "date": "2026-01-22",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 9108
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3211651648,
+      "company_id": 474381,
+      "issue_date": "2026-01-22",
+      "due_date": null,
+      "amount": 22000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 98264328,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8755789546,
+          "account_item_id": 74633341,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 22000,
+          "vat": 2000,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8755789553,
+          "date": "2026-01-22",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 2474938,
+          "amount": 22000
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3278161376,
+      "company_id": 474381,
+      "issue_date": "2026-01-19",
+      "due_date": null,
+      "amount": 56394,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 13211565,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8933352020,
+          "account_item_id": 74633354,
+          "tax_code": 136,
+          "item_id": 75444791,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 56394,
+          "vat": 5126,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8933352026,
+          "date": "2026-01-19",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 56394
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3202843945,
+      "company_id": 474381,
+      "issue_date": "2026-01-18",
+      "due_date": null,
+      "amount": 3492,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 62667584,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 8731988506,
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "item_id": 149111747,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 3492,
+          "vat": 317,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8731988508,
+          "date": "2026-01-18",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1754759,
+          "amount": 3492
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3408965452,
+      "company_id": 474381,
+      "issue_date": "2026-01-15",
+      "due_date": null,
+      "amount": 4400,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 106488865,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9252035995,
+          "account_item_id": 74633354,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 4400,
+          "vat": 400,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9252035996,
+          "date": "2026-01-15",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 1804793,
+          "amount": 4400
+        }
+      ],
+      "receipts": []
+    }
+  ],
+  "meta": {
+    "total_count": 516
+  }
+}

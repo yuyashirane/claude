@@ -1,0 +1,25 @@
+{
+  "checkDate": "2026-03-31",
+  "companyId": 474381,
+  "period": "2025-10-01 ~ 2026-03-31",
+  "taxableSalesRatio": 95,
+  "isRatioAbove95": true,
+  "totalFindings": 0,
+  "findingsBySeverity": {
+    "red": 0,
+    "yellow": 0,
+    "blue": 0
+  },
+  "matchedServices": [],
+  "rules": {
+    "description": "電気通信利用役務の提供に関する消費税チェック",
+    "referenceUrl": "https://www.nta.go.jp/publication/pamph/shohi/cross/touroku.pdf",
+    "keyRules": [
+      "事業者向け（広告・ECプラットフォーム等）: 課税売上割合95%以上→対象外、95%未満→リバースチャージ",
+      "消費者向け・インボイス登録済: 課対仕入10%（仕入税額控除可能）",
+      "消費者向け・インボイス未登録（国外事業者）: 対象外（仕入税額控除不可、80%控除経過措置も不可）",
+      "消費者向け・インボイス未登録（国内事業者）: 少額特例あり、80%控除経過措置あり",
+      "少額特例: 税込1万円未満の取引は帳簿のみで仕入税額控除可能（基準期間の課税売上高1億円以下等の要件あり）"
+    ]
+  }
+}

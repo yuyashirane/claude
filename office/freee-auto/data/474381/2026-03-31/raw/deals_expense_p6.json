@@ -1,0 +1,295 @@
+{
+  "deals": [
+    {
+      "id": 3089414330,
+      "company_id": 474381,
+      "issue_date": "2025-10-08",
+      "amount": 2250,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633355,
+          "tax_code": 136,
+          "amount": 2250,
+          "vat": 204,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ]
+    },
+    {
+      "id": 3089413035,
+      "company_id": 474381,
+      "issue_date": "2025-10-06",
+      "amount": 1080,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "amount": 1080,
+          "vat": 98,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ]
+    },
+    {
+      "id": 3071595141,
+      "company_id": 474381,
+      "issue_date": "2025-10-06",
+      "amount": 27500,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633304,
+          "tax_code": 2,
+          "amount": 27500,
+          "vat": 0,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ]
+    },
+    {
+      "id": 3028289214,
+      "company_id": 474381,
+      "issue_date": "2025-10-06",
+      "amount": 4378,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "amount": 4378,
+          "vat": 398,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ]
+    },
+    {
+      "id": 3015991291,
+      "company_id": 474381,
+      "issue_date": "2025-10-06",
+      "amount": 7976,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633351,
+          "tax_code": 136,
+          "amount": 7976,
+          "vat": 725,
+          "description": "決算書ファイル",
+          "entry_side": "debit"
+        }
+      ]
+    },
+    {
+      "id": 3089412594,
+      "company_id": 474381,
+      "issue_date": "2025-10-04",
+      "amount": 1058,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633339,
+          "tax_code": 136,
+          "amount": 1058,
+          "vat": 96,
+          "description": "手土産代",
+          "entry_side": "debit"
+        }
+      ]
+    },
+    {
+      "id": 3089411753,
+      "company_id": 474381,
+      "issue_date": "2025-10-04",
+      "amount": 1944,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633339,
+          "tax_code": 136,
+          "amount": 1944,
+          "vat": 176,
+          "description": "手土産代",
+          "entry_side": "debit"
+        }
+      ]
+    },
+    {
+      "id": 3015991140,
+      "company_id": 474381,
+      "issue_date": "2025-10-03",
+      "amount": 38500,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633357,
+          "tax_code": 136,
+          "amount": 38500,
+          "vat": 3500,
+          "description": "システム利用料",
+          "entry_side": "debit"
+        }
+      ]
+    },
+    {
+      "id": 3015431994,
+      "company_id": 474381,
+      "issue_date": "2025-10-03",
+      "amount": 21300,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "amount": 21300,
+          "vat": 1936,
+          "description": "Microsoft Office",
+          "entry_side": "debit"
+        }
+      ]
+    },
+    {
+      "id": 3089404831,
+      "company_id": 474381,
+      "issue_date": "2025-10-02",
+      "amount": 49165,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633341,
+          "tax_code": 136,
+          "amount": 49165,
+          "vat": 4469,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ]
+    },
+    {
+      "id": 3011694321,
+      "company_id": 474381,
+      "issue_date": "2025-10-02",
+      "amount": 4950,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "amount": 4950,
+          "vat": 450,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ]
+    },
+    {
+      "id": 3089402979,
+      "company_id": 474381,
+      "issue_date": "2025-10-01",
+      "amount": 5544,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633346,
+          "tax_code": 136,
+          "amount": 5544,
+          "vat": 504,
+          "description": "会議費",
+          "entry_side": "debit"
+        }
+      ]
+    },
+    {
+      "id": 3089399939,
+      "company_id": 474381,
+      "issue_date": "2025-10-01",
+      "amount": 6701,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "amount": 6701,
+          "vat": 609,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ]
+    },
+    {
+      "id": 3025524132,
+      "company_id": 474381,
+      "issue_date": "2025-10-01",
+      "amount": 6900,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633342,
+          "tax_code": 189,
+          "amount": 6900,
+          "vat": 501,
+          "description": "HP管理料",
+          "entry_side": "debit"
+        }
+      ]
+    },
+    {
+      "id": 3025524105,
+      "company_id": 474381,
+      "issue_date": "2025-10-01",
+      "amount": 3850,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633355,
+          "tax_code": 136,
+          "amount": 3850,
+          "vat": 350,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ]
+    },
+    {
+      "id": 3025524085,
+      "company_id": 474381,
+      "issue_date": "2025-10-01",
+      "amount": 13860,
+      "type": "expense",
+      "status": "settled",
+      "details": [
+        {
+          "account_item_id": 74633348,
+          "tax_code": 136,
+          "amount": 13860,
+          "vat": 1260,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ]
+    }
+  ],
+  "meta": {
+    "total_count": 516
+  }
+}

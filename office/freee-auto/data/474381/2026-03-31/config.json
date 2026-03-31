@@ -1,0 +1,29 @@
+{
+  "company_id": 474381,
+  "company_name": "あしたの会計事務所税理士法人",
+  "period_start": "2025-10-01",
+  "period_end": "2026-03-31",
+  "period_months": 6,
+  "fiscal_year_end_month": 9,
+  "taxable_sales_ratio": 95,
+  "periods": {
+    "current": {
+      "start": "2025-10-01",
+      "end": "2026-03-31",
+      "fiscal_year": 2026,
+      "label": "当期(2025/10〜2026/3)"
+    },
+    "prior1": {
+      "start": "2024-10-01",
+      "end": "2025-03-31",
+      "fiscal_year": 2025,
+      "label": "前期(2024/10〜2025/3)"
+    },
+    "prior2": {
+      "start": "2023-10-01",
+      "end": "2024-03-31",
+      "fiscal_year": 2024,
+      "label": "前々期(2023/10〜2024/3)"
+    }
+  }
+}

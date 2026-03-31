@@ -1,0 +1,47 @@
+{
+  "trial_pl": {
+    "company_id": 474381,
+    "fiscal_year": 2026,
+    "start_month": 10,
+    "end_month": 3,
+    "note": "当期（FY2026 Oct-Mar）は取引未登録のためすべてゼロ",
+    "balances": [
+      {
+        "account_category_name": "売上高",
+        "total_line": true,
+        "hierarchy_level": 1,
+        "opening_balance": 0,
+        "debit_amount": 0,
+        "credit_amount": 0,
+        "closing_balance": 0
+      },
+      {
+        "account_category_name": "販売管理費",
+        "total_line": true,
+        "hierarchy_level": 2,
+        "opening_balance": 0,
+        "debit_amount": 0,
+        "credit_amount": 0,
+        "closing_balance": 0
+      },
+      {
+        "account_category_name": "営業損益金額",
+        "total_line": true,
+        "hierarchy_level": 1,
+        "opening_balance": 0,
+        "debit_amount": 0,
+        "credit_amount": 0,
+        "closing_balance": 0
+      },
+      {
+        "account_category_name": "当期純損益金額",
+        "total_line": true,
+        "hierarchy_level": 1,
+        "opening_balance": 0,
+        "debit_amount": 0,
+        "credit_amount": 0,
+        "closing_balance": 0
+      }
+    ]
+  }
+}

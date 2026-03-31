@@ -1,0 +1,199 @@
+{
+  "trial_bs": {
+    "company_id": 474381,
+    "fiscal_year": 2024,
+    "start_month": 10,
+    "end_month": 3,
+    "balances": [
+      {
+        "account_item_id": 548759762,
+        "account_item_name": "【税】ＰａｙＰａｙ銀行",
+        "account_category_name": "現金・預金",
+        "opening_balance": 24604477,
+        "debit_amount": 56743612,
+        "credit_amount": 49200921,
+        "closing_balance": 32147168
+      },
+      {
+        "account_item_id": 74633228,
+        "account_item_name": "売掛金",
+        "account_category_name": "売上債権",
+        "opening_balance": 9237718,
+        "debit_amount": 75111116,
+        "credit_amount": 69760767,
+        "closing_balance": 14588067
+      },
+      {
+        "account_item_id": 74633400,
+        "account_item_name": "ソフトウェア",
+        "account_category_name": "無形固定資産",
+        "opening_balance": 4726500,
+        "debit_amount": 0,
+        "credit_amount": 547500,
+        "closing_balance": 4179000
+      },
+      {
+        "account_item_id": 423490731,
+        "account_item_name": "保険積立金",
+        "account_category_name": "投資その他の資産",
+        "opening_balance": 5962655,
+        "debit_amount": 1593210,
+        "credit_amount": 0,
+        "closing_balance": 7555865
+      },
+      {
+        "account_category_name": "流動資産",
+        "total_line": true,
+        "hierarchy_level": 2,
+        "opening_balance": 38889161,
+        "debit_amount": 145217767,
+        "credit_amount": 134597463,
+        "closing_balance": 49509465
+      },
+      {
+        "account_category_name": "固定資産",
+        "total_line": true,
+        "hierarchy_level": 2,
+        "opening_balance": 11063955,
+        "debit_amount": 2418655,
+        "credit_amount": 841634,
+        "closing_balance": 12640976
+      },
+      {
+        "account_category_name": "諸口",
+        "total_line": true,
+        "hierarchy_level": 2,
+        "opening_balance": 0,
+        "debit_amount": 11861550,
+        "credit_amount": 11861550,
+        "closing_balance": 0
+      },
+      {
+        "account_category_name": "資産",
+        "total_line": true,
+        "hierarchy_level": 1,
+        "opening_balance": 49953116,
+        "debit_amount": 159497972,
+        "credit_amount": 147300647,
+        "closing_balance": 62150441
+      },
+      {
+        "account_item_id": 74633287,
+        "account_item_name": "未払金",
+        "account_category_name": "他流動負債",
+        "opening_balance": 619846,
+        "debit_amount": 2743683,
+        "credit_amount": 2599098,
+        "closing_balance": 475261
+      },
+      {
+        "account_item_id": 74633288,
+        "account_item_name": "未払費用",
+        "account_category_name": "他流動負債",
+        "opening_balance": 4320024,
+        "debit_amount": 25975213,
+        "credit_amount": 25411787,
+        "closing_balance": 3756598
+      },
+      {
+        "account_item_id": 524811265,
+        "account_item_name": "消費税引当金",
+        "account_category_name": "他流動負債",
+        "opening_balance": 0,
+        "debit_amount": 1643800,
+        "credit_amount": 4176000,
+        "closing_balance": 2532200
+      },
+      {
+        "account_item_id": 74633405,
+        "account_item_name": "役員借入金",
+        "account_category_name": "他流動負債",
+        "opening_balance": 998630,
+        "debit_amount": 898816,
+        "credit_amount": 764763,
+        "closing_balance": 864577
+      },
+      {
+        "account_item_id": 74633303,
+        "account_item_name": "長期借入金",
+        "account_category_name": "固定負債",
+        "opening_balance": 12230000,
+        "debit_amount": 1830000,
+        "credit_amount": 5000000,
+        "closing_balance": 15400000
+      },
+      {
+        "account_item_id": 74633304,
+        "account_item_name": "長期未払金",
+        "account_category_name": "固定負債",
+        "opening_balance": 4582500,
+        "debit_amount": 465000,
+        "credit_amount": 0,
+        "closing_balance": 4117500
+      },
+      {
+        "account_category_name": "流動負債",
+        "total_line": true,
+        "hierarchy_level": 2,
+        "opening_balance": 13638755,
+        "debit_amount": 45090844,
+        "credit_amount": 42396219,
+        "closing_balance": 10944130
+      },
+      {
+        "account_category_name": "固定負債",
+        "total_line": true,
+        "hierarchy_level": 2,
+        "opening_balance": 16812500,
+        "debit_amount": 2295000,
+        "credit_amount": 5000000,
+        "closing_balance": 19517500
+      },
+      {
+        "account_category_name": "負債",
+        "total_line": true,
+        "hierarchy_level": 1,
+        "opening_balance": 30451255,
+        "debit_amount": 47385844,
+        "credit_amount": 47396219,
+        "closing_balance": 30461630
+      },
+      {
+        "account_item_id": 74633307,
+        "account_item_name": "資本金",
+        "account_category_name": "資本金",
+        "opening_balance": 1500000,
+        "debit_amount": 0,
+        "credit_amount": 0,
+        "closing_balance": 1500000
+      },
+      {
+        "account_item_id": 74633314,
+        "account_item_name": "繰越利益",
+        "account_category_name": "繰越利益剰余金",
+        "opening_balance": 18001861,
+        "debit_amount": 0,
+        "credit_amount": 0,
+        "closing_balance": 18001861
+      },
+      {
+        "account_category_name": "当期純損益金額",
+        "total_line": true,
+        "hierarchy_level": 5,
+        "opening_balance": 0,
+        "debit_amount": 110974735,
+        "credit_amount": 123161685,
+        "closing_balance": 12186950
+      },
+      {
+        "account_category_name": "純資産",
+        "total_line": true,
+        "hierarchy_level": 1,
+        "opening_balance": 19501861,
+        "debit_amount": 110974735,
+        "credit_amount": 123161685,
+        "closing_balance": 31688811
+      }
+    ]
+  }
+}

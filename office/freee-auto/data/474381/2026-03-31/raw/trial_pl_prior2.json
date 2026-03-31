@@ -1,0 +1,334 @@
+{
+  "trial_pl": {
+    "company_id": 474381,
+    "fiscal_year": 2024,
+    "start_month": 10,
+    "end_month": 3,
+    "balances": [
+      {
+        "account_item_id": 74633321,
+        "account_item_name": "売上高",
+        "account_category_name": "売上高",
+        "opening_balance": 0,
+        "debit_amount": 64048523,
+        "credit_amount": 119534789,
+        "closing_balance": 55486266
+      },
+      {
+        "account_category_name": "売上高",
+        "total_line": true,
+        "hierarchy_level": 1,
+        "opening_balance": 0,
+        "debit_amount": 64048523,
+        "credit_amount": 119534789,
+        "closing_balance": 55486266
+      },
+      {
+        "account_item_id": 74633332,
+        "account_item_name": "役員報酬",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 17330000,
+        "credit_amount": 0,
+        "closing_balance": 17330000
+      },
+      {
+        "account_item_id": 74633334,
+        "account_item_name": "給料手当",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 9242879,
+        "credit_amount": 193312,
+        "closing_balance": 9049567
+      },
+      {
+        "account_item_id": 74633336,
+        "account_item_name": "賞与",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 1090250,
+        "credit_amount": 0,
+        "closing_balance": 1090250
+      },
+      {
+        "account_item_id": 74633338,
+        "account_item_name": "法定福利費",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 3068692,
+        "credit_amount": 233000,
+        "closing_balance": 2835692
+      },
+      {
+        "account_item_id": 74633339,
+        "account_item_name": "福利厚生費",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 94590,
+        "credit_amount": 0,
+        "closing_balance": 94590
+      },
+      {
+        "account_item_id": 74633341,
+        "account_item_name": "採用教育費",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 297000,
+        "credit_amount": 0,
+        "closing_balance": 297000
+      },
+      {
+        "account_item_id": 74633342,
+        "account_item_name": "外注費",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 338260,
+        "credit_amount": 121000,
+        "closing_balance": 217260
+      },
+      {
+        "account_item_id": 74633344,
+        "account_item_name": "広告宣伝費",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 784027,
+        "credit_amount": 154000,
+        "closing_balance": 630027
+      },
+      {
+        "account_item_id": 74633345,
+        "account_item_name": "交際費",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 128028,
+        "credit_amount": 0,
+        "closing_balance": 128028
+      },
+      {
+        "account_item_id": 74633347,
+        "account_item_name": "旅費交通費",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 426094,
+        "credit_amount": 0,
+        "closing_balance": 426094
+      },
+      {
+        "account_item_id": 74633348,
+        "account_item_name": "通信費",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 932036,
+        "credit_amount": 24733,
+        "closing_balance": 907303
+      },
+      {
+        "account_item_id": 74633351,
+        "account_item_name": "消耗品費",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 250898,
+        "credit_amount": 39998,
+        "closing_balance": 210900
+      },
+      {
+        "account_item_id": 74633354,
+        "account_item_name": "水道光熱費",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 42226,
+        "credit_amount": 0,
+        "closing_balance": 42226
+      },
+      {
+        "account_item_id": 74633355,
+        "account_item_name": "新聞図書費",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 53130,
+        "credit_amount": 0,
+        "closing_balance": 53130
+      },
+      {
+        "account_item_id": 74633356,
+        "account_item_name": "諸会費",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 202100,
+        "credit_amount": 0,
+        "closing_balance": 202100
+      },
+      {
+        "account_item_id": 74633357,
+        "account_item_name": "支払手数料",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 3125300,
+        "credit_amount": 27500,
+        "closing_balance": 3097800
+      },
+      {
+        "account_item_id": 74633359,
+        "account_item_name": "地代家賃",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 1747292,
+        "credit_amount": 656000,
+        "closing_balance": 1091292
+      },
+      {
+        "account_item_id": 74633362,
+        "account_item_name": "保険料",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 685430,
+        "credit_amount": 0,
+        "closing_balance": 685430
+      },
+      {
+        "account_item_id": 74633363,
+        "account_item_name": "租税公課",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 4184050,
+        "credit_amount": 0,
+        "closing_balance": 4184050
+      },
+      {
+        "account_item_id": 74633367,
+        "account_item_name": "減価償却費",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 547500,
+        "credit_amount": 0,
+        "closing_balance": 547500
+      },
+      {
+        "account_item_id": 74633369,
+        "account_item_name": "長期前払費用償却",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 52139,
+        "credit_amount": 0,
+        "closing_balance": 52139
+      },
+      {
+        "account_item_id": 74633373,
+        "account_item_name": "雑費",
+        "account_category_name": "販売管理費",
+        "opening_balance": 0,
+        "debit_amount": 42502,
+        "credit_amount": 0,
+        "closing_balance": 42502
+      },
+      {
+        "account_category_name": "販売管理費",
+        "total_line": true,
+        "hierarchy_level": 2,
+        "opening_balance": 0,
+        "debit_amount": 45480407,
+        "credit_amount": 1539543,
+        "closing_balance": 43940864
+      },
+      {
+        "account_category_name": "営業損益金額",
+        "total_line": true,
+        "hierarchy_level": 1,
+        "opening_balance": 0,
+        "debit_amount": 109528930,
+        "credit_amount": 121074332,
+        "closing_balance": 11545402
+      },
+      {
+        "account_item_id": 74633374,
+        "account_item_name": "受取利息",
+        "account_category_name": "営業外収益",
+        "opening_balance": 0,
+        "debit_amount": 0,
+        "credit_amount": 14828,
+        "closing_balance": 14828
+      },
+      {
+        "account_item_id": 74633378,
+        "account_item_name": "雑収入",
+        "account_category_name": "営業外収益",
+        "opening_balance": 0,
+        "debit_amount": 0,
+        "credit_amount": 2072525,
+        "closing_balance": 2072525
+      },
+      {
+        "account_category_name": "営業外収益",
+        "total_line": true,
+        "hierarchy_level": 2,
+        "opening_balance": 0,
+        "debit_amount": 0,
+        "credit_amount": 2087353,
+        "closing_balance": 2087353
+      },
+      {
+        "account_item_id": 74633379,
+        "account_item_name": "支払利息",
+        "account_category_name": "営業外費用",
+        "opening_balance": 0,
+        "debit_amount": 127438,
+        "credit_amount": 0,
+        "closing_balance": 127438
+      },
+      {
+        "account_item_id": 74633387,
+        "account_item_name": "雑損失",
+        "account_category_name": "営業外費用",
+        "opening_balance": 0,
+        "debit_amount": 1316100,
+        "credit_amount": 0,
+        "closing_balance": 1316100
+      },
+      {
+        "account_category_name": "営業外費用",
+        "total_line": true,
+        "hierarchy_level": 2,
+        "opening_balance": 0,
+        "debit_amount": 1443538,
+        "credit_amount": 0,
+        "closing_balance": 1443538
+      },
+      {
+        "account_category_name": "経常損益金額",
+        "total_line": true,
+        "hierarchy_level": 1,
+        "opening_balance": 0,
+        "debit_amount": 110972468,
+        "credit_amount": 123161685,
+        "closing_balance": 12189217
+      },
+      {
+        "account_item_id": 74633396,
+        "account_item_name": "法人税・住民税及び事業税",
+        "account_category_name": "法人税等",
+        "opening_balance": 0,
+        "debit_amount": 2267,
+        "credit_amount": 0,
+        "closing_balance": 2267
+      },
+      {
+        "account_category_name": "法人税等",
+        "total_line": true,
+        "hierarchy_level": 2,
+        "opening_balance": 0,
+        "debit_amount": 2267,
+        "credit_amount": 0,
+        "closing_balance": 2267
+      },
+      {
+        "account_category_name": "当期純損益金額",
+        "total_line": true,
+        "hierarchy_level": 1,
+        "opening_balance": 0,
+        "debit_amount": 110974735,
+        "credit_amount": 123161685,
+        "closing_balance": 12186950
+      }
+    ]
+  }
+}
