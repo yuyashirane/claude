@@ -66,7 +66,12 @@
       "Bash(find /c/Users/yuya_/claude/office/freee-auto/references -type f \\\\\\(-name *.md -o -name *.json -o -name *.js \\\\\\))",
       "Bash(find /c/Users/yuya_/claude/office/freee-auto/src -type f -name *.js)",
       "Bash(ls \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\references\\\\dictionaries\"\" 2>/dev/null; ls \"C:Usersyuya_claudeofficefreee-autoreferencesrules\"\")",
-      "Bash(ls \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\references\\\\operations\"\" 2>/dev/null; ls \"C:Usersyuya_claudeofficefreee-autodocs\"\")"
+      "Bash(ls \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\references\\\\operations\"\" 2>/dev/null; ls \"C:Usersyuya_claudeofficefreee-autodocs\"\")",
+      "Bash(node -e:*)",
+      "Bash(node src/classify/unprocessed-processor.js tmp/wallet_txns_474381_2026-03-30.json tmp/)",
+      "Bash(node src/verify/processing-report.js tmp/processing_result_20260330T221848.json reports/)",
+      "Bash(node src/register/deal-creator.js tmp/processing_result_20260330T221848.json)",
+      "Bash(node src/review/kintone-sender.js tmp/processing_result_20260330T221848.json --dry-run)"
     ]
   }
 }
