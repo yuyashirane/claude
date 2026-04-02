@@ -114,7 +114,8 @@
       "Bash(find /c/Users/yuya_ -type f -name *.json)",
       "Bash(xargs grep:*)",
       "Bash(node tmp/test-2422271-pipeline.js)",
-      "Bash(node tmp/report-2422271.js)"
+      "Bash(node tmp/report-2422271.js)",
+      "Bash(node tmp/verify-new-routing.js)"
     ]
   }
 }

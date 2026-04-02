@@ -20,6 +20,9 @@ const {
 const {
   generateRuleCsv,
   toRuleCsvRow,
+  routeForCsv,
+  selectDescription,
+  normalizeForPartialMatch,
   escapeCsvField,
   CSV_HEADER,
 } = require("../src/register/rule-csv-generator");
@@ -174,9 +177,10 @@ test("R02: auto_register → row[0]=支出", () => {
   assert.strictEqual(row[0], "支出");
 });
 
-test("R03: auto_register → row[3]=description原文", () => {
+test("R03: auto_register + partnerName → row[3]=取引先名（部分一致用）", () => {
   const row = toRuleCsvRow(AUTO_ITEM);
-  assert.strictEqual(row[3], "アマゾン ジャパン　文具");
+  // 部分一致時はpartnerNameを優先（変動しない安定キーワード）
+  assert.strictEqual(row[3], "Amazon.co.jp");
 });
 
 test("R04: auto_register → row[4]=部分一致", () => {
@@ -230,7 +234,8 @@ const MOCK_RESULT = {
     STAFF_ITEM,
     SENIOR_ITEM,
     EXCLUDED_ITEM,
-    { ...AUTO_ITEM, id: 5, description: "タクシー代 新宿", accountName: "旅費交通費" },
+    // partnerNameを別に設定して重複排除テストで「異なるキー」として機能させる
+    { ...AUTO_ITEM, id: 5, description: "タクシー代 新宿", accountName: "旅費交通費", partnerName: "タクシー会社" },
   ],
 };
 
@@ -260,7 +265,7 @@ test("G03: ヘッダー行が53カラム", () => {
 
 test("G04: stats合計の整合性", () => {
   const s = genResult.stats;
-  assert.strictEqual(s.register + s.suggest + s.skipped + s.deduplicated, s.total);
+  assert.strictEqual(s.register + s.suggest + s.excluded + s.deduplicated, s.total);
 });
 
 test("G05: auto_register → register にカウント", () => {
@@ -271,19 +276,137 @@ test("G06: kintone_staff → suggest にカウント", () => {
   assert.strictEqual(genResult.stats.suggest, 1);
 });
 
-test("G07: kintone_senior + excluded → skipped にカウント", () => {
-  assert.strictEqual(genResult.stats.skipped, 2);
+test("G07: kintone_senior + excluded → excluded にカウント", () => {
+  assert.strictEqual(genResult.stats.excluded, 2);
 });
 
 // ==================================================
-// テスト6: 重複排除
+// テスト6: routeForCsv() — 新ルーティング方針
 // ==================================================
-console.log("\n━━━ テスト6: 重複排除 ━━━");
+console.log("\n━━━ テスト6: routeForCsv() 新ルーティング ━━━");
+
+// パイプライン形式のアイテムを生成するヘルパー
+function makePipelineItem({ walletableType, amount, description = 'テスト取引', pastPattern = 0, classificationExcluded = false }) {
+  return {
+    _freee: { walletable_type: walletableType },
+    transaction: { amount, description, debit_credit: 'expense', partner_name: '' },
+    classification: {
+      excluded: classificationExcluded,
+      exclude_reason: classificationExcluded ? '口座間振替' : undefined,
+      score_breakdown: { past_pattern: pastPattern },
+    },
+    routing: { decision: 'kintone_staff' },
+  };
+}
+
+test("RFC01: クレカ + 5万円 → register（部分一致）", () => {
+  const r = routeForCsv(makePipelineItem({ walletableType: 'credit_card', amount: 50000 }));
+  assert.strictEqual(r.action, 'register');
+  assert.strictEqual(r.matchCondition, '部分一致');
+});
+
+test("RFC02: クレカ + 9.9万円 → register（10万円未満はOK）", () => {
+  const r = routeForCsv(makePipelineItem({ walletableType: 'credit_card', amount: 99000 }));
+  assert.strictEqual(r.action, 'register');
+});
+
+test("RFC03: クレカ + 10万円 → exclude（固定資産判定）", () => {
+  const r = routeForCsv(makePipelineItem({ walletableType: 'credit_card', amount: 100000 }));
+  assert.strictEqual(r.action, 'exclude');
+  assert.ok(r.reason.includes('固定資産'));
+});
+
+test("RFC04: 預金 + 5千円 → register", () => {
+  const r = routeForCsv(makePipelineItem({ walletableType: 'bank_account', amount: 5000 }));
+  assert.strictEqual(r.action, 'register');
+  assert.strictEqual(r.matchCondition, '部分一致');
+});
+
+test("RFC05: 預金 + 5万円 + 過去パターン25pt → register", () => {
+  const r = routeForCsv(makePipelineItem({ walletableType: 'bank_account', amount: 50000, pastPattern: 25 }));
+  assert.strictEqual(r.action, 'register');
+  assert.strictEqual(r.matchCondition, '部分一致');
+});
+
+test("RFC06: 預金 + 5万円 + 過去パターン0pt → suggest（完全一致）", () => {
+  const r = routeForCsv(makePipelineItem({ walletableType: 'bank_account', amount: 50000, pastPattern: 0 }));
+  assert.strictEqual(r.action, 'suggest');
+  assert.strictEqual(r.matchCondition, '完全一致');
+});
+
+test("RFC07: 預金 + 10万円 → exclude（固定資産判定）", () => {
+  const r = routeForCsv(makePipelineItem({ walletableType: 'bank_account', amount: 100000 }));
+  assert.strictEqual(r.action, 'exclude');
+  assert.ok(r.reason.includes('固定資産'));
+});
+
+test("RFC08: 借入キーワード → exclude（複合仕訳）", () => {
+  const r = routeForCsv(makePipelineItem({ walletableType: 'bank_account', amount: 30000, description: '借入返済 A銀行' }));
+  assert.strictEqual(r.action, 'exclude');
+  assert.ok(r.reason.includes('複合仕訳'));
+});
+
+test("RFC09: 給与キーワード → exclude（複合仕訳）", () => {
+  const r = routeForCsv(makePipelineItem({ walletableType: 'bank_account', amount: 300000, description: '給与 3月分 山田太郎' }));
+  // 給与は複合仕訳キーワードに該当（10万超より先にチェック）
+  assert.strictEqual(r.action, 'exclude');
+  assert.ok(r.reason.includes('複合仕訳'));
+});
+
+test("RFC10: ウォレット（wallet） + 3万円 → register（クレカ扱い）", () => {
+  const r = routeForCsv(makePipelineItem({ walletableType: 'wallet', amount: 30000 }));
+  assert.strictEqual(r.action, 'register');
+  assert.ok(r.reason.includes('クレカ/ウォレット'));
+});
+
+test("RFC11: cls.excluded=true → exclude（classificationステージの除外）", () => {
+  const r = routeForCsv(makePipelineItem({ walletableType: 'bank_account', amount: 5000, classificationExcluded: true }));
+  assert.strictEqual(r.action, 'exclude');
+});
+
+test("RFC12: walletable_type不明 → suggest（フォールバック）", () => {
+  const r = routeForCsv(makePipelineItem({ walletableType: '', amount: 5000 }));
+  assert.strictEqual(r.action, 'suggest');
+  assert.strictEqual(r.matchCondition, '完全一致');
+});
+
+// ==================================================
+// テスト7: selectDescription() — 取引内容選定
+// ==================================================
+console.log("\n━━━ テスト7: selectDescription() 取引内容選定 ━━━");
+
+test("SD01: 完全一致 → description原文", () => {
+  const n = { matchCondition: '完全一致', description: 'NTTドコモ 通信料 2026/03', partnerName: 'NTTドコモ' };
+  assert.strictEqual(selectDescription(n), 'NTTドコモ 通信料 2026/03');
+});
+
+test("SD02: 部分一致 + partnerName → partnerName", () => {
+  const n = { matchCondition: '部分一致', description: 'アマゾン ジャパン　文具', partnerName: 'Amazon.co.jp' };
+  assert.strictEqual(selectDescription(n), 'Amazon.co.jp');
+});
+
+test("SD03: 部分一致 + partnerNameなし → 摘要から数字除去", () => {
+  const n = { matchCondition: '部分一致', description: 'ETC 12345678 関東支社', partnerName: '' };
+  const result = selectDescription(n);
+  assert.ok(!result.includes('12345678'), `数字が残っている: ${result}`);
+  assert.ok(result.includes('ETC'), `ETCが消えている: ${result}`);
+});
+
+test("SD04: normalizeForPartialMatch — 長い数字・日付を除去", () => {
+  const result = normalizeForPartialMatch('アマゾン 20260301 注文12345 03/01');
+  assert.ok(!result.includes('20260301'), `4桁以上の数字が残っている: ${result}`);
+  assert.ok(!result.includes('03/01'), `日付が残っている: ${result}`);
+});
+
+// ==================================================
+// ==================================================
+console.log("\n━━━ テスト8: 重複排除 ━━━");
 
 // 既存ルールCSVを作成（AUTO_ITEMと同じキーを持つ行）
+// AUTO_ITEMはpartnerName="Amazon.co.jp"を持つため、部分一致時row[3]="Amazon.co.jp"になる
 const existingCsvPath = path.join(TMP_DIR, "existing_rules.csv");
 const existingRow = [
-  "支出", "三菱UFJ", "", "アマゾン ジャパン　文具", "部分一致", "", "",
+  "支出", "三菱UFJ", "", "Amazon.co.jp", "部分一致", "", "",
   ...new Array(46).fill(""),
 ];
 const existingCsv = CSV_HEADER + "\r\n" + existingRow.join(",") + "\r\n";
@@ -302,12 +425,13 @@ test("D01: 同一キーの行が除外される", () => {
 });
 
 test("D02: stats.deduplicated が正しいカウント", () => {
-  // AUTO_ITEMのキーと一致する行は2件（id:1とid:5はdescriptionが違うので1件のみ重複）
+  // AUTO_ITEM(id:1)のキー"Amazon.co.jp"が既存と一致 → 1件重複
+  // id:5はpartnerName="タクシー会社" → キーが異なるので重複しない
   assert.strictEqual(dedupeResult.stats.deduplicated, 1);
 });
 
 test("D03: 異なるキーの行は残る", () => {
-  // kintone_staff(1件) + auto_register残り(1件) = suggest(1) + register(1)
+  // kintone_staff(1件→suggest) + auto_register残り(id:5→register) = suggest(1) + register(1)
   assert.strictEqual(dedupeResult.stats.register, 1);
   assert.strictEqual(dedupeResult.stats.suggest, 1);
 });

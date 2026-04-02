@@ -62,6 +62,7 @@ const ACCOUNT_KEYWORDS = {
       "ヨドバシ", "ビックカメラ", "PC周辺機器",
       // account-dictionary.md追加分
       "文房具", "インク", "USB", "モノタロウ", "ホームセンター", "工具", "備品",
+      "LED", "防犯カメラ", "壁紙", "看板",
     ],
     defaultTax: "課税10%",
     taxGroup: "taxable",
@@ -136,6 +137,7 @@ const ACCOUNT_KEYWORDS = {
       // account-dictionary.md追加分
       "仲介手数料", "税理士", "会計士", "弁護士", "司法書士", "社労士",
       "コンサル", "アドバイザリー", "紹介料",
+      "UBER", "UberEats", "Uber Eats",
     ],
     defaultTax: "課税10%",
     taxGroup: "taxable",
@@ -231,10 +233,17 @@ const ACCOUNT_KEYWORDS = {
     defaultTax: "課税売上10%",
     taxGroup: "taxable_sale",
   },
-  支払利息: {
-    keywords: ["利息", "利子", "金利", "ローン利息"],
+  受取利息: {
+    keywords: ["預金利息", "普通預金利息", "定期預金利息"],
     defaultTax: "非課税",
     taxGroup: "non_taxable",
+    notes: "入金側の利息。キーワードで判別できない場合はentry_sideで振り分け",
+  },
+  支払利息: {
+    keywords: ["借入利息", "ローン利息", "金利"],
+    defaultTax: "非課税",
+    taxGroup: "non_taxable",
+    notes: "出金側の利息。汎用キーワード「利息」「利子」はentry_sideで振り分け",
   },
   雑費: {
     keywords: [], // キーワードなし（フォールバック用）
@@ -271,6 +280,7 @@ const FREEE_ACCOUNT_IDS = {
   売上高: 236940260,
   雑費: 236940288,
   支払利息: 236940289,
+  受取利息: 236940290,
 };
 
 // --------------------------------------------------
@@ -363,6 +373,22 @@ function classifyTransaction(item, options = {}) {
 
   // 1. キーワードマッチ（30pt）
   const keywordResult = matchKeywords(searchText, tx.account_hint);
+
+  // 1b. 汎用「利息」「利子」→ entry_side で受取利息/支払利息を振り分け
+  if (!keywordResult.bestAccount && /利息|利子/.test(searchText)) {
+    const entrySide = tx.entry_side || item.rawData?.entry_side || '';
+    if (entrySide === 'income') {
+      keywordResult.bestAccount = '受取利息';
+      keywordResult.defaultTax = '非課税';
+      keywordResult.score = 25;
+      keywordResult.allMatches = [{ account: '受取利息', matchedKeywords: ['利息(入金)'], score: 25 }];
+    } else {
+      keywordResult.bestAccount = '支払利息';
+      keywordResult.defaultTax = '非課税';
+      keywordResult.score = 25;
+      keywordResult.allMatches = [{ account: '支払利息', matchedKeywords: ['利息(出金)'], score: 25 }];
+    }
+  }
 
   // 2. 過去仕訳パターン（30pt）— pastPatternStore.calculatePastPatternScore() の結果を受け取る
   const s2 = Math.min(30, options.pastPatternScore || 0);
@@ -584,7 +610,7 @@ function checkTaxRules(account, searchText, amount) {
   }
 
   // === R01: 非課税取引（保険料, 利息, 住居等）が課税になっていないか ===
-  if (["保険料", "支払利息"].includes(account)) {
+  if (["保険料", "支払利息", "受取利息"].includes(account)) {
     determinedTax = "非課税";
     return { score: 15, flags, flagDetails, determinedTax,
       detail: `R01: ${account}→非課税（明確）` };
@@ -625,7 +651,7 @@ function checkTaxRules(account, searchText, amount) {
   }
 
   // === R04: 軽減税率8%対象（食品,飲料,新聞 ※外食・酒除く） ===
-  if (/弁当|食品|飲料|お茶|ジュース|水|食料|テイクアウト/.test(searchText)) {
+  if (/弁当|食品|飲料|お茶|ジュース|水|食料|テイクアウト|チョコレート|チョコ/.test(searchText)) {
     if (!/外食|レストラン|居酒屋|酒|ビール|ワイン|ケータリング|出張料理/.test(searchText)) {
       flags.push("R04");
       flagDetails.push({ rule: "R04", severity: "🟡",

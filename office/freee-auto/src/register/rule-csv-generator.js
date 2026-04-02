@@ -56,6 +56,137 @@ function selectAction(item) {
 }
 
 /**
+ * 複合仕訳キーワード（CSV除外条件1）
+ * これらを含む明細は単一行の自動登録ルールでは正しく処理できないため除外する。
+ * 分類ステップ(cls.excluded)でカバーされないキーワードも追加。
+ */
+const COMPLEX_JOURNAL_KEYWORDS = [
+  // 借入返済系
+  '公庫', '融資', 'ローン', '借入', '返済',
+  // 給与系（classifyはしても仕訳構造が複雑）
+  '給与', '給料', '賞与', 'ボーナス',
+  // 社会保険系
+  '年金', '健保', '源泉税', '厚生年金', '健康保険', '雇用保険', '労災保険',
+  // 口座振替・相殺系
+  '相殺',
+  // ATM・現金出金系
+  'ATM', '現金出金',
+];
+
+/**
+ * 複合仕訳キーワードに該当するか判定
+ * @param {string} description - 取引摘要
+ * @returns {boolean}
+ */
+function isComplexJournalKeyword(description) {
+  if (!description) return false;
+  return COMPLEX_JOURNAL_KEYWORDS.some((kw) => description.includes(kw));
+}
+
+/**
+ * CSV生成専用ルーティング（大胆に登録 → 事後チェック方針）
+ *
+ * 除外条件（2条件のみ）:
+ *   1. 複合仕訳対象: cls.excluded=true または摘要に複合仕訳キーワードを含む
+ *   2. 10万円以上（固定資産判定が必要）
+ *
+ * 自動登録ルール:
+ *   - クレカ/ウォレット → 全自動（取引を登録する・部分一致）
+ *   - 預金口座1万円未満 → 全自動
+ *   - 預金口座1万円以上 + 過去パターンスコア>=20 → 自動登録
+ *   - 預金口座1万円以上 + パターンなし → 推測（取引を推測する・完全一致）
+ *
+ * @param {Object} item - パイプライン出力（item.transaction, item.classification, item._freee）
+ *                        またはテスト用パイプライン形式オブジェクト
+ * @returns {{ action: 'register'|'suggest'|'exclude', matchCondition: string|null, reason: string }}
+ */
+function routeForCsv(item) {
+  const cls = item.classification || {};
+  const tx = item.transaction || {};
+  const amount = Math.abs(tx.amount || 0);
+  // walletable_typeは _freee（unprocessed-processor.js由来）または transaction（テスト用）から取得
+  const walletableType = item._freee?.walletable_type || tx.walletable_type || '';
+  const description = tx.description || '';
+
+  // 1. 除外チェック①: classificationステージで付与された除外フラグ（口座間振替・金額0等）
+  if (cls.excluded) {
+    return { action: 'exclude', matchCondition: null, reason: cls.exclude_reason || '複合仕訳対象' };
+  }
+
+  // 2. 除外チェック②: 複合仕訳キーワード（給与・借入・社保等）
+  if (isComplexJournalKeyword(description)) {
+    return { action: 'exclude', matchCondition: null, reason: '複合仕訳対象（キーワード該当）' };
+  }
+
+  // 3. 10万円以上 → 除外（固定資産判定が必要）
+  if (amount >= 100000) {
+    return { action: 'exclude', matchCondition: null, reason: '固定資産判定要（10万円以上）' };
+  }
+
+  // 4. 口座種別を判定
+  //    credit_card / wallet（Amazon等） → クレカ扱い（全自動）
+  //    bank_account → 預金口座（金額・信頼度で判断）
+  const isCredit = ['credit_card', 'wallet'].includes(walletableType);
+  const isBank = walletableType === 'bank_account';
+
+  // 5. クレカ・デビット・ウォレット → 全自動
+  if (isCredit) {
+    return { action: 'register', matchCondition: '部分一致', reason: 'クレカ/ウォレット: 全自動' };
+  }
+
+  // 6. 預金口座・1万円未満 → 全自動
+  if (isBank && amount < 10000) {
+    return { action: 'register', matchCondition: '部分一致', reason: '預金口座1万円未満: 全自動' };
+  }
+
+  // 7. 預金口座・1万円以上 → 過去パターンスコアで判断
+  if (isBank && amount >= 10000) {
+    // score_breakdown.past_pattern: 過去パターンマッチ成功時に加算される最大30点の成分
+    const pastPatternScore = cls.score_breakdown?.past_pattern || 0;
+    if (pastPatternScore >= 20) {
+      return { action: 'register', matchCondition: '部分一致', reason: `預金口座高パターン(past=${pastPatternScore}): 自動登録` };
+    }
+    return { action: 'suggest', matchCondition: '完全一致', reason: '預金口座パターンなし: 推測' };
+  }
+
+  // フォールバック（walletable_typeが不明な場合）→ 推測
+  return { action: 'suggest', matchCondition: '完全一致', reason: 'walletable_type不明: 推測' };
+}
+
+/**
+ * 部分一致用に摘要を正規化（変動する数字・日付を除去して安定した文字列に）
+ * @param {string} desc - 摘要原文
+ * @returns {string}
+ */
+function normalizeForPartialMatch(desc) {
+  return (desc || '')
+    .replace(/\d{4,}/g, '')        // 長い数字列（注文番号・取引ID等）を除去
+    .replace(/\d{2}\/\d{2}/g, '')  // 日付（MM/DD）を除去
+    .replace(/\s+/g, ' ')          // 余分なスペースを整理
+    .trim();
+}
+
+/**
+ * CSV row[3]（取引内容）に設定する文字列を選定
+ * - 部分一致: 取引先名 → 摘要の安定部分（変動する数字を除去）
+ * - 完全一致: 摘要原文そのまま（一回限りのルールなので精確に合わせる）
+ *
+ * @param {Object} n - normalizeItem()の出力
+ * @returns {string}
+ */
+function selectDescription(n) {
+  if (n.matchCondition === '完全一致') {
+    return n.description;
+  }
+  // 部分一致: 取引先名があればそれを優先（安定したキーワード）
+  if (n.partnerName) {
+    return n.partnerName;
+  }
+  // 取引先名がない場合は摘要から変動要素を除去して安定部分を抽出
+  return normalizeForPartialMatch(n.description);
+}
+
+/**
  * パイプライン出力アイテムからフラット形式のフィールドを抽出
  * processWalletTxns()のネスト構造とテスト用フラット構造の両方に対応
  * @param {Object} item - パイプライン出力またはフラットオブジェクト
@@ -63,9 +194,20 @@ function selectAction(item) {
  */
 function normalizeItem(item) {
   // パイプライン出力（ネスト構造: item.transaction, item.classification, item.routing）
+  // → routeForCsv()で新ルーティング方針（大胆に登録）を適用
   if (item.routing && item.routing.decision) {
+    const csvRoute = routeForCsv(item);
+    let routeDestination;
+    if (csvRoute.action === 'exclude') {
+      routeDestination = 'exclude';
+    } else if (csvRoute.action === 'register') {
+      routeDestination = 'auto_register';
+    } else {
+      routeDestination = 'kintone_staff'; // suggest
+    }
     return {
-      routeDestination: item.routing.decision,
+      routeDestination,
+      matchCondition: csvRoute.matchCondition || '完全一致',
       entrySide: item.transaction?.debit_credit || 'expense',
       description: item.transaction?.description || '',
       walletableName: item.walletableName || '',
@@ -73,12 +215,17 @@ function normalizeItem(item) {
       accountName: item.classification?.estimated_account || '',
       taxClassification: item.classification?.estimated_tax_class || '',
       invoiceType: item.classification?.invoice_class || '',
+      itemTag: item.classification?.item_tag || '',
       confidenceScore: item.classification?.confidence_score || 0,
     };
   }
-  // テスト用フラット構造（routeDestination直接指定）
+  // テスト用フラット構造（routeDestination直接指定）→ 従来通り
+  // matchConditionはrouteDestinationから導出
+  const routeDestination = item.routeDestination || '';
+  const matchCondition = routeDestination === 'auto_register' ? '部分一致' : '完全一致';
   return {
-    routeDestination: item.routeDestination || '',
+    routeDestination,
+    matchCondition,
     entrySide: item.entrySide || 'expense',
     description: item.description || '',
     walletableName: item.walletableName || '',
@@ -86,6 +233,7 @@ function normalizeItem(item) {
     accountName: item.accountName || '',
     taxClassification: item.taxClassification || '',
     invoiceType: item.invoiceType || '',
+    itemTag: item.itemTag || '',
     confidenceScore: item.confidenceScore || 0,
   };
 }
@@ -93,12 +241,13 @@ function normalizeItem(item) {
 /**
  * CLASSIFY済み1明細を53要素の配列に変換
  * @param {Object} item - 分類済み明細（パイプライン出力 or フラット形式）
+ * @param {Object} [options] - 将来の拡張用
  * @returns {string[]|null} 53要素の配列、またはスキップ時null
  */
-function toRuleCsvRow(item) {
+function toRuleCsvRow(item, options = {}) {
   const n = normalizeItem(item);
 
-  // CSV行を生成しないルート
+  // CSV行を生成しないルート（除外・シニアレビュー）
   if (n.routeDestination === 'kintone_senior' || n.routeDestination === 'excluded'
       || n.routeDestination === 'exclude') {
     return null;
@@ -110,14 +259,14 @@ function toRuleCsvRow(item) {
   row[0] = toFreeeEntrySide(n.entrySide);       // 収支区分
   row[1] = n.walletableName || '';               // 取引口座
   row[2] = '';                                   // カードラベル（通常空）
-  row[3] = n.description;                        // 取引内容 ※原文そのまま
-  row[4] = selectMatchCondition(n);              // マッチ条件
+  row[3] = selectDescription(n);                 // 取引内容: 部分一致→取引先名/安定部分, 完全一致→原文
+  row[4] = n.matchCondition;                     // マッチ条件
   row[5] = '';                                   // 金額（最小値）
   row[6] = '';                                   // 金額（最大値）
 
   // カラム7〜22: 処理側
   row[7] = '0';                                  // 優先度
-  row[8] = selectAction(n);                      // マッチ後のアクション
+  row[8] = n.routeDestination === 'auto_register' ? '取引を登録する' : '取引を推測する';
   row[9] = '';                                   // 振替口座
   row[10] = '';                                  // 取引テンプレート
   row[11] = '';                                  // 購入データ原本に準拠
@@ -125,7 +274,7 @@ function toRuleCsvRow(item) {
   row[13] = toFreeeInvoiceLabel(n.invoiceType);  // 適格請求書等
   row[14] = n.accountName || '';                 // 勘定科目
   row[15] = toFreeeTaxLabel(n.taxClassification); // 税区分
-  row[16] = '';                                  // 品目
+  row[16] = n.itemTag || '';                     // 品目
   row[17] = '';                                  // 部門
   row[18] = '';                                  // メモタグ
   // カラム19〜52: セグメント・備考・消込関連 → 全て空（初期値のまま）
@@ -209,7 +358,7 @@ function parseCsvLine(line) {
  * @param {string} [options.outputDir] - CSV出力先ディレクトリ（デフォルト: ./rule-csv/）
  * @param {string} [options.encoding] - 'cp932'(デフォルト) or 'utf-8'
  * @param {string} [options.existingRuleCsvPath] - 既存ルールCSV（重複排除用）
- * @returns {Object} { csvPath, stats: { total, register, suggest, skipped, deduplicated } }
+ * @returns {Object} { csvPath, stats: { total, register, suggest, excluded, deduplicated } }
  */
 function generateRuleCsv(classifiedResult, options = {}) {
   const {
@@ -224,7 +373,7 @@ function generateRuleCsv(classifiedResult, options = {}) {
   }
 
   const items = classifiedResult.all || classifiedResult.items || [];
-  const stats = { total: items.length, register: 0, suggest: 0, skipped: 0, deduplicated: 0 };
+  const stats = { total: items.length, register: 0, suggest: 0, excluded: 0, deduplicated: 0 };
 
   // 既存ルールの重複判定キーを読み込み
   let existingKeys = new Set();
@@ -237,7 +386,7 @@ function generateRuleCsv(classifiedResult, options = {}) {
   for (const item of items) {
     const row = toRuleCsvRow(item);
     if (!row) {
-      stats.skipped++;
+      stats.excluded++;
       continue;
     }
 
@@ -290,9 +439,12 @@ module.exports = {
   generateRuleCsv,
   // テスト用に内部関数も公開
   toRuleCsvRow,
+  routeForCsv,
   escapeCsvField,
   parseCsvLine,
   buildDedupeKey,
+  selectDescription,
+  normalizeForPartialMatch,
   selectMatchCondition,
   selectAction,
   CSV_HEADER,
@@ -332,6 +484,6 @@ if (require.main === module) {
   console.log(`合計: ${result.stats.total}件`);
   console.log(`  登録ルール: ${result.stats.register}件`);
   console.log(`  推測ルール: ${result.stats.suggest}件`);
-  console.log(`  スキップ: ${result.stats.skipped}件`);
+  console.log(`  除外（複合仕訳+10万以上）: ${result.stats.excluded}件`);
   console.log(`  重複除外: ${result.stats.deduplicated}件`);
 }
