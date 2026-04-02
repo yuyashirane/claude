@@ -17,7 +17,8 @@ const {
   standardizeRows,
   standardizeFreeeWalletTxns,
 } = require("../normalize/format-standardizer");
-const { classifyTransactions, FREEE_ACCOUNT_IDS, TAX_CLASS_TO_CODE } = require("./account-matcher");
+const { classifyTransaction, classifyTransactions, FREEE_ACCOUNT_IDS, TAX_CLASS_TO_CODE } = require("./account-matcher");
+const { buildPatternStore } = require("./past-pattern-store");
 const { routeAll, printRoutingSummary } = require("./routing-decider");
 
 // --------------------------------------------------
@@ -30,12 +31,29 @@ const { routeAll, printRoutingSummary } = require("./routing-decider");
  * @param {Array} walletTxns - freee wallet_txns APIレスポンスの配列
  * @param {Object} options
  * @param {number|string} options.companyId - freee事業所ID
- * @returns {{ items: Array, summary: Object, excluded: Array, metadata: Object }}
+ * @param {string} [options.cacheDir]  - 過去パターンキャッシュ保存先
+ * @param {Array}  [options.pastDeals] - テスト用: deals配列を直接渡す
+ * @returns {Promise<{ items: Array, summary: Object, excluded: Array, metadata: Object }>}
  */
-function processWalletTxns(walletTxns, options = {}) {
+async function processWalletTxns(walletTxns, options = {}) {
   const companyId = options.companyId || 0;
 
   console.log(`\n=== processWalletTxns: ${walletTxns.length}件 ===`);
+
+  // 【過去パターンストアの構築】
+  let patternStore = null;
+  try {
+    patternStore = await buildPatternStore({
+      companyId,
+      cacheDir: options.cacheDir,
+      deals: options.pastDeals,
+      existingRuleCsvPath: options.existingRuleCsvPath,
+      partners: options.partners,
+    });
+    console.log(`[CLASSIFY] 過去パターン: ${patternStore.size}件ロード / カタカナマップ: ${patternStore.kanaMapSize}件`);
+  } catch (e) {
+    console.warn(`[CLASSIFY] 過去パターンのロードに失敗（0ptで継続）: ${e.message}`);
+  }
 
   // Step 1: NORMALIZE（standardizeFreeeWalletTxns でスキップ判定付き変換）
   console.log("\n━━━ Step 1: NORMALIZE ━━━");
@@ -93,7 +111,22 @@ function processWalletTxns(walletTxns, options = {}) {
 
   // Step 2: CLASSIFY（仕訳判定 + スコア算出）
   console.log("\n━━━ Step 2: CLASSIFY ━━━");
-  const classified = classifyTransactions(standardized.valid);
+  const classified = standardized.valid.map((item) => {
+    let pastPatternScore = 0;
+    let pastPatternMatch = null;
+    if (patternStore) {
+      const tx = item.transaction || item;
+      pastPatternMatch = patternStore.matchPattern(tx.description || "");
+      pastPatternScore = patternStore.calculatePastPatternScore(pastPatternMatch);
+    }
+    const result = classifyTransaction(item, { ...options, pastPatternScore, pastPatternMatch });
+    // 過去パターンから取引先名を補完
+    if (pastPatternMatch && pastPatternMatch.partnerName) {
+      const tx = result.transaction || result;
+      if (!tx.partner_name) tx.partner_name = pastPatternMatch.partnerName;
+    }
+    return result;
+  });
   logClassified(classified);
 
   // Step 3: ROUTING
@@ -332,7 +365,7 @@ async function main() {
   }
 
   const companyId = targetTxns[0]?.company_id || 0;
-  const result = processWalletTxns(targetTxns, { companyId });
+  const result = await processWalletTxns(targetTxns, { companyId });
 
   // freee登録用ペイロードの生成
   const autoItems = result.items.filter((i) => i.routing?.decision === "auto_register");

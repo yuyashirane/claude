@@ -364,8 +364,9 @@ function classifyTransaction(item, options = {}) {
   // 1. キーワードマッチ（30pt）
   const keywordResult = matchKeywords(searchText, tx.account_hint);
 
-  // 2. 過去仕訳パターン（30pt）— 未実装、0pt固定
-  const pastResult = { score: 0, detail: "過去仕訳データ未参照" };
+  // 2. 過去仕訳パターン（30pt）— pastPatternStore.calculatePastPatternScore() の結果を受け取る
+  const s2 = Math.min(30, options.pastPatternScore || 0);
+  const pastResult = { score: s2, detail: s2 > 0 ? "過去仕訳パターン一致" : "過去仕訳データ未参照" };
 
   // 3. 金額の妥当性（15pt）
   const amountResult = scoreAmount(Math.abs(amount));

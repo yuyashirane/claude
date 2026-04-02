@@ -1,0 +1,1783 @@
+{
+  "cachedAt": "2026-04-02T02:44:40.647Z",
+  "patterns": {
+    "楽天モバイル㈱（DMM）": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "楽天モバイル㈱（DMM）",
+      "count": 13,
+      "lastDate": "2026-04-01"
+    },
+    "PAYPAL": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "PayPal",
+      "count": 21,
+      "lastDate": "2026-03-30"
+    },
+    "スモールビジネスプラン": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "スモールビジネスプラン",
+      "count": 18,
+      "lastDate": "2026-03-30"
+    },
+    "小島国隆": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "小島 国隆",
+      "count": 1,
+      "lastDate": "2026-03-30"
+    },
+    "佐久間大輔": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "佐久間 大輔",
+      "count": 1,
+      "lastDate": "2026-03-30"
+    },
+    "ANTHROPIC": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "Anthropic",
+      "count": 2,
+      "lastDate": "2026-03-29"
+    },
+    "FRESHNESSBURGER": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "FRESHNESS BURGER",
+      "count": 10,
+      "lastDate": "2026-03-27"
+    },
+    "GOOGLE": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "Google",
+      "count": 33,
+      "lastDate": "2026-03-27"
+    },
+    "(特非)日本司法サービス推進協議会": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "(特非)日本司法サービス推進協議会",
+      "count": 13,
+      "lastDate": "2026-03-27"
+    },
+    "アスクル（安藤ハザマ興業㈱）": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "アスクル（安藤ハザマ興業㈱）",
+      "count": 6,
+      "lastDate": "2026-03-27"
+    },
+    "マニュライフ生命": {
+      "accountName": "保険料",
+      "taxClassification": "",
+      "partnerName": "マニュライフ生命",
+      "count": 24,
+      "lastDate": "2026-03-27"
+    },
+    "㈱エフアンドエム": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "㈱エフアンドエム",
+      "count": 12,
+      "lastDate": "2026-03-27"
+    },
+    "㈱チェンジ": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "㈱チェンジ",
+      "count": 12,
+      "lastDate": "2026-03-27"
+    },
+    "NSSマーケティング㈱": {
+      "accountName": "採用教育費",
+      "taxClassification": "",
+      "partnerName": "NSSマーケティング㈱",
+      "count": 12,
+      "lastDate": "2026-03-27"
+    },
+    "㈱アプラス": {
+      "accountName": "長期未払金",
+      "taxClassification": "",
+      "partnerName": "㈱アプラス",
+      "count": 12,
+      "lastDate": "2026-03-27"
+    },
+    "NTTドコモビジネス㈱": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "NTTドコモビジネス㈱",
+      "count": 14,
+      "lastDate": "2026-03-26"
+    },
+    "松橋裕美": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "松橋 裕美",
+      "count": 3,
+      "lastDate": "2026-03-26"
+    },
+    "加賀悠介": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "加賀 悠介",
+      "count": 2,
+      "lastDate": "2026-03-26"
+    },
+    "石田峻一郎": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "石田 峻一郎",
+      "count": 2,
+      "lastDate": "2026-03-26"
+    },
+    "SBIベネフィットシステムズ㈱": {
+      "accountName": "退職給付費用",
+      "taxClassification": "",
+      "partnerName": "SBIベネフィットシステムズ㈱",
+      "count": 12,
+      "lastDate": "2026-03-26"
+    },
+    "JR東日本（東日本旅客鉄道㈱）": {
+      "accountName": "旅費交通費",
+      "taxClassification": "",
+      "partnerName": "JR東日本（東日本旅客鉄道㈱）",
+      "count": 11,
+      "lastDate": "2026-03-25"
+    },
+    "PAYPAY銀行㈱": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "PayPay銀行㈱",
+      "count": 182,
+      "lastDate": "2026-03-25"
+    },
+    "日本郵便㈱": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "日本郵便㈱",
+      "count": 7,
+      "lastDate": "2026-03-24"
+    },
+    "大谷和徳": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "大谷 和徳",
+      "count": 1,
+      "lastDate": "2026-03-24"
+    },
+    "弁護⼠松井章義先⽣": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "弁護⼠ 松井 章義 先⽣",
+      "count": 2,
+      "lastDate": "2026-03-24"
+    },
+    "山﨑圭祐": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "山﨑 圭祐",
+      "count": 1,
+      "lastDate": "2026-03-24"
+    },
+    "NTT東日本": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "NTT東日本",
+      "count": 20,
+      "lastDate": "2026-03-24"
+    },
+    "FRONTAGENT(UMEETECHNOLOGIES㈱)": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "Front Agent (Umee Technologies㈱)",
+      "count": 6,
+      "lastDate": "2026-03-24"
+    },
+    "フリー㈱": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "フリー㈱",
+      "count": 18,
+      "lastDate": "2026-03-23"
+    },
+    "原田昌昭": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "原田 昌昭",
+      "count": 1,
+      "lastDate": "2026-03-23"
+    },
+    "あいおいニッセイ同和損害保険㈱": {
+      "accountName": "保険料",
+      "taxClassification": "",
+      "partnerName": "あいおいニッセイ同和損害保険㈱",
+      "count": 1,
+      "lastDate": "2026-03-23"
+    },
+    "ゾーホージャパン㈱": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "ゾーホージャパン㈱",
+      "count": 6,
+      "lastDate": "2026-03-22"
+    },
+    "河村宣明": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "河村 宣明",
+      "count": 1,
+      "lastDate": "2026-03-21"
+    },
+    "上村侑太郎": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "上村 侑太郎",
+      "count": 1,
+      "lastDate": "2026-03-21"
+    },
+    "岩本純一": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "岩本 純一",
+      "count": 1,
+      "lastDate": "2026-03-19"
+    },
+    "岩本治美": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "岩本 治美",
+      "count": 1,
+      "lastDate": "2026-03-19"
+    },
+    "ウォータースタンド㈱": {
+      "accountName": "水道光熱費",
+      "taxClassification": "",
+      "partnerName": "ウォータースタンド㈱",
+      "count": 6,
+      "lastDate": "2026-03-19"
+    },
+    "㈱丸善ジュンク堂書店": {
+      "accountName": "新聞図書費",
+      "taxClassification": "",
+      "partnerName": "㈱丸善ジュンク堂書店",
+      "count": 16,
+      "lastDate": "2026-03-19"
+    },
+    "木村真由美": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "木村 真由美",
+      "count": 2,
+      "lastDate": "2026-03-18"
+    },
+    "㈱ほくと": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "㈱ほくと",
+      "count": 1,
+      "lastDate": "2026-03-18"
+    },
+    "見目智也": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "見目 智也",
+      "count": 2,
+      "lastDate": "2026-03-18"
+    },
+    "OPENAI": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "OpenAI",
+      "count": 13,
+      "lastDate": "2026-03-18"
+    },
+    "廣田輝幸": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "廣田 輝幸",
+      "count": 1,
+      "lastDate": "2026-03-17"
+    },
+    "ランタンアドバイザリーグループ㈱": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "ランタンアドバイザリーグループ㈱",
+      "count": 3,
+      "lastDate": "2026-03-17"
+    },
+    "小島里美": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "小島 里美",
+      "count": 1,
+      "lastDate": "2026-03-17"
+    },
+    "坂寄幸子": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "坂寄 幸子",
+      "count": 1,
+      "lastDate": "2026-03-17"
+    },
+    "鈴木桂子": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "鈴木 桂子",
+      "count": 1,
+      "lastDate": "2026-03-17"
+    },
+    "原勇三": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "原 勇三",
+      "count": 1,
+      "lastDate": "2026-03-17"
+    },
+    "黒瀬幸子": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "黒瀬 幸子",
+      "count": 1,
+      "lastDate": "2026-03-17"
+    },
+    "東京電力エナジーパートナー㈱": {
+      "accountName": "水道光熱費",
+      "taxClassification": "",
+      "partnerName": "東京電力エナジーパートナー㈱",
+      "count": 14,
+      "lastDate": "2026-03-17"
+    },
+    "八木敏之": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "八木 敏之",
+      "count": 1,
+      "lastDate": "2026-03-17"
+    },
+    "加藤隼人": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "加藤 隼人",
+      "count": 1,
+      "lastDate": "2026-03-17"
+    },
+    "ALEXLAMB": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "Alex Lamb",
+      "count": 1,
+      "lastDate": "2026-03-17"
+    },
+    "晃桜花プロダクション株式会社": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "晃桜花プロダクション 株式会社",
+      "count": 2,
+      "lastDate": "2026-03-12"
+    },
+    "島下由加": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "島下 由加",
+      "count": 1,
+      "lastDate": "2026-03-12"
+    },
+    "㈱アックスコンサルティング": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "㈱アックスコンサルティング",
+      "count": 15,
+      "lastDate": "2026-03-12"
+    },
+    "SPOTIFY": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "Spotify",
+      "count": 12,
+      "lastDate": "2026-03-11"
+    },
+    "赤嶺克英": {
+      "accountName": "外注費",
+      "taxClassification": "",
+      "partnerName": "赤嶺 克英",
+      "count": 3,
+      "lastDate": "2026-03-10"
+    },
+    "㈱シンフォネット": {
+      "accountName": "外注費",
+      "taxClassification": "",
+      "partnerName": "㈱シンフォネット",
+      "count": 12,
+      "lastDate": "2026-03-10"
+    },
+    "杜輝明": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "杜 輝明",
+      "count": 1,
+      "lastDate": "2026-03-10"
+    },
+    "ATSKY㈱": {
+      "accountName": "外注費",
+      "taxClassification": "",
+      "partnerName": "ATSKY㈱",
+      "count": 23,
+      "lastDate": "2026-03-09"
+    },
+    "税理士協同組合": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "税理士協同組合",
+      "count": 18,
+      "lastDate": "2026-03-09"
+    },
+    "中澤直美": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "中澤 直美",
+      "count": 1,
+      "lastDate": "2026-03-09"
+    },
+    "船井総研": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "船井総研",
+      "count": 19,
+      "lastDate": "2026-03-06"
+    },
+    "㈱KUBELL(CHATWOK)": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "㈱kubell (Chatwok)",
+      "count": 3,
+      "lastDate": "2026-03-05"
+    },
+    "㈱エッサム": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "㈱エッサム",
+      "count": 10,
+      "lastDate": "2026-03-05"
+    },
+    "東京法務局": {
+      "accountName": "租税公課",
+      "taxClassification": "",
+      "partnerName": "東京法務局",
+      "count": 2,
+      "lastDate": "2026-03-03"
+    },
+    "日本ビズアップ㈱": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "日本ビズアップ㈱",
+      "count": 12,
+      "lastDate": "2026-03-03"
+    },
+    "第1期中間納付": {
+      "accountName": "消費税引当金",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-03-02"
+    },
+    "ZOOM": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "ZOOM",
+      "count": 13,
+      "lastDate": "2026-03-02"
+    },
+    "サイボウズ㈱": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "サイボウズ㈱",
+      "count": 11,
+      "lastDate": "2026-03-01"
+    },
+    "健康保険料（預り分）": {
+      "accountName": "預り金",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-02-28"
+    },
+    "役員・従業員": {
+      "accountName": "役員報酬",
+      "taxClassification": "",
+      "partnerName": "役員・従業員",
+      "count": 22,
+      "lastDate": "2026-02-28"
+    },
+    "ソフトバンク㈱": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "ソフトバンク㈱",
+      "count": 19,
+      "lastDate": "2026-02-28"
+    },
+    "アクサ生命": {
+      "accountName": "保険積立金",
+      "taxClassification": "",
+      "partnerName": "アクサ生命",
+      "count": 11,
+      "lastDate": "2026-02-27"
+    },
+    "東急住宅リース㈱": {
+      "accountName": "地代家賃",
+      "taxClassification": "",
+      "partnerName": "東急住宅リース㈱",
+      "count": 11,
+      "lastDate": "2026-02-27"
+    },
+    "大松土地㈱": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "大松土地㈱",
+      "count": 2,
+      "lastDate": "2026-02-27"
+    },
+    "加藤晋介": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "加藤 晋介",
+      "count": 1,
+      "lastDate": "2026-02-27"
+    },
+    "㈱クラウドパートナーズ": {
+      "accountName": "採用教育費",
+      "taxClassification": "",
+      "partnerName": "㈱クラウドパートナーズ",
+      "count": 9,
+      "lastDate": "2026-02-24"
+    },
+    "東京都交通局": {
+      "accountName": "旅費交通費",
+      "taxClassification": "",
+      "partnerName": "東京都交通局",
+      "count": 9,
+      "lastDate": "2026-02-20"
+    },
+    "ラクスル㈱": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "ラクスル㈱",
+      "count": 1,
+      "lastDate": "2026-02-19"
+    },
+    "㈱はいぱーいんでっくす": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "㈱はいぱーいんでっくす",
+      "count": 2,
+      "lastDate": "2026-02-19"
+    },
+    "ローソン": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "ローソン",
+      "count": 1,
+      "lastDate": "2026-02-14"
+    },
+    "オプティブ株式会社": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "オプティブ株式会社",
+      "count": 2,
+      "lastDate": "2026-02-12"
+    },
+    "株式会社KAWASEMIRECORDS": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "株式会社 KawasemiRecords",
+      "count": 1,
+      "lastDate": "2026-02-12"
+    },
+    "株式会社創環境設計": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "株式会社 創環境設計",
+      "count": 1,
+      "lastDate": "2026-02-12"
+    },
+    "アマゾンジャパン(同)": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "アマゾンジャパン(同)",
+      "count": 85,
+      "lastDate": "2026-02-09"
+    },
+    "ダイソー/㈱大創産業": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "ダイソー/㈱大創産業",
+      "count": 6,
+      "lastDate": "2026-02-08"
+    },
+    "株式会社TAMONT": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "株式会社 TAMONT",
+      "count": 1,
+      "lastDate": "2026-02-06"
+    },
+    "㈱クラビス": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "㈱クラビス",
+      "count": 10,
+      "lastDate": "2026-02-02"
+    },
+    "㈱TKC": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "㈱TKC",
+      "count": 12,
+      "lastDate": "2026-01-31"
+    },
+    "㈱本澤式賃金研究所": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "㈱本澤式賃金研究所",
+      "count": 2,
+      "lastDate": "2026-01-31"
+    },
+    "健康保険料（事業主負担分）": {
+      "accountName": "法定福利費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 5,
+      "lastDate": "2026-01-31"
+    },
+    "SPACEHEAD㈱": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "SPACE HEAD㈱",
+      "count": 1,
+      "lastDate": "2026-01-28"
+    },
+    "東京労働局": {
+      "accountName": "雑収入",
+      "taxClassification": "",
+      "partnerName": "東京労働局",
+      "count": 3,
+      "lastDate": "2026-01-26"
+    },
+    "松坂屋（㈱大丸松坂屋百貨店）": {
+      "accountName": "福利厚生費",
+      "taxClassification": "",
+      "partnerName": "松坂屋（㈱大丸松坂屋百貨店）",
+      "count": 6,
+      "lastDate": "2026-01-22"
+    },
+    "㈱万和": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "㈱万和",
+      "count": 1,
+      "lastDate": "2026-01-15"
+    },
+    "㈱パスモ": {
+      "accountName": "旅費交通費",
+      "taxClassification": "",
+      "partnerName": "㈱パスモ",
+      "count": 2,
+      "lastDate": "2026-01-14"
+    },
+    "上谷さくら": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "上谷 さくら",
+      "count": 1,
+      "lastDate": "2026-01-06"
+    },
+    "東京税理士会": {
+      "accountName": "諸会費",
+      "taxClassification": "",
+      "partnerName": "東京税理士会",
+      "count": 10,
+      "lastDate": "2026-01-05"
+    },
+    "ヤマト運輸㈱": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "ヤマト運輸㈱",
+      "count": 9,
+      "lastDate": "2026-01-05"
+    },
+    "社内懇親会T*": {
+      "accountName": "交際費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-12-26"
+    },
+    "㈱エスプリ": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "㈱エスプリ",
+      "count": 1,
+      "lastDate": "2025-12-26"
+    },
+    "日税ビジネスサービス": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "日税ビジネスサービス",
+      "count": 1,
+      "lastDate": "2025-12-15"
+    },
+    "蔦屋書店展望と開運": {
+      "accountName": "新聞図書費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-12-13"
+    },
+    "アトミジャパン(同)": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "アトミジャパン(同)",
+      "count": 1,
+      "lastDate": "2025-12-12"
+    },
+    "みますや水本先生勉強会（神保町倶楽部）懇親会": {
+      "accountName": "交際費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-12-11"
+    },
+    "ココカラファイン衛生用品代": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-12-10"
+    },
+    "㈱サイテックス": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "㈱サイテックス",
+      "count": 2,
+      "lastDate": "2025-12-09"
+    },
+    "ジョナサン": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "ジョナサン",
+      "count": 13,
+      "lastDate": "2025-12-09"
+    },
+    "一承東京上野久保公認会計士、末武公認会計士他": {
+      "accountName": "交際費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-12-08"
+    },
+    "一承東京上野末武会計士": {
+      "accountName": "交際費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-12-08"
+    },
+    "COLORFULLIFEDESIGN合同会社": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "Colorful Life Design合同会社",
+      "count": 1,
+      "lastDate": "2025-12-08"
+    },
+    "SUICAチャージ代": {
+      "accountName": "旅費交通費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-12-05"
+    },
+    "SWARO.RG(同)": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "Swaro.RG(同)",
+      "count": 2,
+      "lastDate": "2025-12-03"
+    },
+    "合同会社チョッカクラボ": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "合同会社 チョッカクラボ",
+      "count": 1,
+      "lastDate": "2025-12-03"
+    },
+    "ベアーズ経営労務コンサルティング熊倉智光": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "ベアーズ経営労務コンサルティング 熊倉 智光",
+      "count": 1,
+      "lastDate": "2025-12-03"
+    },
+    "ファミリーマート": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "ファミリーマート",
+      "count": 2,
+      "lastDate": "2025-12-02"
+    },
+    "賞与": {
+      "accountName": "賞与",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-12-01"
+    },
+    "㈱ヒュープロ": {
+      "accountName": "採用教育費",
+      "taxClassification": "",
+      "partnerName": "㈱ヒュープロ",
+      "count": 1,
+      "lastDate": "2025-12-01"
+    },
+    "藤澤あすか": {
+      "accountName": "外注費",
+      "taxClassification": "",
+      "partnerName": "藤澤 あすか",
+      "count": 7,
+      "lastDate": "2025-12-01"
+    },
+    "役員報酬": {
+      "accountName": "役員報酬",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-11-30"
+    },
+    "㈱多慶屋": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "㈱多慶屋",
+      "count": 5,
+      "lastDate": "2025-11-26"
+    },
+    "健康診断": {
+      "accountName": "福利厚生費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-11-20"
+    },
+    "東急電鉄㈱": {
+      "accountName": "旅費交通費",
+      "taxClassification": "",
+      "partnerName": "東急電鉄㈱",
+      "count": 6,
+      "lastDate": "2025-11-18"
+    },
+    "楽天": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "楽天",
+      "count": 1,
+      "lastDate": "2025-11-14"
+    },
+    "(一社)GERIA": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "(一社)GERIA",
+      "count": 3,
+      "lastDate": "2025-11-14"
+    },
+    "日本公認会計士協会": {
+      "accountName": "諸会費",
+      "taxClassification": "",
+      "partnerName": "日本公認会計士協会",
+      "count": 3,
+      "lastDate": "2025-11-12"
+    },
+    "㈱モトジン・ドット・コム": {
+      "accountName": "前受金",
+      "taxClassification": "",
+      "partnerName": "㈱モトジン・ドット・コム",
+      "count": 1,
+      "lastDate": "2025-11-07"
+    },
+    "健康診断医療法人社団せいおう会T*": {
+      "accountName": "福利厚生費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-11-06"
+    },
+    "㈱ハジキ": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "㈱ハジキ",
+      "count": 1,
+      "lastDate": "2025-11-05"
+    },
+    "帝建商株式会社": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "帝建商株式会社",
+      "count": 1,
+      "lastDate": "2025-11-05"
+    },
+    "MUC(同)": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "MUC(同)",
+      "count": 1,
+      "lastDate": "2025-11-04"
+    },
+    "ロリポップ（GMOペポパ㈱）": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "ロリポップ（GMOペポパ㈱）",
+      "count": 1,
+      "lastDate": "2025-11-03"
+    },
+    "INDEEDJAPAN㈱": {
+      "accountName": "採用教育費",
+      "taxClassification": "",
+      "partnerName": "Indeed Japan㈱",
+      "count": 6,
+      "lastDate": "2025-11-02"
+    },
+    "久保氏打合せ": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-10-30"
+    },
+    "ルノアール": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "ルノアール",
+      "count": 1,
+      "lastDate": "2025-10-29"
+    },
+    "合同会社岩田研究所": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "合同会社 岩田研究所",
+      "count": 1,
+      "lastDate": "2025-10-28"
+    },
+    "㈱東京リゾートハウス（免税事業者）紹介手数料": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-10-28"
+    },
+    "東京都水道局": {
+      "accountName": "水道光熱費",
+      "taxClassification": "",
+      "partnerName": "東京都水道局",
+      "count": 6,
+      "lastDate": "2025-10-28"
+    },
+    "公認会計士協会": {
+      "accountName": "諸会費",
+      "taxClassification": "",
+      "partnerName": "公認会計士協会",
+      "count": 1,
+      "lastDate": "2025-10-27"
+    },
+    "独立行政法人中小企業基盤整備機構": {
+      "accountName": "保険積立金",
+      "taxClassification": "",
+      "partnerName": "独立行政法人 中小企業基盤整備機構",
+      "count": 7,
+      "lastDate": "2025-10-27"
+    },
+    "EFAX(J2GLOBALJAPAN㈲)": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "efax (j2 Global Japan㈲)",
+      "count": 1,
+      "lastDate": "2025-10-26"
+    },
+    "ドトール": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "ドトール",
+      "count": 2,
+      "lastDate": "2025-10-24"
+    },
+    "㈱和泉建物サービス": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "㈱和泉建物サービス",
+      "count": 1,
+      "lastDate": "2025-10-21"
+    },
+    "日本政策金融公庫": {
+      "accountName": "長期借入金",
+      "taxClassification": "",
+      "partnerName": "日本政策金融公庫",
+      "count": 14,
+      "lastDate": "2025-10-20"
+    },
+    "江東信用組合": {
+      "accountName": "長期借入金",
+      "taxClassification": "",
+      "partnerName": "江東信用組合",
+      "count": 16,
+      "lastDate": "2025-10-20"
+    },
+    "ふたば皮膚科インフルエンザ予防接種": {
+      "accountName": "福利厚生費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-10-18"
+    },
+    "L'AMBIANCEDOUCE久保公認会計士公認会計士久保": {
+      "accountName": "交際費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-10-17"
+    },
+    "久保会計士LAMBIANCEDOUCE": {
+      "accountName": "交際費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-10-17"
+    },
+    "㈱磐田おおくすのき農園": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "㈱磐田おおくすのき農園",
+      "count": 1,
+      "lastDate": "2025-10-17"
+    },
+    "お名前ドットコム": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "お名前ドットコム",
+      "count": 3,
+      "lastDate": "2025-10-17"
+    },
+    "医療法人社団善仁会健康診断": {
+      "accountName": "福利厚生費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-10-16"
+    },
+    "ムームードメイン": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "ムームードメイン",
+      "count": 2,
+      "lastDate": "2025-10-15"
+    },
+    "リモート用PC②": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 2,
+      "lastDate": "2025-10-09"
+    },
+    "リモート用PC": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-10-09"
+    },
+    "キンコーズ": {
+      "accountName": "雑費",
+      "taxClassification": "",
+      "partnerName": "キンコーズ",
+      "count": 8,
+      "lastDate": "2025-10-09"
+    },
+    "日本マイクロソフト㈱": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "日本マイクロソフト㈱",
+      "count": 5,
+      "lastDate": "2025-10-09"
+    },
+    "SANSAN㈱": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "Sansan㈱",
+      "count": 1,
+      "lastDate": "2025-10-08"
+    },
+    "㈱SASANQUA": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "㈱SASANQUA",
+      "count": 1,
+      "lastDate": "2025-10-08"
+    },
+    "ヤマトクレジットファイナンス㈱": {
+      "accountName": "長期未払金",
+      "taxClassification": "",
+      "partnerName": "ヤマトクレジットファイナンス㈱",
+      "count": 7,
+      "lastDate": "2025-10-06"
+    },
+    "手土産代": {
+      "accountName": "福利厚生費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 3,
+      "lastDate": "2025-10-04"
+    },
+    "カプリチョーザ": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "カプリチョーザ",
+      "count": 7,
+      "lastDate": "2025-10-01"
+    },
+    "㈱イルマティック": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "㈱イルマティック",
+      "count": 1,
+      "lastDate": "2025-09-30"
+    },
+    "年金事務所": {
+      "accountName": "法定福利費",
+      "taxClassification": "",
+      "partnerName": "年金事務所",
+      "count": 7,
+      "lastDate": "2025-09-30"
+    },
+    "株式会社マネジメントサービス": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "株式会社 マネジメントサービス",
+      "count": 1,
+      "lastDate": "2025-09-30"
+    },
+    "合同会社42Nスタジオ": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "合同会社 42Nスタジオ",
+      "count": 1,
+      "lastDate": "2025-09-29"
+    },
+    "オリックス生命": {
+      "accountName": "保険料",
+      "taxClassification": "",
+      "partnerName": "オリックス生命",
+      "count": 1,
+      "lastDate": "2025-09-29"
+    },
+    "MULTCLOUDクラウドストレージサービス間データ転送サービスクレバーブリッジGMBHT*": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-09-26"
+    },
+    "朝日生命": {
+      "accountName": "保険料",
+      "taxClassification": "",
+      "partnerName": "朝日生命",
+      "count": 2,
+      "lastDate": "2025-09-26"
+    },
+    "天丼てんや小沼さん、龍崎さん打合せ": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-09-25"
+    },
+    "セブンイレブン": {
+      "accountName": "雑費",
+      "taxClassification": "",
+      "partnerName": "セブンイレブン",
+      "count": 2,
+      "lastDate": "2025-09-24"
+    },
+    "㈱日本HP": {
+      "accountName": "一括償却資産",
+      "taxClassification": "",
+      "partnerName": "㈱日本HP",
+      "count": 1,
+      "lastDate": "2025-09-22"
+    },
+    "SERIA": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "Seria",
+      "count": 3,
+      "lastDate": "2025-09-21"
+    },
+    "WHEREBYAS": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "Whereby AS",
+      "count": 1,
+      "lastDate": "2025-09-21"
+    },
+    "合同会社むぎ": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "合同会社 むぎ",
+      "count": 1,
+      "lastDate": "2025-09-18"
+    },
+    "社内サーバー用HD（WD80EFPX）2台PC-IDEA興隆商事㈱T*": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-09-17"
+    },
+    "城北信金": {
+      "accountName": "長期借入金",
+      "taxClassification": "",
+      "partnerName": "城北信金",
+      "count": 5,
+      "lastDate": "2025-09-16"
+    },
+    "ダイキン工業㈱": {
+      "accountName": "修繕費",
+      "taxClassification": "",
+      "partnerName": "ダイキン工業㈱",
+      "count": 1,
+      "lastDate": "2025-09-16"
+    },
+    "APPLEJAPAN(同)": {
+      "accountName": "修繕費",
+      "taxClassification": "",
+      "partnerName": "Apple Japan(同)",
+      "count": 5,
+      "lastDate": "2025-09-16"
+    },
+    "IART㈱": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "iArt㈱",
+      "count": 1,
+      "lastDate": "2025-09-12"
+    },
+    "税理士法人ブリッジフィールド国際会計事務所": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "税理士法人ブリッジフィールド国際会計事務所",
+      "count": 1,
+      "lastDate": "2025-09-10"
+    },
+    "新事務所本棚ザッカグマート㈱ワイエムワールドT*": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-09-06"
+    },
+    "一般社団法人HRBUDDY研究所": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "一般社団法人HR Buddy研究所",
+      "count": 1,
+      "lastDate": "2025-09-03"
+    },
+    "台東都税事務所": {
+      "accountName": "租税公課",
+      "taxClassification": "",
+      "partnerName": "台東都税事務所",
+      "count": 1,
+      "lastDate": "2025-09-02"
+    },
+    "ILIVEFOREST_㈲雄飛_㈱ユニホー": {
+      "accountName": "敷金",
+      "taxClassification": "",
+      "partnerName": "I LIVE FOREST_㈲雄飛_㈱ユニホー",
+      "count": 3,
+      "lastDate": "2025-09-01"
+    },
+    "PLAYERONE㈱": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "PLAYER ONE ㈱",
+      "count": 1,
+      "lastDate": "2025-08-29"
+    },
+    "サミット": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "サミット",
+      "count": 1,
+      "lastDate": "2025-08-29"
+    },
+    "消費税中間納付": {
+      "accountName": "消費税引当金",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-08-29"
+    },
+    "BONDAVI㈱": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "bondavi㈱",
+      "count": 1,
+      "lastDate": "2025-08-29"
+    },
+    "三菱電機ビルソリューションズ㈱": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "三菱電機ビルソリューションズ㈱",
+      "count": 1,
+      "lastDate": "2025-08-27"
+    },
+    "新事務所プリンター（QOO10）": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-08-26"
+    },
+    "㈱トレジャー・ファクトリー": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "㈱トレジャー・ファクトリー",
+      "count": 1,
+      "lastDate": "2025-08-23"
+    },
+    "ETERNALMARRIAGE合同会社": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "Eternal Marriage合同会社",
+      "count": 1,
+      "lastDate": "2025-08-22"
+    },
+    "白根裕也公認会計士事務所": {
+      "accountName": "未払金",
+      "taxClassification": "",
+      "partnerName": "白根裕也公認会計士事務所",
+      "count": 2,
+      "lastDate": "2025-08-22"
+    },
+    "打合せ室用テーブルセット（RASIK㈱もしもT*）": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-08-18"
+    },
+    "CANDYHOUSEJAPAN㈱": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "CANDY HOUSE JAPAN㈱",
+      "count": 3,
+      "lastDate": "2025-08-13"
+    },
+    "エン・ジャパン㈱": {
+      "accountName": "前払費用",
+      "taxClassification": "",
+      "partnerName": "エン・ジャパン㈱",
+      "count": 1,
+      "lastDate": "2025-08-08"
+    },
+    "㈱アルティシア": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "㈱アルティシア",
+      "count": 2,
+      "lastDate": "2025-08-08"
+    },
+    "日影茶屋ピーテック伊藤さん贈答品袋代": {
+      "accountName": "交際費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-08-01"
+    },
+    "日影茶屋ピーテック伊藤さん贈答品": {
+      "accountName": "交際費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-08-01"
+    },
+    "コメダ珈琲店": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "コメダ珈琲店",
+      "count": 1,
+      "lastDate": "2025-08-01"
+    },
+    "京急チャージ": {
+      "accountName": "旅費交通費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-08-01"
+    },
+    "白根邦之": {
+      "accountName": "長期前払費用",
+      "taxClassification": "",
+      "partnerName": "白根邦之",
+      "count": 1,
+      "lastDate": "2025-08-01"
+    },
+    "㈱ニトリ": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "㈱ニトリ",
+      "count": 2,
+      "lastDate": "2025-07-19"
+    },
+    "オフィスコム㈱": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "オフィスコム㈱",
+      "count": 1,
+      "lastDate": "2025-07-17"
+    },
+    "PCボンバーYAHOO!店（㈱綿半ドットコム）": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "PCボンバー Yahoo!店（㈱綿半ドットコム）",
+      "count": 1,
+      "lastDate": "2025-07-14"
+    },
+    "社内会議斉藤さん": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-07-11"
+    },
+    "上海庭水本先生勉強会": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-07-10"
+    },
+    "会社ホームページ用写真撮影": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-07-08"
+    },
+    "(同)オフィスしましま": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "(同)オフィスしましま",
+      "count": 1,
+      "lastDate": "2025-07-08"
+    },
+    "BEMIKREH": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "Bemikreh",
+      "count": 2,
+      "lastDate": "2025-07-03"
+    },
+    "CLAUDE(ANTHROPIC,PBC)": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "Claude (Anthropic, PBC)",
+      "count": 1,
+      "lastDate": "2025-07-03"
+    },
+    "スペースマーケット写真撮影スタジオ代": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-07-02"
+    },
+    "釜寅": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "釜寅",
+      "count": 3,
+      "lastDate": "2025-06-30"
+    },
+    "EXCELSIORCAFFE": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "EXCELSIOR CAFFE",
+      "count": 1,
+      "lastDate": "2025-06-27"
+    },
+    "日税連保険サービス": {
+      "accountName": "保険料",
+      "taxClassification": "",
+      "partnerName": "日税連保険サービス",
+      "count": 1,
+      "lastDate": "2025-06-27"
+    },
+    "NTTコミュニケーションズ㈱": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "NTTコミュニケーションズ㈱",
+      "count": 5,
+      "lastDate": "2025-06-26"
+    },
+    "BECK'S": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "BECK'S",
+      "count": 1,
+      "lastDate": "2025-06-24"
+    },
+    "楠会～東戸塚駅": {
+      "accountName": "旅費交通費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 2,
+      "lastDate": "2025-06-24"
+    },
+    "アメリカンエキスプレス": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "アメリカンエキスプレス",
+      "count": 5,
+      "lastDate": "2025-06-22"
+    },
+    "㈱岡田興業": {
+      "accountName": "仮払金",
+      "taxClassification": "",
+      "partnerName": "㈱岡田興業",
+      "count": 1,
+      "lastDate": "2025-06-20"
+    },
+    "㈱ブランディングプレス": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "㈱ブランディングプレス",
+      "count": 1,
+      "lastDate": "2025-06-16"
+    },
+    "日本テクノス株式会社": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "日本テクノス 株式会社",
+      "count": 1,
+      "lastDate": "2025-06-05"
+    },
+    "日影商事㈱": {
+      "accountName": "立替金",
+      "taxClassification": "",
+      "partnerName": "日影商事㈱",
+      "count": 2,
+      "lastDate": "2025-06-02"
+    },
+    "日南鉄構㈱": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "日南鉄構㈱",
+      "count": 1,
+      "lastDate": "2025-06-02"
+    },
+    "金城哲": {
+      "accountName": "仮受金",
+      "taxClassification": "",
+      "partnerName": "金城 哲",
+      "count": 2,
+      "lastDate": "2025-05-30"
+    },
+    "株式会社MTイノベーション": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "株式会社MTイノベーション",
+      "count": 1,
+      "lastDate": "2025-05-30"
+    },
+    "株式会社CAMPSIS": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "株式会社 Campsis",
+      "count": 2,
+      "lastDate": "2025-05-30"
+    },
+    "レモネード合同会社": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "レモネード合同会社",
+      "count": 1,
+      "lastDate": "2025-05-30"
+    },
+    "株式会社DOWELL": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "株式会社Dowell",
+      "count": 1,
+      "lastDate": "2025-05-30"
+    },
+    "中間納付": {
+      "accountName": "法人税・住民税及び事業税",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 4,
+      "lastDate": "2025-05-30"
+    },
+    "ZAPIERINC.": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "Zapier Inc.",
+      "count": 1,
+      "lastDate": "2025-05-21"
+    },
+    "丸高工業㈱": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "丸高工業㈱",
+      "count": 1,
+      "lastDate": "2025-05-21"
+    },
+    "㈱K&I": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "㈱K&I",
+      "count": 2,
+      "lastDate": "2025-05-21"
+    },
+    "三井カーシェアーズ新事務所用オフィス事務機器視察モラージュ菖蒲EASTFORCE（㈱K&I）": {
+      "accountName": "旅費交通費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-05-18"
+    },
+    "三菱UFJ銀行": {
+      "accountName": "支払手数料",
+      "taxClassification": "",
+      "partnerName": "三菱UFJ銀行",
+      "count": 1,
+      "lastDate": "2025-05-14"
+    },
+    "中小企業診断士協会": {
+      "accountName": "諸会費",
+      "taxClassification": "",
+      "partnerName": "中小企業診断士協会",
+      "count": 1,
+      "lastDate": "2025-05-14"
+    },
+    "無印良品": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "無印良品",
+      "count": 1,
+      "lastDate": "2025-05-04"
+    },
+    "㈱オリエントコーポレーション（オリココーポレーション）": {
+      "accountName": "諸会費",
+      "taxClassification": "",
+      "partnerName": "㈱オリエントコーポレーション（オリココーポレーション）",
+      "count": 1,
+      "lastDate": "2025-04-30"
+    },
+    "東京商工会議所": {
+      "accountName": "諸会費",
+      "taxClassification": "",
+      "partnerName": "東京商工会議所",
+      "count": 1,
+      "lastDate": "2025-04-28"
+    },
+    "OLT1_オールドトライアングル": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "OLT1_オールドトライアングル",
+      "count": 1,
+      "lastDate": "2025-04-25"
+    },
+    "オールドトライアングルウィル氏": {
+      "accountName": "消耗品費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 3,
+      "lastDate": "2025-04-25"
+    },
+    "社内会議": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-04-25"
+    },
+    "路傍塾参加費": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-04-24"
+    },
+    "㈱ゴールドクロス": {
+      "accountName": "雑費",
+      "taxClassification": "",
+      "partnerName": "㈱ゴールドクロス",
+      "count": 1,
+      "lastDate": "2025-04-21"
+    },
+    "ドロップボックス": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "ドロップボックス",
+      "count": 4,
+      "lastDate": "2025-04-18"
+    },
+    "BISTRODOMANNAKA": {
+      "accountName": "通信費",
+      "taxClassification": "",
+      "partnerName": "BISTRO DOMANNAKA",
+      "count": 3,
+      "lastDate": "2025-04-18"
+    },
+    "大橋優子": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "大橋 優子",
+      "count": 1,
+      "lastDate": "2025-04-16"
+    },
+    "オールドサイゴン堀さんユニットに関する情報共有打合せ": {
+      "accountName": "会議費",
+      "taxClassification": "",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-04-15"
+    },
+    "合同会社フフフ": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "合同会社 フフフ",
+      "count": 1,
+      "lastDate": "2025-04-03"
+    },
+    "石田彩美": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "石田 彩美",
+      "count": 1,
+      "lastDate": "2025-04-03"
+    },
+    "松尾健": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "松尾 健",
+      "count": 1,
+      "lastDate": "2025-04-03"
+    },
+    "佐藤司": {
+      "accountName": "売上高",
+      "taxClassification": "",
+      "partnerName": "佐藤 司",
+      "count": 1,
+      "lastDate": "2025-04-03"
+    }
+  }
+}

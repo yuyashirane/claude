@@ -352,75 +352,77 @@ test("R10: routeAll サマリー合計=total", () => {
 });
 
 // ==================================================
-// 統合テスト: processWalletTxns / processRows
+// 統合テスト: processWalletTxns / processRows（async IIFE）
 // ==================================================
-console.log("\n━━━ 統合テスト ━━━");
+(async () => {
+  console.log("\n━━━ 統合テスト ━━━");
 
-// processWalletTxnsの結果を保存して複数テストで共有
-const walletResult = processWalletTxns(MOCK_WALLET_TXNS, { companyId: 474381 });
+  // processWalletTxns は async になったので await する
+  const walletResult = await processWalletTxns(MOCK_WALLET_TXNS, { companyId: 474381 });
 
-// suppress console for remaining quick tests
-const origLog = console.log;
-const origWarn = console.warn;
+  // suppress console for remaining quick tests
+  const origLog = console.log;
+  const origWarn = console.warn;
 
-test("I01: processWalletTxns 処理完了", () => {
-  assert.ok(walletResult.items.length > 0, "アイテムあり");
-  assert.ok(walletResult.summary, "サマリーあり");
-  assert.ok(walletResult.metadata, "メタデータあり");
-});
+  test("I01: processWalletTxns 処理完了", () => {
+    assert.ok(walletResult.items.length > 0, "アイテムあり");
+    assert.ok(walletResult.summary, "サマリーあり");
+    assert.ok(walletResult.metadata, "メタデータあり");
+  });
 
-test("I02: rule_matchedは事前スキップ", () => {
-  assert.ok(walletResult.excluded.length >= 1, `スキップ≥1 (実際: ${walletResult.excluded.length})`);
-});
+  test("I02: rule_matchedは事前スキップ", () => {
+    assert.ok(walletResult.excluded.length >= 1, `スキップ≥1 (実際: ${walletResult.excluded.length})`);
+  });
 
-test("I03: サマリー合計=total", () => {
-  const s = walletResult.summary;
-  const total = s.auto_register + s.kintone_staff + s.kintone_senior + s.exclude;
-  assert.strictEqual(total, s.total, `合計${total} vs total${s.total}`);
-});
+  test("I03: サマリー合計=total", () => {
+    const s = walletResult.summary;
+    const total = s.auto_register + s.kintone_staff + s.kintone_senior + s.exclude;
+    assert.strictEqual(total, s.total, `合計${total} vs total${s.total}`);
+  });
 
-test("I04: metadata.company_id", () => {
-  assert.strictEqual(walletResult.metadata.company_id, 474381);
-});
+  test("I04: metadata.company_id", () => {
+    assert.strictEqual(walletResult.metadata.company_id, 474381);
+  });
 
-// processRows テスト
-console.log = () => {};
-console.warn = () => {};
-const rowResult = processRows(
-  [
-    { date: "2026-03-01", amount: -3500, description: "タクシー代" },
-    { date: "2026-03-02", amount: -8800, description: "Amazon 文具" },
-    { date: "2026-03-03", amount: -500000, description: "口座間振替" },
-  ],
-  { companyId: 474381, source: "csv", fileName: "test.csv" }
-);
-console.log = origLog;
-console.warn = origWarn;
+  // processRows テスト（同期のまま）
+  console.log = () => {};
+  console.warn = () => {};
+  const rowResult = processRows(
+    [
+      { date: "2026-03-01", amount: -3500, description: "タクシー代" },
+      { date: "2026-03-02", amount: -8800, description: "Amazon 文具" },
+      { date: "2026-03-03", amount: -500000, description: "口座間振替" },
+    ],
+    { companyId: 474381, source: "csv", fileName: "test.csv" }
+  );
+  console.log = origLog;
+  console.warn = origWarn;
 
-test("I05: processRows 結果にアイテムあり", () => {
-  assert.ok(rowResult.items.length > 0);
-});
+  test("I05: processRows 結果にアイテムあり", () => {
+    assert.ok(rowResult.items.length > 0);
+  });
 
-test("I06: processRows サマリーtotal>0", () => {
-  assert.ok(rowResult.summary.total > 0);
-});
+  test("I06: processRows サマリーtotal>0", () => {
+    assert.ok(rowResult.summary.total > 0);
+  });
 
-test("I07: processRows metadata.source=csv", () => {
-  assert.strictEqual(rowResult.metadata.source, "csv");
-});
+  test("I07: processRows metadata.source=csv", () => {
+    assert.strictEqual(rowResult.metadata.source, "csv");
+  });
 
-test("I08: processRows metadata.file_name", () => {
-  assert.strictEqual(rowResult.metadata.file_name, "test.csv");
-});
+  test("I08: processRows metadata.file_name", () => {
+    assert.strictEqual(rowResult.metadata.file_name, "test.csv");
+  });
 
-// ==================================================
-// 結果
-// ==================================================
-console.log("\n" + "=".repeat(50));
-console.log(`テスト結果: ${passed} passed / ${failed} failed / ${passed + failed} total`);
-if (failed > 0) {
-  console.log("⚠️ 一部テストが失敗しました");
-  process.exit(1);
-} else {
-  console.log("✅ 全テスト通過！");
-}
+  // ==================================================
+  // 結果
+  // ==================================================
+  console.log("\n" + "=".repeat(50));
+  console.log(`テスト結果: ${passed} passed / ${failed} failed / ${passed + failed} total`);
+  if (failed > 0) {
+    console.log("⚠️ 一部テストが失敗しました");
+    process.exit(1);
+  } else {
+    console.log("✅ 全テスト通過！");
+  }
+})();

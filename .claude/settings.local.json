@@ -94,7 +94,18 @@
       "Bash(python3 -c \":*)",
       "Bash(node tests/test-rule-csv-generator.js)",
       "Bash(ls -la C:/Users/yuya_/claude/office/freee-auto/data/*.csv)",
-      "Bash(node tmp/gen-corrected-csv.js)"
+      "Bash(node tmp/gen-corrected-csv.js)",
+      "Bash(node tests/test-past-pattern-store.js)",
+      "Bash(node tmp/compare-before-after.js)",
+      "Bash(wc -l /c/Users/yuya_/claude/office/freee-auto/data/474381/*.csv)",
+      "mcp__freee-mcp__freee_api_list_paths",
+      "Bash(node tmp/verify-kana-mapping.js)",
+      "Bash(find /c/Users/yuya_ -maxdepth 4 -name freee_user_matchers* -o -name *自動登録ルール* -o -name *auto_rule*)",
+      "Bash(find /c/Users/yuya_/Downloads -name freee_user_matchers* -o -name *ルール*csv)",
+      "Bash(find /c/Users/yuya_ -maxdepth 6 -name freee_user_matchers*)",
+      "Bash(xxd \"/c/Users/yuya_/AppData/Roaming/Microsoft/Windows/Recent/freee_user_matchers_20260401.csv.lnk\")",
+      "Read(//g//**)",
+      "Bash(python3:*)"
     ]
   }
 }
