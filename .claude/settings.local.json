@@ -105,7 +105,16 @@
       "Bash(find /c/Users/yuya_ -maxdepth 6 -name freee_user_matchers*)",
       "Bash(xxd \"/c/Users/yuya_/AppData/Roaming/Microsoft/Windows/Recent/freee_user_matchers_20260401.csv.lnk\")",
       "Read(//g//**)",
-      "Bash(python3:*)"
+      "Bash(python3:*)",
+      "Bash(grep -E \"\\\\.js$|lib|src\")",
+      "Bash(find /c/Users/yuya_/.claude -type f -name *freee*)",
+      "Bash(grep -r freee-mcp /c/Users/yuya_/.claude/*.json)",
+      "Bash(find /c/Users/yuya_/AppData/Local/npm-cache/_npx/e8410b72b19e994e/node_modules/freee-mcp/dist -type f -name *.js)",
+      "Bash(find /c/Users/yuya_ -type f -name *.json -path *config*)",
+      "Bash(find /c/Users/yuya_ -type f -name *.json)",
+      "Bash(xargs grep:*)",
+      "Bash(node tmp/test-2422271-pipeline.js)",
+      "Bash(node tmp/report-2422271.js)"
     ]
   }
 }

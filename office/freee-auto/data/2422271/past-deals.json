@@ -1,0 +1,1272 @@
+{
+  "cachedAt": "2026-04-02T13:02:52.108Z",
+  "patterns": {
+    "【AIRレジ】AIRペイ手数料": {
+      "accountName": "支払手数料",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 249,
+      "lastDate": "2026-03-31"
+    },
+    "【AIRレジ】売上戻り高現金": {
+      "accountName": "売上戻り高",
+      "taxClassification": "課税売返8%（軽）",
+      "partnerName": "",
+      "count": 32,
+      "lastDate": "2026-03-31"
+    },
+    "【AIRレジ】売上高現金": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上8%（軽）",
+      "partnerName": "",
+      "count": 113,
+      "lastDate": "2026-03-31"
+    },
+    "【AIRレジ】売上高ID(AIRペイ)*": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上8%（軽）",
+      "partnerName": "",
+      "count": 7,
+      "lastDate": "2026-03-31"
+    },
+    "上野年金事務所": {
+      "accountName": "法定福利費",
+      "taxClassification": "対象外",
+      "partnerName": "上野年金事務所",
+      "count": 21,
+      "lastDate": "2026-03-31"
+    },
+    "城北信金": {
+      "accountName": "支払手数料",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "城北信金",
+      "count": 54,
+      "lastDate": "2026-03-31"
+    },
+    "GMOあおぞらネット銀行": {
+      "accountName": "支払手数料",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "GMOあおぞらネット銀行",
+      "count": 24,
+      "lastDate": "2026-03-31"
+    },
+    "PAYPAY銀行": {
+      "accountName": "支払手数料",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "PayPay銀行",
+      "count": 26,
+      "lastDate": "2026-03-30"
+    },
+    "あしたの会計事務所": {
+      "accountName": "支払手数料",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "あしたの会計事務所",
+      "count": 12,
+      "lastDate": "2026-03-30"
+    },
+    "FACEBOOK": {
+      "accountName": "広告宣伝費",
+      "taxClassification": "対象外",
+      "partnerName": "Facebook",
+      "count": 148,
+      "lastDate": "2026-03-30"
+    },
+    "【AIRレジ】売上高QR決済(AIRペイ)*": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上8%（軽）",
+      "partnerName": "",
+      "count": 37,
+      "lastDate": "2026-03-29"
+    },
+    "【AIRレジ】売上高QUICPAY(AIRペイ)*": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上8%（軽）",
+      "partnerName": "",
+      "count": 28,
+      "lastDate": "2026-03-28"
+    },
+    "中小企業基盤整備機構": {
+      "accountName": "保険積立金",
+      "taxClassification": "対象外",
+      "partnerName": "中小企業基盤整備機構",
+      "count": 24,
+      "lastDate": "2026-03-27"
+    },
+    "㈱マキヤ": {
+      "accountName": "仕入高",
+      "taxClassification": "課対仕入8%（軽）",
+      "partnerName": "㈱マキヤ",
+      "count": 50,
+      "lastDate": "2026-03-27"
+    },
+    "03PLUS": {
+      "accountName": "通信費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "03 Plus",
+      "count": 12,
+      "lastDate": "2026-03-26"
+    },
+    "GOOGLE": {
+      "accountName": "通信費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "Google",
+      "count": 17,
+      "lastDate": "2026-03-26"
+    },
+    "【AIRレジ】売上高交通系電子マネー(AIRペイ)*": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上8%（軽）",
+      "partnerName": "",
+      "count": 13,
+      "lastDate": "2026-03-25"
+    },
+    "クリエート合同会社": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上10%",
+      "partnerName": "クリエート合同会社",
+      "count": 12,
+      "lastDate": "2026-03-25"
+    },
+    "サミット㈱": {
+      "accountName": "仕入高",
+      "taxClassification": "課対仕入8%（軽）",
+      "partnerName": "サミット㈱",
+      "count": 29,
+      "lastDate": "2026-03-24"
+    },
+    "住信SBI": {
+      "accountName": "支払手数料",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "住信SBI",
+      "count": 84,
+      "lastDate": "2026-03-24"
+    },
+    "AMAZON": {
+      "accountName": "仕入高",
+      "taxClassification": "課対仕入8%（軽）",
+      "partnerName": "Amazon",
+      "count": 391,
+      "lastDate": "2026-03-23"
+    },
+    "足立成和信金": {
+      "accountName": "支払利息",
+      "taxClassification": "対象外",
+      "partnerName": "足立成和信金",
+      "count": 86,
+      "lastDate": "2026-03-23"
+    },
+    "㈱リクルート": {
+      "accountName": "支払手数料",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "㈱リクルート",
+      "count": 3,
+      "lastDate": "2026-03-23"
+    },
+    "㈱シモジマ": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "㈱シモジマ",
+      "count": 25,
+      "lastDate": "2026-03-23"
+    },
+    "【AIRレジ】売上高クレジットカード(AIRペイ)*": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上8%（軽）",
+      "partnerName": "",
+      "count": 31,
+      "lastDate": "2026-03-20"
+    },
+    "㈱ビッグ・エー": {
+      "accountName": "仕入高",
+      "taxClassification": "課対仕入8%（軽）",
+      "partnerName": "㈱ビッグ・エー",
+      "count": 15,
+      "lastDate": "2026-03-19"
+    },
+    "足立区": {
+      "accountName": "雑収入",
+      "taxClassification": "対象外",
+      "partnerName": "足立区",
+      "count": 6,
+      "lastDate": "2026-03-18"
+    },
+    "朝日信用金庫": {
+      "accountName": "支払手数料",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "朝日信用金庫",
+      "count": 26,
+      "lastDate": "2026-03-17"
+    },
+    "日本郵便": {
+      "accountName": "通信費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "日本郵便",
+      "count": 17,
+      "lastDate": "2026-03-16"
+    },
+    "FREEE": {
+      "accountName": "通信費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "freee",
+      "count": 16,
+      "lastDate": "2026-03-16"
+    },
+    "㈱クラウドビューティ": {
+      "accountName": "通信費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "㈱クラウドビューティ",
+      "count": 2,
+      "lastDate": "2026-03-16"
+    },
+    "ソフトバンク": {
+      "accountName": "通信費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "ソフトバンク",
+      "count": 12,
+      "lastDate": "2026-03-15"
+    },
+    "MICROSOFT": {
+      "accountName": "通信費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "Microsoft",
+      "count": 18,
+      "lastDate": "2026-03-12"
+    },
+    "DAISO": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "DAISO",
+      "count": 36,
+      "lastDate": "2026-03-12"
+    },
+    "INDEED㈱": {
+      "accountName": "採用教育費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "Indeed㈱",
+      "count": 7,
+      "lastDate": "2026-03-11"
+    },
+    "㈱丸菱LINKED": {
+      "accountName": "仕入高",
+      "taxClassification": "課対仕入8%（軽）",
+      "partnerName": "㈱丸菱LINKed",
+      "count": 22,
+      "lastDate": "2026-03-10"
+    },
+    "(同)荒井商事インボイス未登録": {
+      "accountName": "売上高",
+      "taxClassification": "非課売上",
+      "partnerName": "(同)荒井商事　インボイス未登録",
+      "count": 9,
+      "lastDate": "2026-03-10"
+    },
+    "鴨下博充（インボイス未登録）": {
+      "accountName": "地代家賃",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "鴨下博充（インボイス未登録）",
+      "count": 12,
+      "lastDate": "2026-03-10"
+    },
+    "㈱トラストアドバイザーズ": {
+      "accountName": "地代家賃",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "㈱トラストアドバイザーズ",
+      "count": 13,
+      "lastDate": "2026-03-10"
+    },
+    "日本政策金融公庫": {
+      "accountName": "長期借入金",
+      "taxClassification": "対象外",
+      "partnerName": "日本政策金融公庫",
+      "count": 31,
+      "lastDate": "2026-03-05"
+    },
+    "㈱KUBELL（CHATWORK）": {
+      "accountName": "通信費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "㈱Kubell（chatwork）",
+      "count": 11,
+      "lastDate": "2026-03-02"
+    },
+    "【AIRレジ】会計修正打ち間違い": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上8%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-03-02"
+    },
+    "お名前.COM": {
+      "accountName": "通信費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "お名前.com",
+      "count": 11,
+      "lastDate": "2026-03-01"
+    },
+    "㈱エネゲート": {
+      "accountName": "車両費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "㈱エネゲート",
+      "count": 10,
+      "lastDate": "2026-03-01"
+    },
+    "ROKETNOW": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上8%（軽）",
+      "partnerName": "Roket Now",
+      "count": 2,
+      "lastDate": "2026-02-28"
+    },
+    "出前館": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上8%（軽）",
+      "partnerName": "出前館",
+      "count": 2,
+      "lastDate": "2026-02-28"
+    },
+    "役員及び従業員": {
+      "accountName": "役員報酬",
+      "taxClassification": "対象外",
+      "partnerName": "役員及び従業員",
+      "count": 15,
+      "lastDate": "2026-02-28"
+    },
+    "ドコモ": {
+      "accountName": "通信費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "ドコモ",
+      "count": 18,
+      "lastDate": "2026-02-28"
+    },
+    "東京ガス㈱": {
+      "accountName": "支払手数料",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "東京ガス㈱",
+      "count": 31,
+      "lastDate": "2026-02-28"
+    },
+    "株式会社ユニコーン": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上10%",
+      "partnerName": "株式会社ユニコーン",
+      "count": 11,
+      "lastDate": "2026-02-28"
+    },
+    "エルズサポート㈱": {
+      "accountName": "地代家賃",
+      "taxClassification": "非課仕入",
+      "partnerName": "エルズサポート㈱",
+      "count": 4,
+      "lastDate": "2026-02-27"
+    },
+    "㈱和かば": {
+      "accountName": "広告宣伝費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "㈱和かば",
+      "count": 2,
+      "lastDate": "2026-02-26"
+    },
+    "佐藤なつき投稿費用": {
+      "accountName": "外注費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-02-26"
+    },
+    "㈱ジャパンミート": {
+      "accountName": "仕入高",
+      "taxClassification": "課対仕入8%（軽）",
+      "partnerName": "㈱ジャパンミート",
+      "count": 15,
+      "lastDate": "2026-02-25"
+    },
+    "(公財)公庫団信サービス協会": {
+      "accountName": "保険料",
+      "taxClassification": "対象外",
+      "partnerName": "(公財)公庫団信サービス協会",
+      "count": 2,
+      "lastDate": "2026-02-20"
+    },
+    "印紙": {
+      "accountName": "租税公課",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-02-18"
+    },
+    "東京電力エナジーパートナー㈱": {
+      "accountName": "水道光熱費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "東京電力エナジーパートナー㈱",
+      "count": 11,
+      "lastDate": "2026-02-18"
+    },
+    "AT-L社会保険労務士法人": {
+      "accountName": "支払手数料",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "AT-L社会保険労務士法人",
+      "count": 2,
+      "lastDate": "2026-02-18"
+    },
+    "福岡本店研修費用（佐藤さん）": {
+      "accountName": "研修費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-02-18"
+    },
+    "㈱ミース": {
+      "accountName": "研修費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "㈱ミース",
+      "count": 9,
+      "lastDate": "2026-02-17"
+    },
+    "ETC": {
+      "accountName": "旅費交通費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "ETC",
+      "count": 17,
+      "lastDate": "2026-02-14"
+    },
+    "出張販売費用": {
+      "accountName": "広告宣伝費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-02-12"
+    },
+    "【AIRレジ】会計修正打ち間違いのため": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上8%",
+      "partnerName": "",
+      "count": 2,
+      "lastDate": "2026-02-11"
+    },
+    "齋藤廉PR投稿費用": {
+      "accountName": "外注費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-02-10"
+    },
+    "中野果奈PR撮影・投稿費": {
+      "accountName": "外注費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-02-10"
+    },
+    "ニトリ": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "ニトリ",
+      "count": 4,
+      "lastDate": "2026-02-08"
+    },
+    "営業許可手数料": {
+      "accountName": "租税公課",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-02-06"
+    },
+    "人件費": {
+      "accountName": "外注費",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-02-04"
+    },
+    "店舗制服": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-02-03"
+    },
+    "UBEREATS": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上8%（軽）",
+      "partnerName": "Uber Eats",
+      "count": 3,
+      "lastDate": "2026-02-01"
+    },
+    "ごみ処分・天井の金具取付": {
+      "accountName": "外注費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-02-01"
+    },
+    "福岡本店研修移動費用（佐藤さん）": {
+      "accountName": "研修費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-02-01"
+    },
+    "福岡本店研修移動費（斎藤さん）": {
+      "accountName": "研修費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-02-01"
+    },
+    "洗濯機取付": {
+      "accountName": "外注費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-01-31"
+    },
+    "合かぎ": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-01-31"
+    },
+    "㈱KUROZUMI": {
+      "accountName": "仕入高",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "㈱KUROZUMI",
+      "count": 5,
+      "lastDate": "2026-01-31"
+    },
+    "アスクル": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "アスクル",
+      "count": 4,
+      "lastDate": "2026-01-29"
+    },
+    "㈱ビューティガレージ": {
+      "accountName": "仕入高",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "㈱ビューティガレージ",
+      "count": 3,
+      "lastDate": "2026-01-29"
+    },
+    "店舗用印鑑": {
+      "accountName": "開業費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-01-29"
+    },
+    "カインズホーム": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "カインズホーム",
+      "count": 6,
+      "lastDate": "2026-01-27"
+    },
+    "開店諸費用": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 3,
+      "lastDate": "2026-01-24"
+    },
+    "マカフィーリブセーフ": {
+      "accountName": "通信費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "マカフィーリブセーフ",
+      "count": 2,
+      "lastDate": "2026-01-23"
+    },
+    "選択機設置依頼": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-01-20"
+    },
+    "【AIRレジ】会計修正駐車券料金": {
+      "accountName": "売上高",
+      "taxClassification": "非課売上",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-01-19"
+    },
+    "【AIRレジ】会計修正重複": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上8%（軽）",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-01-17"
+    },
+    "川島輝星PR素材購入": {
+      "accountName": "広告宣伝費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2026-01-16"
+    },
+    "CANVA": {
+      "accountName": "通信費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "Canva",
+      "count": 1,
+      "lastDate": "2025-12-31"
+    },
+    "FRONTIER-INFO株式会社": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上10%",
+      "partnerName": "Frontier-info株式会社",
+      "count": 18,
+      "lastDate": "2025-12-31"
+    },
+    "㈱セラピスト不動産": {
+      "accountName": "敷金",
+      "taxClassification": "対象外",
+      "partnerName": "㈱セラピスト不動産",
+      "count": 1,
+      "lastDate": "2025-12-27"
+    },
+    "山﨑梨世": {
+      "accountName": "広告宣伝費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "山﨑 梨世",
+      "count": 1,
+      "lastDate": "2025-12-26"
+    },
+    "下期源泉所得税納付": {
+      "accountName": "預り金",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-12-26"
+    },
+    "電気工事費": {
+      "accountName": "修繕費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-12-14"
+    },
+    "上野→新潟": {
+      "accountName": "旅費交通費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-12-13"
+    },
+    "ロイヤルホームセンター": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "ロイヤルホームセンター",
+      "count": 11,
+      "lastDate": "2025-12-12"
+    },
+    "オフィス万代502号室家財保険": {
+      "accountName": "保険料",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-12-09"
+    },
+    "プリント代": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 21,
+      "lastDate": "2025-12-08"
+    },
+    "【AIRレジ】会計修正ミス": {
+      "accountName": "売上高",
+      "taxClassification": "課税売上8%（軽）",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-12-02"
+    },
+    "株式会社BUG.S": {
+      "accountName": "外注費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "株式会社Bug.s",
+      "count": 8,
+      "lastDate": "2025-12-01"
+    },
+    "ヴィ・シティ草加管理組合(インボイス未登録)": {
+      "accountName": "地代家賃",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "ヴィ・シティ草加管理組合(インボイス未登録)",
+      "count": 3,
+      "lastDate": "2025-11-30"
+    },
+    "設備配管更新工事": {
+      "accountName": "開業費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-11-25"
+    },
+    "合鍵代": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-11-25"
+    },
+    "エアコンクリーニング代": {
+      "accountName": "衛生費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-11-22"
+    },
+    "テスト入金": {
+      "accountName": "雑収入",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-11-17"
+    },
+    "取付工事": {
+      "accountName": "開業費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-11-17"
+    },
+    "クロスクリーニング代": {
+      "accountName": "衛生費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-11-15"
+    },
+    "Tシャツ7枚": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-11-13"
+    },
+    "店舗細菌検査代": {
+      "accountName": "衛生費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-11-12"
+    },
+    "冷蔵庫": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-11-08"
+    },
+    "セツホウ": {
+      "accountName": "売上高",
+      "taxClassification": "非課売上",
+      "partnerName": "セツ ホウ",
+      "count": 8,
+      "lastDate": "2025-11-08"
+    },
+    "ポスター": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-11-07"
+    },
+    "火災保険料": {
+      "accountName": "保険料",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-11-05"
+    },
+    "シンク": {
+      "accountName": "開業費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-11-04"
+    },
+    "IPAD第8世代": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 3,
+      "lastDate": "2025-11-03"
+    },
+    "㈱VALORCONNECT": {
+      "accountName": "前渡金",
+      "taxClassification": "対象外",
+      "partnerName": "㈱Valor Connect",
+      "count": 1,
+      "lastDate": "2025-10-29"
+    },
+    "MACBOOKAIRM1": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 2,
+      "lastDate": "2025-10-27"
+    },
+    "食品衛生責任者Eラーニング（山田朋子）": {
+      "accountName": "研修費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-10-24"
+    },
+    "食品衛生責任者Eラーニング（山田誠）": {
+      "accountName": "研修費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-10-24"
+    },
+    "㈱不動産照力": {
+      "accountName": "敷金",
+      "taxClassification": "対象外",
+      "partnerName": "㈱不動産照力",
+      "count": 1,
+      "lastDate": "2025-10-21"
+    },
+    "元郷2丁目店舗仲介手数料": {
+      "accountName": "支払手数料",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-10-21"
+    },
+    "西新井税務署": {
+      "accountName": "雑収入",
+      "taxClassification": "対象外",
+      "partnerName": "西新井税務署",
+      "count": 3,
+      "lastDate": "2025-10-15"
+    },
+    "IPHONE12": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-10-13"
+    },
+    "社内車修理代": {
+      "accountName": "車両費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-10-11"
+    },
+    "鈴木茂（インボイス未登録）": {
+      "accountName": "敷金",
+      "taxClassification": "対象外",
+      "partnerName": "鈴木　茂（インボイス未登録）",
+      "count": 3,
+      "lastDate": "2025-09-30"
+    },
+    "楽天銀行": {
+      "accountName": "受取利息",
+      "taxClassification": "非課売上",
+      "partnerName": "楽天銀行",
+      "count": 3,
+      "lastDate": "2025-09-30"
+    },
+    "住民税返金": {
+      "accountName": "預り金",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-09-24"
+    },
+    "電気自動車等（EV・PHEV車両）の普及促進事業助成金": {
+      "accountName": "雑収入",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-09-19"
+    },
+    "スキャン代②": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-09-16"
+    },
+    "スキャン代①": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-09-16"
+    },
+    "カーワックス": {
+      "accountName": "車両費",
+      "taxClassification": "共対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-09-05"
+    },
+    "パンク修理代": {
+      "accountName": "車両費",
+      "taxClassification": "共対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-09-05"
+    },
+    "株式会社ライコン": {
+      "accountName": "支払手数料",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "株式会社ライコン",
+      "count": 9,
+      "lastDate": "2025-09-05"
+    },
+    "京葉ガス㈱": {
+      "accountName": "水道光熱費",
+      "taxClassification": "非対仕入10%",
+      "partnerName": "京葉ガス㈱",
+      "count": 2,
+      "lastDate": "2025-08-31"
+    },
+    "ファックス代": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-08-30"
+    },
+    "部屋の消臭力": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-08-27"
+    },
+    "ENEOS": {
+      "accountName": "車両費",
+      "taxClassification": "共対仕入10%",
+      "partnerName": "ENEOS",
+      "count": 2,
+      "lastDate": "2025-08-07"
+    },
+    "不動産取得税": {
+      "accountName": "租税公課",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-08-01"
+    },
+    "一般検診（山田誠）": {
+      "accountName": "福利厚生費",
+      "taxClassification": "共対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-08-01"
+    },
+    "三井住友VISAカード": {
+      "accountName": "諸会費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "三井住友VISAカード",
+      "count": 2,
+      "lastDate": "2025-07-31"
+    },
+    "東日本住宅": {
+      "accountName": "管理諸費",
+      "taxClassification": "",
+      "partnerName": "東日本住宅",
+      "count": 7,
+      "lastDate": "2025-07-31"
+    },
+    "東京海上日動火災保険㈱": {
+      "accountName": "保険料",
+      "taxClassification": "対象外",
+      "partnerName": "東京海上日動火災保険㈱",
+      "count": 1,
+      "lastDate": "2025-07-28"
+    },
+    "柏市水道事業": {
+      "accountName": "水道光熱費",
+      "taxClassification": "非対仕入10%",
+      "partnerName": "柏市水道事業",
+      "count": 2,
+      "lastDate": "2025-07-26"
+    },
+    "コピー代": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 2,
+      "lastDate": "2025-07-24"
+    },
+    "㈱アイジョブ": {
+      "accountName": "広告宣伝費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "㈱アイジョブ",
+      "count": 1,
+      "lastDate": "2025-07-23"
+    },
+    "中間納付法人税": {
+      "accountName": "法人税・住民税及び事業税",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-07-18"
+    },
+    "中間納付地方法人税": {
+      "accountName": "法人税・住民税及び事業税",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-07-18"
+    },
+    "㈱東成": {
+      "accountName": "広告宣伝費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "㈱東成",
+      "count": 1,
+      "lastDate": "2025-07-16"
+    },
+    "タイヤ交換": {
+      "accountName": "車両費",
+      "taxClassification": "共対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-07-12"
+    },
+    "洗車代": {
+      "accountName": "車両費",
+      "taxClassification": "共対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-07-10"
+    },
+    "お土産代": {
+      "accountName": "交際費",
+      "taxClassification": "課対仕入8%（軽）",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-07-05"
+    },
+    "(一社)次世代自動車振興センター": {
+      "accountName": "雑収入",
+      "taxClassification": "対象外",
+      "partnerName": "(一社)次世代自動車振興センター",
+      "count": 1,
+      "lastDate": "2025-07-04"
+    },
+    "住民票": {
+      "accountName": "租税公課",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-07-01"
+    },
+    "フルスタック株式会社": {
+      "accountName": "外注費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "フルスタック株式会社",
+      "count": 3,
+      "lastDate": "2025-07-01"
+    },
+    "印鑑登録証明書": {
+      "accountName": "租税公課",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-06-26"
+    },
+    "中間納付消費税": {
+      "accountName": "未払消費税等",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-06-23"
+    },
+    "住民票・印鑑登録証明書": {
+      "accountName": "租税公課",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-06-20"
+    },
+    "施術代（フランチャイズ検討のため）": {
+      "accountName": "研修費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-06-15"
+    },
+    "山田市場見学調査（ヘッドスパ施術代）": {
+      "accountName": "研修費",
+      "taxClassification": "課対仕入（控80）10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-06-14"
+    },
+    "ウェインズトヨタ神奈川株式会社": {
+      "accountName": "保険料",
+      "taxClassification": "対象外",
+      "partnerName": "ウェインズトヨタ神奈川株式会社",
+      "count": 2,
+      "lastDate": "2025-06-13"
+    },
+    "トヨタコネクティッド㈱": {
+      "accountName": "車両費",
+      "taxClassification": "共対仕入10%",
+      "partnerName": "トヨタコネクティッド㈱",
+      "count": 3,
+      "lastDate": "2025-06-10"
+    },
+    "中間納付（事業税・特別事業税）": {
+      "accountName": "法人税・住民税及び事業税",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-06-05"
+    },
+    "地方公共団体証明書4枚": {
+      "accountName": "租税公課",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-05-30"
+    },
+    "事務手数料": {
+      "accountName": "支払手数料",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-05-30"
+    },
+    "山田＋1名": {
+      "accountName": "会議費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 2,
+      "lastDate": "2025-05-15"
+    },
+    "春日部市牛島土地建物": {
+      "accountName": "前渡金",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-05-14"
+    },
+    "㈱即入居": {
+      "accountName": "前渡金",
+      "taxClassification": "対象外",
+      "partnerName": "㈱即入居",
+      "count": 1,
+      "lastDate": "2025-05-14"
+    },
+    "司法書士法人GLPEAST": {
+      "accountName": "支払手数料",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "司法書士法人GLP EAST",
+      "count": 1,
+      "lastDate": "2025-05-14"
+    },
+    "楽侍㈱": {
+      "accountName": "支払手数料",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "楽侍㈱",
+      "count": 1,
+      "lastDate": "2025-05-13"
+    },
+    "東京マツダ販売㈱": {
+      "accountName": "前渡金",
+      "taxClassification": "対象外",
+      "partnerName": "東京マツダ販売㈱",
+      "count": 1,
+      "lastDate": "2025-05-12"
+    },
+    "韓国飲食代": {
+      "accountName": "会議費",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 2,
+      "lastDate": "2025-05-05"
+    },
+    "ライナー券購入": {
+      "accountName": "旅費交通費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-05-05"
+    },
+    "シンガポール宿泊": {
+      "accountName": "旅費交通費",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-05-04"
+    },
+    "傘（輸入代行消費税）": {
+      "accountName": "消耗品費",
+      "taxClassification": "課対輸税10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-04-30"
+    },
+    "ライナー券": {
+      "accountName": "旅費交通費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-04-30"
+    },
+    "出張品代": {
+      "accountName": "交際費",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-04-30"
+    },
+    "GLOBALWIFI": {
+      "accountName": "通信費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "Global WiFi",
+      "count": 1,
+      "lastDate": "2025-04-28"
+    },
+    "傘国際運賃（中国から購入）": {
+      "accountName": "消耗品費",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-04-19"
+    },
+    "山田+2名交流会": {
+      "accountName": "会議費",
+      "taxClassification": "課対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-04-12"
+    },
+    "リフォーム品代": {
+      "accountName": "消耗品費",
+      "taxClassification": "非対仕入10%",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-04-12"
+    },
+    "㈲キタムラコーポレーション": {
+      "accountName": "修繕費",
+      "taxClassification": "非対仕入10%",
+      "partnerName": "㈲キタムラコーポレーション",
+      "count": 1,
+      "lastDate": "2025-04-10"
+    },
+    "松戸市社宅固定資産税": {
+      "accountName": "租税公課",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-04-09"
+    },
+    "傘（中国からの輸入品）": {
+      "accountName": "消耗品費",
+      "taxClassification": "対象外",
+      "partnerName": "",
+      "count": 1,
+      "lastDate": "2025-04-07"
+    }
+  }
+}

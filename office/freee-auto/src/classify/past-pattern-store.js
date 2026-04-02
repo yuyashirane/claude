@@ -92,7 +92,10 @@ function extractKanaFromDescription(desc) {
 
 /**
  * 既存自動登録ルールCSV（cp932）からカタカナ→取引先名マッピングを構築する。
- * CSVカラム: [3]取引内容（カタカナ振込名） / [12]取引先 / [14]勘定科目 / [15]税区分
+ *
+ * ヘッダー行から自動でカラム位置を検出する（新旧フォーマット対応）。
+ *   新フォーマット（53列）: [3]取引内容 / [12]取引先 / [14]勘定科目 / [15]税区分
+ *   旧フォーマット（21列）: [2]取引内容 / [12]取引先 / [10]勘定科目 / [11]税区分
  *
  * @param {string} csvPath - CSVファイルのパス（Shift_JIS / cp932）
  * @returns {Object} { [normalizedKana]: { partnerName, accountName, taxClassification, count } }
@@ -110,6 +113,15 @@ function buildKanaMapFromRuleCsv(csvPath) {
   }
 
   const lines = text.split(/\r?\n/);
+  if (lines.length < 2) return kanaMap;
+
+  // ヘッダーからカラム位置を自動検出
+  const headerCols = lines[0].split(",");
+  const colIdx = detectRuleCsvColumns(headerCols);
+  if (!colIdx) {
+    console.warn("[past-pattern-store] ルールCSVのヘッダーが認識できません");
+    return kanaMap;
+  }
 
   for (let i = 1; i < lines.length; i++) {
     const line = lines[i].trim();
@@ -117,20 +129,22 @@ function buildKanaMapFromRuleCsv(csvPath) {
 
     // 簡易CSV分割（カンマ区切り、クォートなし前提）
     const cols = line.split(",");
-    if (cols.length < 15) continue;
+    if (cols.length <= colIdx.partner) continue;
 
-    const content     = (cols[3]  || "").trim(); // 取引内容
-    const partnerName = (cols[12] || "").trim(); // 取引先
-    const accountName = (cols[14] || "").trim(); // 勘定科目
-    const taxClass    = (cols[15] || "").trim(); // 税区分
+    const content     = (cols[colIdx.content]  || "").trim();
+    const partnerName = (cols[colIdx.partner]  || "").trim();
+    const accountName = (cols[colIdx.account]  || "").trim();
+    const taxClass    = (cols[colIdx.tax]      || "").trim();
 
     if (!content || !partnerName) continue;
 
     // 取引内容にカタカナが含まれる場合のみ対象
     if (!/[ァ-ヶー]/.test(content)) continue;
 
-    // スペース除去して正規化キーを作成
-    const kanaKey = content.replace(/\s+/g, "").replace(/[㈱㈲]/g, "");
+    // スペース除去 + 振込プレフィックス除去して正規化キーを作成
+    // extractKanaFromDescription() と同じ正規化を適用してキーを一致させる
+    let kanaKey = content.replace(/\s+/g, "").replace(/[㈱㈲]/g, "");
+    kanaKey = kanaKey.replace(/^(振込|フリコミ|入金|ニュウキン|送金|ソウキン)/, "");
     if (!kanaKey) continue;
 
     if (!kanaMap[kanaKey]) {
@@ -143,6 +157,29 @@ function buildKanaMapFromRuleCsv(csvPath) {
   }
 
   return kanaMap;
+}
+
+/**
+ * ルールCSVのヘッダーからカラムインデックスを検出する。
+ * 新フォーマット（53列、カードラベルあり）と旧フォーマット（21列）に対応。
+ *
+ * @param {string[]} headerCols - ヘッダー行をカンマ分割した配列
+ * @returns {{ content: number, partner: number, account: number, tax: number }|null}
+ */
+function detectRuleCsvColumns(headerCols) {
+  const contentIdx = headerCols.findIndex((h) => h.trim() === "取引内容");
+  const partnerIdx = headerCols.findIndex((h) => h.trim() === "取引先");
+  const accountIdx = headerCols.findIndex((h) => h.trim() === "勘定科目");
+  const taxIdx     = headerCols.findIndex((h) => h.trim() === "税区分");
+
+  if (contentIdx < 0 || partnerIdx < 0) return null;
+
+  return {
+    content: contentIdx,
+    partner: partnerIdx,
+    account: accountIdx >= 0 ? accountIdx : -1,
+    tax:     taxIdx >= 0     ? taxIdx     : -1,
+  };
 }
 
 /**
@@ -180,16 +217,32 @@ function buildKanaMapFromPartners(partners) {
  * deals 配列からパターンマップを構築する。
  * キー: 取引先名 > 明細摘要 の正規化文字列（優先順）
  *
+ * freee APIのdealsレスポンスには account_item_name / tax_code_name / partner.name が
+ * 含まれない場合がある（IDのみ）。その場合、masterMaps で名前解決する。
+ *
  * @param {Array} deals - freee /api/1/deals レスポンスの deals 配列
+ * @param {Object} [masterMaps] - マスタマッピング（省略可）
+ * @param {Object} [masterMaps.accountItems] - { [account_item_id]: "勘定科目名" }
+ * @param {Object} [masterMaps.taxCodes]     - { [tax_code]: "税区分名" }
+ * @param {Object} [masterMaps.partners]     - { [partner_id]: "取引先名" }
  * @returns {Object} { [normalizedKey]: PatternEntry }
  */
-function extractPatternsFromDeals(deals) {
+function extractPatternsFromDeals(deals, masterMaps) {
   const patterns = {};
+  const acctMap    = (masterMaps && masterMaps.accountItems) || {};
+  const taxMap     = (masterMaps && masterMaps.taxCodes)     || {};
+  const partnerMap = (masterMaps && masterMaps.partners)     || {};
 
   for (const deal of deals) {
+    // 取引先名の解決: partner.name → masterMaps.partners[partner_id]
+    const resolvedPartnerName =
+      deal.partner?.name ||
+      (deal.partner_id && partnerMap[deal.partner_id]) ||
+      "";
+
     // パターンキー: 取引先名が最も安定した識別子
     const rawKey =
-      deal.partner?.name ||
+      resolvedPartnerName ||
       deal.details?.[0]?.description ||
       null;
 
@@ -198,10 +251,21 @@ function extractPatternsFromDeals(deals) {
     const key = normalizeDescription(rawKey);
     if (!key || key.length < 2) continue;
 
-    const accountName      = deal.details?.[0]?.account_item_name || "";
-    const taxClassification = deal.details?.[0]?.tax_code_name    || "";
-    const partnerName       = deal.partner?.name                  || "";
-    const issueDate         = deal.issue_date                     || "";
+    // 勘定科目名の解決: account_item_name → masterMaps.accountItems[account_item_id]
+    const detail = deal.details?.[0];
+    const accountName =
+      detail?.account_item_name ||
+      (detail?.account_item_id && acctMap[detail.account_item_id]) ||
+      "";
+
+    // 税区分名の解決: tax_code_name → masterMaps.taxCodes[tax_code]
+    const taxClassification =
+      detail?.tax_code_name ||
+      (detail?.tax_code && taxMap[detail.tax_code]) ||
+      "";
+
+    const partnerName = resolvedPartnerName;
+    const issueDate   = deal.issue_date || "";
 
     if (!patterns[key]) {
       patterns[key] = {
@@ -463,6 +527,46 @@ class PastPatternStore {
 }
 
 // --------------------------------------------------
+// マスタマッピング読込
+// --------------------------------------------------
+
+/**
+ * data/{companyId}/ にあるマスタファイルを読み込み、ID→名前のマッピングを返す。
+ * ファイルが存在しない場合は空オブジェクトを返す（エラーにしない）。
+ *
+ * 対象ファイル:
+ *   - account-items-master.json : { [account_item_id]: "勘定科目名" }
+ *   - tax-codes-master.json    : { [tax_code]: "税区分名" }
+ *   - partners-master.json     : { [partner_id]: "取引先名" }
+ *
+ * @param {string|null} dataDir - マスタファイルのあるディレクトリ
+ * @returns {Object} { accountItems, taxCodes, partners }
+ */
+function loadMasterMaps(dataDir) {
+  const result = { accountItems: {}, taxCodes: {}, partners: {} };
+  if (!dataDir) return result;
+
+  const files = [
+    { key: "accountItems", file: "account-items-master.json" },
+    { key: "taxCodes",     file: "tax-codes-master.json" },
+    { key: "partners",     file: "partners-master.json" },
+  ];
+
+  for (const { key, file } of files) {
+    try {
+      const filePath = path.join(dataDir, file);
+      if (fs.existsSync(filePath)) {
+        result[key] = JSON.parse(fs.readFileSync(filePath, "utf-8"));
+      }
+    } catch {
+      // ファイルが壊れていても無視
+    }
+  }
+
+  return result;
+}
+
+// --------------------------------------------------
 // エントリポイント
 // --------------------------------------------------
 
@@ -476,13 +580,21 @@ class PastPatternStore {
  * @param {Array}         [options.deals]               - テスト用: deals 配列を直接渡す
  * @param {string}        [options.existingRuleCsvPath] - 既存ルールCSVパス（カタカナマップ構築）
  * @param {Array}         [options.partners]            - partners API レスポンス（カタカナマップ補完）
+ * @param {Object}        [options.masterMaps]          - マスタマッピング（IDから名前を解決）
+ * @param {Object}        [options.masterMaps.accountItems] - { [account_item_id]: "勘定科目名" }
+ * @param {Object}        [options.masterMaps.taxCodes]     - { [tax_code]: "税区分名" }
+ * @param {Object}        [options.masterMaps.partners]     - { [partner_id]: "取引先名" }
  * @returns {Promise<PastPatternStore>}
  */
 async function buildPatternStore(options = {}) {
   const {
     companyId, cacheDir, monthsBack = 12,
     deals: dealsOverride, existingRuleCsvPath, partners,
+    masterMaps,
   } = options;
+
+  // masterMapsの自動ロード: cacheDir内にマスタファイルがあれば読む
+  const resolvedMasterMaps = masterMaps || loadMasterMaps(cacheDir || (companyId ? path.join(DATA_ROOT, String(companyId)) : null));
 
   // カタカナマッピングの構築（方法C → 方法B の順で補完）
   let kanaMap = {};
@@ -500,7 +612,7 @@ async function buildPatternStore(options = {}) {
 
   // --- テスト用の直接渡し ---
   if (Array.isArray(dealsOverride)) {
-    const patterns = extractPatternsFromDeals(dealsOverride);
+    const patterns = extractPatternsFromDeals(dealsOverride, resolvedMasterMaps);
     return new PastPatternStore(patterns, kanaMap);
   }
 
@@ -529,7 +641,7 @@ async function buildPatternStore(options = {}) {
   try {
     console.log(`[past-pattern-store] API取得開始 (companyId=${companyId}, 過去${monthsBack}ヶ月)`);
     const deals = await fetchAllDeals(accessToken, companyId, monthsBack);
-    const patterns = extractPatternsFromDeals(deals);
+    const patterns = extractPatternsFromDeals(deals, resolvedMasterMaps);
     saveCache(cachePath, patterns);
     const store = new PastPatternStore(patterns, kanaMap);
     console.log(`[past-pattern-store] API取得完了: ${deals.length} 件 → ${store.size} パターン`);
@@ -568,6 +680,7 @@ module.exports = {
   extractKanaFromDescription,
   buildKanaMapFromRuleCsv,
   buildKanaMapFromPartners,
+  loadMasterMaps,
   scoreDescription,
   PastPatternStore,
 };
