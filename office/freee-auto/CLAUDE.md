@@ -33,7 +33,7 @@ freee MCP / Gmail MCP（Phase 4）/ Google Drive MCP（Phase 4）
 | NORMALIZE | `src/normalize/` | 全角→半角、日付正規化、StandardRow形式へ変換 |
 | CLASSIFY | `src/classify/` | 勘定科目推定、消費税R01-R12判定、信頼度スコア、振り分け |
 | REVIEW | `src/review/` | 中低確度→Kintone App①登録 |
-| REGISTER | `src/register/` | freee取引登録（ドライラン/本番、上限50件/バッチ） |
+| REGISTER | `src/register/` | 自動登録ルールCSV生成（freeeにインポートして消込付き登録）。High信頼度+安全→「取引を登録する」ルール（完全自動）、Medium信頼度→「取引を推測する」ルール（科目プリセット→ワンクリック確認）、Low/除外→CSVに含めずKintone App①で人間レビュー。deal-creator.jsは口座連携のない取引（現金等）用に残す |
 | VERIFY | `src/verify/` | 4シートExcelレポート、帳簿チェック |
 | LEARN | `src/learn/` | 修正→辞書改善（Phase 3） |
 
@@ -59,9 +59,9 @@ freeeが正本。Kintoneは例外管理のみ。全件同期は行わない。
 
 ---
 
-## テスト: 94件通過
+## テスト: 132件通過（npm test）+ excel-csv-parser(21)
 
-pipeline(50) + deal-creator(14) + report(9) + excel-csv-parser(21)
+pipeline(50) + deal-creator(14) + report(9) + freee-links(5) + kintone-to-freee(17) + rule-csv-generator(37)
 
 ---
 
@@ -91,15 +91,27 @@ CLAUDE.mdには骨格のみ記載。詳細は以下を参照:
 | 開発フェーズ・ロードマップ | `docs/development-roadmap.md` |
 | 全体アーキテクチャ | `docs/architecture-v2.md` |
 | フォルダ構成・命名規則 | `docs/folder-structure.md` |
+| 自動登録ルールCSVフォーマット仕様 | `references/operations/freee-rule-csv-spec.md` |
 | freee Webリンク生成 | `references/operations/freee-web-links.md` |
+| freee Webリンク生成（コード） | `src/shared/freee-links.js` |
+| Kintone承認→freee登録 | `src/register/kintone-to-freee.js` |
 | 海外サービスDB | `src/shared/overseas-services.js` |
 | 閾値・定数定義 | `src/shared/rules.js` |
+
+### タグ・入力ルール
+- `references/rules/input-general-rules.md` — 文字種・命名・法人格略称ルール
+- `references/rules/partner-tag-rules.md` — 取引先タグの付与・命名ルール
+- `references/rules/item-tag-rules.md` — 品目タグ一覧・付与ルール・自動判定キーワード
+- `references/rules/department-memo-tag-rules.md` — 部門タグ・メモタグルール
+- `references/rules/remarks-rules.md` — 備考欄の記載ルール・閾値
 
 ---
 
 ## コマンド
 
-npm test                              # 全テスト（94件）
+npm test                              # 全テスト（132件）
 npm run freee:register                # 取引登録（DRY_RUN設定に従う）
+npm run rule-csv                      # ルールCSV生成
+node src/register/rule-csv-generator.js <result.json>  # ルールCSV生成（CLI直接）
 npm run kintone:test                  # Kintone接続テスト
 npm run report                        # 処理結果レポート生成

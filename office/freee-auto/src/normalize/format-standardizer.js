@@ -142,6 +142,8 @@ function standardizeFreeeWalletTxns(walletTxns) {
       description: txn.description || "",
       counterpart: txn.walletable_name || txn.partner_name || "",
       walletName: txn.wallet_name || "",
+      walletable_type: txn.walletable_type || "",
+      walletable_id: txn.walletable_id || "",
       rawData: txn,
       rule_matched: txn.rule_matched || false,
     });

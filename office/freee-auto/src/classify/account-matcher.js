@@ -50,6 +50,8 @@ const ACCOUNT_KEYWORDS = {
       // account-dictionary.md追加分
       "通信", "Wi-Fi", "回線", "はがき", "レターパック", "宅急便", "日本郵便",
       "クリックポスト",
+      // AIツール・クラウドサービス（インボイス登録済み海外事業者）
+      "anthropic", "claude", "クロード",
     ],
     defaultTax: "課税10%",
     taxGroup: "taxable",
@@ -93,7 +95,7 @@ const ACCOUNT_KEYWORDS = {
       "定期購読", "セミナー", "研修", "講座", "受講料",
       // rules.js BOOK_KEYWORDS追加分
       "図書", "ブック", "テキスト", "参考書", "専門書",
-      "読み放題", "unlimited", "audible", "オーディブル",
+      "読み放題", "audible", "オーディブル",
     ],
     defaultTax: "課税10%",
     taxGroup: "taxable",

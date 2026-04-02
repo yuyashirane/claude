@@ -1,0 +1,940 @@
+{
+  "items": [
+    {
+      "source": {
+        "type": "freee_unprocessed",
+        "file_name": "",
+        "row_number": 1,
+        "processed_at": "2026-04-01T11:07:15.548Z"
+      },
+      "transaction": {
+        "date": "2026-03-30",
+        "amount": 66000,
+        "amount_type": "tax_included",
+        "description": "コジマ サトミ",
+        "partner_name": "コジマ サトミ",
+        "debit_credit": "income",
+        "raw_text": "振込 コジマ　サトミ",
+        "account_hint": "",
+        "tax_hint": ""
+      },
+      "client": {
+        "company_id": 474381,
+        "client_name": ""
+      },
+      "classification": {
+        "estimated_account": "雑費",
+        "estimated_account_id": 236940288,
+        "estimated_tax_class": "課税10%",
+        "estimated_tax_code": 136,
+        "invoice_class": "要確認",
+        "confidence_score": 19,
+        "confidence_rank": "Low",
+        "score_breakdown": {
+          "keyword_match": 0,
+          "past_pattern": 0,
+          "amount_validity": 15,
+          "tax_rule_clarity": 0,
+          "description_quality": 4
+        },
+        "tax_flags": [],
+        "tax_flag_details": [],
+        "special_flags": [],
+        "matched_accounts": [],
+        "routing_reason": "Low（19点） / 科目: マッチなし→雑費"
+      },
+      "validation_errors": [],
+      "is_valid": true,
+      "_freee": {
+        "wallet_txn_id": 2204989726,
+        "walletable_type": "bank_account",
+        "walletable_id": 2474938,
+        "status": 1,
+        "rule_matched": false
+      },
+      "routing": {
+        "decision": "kintone_senior",
+        "reason": "低確度（19点）: シニアレビュー対象",
+        "assignee": "シニア"
+      }
+    },
+    {
+      "source": {
+        "type": "freee_unprocessed",
+        "file_name": "",
+        "row_number": 2,
+        "processed_at": "2026-04-01T11:07:15.548Z"
+      },
+      "transaction": {
+        "date": "2026-03-29",
+        "amount": 27500,
+        "amount_type": "tax_included",
+        "description": "ヒロタ テルユキ",
+        "partner_name": "ヒロタ テルユキ",
+        "debit_credit": "income",
+        "raw_text": "振込 ヒロタ　テルユキ",
+        "account_hint": "",
+        "tax_hint": ""
+      },
+      "client": {
+        "company_id": 474381,
+        "client_name": ""
+      },
+      "classification": {
+        "estimated_account": "雑費",
+        "estimated_account_id": 236940288,
+        "estimated_tax_class": "課税10%",
+        "estimated_tax_code": 136,
+        "invoice_class": "要確認",
+        "confidence_score": 19,
+        "confidence_rank": "Low",
+        "score_breakdown": {
+          "keyword_match": 0,
+          "past_pattern": 0,
+          "amount_validity": 15,
+          "tax_rule_clarity": 0,
+          "description_quality": 4
+        },
+        "tax_flags": [],
+        "tax_flag_details": [],
+        "special_flags": [],
+        "matched_accounts": [],
+        "routing_reason": "Low（19点） / 科目: マッチなし→雑費"
+      },
+      "validation_errors": [],
+      "is_valid": true,
+      "_freee": {
+        "wallet_txn_id": 2204989725,
+        "walletable_type": "bank_account",
+        "walletable_id": 2474938,
+        "status": 1,
+        "rule_matched": false
+      },
+      "routing": {
+        "decision": "kintone_senior",
+        "reason": "低確度（19点）: シニアレビュー対象",
+        "assignee": "シニア"
+      }
+    },
+    {
+      "source": {
+        "type": "freee_unprocessed",
+        "file_name": "",
+        "row_number": 3,
+        "processed_at": "2026-04-01T11:07:15.548Z"
+      },
+      "transaction": {
+        "date": "2026-03-29",
+        "amount": 143000,
+        "amount_type": "tax_included",
+        "description": "カワムラ ノリアキ",
+        "partner_name": "カワムラ ノリアキ",
+        "debit_credit": "income",
+        "raw_text": "振込 カワムラ　ノリアキ",
+        "account_hint": "",
+        "tax_hint": ""
+      },
+      "client": {
+        "company_id": 474381,
+        "client_name": ""
+      },
+      "classification": {
+        "estimated_account": "雑費",
+        "estimated_account_id": 236940288,
+        "estimated_tax_class": "課税10%",
+        "estimated_tax_code": 136,
+        "invoice_class": "要確認",
+        "confidence_score": 14,
+        "confidence_rank": "Low",
+        "score_breakdown": {
+          "keyword_match": 0,
+          "past_pattern": 0,
+          "amount_validity": 10,
+          "tax_rule_clarity": 0,
+          "description_quality": 4
+        },
+        "tax_flags": [],
+        "tax_flag_details": [],
+        "special_flags": [],
+        "matched_accounts": [],
+        "routing_reason": "Low（14点） / 科目: マッチなし→雑費"
+      },
+      "validation_errors": [],
+      "is_valid": true,
+      "_freee": {
+        "wallet_txn_id": 2204989724,
+        "walletable_type": "bank_account",
+        "walletable_id": 2474938,
+        "status": 1,
+        "rule_matched": false
+      },
+      "routing": {
+        "decision": "kintone_senior",
+        "reason": "低確度（14点）: シニアレビュー対象",
+        "assignee": "シニア"
+      }
+    },
+    {
+      "source": {
+        "type": "freee_unprocessed",
+        "file_name": "",
+        "row_number": 4,
+        "processed_at": "2026-04-01T11:07:15.548Z"
+      },
+      "transaction": {
+        "date": "2026-03-29",
+        "amount": 802,
+        "amount_type": "tax_included",
+        "description": "ANTHROPIC freee Unlimited（リアル）",
+        "partner_name": "ANTHROPIC freee Unlimited（リアル）",
+        "debit_credit": "expense",
+        "raw_text": "ANTHROPIC freee Unlimited（リアル）",
+        "account_hint": "",
+        "tax_hint": ""
+      },
+      "client": {
+        "company_id": 474381,
+        "client_name": ""
+      },
+      "classification": {
+        "estimated_account": "新聞図書費",
+        "estimated_account_id": 236940274,
+        "estimated_tax_class": "対象外",
+        "estimated_tax_code": 2,
+        "invoice_class": "非適格80%",
+        "confidence_score": 63,
+        "confidence_rank": "Medium",
+        "score_breakdown": {
+          "keyword_match": 30,
+          "past_pattern": 0,
+          "amount_validity": 15,
+          "tax_rule_clarity": 8,
+          "description_quality": 10
+        },
+        "tax_flags": [
+          "R06"
+        ],
+        "tax_flag_details": [
+          {
+            "rule": "R06",
+            "severity": "🟡",
+            "message": "Claude: 未登録国外事業者→仕入税額控除不可"
+          }
+        ],
+        "special_flags": [],
+        "matched_accounts": [
+          {
+            "account": "新聞図書費",
+            "matchedKeywords": [
+              "unlimited"
+            ],
+            "score": 1
+          }
+        ],
+        "routing_reason": "Medium（63点） / 科目: 新聞図書費 / 税指摘: R06"
+      },
+      "validation_errors": [],
+      "is_valid": true,
+      "_freee": {
+        "wallet_txn_id": 2204695153,
+        "walletable_type": "credit_card",
+        "walletable_id": 1754759,
+        "status": 1,
+        "rule_matched": false
+      },
+      "routing": {
+        "decision": "kintone_staff",
+        "reason": "中確度（63点）: スタッフレビュー対象",
+        "assignee": "スタッフ"
+      }
+    },
+    {
+      "source": {
+        "type": "freee_unprocessed",
+        "file_name": "",
+        "row_number": 5,
+        "processed_at": "2026-04-01T11:07:15.548Z"
+      },
+      "transaction": {
+        "date": "2026-03-28",
+        "amount": 29700,
+        "amount_type": "tax_included",
+        "description": "イワモトハルミ",
+        "partner_name": "イワモトハルミ",
+        "debit_credit": "income",
+        "raw_text": "振込 イワモトハルミ",
+        "account_hint": "",
+        "tax_hint": ""
+      },
+      "client": {
+        "company_id": 474381,
+        "client_name": ""
+      },
+      "classification": {
+        "estimated_account": "雑費",
+        "estimated_account_id": 236940288,
+        "estimated_tax_class": "課税10%",
+        "estimated_tax_code": 136,
+        "invoice_class": "要確認",
+        "confidence_score": 19,
+        "confidence_rank": "Low",
+        "score_breakdown": {
+          "keyword_match": 0,
+          "past_pattern": 0,
+          "amount_validity": 15,
+          "tax_rule_clarity": 0,
+          "description_quality": 4
+        },
+        "tax_flags": [],
+        "tax_flag_details": [],
+        "special_flags": [],
+        "matched_accounts": [],
+        "routing_reason": "Low（19点） / 科目: マッチなし→雑費"
+      },
+      "validation_errors": [],
+      "is_valid": true,
+      "_freee": {
+        "wallet_txn_id": 2204989723,
+        "walletable_type": "bank_account",
+        "walletable_id": 2474938,
+        "status": 1,
+        "rule_matched": false
+      },
+      "routing": {
+        "decision": "kintone_senior",
+        "reason": "低確度（19点）: シニアレビュー対象",
+        "assignee": "シニア"
+      }
+    },
+    {
+      "source": {
+        "type": "freee_unprocessed",
+        "file_name": "",
+        "row_number": 6,
+        "processed_at": "2026-04-01T11:07:15.548Z"
+      },
+      "transaction": {
+        "date": "2026-03-28",
+        "amount": 18700,
+        "amount_type": "tax_included",
+        "description": "イワモト ジユンイチ",
+        "partner_name": "イワモト ジユンイチ",
+        "debit_credit": "income",
+        "raw_text": "振込 イワモト　ジユンイチ",
+        "account_hint": "",
+        "tax_hint": ""
+      },
+      "client": {
+        "company_id": 474381,
+        "client_name": ""
+      },
+      "classification": {
+        "estimated_account": "雑費",
+        "estimated_account_id": 236940288,
+        "estimated_tax_class": "課税10%",
+        "estimated_tax_code": 136,
+        "invoice_class": "要確認",
+        "confidence_score": 22,
+        "confidence_rank": "Low",
+        "score_breakdown": {
+          "keyword_match": 0,
+          "past_pattern": 0,
+          "amount_validity": 15,
+          "tax_rule_clarity": 0,
+          "description_quality": 7
+        },
+        "tax_flags": [],
+        "tax_flag_details": [],
+        "special_flags": [],
+        "matched_accounts": [],
+        "routing_reason": "Low（22点） / 科目: マッチなし→雑費"
+      },
+      "validation_errors": [],
+      "is_valid": true,
+      "_freee": {
+        "wallet_txn_id": 2204989722,
+        "walletable_type": "bank_account",
+        "walletable_id": 2474938,
+        "status": 1,
+        "rule_matched": false
+      },
+      "routing": {
+        "decision": "kintone_senior",
+        "reason": "低確度（22点）: シニアレビュー対象",
+        "assignee": "シニア"
+      }
+    },
+    {
+      "source": {
+        "type": "freee_unprocessed",
+        "file_name": "",
+        "row_number": 7,
+        "processed_at": "2026-04-01T11:07:15.548Z"
+      },
+      "transaction": {
+        "date": "2026-03-27",
+        "amount": 38500,
+        "amount_type": "tax_included",
+        "description": "イシダ シユンイチロウ",
+        "partner_name": "イシダ シユンイチロウ",
+        "debit_credit": "income",
+        "raw_text": "振込 イシダ　シユンイチロウ",
+        "account_hint": "",
+        "tax_hint": ""
+      },
+      "client": {
+        "company_id": 474381,
+        "client_name": ""
+      },
+      "classification": {
+        "estimated_account": "雑費",
+        "estimated_account_id": 236940288,
+        "estimated_tax_class": "課税10%",
+        "estimated_tax_code": 136,
+        "invoice_class": "要確認",
+        "confidence_score": 22,
+        "confidence_rank": "Low",
+        "score_breakdown": {
+          "keyword_match": 0,
+          "past_pattern": 0,
+          "amount_validity": 15,
+          "tax_rule_clarity": 0,
+          "description_quality": 7
+        },
+        "tax_flags": [],
+        "tax_flag_details": [],
+        "special_flags": [],
+        "matched_accounts": [],
+        "routing_reason": "Low（22点） / 科目: マッチなし→雑費"
+      },
+      "validation_errors": [],
+      "is_valid": true,
+      "_freee": {
+        "wallet_txn_id": 2204989721,
+        "walletable_type": "bank_account",
+        "walletable_id": 2474938,
+        "status": 1,
+        "rule_matched": false
+      },
+      "routing": {
+        "decision": "kintone_senior",
+        "reason": "低確度（22点）: シニアレビュー対象",
+        "assignee": "シニア"
+      }
+    },
+    {
+      "source": {
+        "type": "freee_unprocessed",
+        "file_name": "",
+        "row_number": 8,
+        "processed_at": "2026-04-01T11:07:15.548Z"
+      },
+      "transaction": {
+        "date": "2026-03-27",
+        "amount": 70000,
+        "amount_type": "tax_included",
+        "description": "PE チホウゼイキヨウドウキコウ",
+        "partner_name": "PE チホウゼイキヨウドウキコウ",
+        "debit_credit": "expense",
+        "raw_text": "PE チホウゼイキヨウドウキコウ",
+        "account_hint": "",
+        "tax_hint": ""
+      },
+      "client": {
+        "company_id": 474381,
+        "client_name": ""
+      },
+      "classification": {
+        "estimated_account": "雑費",
+        "estimated_account_id": 236940288,
+        "estimated_tax_class": "課税10%",
+        "estimated_tax_code": 136,
+        "invoice_class": "要確認",
+        "confidence_score": 22,
+        "confidence_rank": "Low",
+        "score_breakdown": {
+          "keyword_match": 0,
+          "past_pattern": 0,
+          "amount_validity": 15,
+          "tax_rule_clarity": 0,
+          "description_quality": 7
+        },
+        "tax_flags": [],
+        "tax_flag_details": [],
+        "special_flags": [],
+        "matched_accounts": [],
+        "routing_reason": "Low（22点） / 科目: マッチなし→雑費"
+      },
+      "validation_errors": [],
+      "is_valid": true,
+      "_freee": {
+        "wallet_txn_id": 2204989720,
+        "walletable_type": "bank_account",
+        "walletable_id": 2474938,
+        "status": 1,
+        "rule_matched": false
+      },
+      "routing": {
+        "decision": "kintone_senior",
+        "reason": "低確度（22点）: シニアレビュー対象",
+        "assignee": "シニア"
+      }
+    },
+    {
+      "source": {
+        "type": "freee_unprocessed",
+        "file_name": "",
+        "row_number": 9,
+        "processed_at": "2026-04-01T11:07:15.548Z"
+      },
+      "transaction": {
+        "date": "2026-03-27",
+        "amount": 75500,
+        "amount_type": "tax_included",
+        "description": "ヤキヤマ リヨウ",
+        "partner_name": "ヤキヤマ リヨウ",
+        "debit_credit": "income",
+        "raw_text": "振込 ヤキヤマ　リヨウ",
+        "account_hint": "",
+        "tax_hint": ""
+      },
+      "client": {
+        "company_id": 474381,
+        "client_name": ""
+      },
+      "classification": {
+        "estimated_account": "雑費",
+        "estimated_account_id": 236940288,
+        "estimated_tax_class": "課税10%",
+        "estimated_tax_code": 136,
+        "invoice_class": "要確認",
+        "confidence_score": 19,
+        "confidence_rank": "Low",
+        "score_breakdown": {
+          "keyword_match": 0,
+          "past_pattern": 0,
+          "amount_validity": 15,
+          "tax_rule_clarity": 0,
+          "description_quality": 4
+        },
+        "tax_flags": [],
+        "tax_flag_details": [],
+        "special_flags": [],
+        "matched_accounts": [],
+        "routing_reason": "Low（19点） / 科目: マッチなし→雑費"
+      },
+      "validation_errors": [],
+      "is_valid": true,
+      "_freee": {
+        "wallet_txn_id": 2204989719,
+        "walletable_type": "bank_account",
+        "walletable_id": 2474938,
+        "status": 1,
+        "rule_matched": false
+      },
+      "routing": {
+        "decision": "kintone_senior",
+        "reason": "低確度（19点）: シニアレビュー対象",
+        "assignee": "シニア"
+      }
+    },
+    {
+      "source": {
+        "type": "freee_unprocessed",
+        "file_name": "",
+        "row_number": 10,
+        "processed_at": "2026-04-01T11:07:15.548Z"
+      },
+      "transaction": {
+        "date": "2026-03-27",
+        "amount": 110000,
+        "amount_type": "tax_included",
+        "description": "キムラ マユミ",
+        "partner_name": "キムラ マユミ",
+        "debit_credit": "income",
+        "raw_text": "振込 キムラ　マユミ",
+        "account_hint": "",
+        "tax_hint": ""
+      },
+      "client": {
+        "company_id": 474381,
+        "client_name": ""
+      },
+      "classification": {
+        "estimated_account": "雑費",
+        "estimated_account_id": 236940288,
+        "estimated_tax_class": "課税10%",
+        "estimated_tax_code": 136,
+        "invoice_class": "要確認",
+        "confidence_score": 14,
+        "confidence_rank": "Low",
+        "score_breakdown": {
+          "keyword_match": 0,
+          "past_pattern": 0,
+          "amount_validity": 10,
+          "tax_rule_clarity": 0,
+          "description_quality": 4
+        },
+        "tax_flags": [],
+        "tax_flag_details": [],
+        "special_flags": [],
+        "matched_accounts": [],
+        "routing_reason": "Low（14点） / 科目: マッチなし→雑費"
+      },
+      "validation_errors": [],
+      "is_valid": true,
+      "_freee": {
+        "wallet_txn_id": 2204989718,
+        "walletable_type": "bank_account",
+        "walletable_id": 2474938,
+        "status": 1,
+        "rule_matched": false
+      },
+      "routing": {
+        "decision": "kintone_senior",
+        "reason": "低確度（14点）: シニアレビュー対象",
+        "assignee": "シニア"
+      }
+    },
+    {
+      "source": {
+        "type": "freee_unprocessed",
+        "file_name": "",
+        "row_number": 11,
+        "processed_at": "2026-04-01T11:07:15.549Z"
+      },
+      "transaction": {
+        "date": "2026-03-27",
+        "amount": 180400,
+        "amount_type": "tax_included",
+        "description": "ダン フイ",
+        "partner_name": "ダン フイ",
+        "debit_credit": "income",
+        "raw_text": "振込 ダン　フイ",
+        "account_hint": "",
+        "tax_hint": ""
+      },
+      "client": {
+        "company_id": 474381,
+        "client_name": ""
+      },
+      "classification": {
+        "estimated_account": "雑費",
+        "estimated_account_id": 236940288,
+        "estimated_tax_class": "課税10%",
+        "estimated_tax_code": 136,
+        "invoice_class": "要確認",
+        "confidence_score": 14,
+        "confidence_rank": "Low",
+        "score_breakdown": {
+          "keyword_match": 0,
+          "past_pattern": 0,
+          "amount_validity": 10,
+          "tax_rule_clarity": 0,
+          "description_quality": 4
+        },
+        "tax_flags": [],
+        "tax_flag_details": [],
+        "special_flags": [],
+        "matched_accounts": [],
+        "routing_reason": "Low（14点） / 科目: マッチなし→雑費"
+      },
+      "validation_errors": [],
+      "is_valid": true,
+      "_freee": {
+        "wallet_txn_id": 2204989717,
+        "walletable_type": "bank_account",
+        "walletable_id": 2474938,
+        "status": 1,
+        "rule_matched": false
+      },
+      "routing": {
+        "decision": "kintone_senior",
+        "reason": "低確度（14点）: シニアレビュー対象",
+        "assignee": "シニア"
+      }
+    },
+    {
+      "source": {
+        "type": "freee_unprocessed",
+        "file_name": "",
+        "row_number": 12,
+        "processed_at": "2026-04-01T11:07:15.549Z"
+      },
+      "transaction": {
+        "date": "2026-03-27",
+        "amount": 73700,
+        "amount_type": "tax_included",
+        "description": "カ）サザンカ",
+        "partner_name": "サザンカ",
+        "debit_credit": "income",
+        "raw_text": "振込 カ）サザンカ",
+        "account_hint": "",
+        "tax_hint": ""
+      },
+      "client": {
+        "company_id": 474381,
+        "client_name": ""
+      },
+      "classification": {
+        "estimated_account": "雑費",
+        "estimated_account_id": 236940288,
+        "estimated_tax_class": "課税10%",
+        "estimated_tax_code": 136,
+        "invoice_class": "要確認",
+        "confidence_score": 19,
+        "confidence_rank": "Low",
+        "score_breakdown": {
+          "keyword_match": 0,
+          "past_pattern": 0,
+          "amount_validity": 15,
+          "tax_rule_clarity": 0,
+          "description_quality": 4
+        },
+        "tax_flags": [],
+        "tax_flag_details": [],
+        "special_flags": [],
+        "matched_accounts": [],
+        "routing_reason": "Low（19点） / 科目: マッチなし→雑費"
+      },
+      "validation_errors": [],
+      "is_valid": true,
+      "_freee": {
+        "wallet_txn_id": 2204989716,
+        "walletable_type": "bank_account",
+        "walletable_id": 2474938,
+        "status": 1,
+        "rule_matched": false
+      },
+      "routing": {
+        "decision": "kintone_senior",
+        "reason": "低確度（19点）: シニアレビュー対象",
+        "assignee": "シニア"
+      }
+    },
+    {
+      "source": {
+        "type": "freee_unprocessed",
+        "file_name": "",
+        "row_number": 13,
+        "processed_at": "2026-04-01T11:07:15.549Z"
+      },
+      "transaction": {
+        "date": "2026-03-27",
+        "amount": 34100,
+        "amount_type": "tax_included",
+        "description": "カネシロ テツ",
+        "partner_name": "カネシロ テツ",
+        "debit_credit": "income",
+        "raw_text": "振込 カネシロ　テツ",
+        "account_hint": "",
+        "tax_hint": ""
+      },
+      "client": {
+        "company_id": 474381,
+        "client_name": ""
+      },
+      "classification": {
+        "estimated_account": "雑費",
+        "estimated_account_id": 236940288,
+        "estimated_tax_class": "課税10%",
+        "estimated_tax_code": 136,
+        "invoice_class": "要確認",
+        "confidence_score": 19,
+        "confidence_rank": "Low",
+        "score_breakdown": {
+          "keyword_match": 0,
+          "past_pattern": 0,
+          "amount_validity": 15,
+          "tax_rule_clarity": 0,
+          "description_quality": 4
+        },
+        "tax_flags": [],
+        "tax_flag_details": [],
+        "special_flags": [],
+        "matched_accounts": [],
+        "routing_reason": "Low（19点） / 科目: マッチなし→雑費"
+      },
+      "validation_errors": [],
+      "is_valid": true,
+      "_freee": {
+        "wallet_txn_id": 2204989715,
+        "walletable_type": "bank_account",
+        "walletable_id": 2474938,
+        "status": 1,
+        "rule_matched": false
+      },
+      "routing": {
+        "decision": "kintone_senior",
+        "reason": "低確度（19点）: シニアレビュー対象",
+        "assignee": "シニア"
+      }
+    },
+    {
+      "source": {
+        "type": "freee_unprocessed",
+        "file_name": "",
+        "row_number": 14,
+        "processed_at": "2026-04-01T11:07:15.549Z"
+      },
+      "transaction": {
+        "date": "2026-03-27",
+        "amount": 330000,
+        "amount_type": "tax_included",
+        "description": "ワム（ド",
+        "partner_name": "ワム（ド",
+        "debit_credit": "income",
+        "raw_text": "振込 ワム（ド",
+        "account_hint": "",
+        "tax_hint": ""
+      },
+      "client": {
+        "company_id": 474381,
+        "client_name": ""
+      },
+      "classification": {
+        "estimated_account": "雑費",
+        "estimated_account_id": 236940288,
+        "estimated_tax_class": "課税10%",
+        "estimated_tax_code": 136,
+        "invoice_class": "要確認",
+        "confidence_score": 5,
+        "confidence_rank": "Low",
+        "score_breakdown": {
+          "keyword_match": 0,
+          "past_pattern": 0,
+          "amount_validity": 5,
+          "tax_rule_clarity": 0,
+          "description_quality": 0
+        },
+        "tax_flags": [],
+        "tax_flag_details": [],
+        "special_flags": [],
+        "matched_accounts": [],
+        "routing_reason": "Low（5点） / 科目: マッチなし→雑費"
+      },
+      "validation_errors": [],
+      "is_valid": true,
+      "_freee": {
+        "wallet_txn_id": 2204989714,
+        "walletable_type": "bank_account",
+        "walletable_id": 2474938,
+        "status": 1,
+        "rule_matched": false
+      },
+      "routing": {
+        "decision": "kintone_senior",
+        "reason": "低確度（5点）: シニアレビュー対象",
+        "assignee": "シニア"
+      }
+    },
+    {
+      "source": {
+        "type": "freee_unprocessed",
+        "file_name": "",
+        "row_number": 15,
+        "processed_at": "2026-04-01T11:07:15.549Z"
+      },
+      "transaction": {
+        "date": "2026-03-27",
+        "amount": 157300,
+        "amount_type": "tax_included",
+        "description": "サニ−（カ",
+        "partner_name": "サニ−（カ",
+        "debit_credit": "income",
+        "raw_text": "振込 サニ−（カ",
+        "account_hint": "",
+        "tax_hint": ""
+      },
+      "client": {
+        "company_id": 474381,
+        "client_name": ""
+      },
+      "classification": {
+        "estimated_account": "雑費",
+        "estimated_account_id": 236940288,
+        "estimated_tax_class": "課税10%",
+        "estimated_tax_code": 136,
+        "invoice_class": "要確認",
+        "confidence_score": 14,
+        "confidence_rank": "Low",
+        "score_breakdown": {
+          "keyword_match": 0,
+          "past_pattern": 0,
+          "amount_validity": 10,
+          "tax_rule_clarity": 0,
+          "description_quality": 4
+        },
+        "tax_flags": [],
+        "tax_flag_details": [],
+        "special_flags": [],
+        "matched_accounts": [],
+        "routing_reason": "Low（14点） / 科目: マッチなし→雑費"
+      },
+      "validation_errors": [],
+      "is_valid": true,
+      "_freee": {
+        "wallet_txn_id": 2204989713,
+        "walletable_type": "bank_account",
+        "walletable_id": 2474938,
+        "status": 1,
+        "rule_matched": false
+      },
+      "routing": {
+        "decision": "kintone_senior",
+        "reason": "低確度（14点）: シニアレビュー対象",
+        "assignee": "シニア"
+      }
+    }
+  ],
+  "summary": {
+    "total": 15,
+    "auto_register": 0,
+    "kintone_staff": 1,
+    "kintone_senior": 14,
+    "exclude": 0,
+    "by_rank": {
+      "High": 0,
+      "Medium": 1,
+      "Low": 14,
+      "Excluded": 0
+    },
+    "total_amount": 1355202,
+    "tax_flags_count": 1,
+    "special_flags_count": 0
+  },
+  "excluded": [
+    {
+      "id": 2209797912,
+      "reason": "rule_matched",
+      "description": "RAKUTEN MOBILE(DMM) freee Unlimited（リアル）"
+    },
+    {
+      "id": 2206921773,
+      "reason": "rule_matched",
+      "description": "PayPal定期決済 啓 藤原(PayPal手数料) ID:5UM9003552718070A"
+    },
+    {
+      "id": 2206921772,
+      "reason": "rule_matched",
+      "description": "PayPal定期決済 啓 藤原 ID:5UM9003552718070A"
+    },
+    {
+      "id": 2205022394,
+      "reason": "rule_matched",
+      "description": "フレッシュネスバーガー　代々木　東京都"
+    },
+    {
+      "id": 2205022393,
+      "reason": "rule_matched",
+      "description": "GOOGLE *GOOGLE ONE"
+    }
+  ],
+  "metadata": {
+    "processed_at": "2026-04-01T11:07:15.566Z",
+    "company_id": 474381,
+    "total_input": 20,
+    "rule_matched_skipped": 5,
+    "processed_count": 15
+  }
+}

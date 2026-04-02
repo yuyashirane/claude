@@ -4,16 +4,20 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node tests/test-pipeline.js && node tests/test-deal-creator.js && node tests/test-processing-report.js",
+    "test": "node tests/test-pipeline.js && node tests/test-deal-creator.js && node tests/test-processing-report.js && node tests/test-freee-links.js && node tests/test-kintone-to-freee.js && node tests/test-rule-csv-generator.js",
+    "test:rule-csv": "node tests/test-rule-csv-generator.js",
     "test:pipeline": "node tests/test-pipeline.js",
     "test:deal": "node tests/test-deal-creator.js",
     "test:report": "node tests/test-processing-report.js",
+    "test:links": "node tests/test-freee-links.js",
+    "test:kintone-freee": "node tests/test-kintone-to-freee.js",
     "freee:register": "node src/register/deal-creator.js",
     "freee:register:dry": "node src/register/deal-creator.js",
     "report": "node src/verify/processing-report.js",
     "kintone:test": "node src/review/kintone-connection-test.js",
     "kintone:send": "node src/review/kintone-sender.js",
-    "kintone:send:dry": "node src/review/kintone-sender.js --dry-run"
+    "kintone:send:dry": "node src/review/kintone-sender.js --dry-run",
+    "rule-csv": "node src/register/rule-csv-generator.js"
   },
   "repository": {
     "type": "git",
