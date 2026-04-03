@@ -115,7 +115,11 @@
       "Bash(xargs grep:*)",
       "Bash(node tmp/test-2422271-pipeline.js)",
       "Bash(node tmp/report-2422271.js)",
-      "Bash(node tmp/verify-new-routing.js)"
+      "Bash(node tmp/verify-new-routing.js)",
+      "Bash(node tests/test-post-register-checker.js)",
+      "Bash(Test-Path \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\tests\\\\test-post-register-checker.js\")",
+      "Bash(ls -la \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\data\"\" 2>/dev/null || echo \"data directory check \")",
+      "Bash(node verify-test-run.js)"
     ]
   }
 }

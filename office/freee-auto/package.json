@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "node tests/test-pipeline.js && node tests/test-deal-creator.js && node tests/test-processing-report.js && node tests/test-freee-links.js && node tests/test-kintone-to-freee.js && node tests/test-rule-csv-generator.js",
+    "test": "node tests/test-pipeline.js && node tests/test-deal-creator.js && node tests/test-processing-report.js && node tests/test-freee-links.js && node tests/test-kintone-to-freee.js && node tests/test-rule-csv-generator.js && node tests/test-post-register-checker.js",
     "test:rule-csv": "node tests/test-rule-csv-generator.js",
     "test:pipeline": "node tests/test-pipeline.js",
     "test:deal": "node tests/test-deal-creator.js",
