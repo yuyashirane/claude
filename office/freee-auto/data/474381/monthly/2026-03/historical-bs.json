@@ -1,0 +1,597 @@
+{
+  "fetchedAt": "2026-04-03T15:51:23.941Z",
+  "data": {
+    "2020": {
+      "現金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "【会】ＰａｙＰａｙ銀行": {
+        "opening": 12672006,
+        "closing": 29995472
+      },
+      "【会】江東信組（法人）": {
+        "opening": 3763140,
+        "closing": 2534343
+      },
+      "【会】三菱ＵＦＪ（法人）": {
+        "opening": 20604,
+        "closing": 20604
+      },
+      "売掛金": {
+        "opening": 24091679,
+        "closing": 6146959
+      },
+      "貸倒引当金(売)": {
+        "opening": -31000,
+        "closing": -36000
+      },
+      "PayPal（法人）": {
+        "opening": 24532,
+        "closing": 25456
+      },
+      "立替金": {
+        "opening": -1857400,
+        "closing": 0
+      },
+      "前払費用": {
+        "opening": 37118,
+        "closing": 10364
+      },
+      "未収収益": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未収入金": {
+        "opening": 3693835,
+        "closing": 190618
+      },
+      "仮払金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "Paypal（個人）": {
+        "opening": 147733,
+        "closing": 0
+      },
+      "工具器具備品": {
+        "opening": 1360167,
+        "closing": 1360167
+      },
+      "減価償却累計額": {
+        "opening": -852307,
+        "closing": -1360167
+      },
+      "出資金": {
+        "opening": 10000,
+        "closing": 10000
+      },
+      "敷金": {
+        "opening": 132000,
+        "closing": 132000
+      },
+      "保険積立金": {
+        "opening": 600000,
+        "closing": 650000
+      },
+      "短期借入金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未払金": {
+        "opening": 257682,
+        "closing": 257682
+      },
+      "未払費用": {
+        "opening": 2488754,
+        "closing": 2607479
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 775900
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 1379100
+      },
+      "消費税引当金": {
+        "opening": 1132800,
+        "closing": 0
+      },
+      "預り金": {
+        "opening": 870366,
+        "closing": 1073233
+      },
+      "仮受金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "預り保証金": {
+        "opening": 800000,
+        "closing": 800000
+      },
+      "【税】オリコ": {
+        "opening": 69745,
+        "closing": 74083
+      },
+      "【旧々会】アメリカン・エキスプレス": {
+        "opening": 251004,
+        "closing": 355245
+      },
+      "未払金（白根裕也）": {
+        "opening": -92661,
+        "closing": 0
+      },
+      "未払金（長瀬祐基）": {
+        "opening": 227995,
+        "closing": 0
+      },
+      "役員借入金": {
+        "opening": 1817833,
+        "closing": 1789057
+      },
+      "長期借入金": {
+        "opening": 20786000,
+        "closing": 20528000
+      },
+      "資本金": {
+        "opening": 1500000,
+        "closing": 1500000
+      },
+      "繰越利益": {
+        "opening": 5330142,
+        "closing": 8540037
+      }
+    },
+    "2022": {
+      "【税】ＰａｙＰａｙ銀行": {
+        "opening": 19174310,
+        "closing": 21765812
+      },
+      "【税】江東信組（法人）": {
+        "opening": 1643515,
+        "closing": 674233
+      },
+      "【会】ＰａｙＰａｙ銀行": {
+        "opening": -38827,
+        "closing": 0
+      },
+      "【会】江東信組（法人）": {
+        "opening": -57000,
+        "closing": 0
+      },
+      "売掛金": {
+        "opening": 8935232,
+        "closing": 9616445
+      },
+      "貸倒引当金(売)": {
+        "opening": -55000,
+        "closing": -55000
+      },
+      "PayPal（法人）": {
+        "opening": 14318,
+        "closing": 6186
+      },
+      "立替金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "前払費用": {
+        "opening": 27500,
+        "closing": 27500
+      },
+      "未収収益": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未収入金": {
+        "opening": 428414,
+        "closing": 4796
+      },
+      "Paypal（個人）": {
+        "opening": 68515,
+        "closing": 82218
+      },
+      "工具器具備品": {
+        "opening": 234180,
+        "closing": 234180
+      },
+      "減価償却累計額": {
+        "opening": -127380,
+        "closing": -127380
+      },
+      "保険積立金": {
+        "opening": 524280,
+        "closing": 589815
+      },
+      "資金諸口": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未払金": {
+        "opening": 1757791,
+        "closing": 2045047
+      },
+      "未払費用": {
+        "opening": 3456239,
+        "closing": 3353557
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 0
+      },
+      "預り金": {
+        "opening": 1246924,
+        "closing": 1775734
+      },
+      "預り保証金": {
+        "opening": 800000,
+        "closing": 800000
+      },
+      "【税】オリコ": {
+        "opening": 67142,
+        "closing": 76952
+      },
+      "【旧税】アメリカン・エキスプレス": {
+        "opening": 236157,
+        "closing": 194627
+      },
+      "【旧会】アメリカン・エキスプレス": {
+        "opening": 120410,
+        "closing": 0
+      },
+      "未払金（白根裕也）": {
+        "opening": 28705,
+        "closing": 28705
+      },
+      "未払金（長瀬祐基）": {
+        "opening": 133688,
+        "closing": 142197
+      },
+      "役員借入金": {
+        "opening": 125708,
+        "closing": 125708
+      },
+      "長期借入金": {
+        "opening": 12285000,
+        "closing": 12090000
+      },
+      "資本金": {
+        "opening": 1500000,
+        "closing": 1500000
+      },
+      "繰越利益": {
+        "opening": 5386911,
+        "closing": 5386911
+      }
+    },
+    "2023": {
+      "【税】ＰａｙＰａｙ銀行": {
+        "opening": 28800130,
+        "closing": 24604477
+      },
+      "【税】江東信組（法人）": {
+        "opening": 2049387,
+        "closing": 4627432
+      },
+      "【会】ＰａｙＰａｙ銀行": {
+        "opening": -101602,
+        "closing": 0
+      },
+      "【会】江東信組（法人）": {
+        "opening": -114000,
+        "closing": 0
+      },
+      "売掛金": {
+        "opening": 10252633,
+        "closing": 9237718
+      },
+      "貸倒引当金(売)": {
+        "opening": -50000,
+        "closing": -50000
+      },
+      "PayPal（法人）": {
+        "opening": 8875,
+        "closing": 0
+      },
+      "立替金": {
+        "opening": 130260,
+        "closing": 121020
+      },
+      "前払費用": {
+        "opening": 328318,
+        "closing": 348514
+      },
+      "未収収益": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未収入金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "Paypal（個人）": {
+        "opening": 286966,
+        "closing": 0
+      },
+      "工具器具備品": {
+        "opening": 510490,
+        "closing": 510490
+      },
+      "減価償却累計額": {
+        "opening": -370690,
+        "closing": -370690
+      },
+      "ソフトウェア": {
+        "opening": 4817750,
+        "closing": 4726500
+      },
+      "出資金": {
+        "opening": 10000,
+        "closing": 10000
+      },
+      "敷金": {
+        "opening": 225000,
+        "closing": 225000
+      },
+      "保険積立金": {
+        "opening": 5697120,
+        "closing": 5962655
+      },
+      "資金諸口": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未払金": {
+        "opening": 842598,
+        "closing": 619846
+      },
+      "未払費用": {
+        "opening": 4075819,
+        "closing": 4320024
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 416600
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 4030000
+      },
+      "消費税引当金": {
+        "opening": 3549200,
+        "closing": 0
+      },
+      "預り金": {
+        "opening": 1908974,
+        "closing": 2708967
+      },
+      "仮受金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "【税】アメリカン・エキスプレス": {
+        "opening": 337098,
+        "closing": 457848
+      },
+      "【税】オリコ": {
+        "opening": 10841,
+        "closing": 6947
+      },
+      "【税】freeeカード Unlimited": {
+        "opening": 136894,
+        "closing": 79893
+      },
+      "【会】アメリカン・エキスプレス": {
+        "opening": 143220,
+        "closing": 0
+      },
+      "未払金（白根裕也）": {
+        "opening": 94459,
+        "closing": 0
+      },
+      "未払金（長瀬祐基）": {
+        "opening": 260229,
+        "closing": 0
+      },
+      "役員借入金": {
+        "opening": 702588,
+        "closing": 998630
+      },
+      "Amazonビジネス（API）": {
+        "opening": 0,
+        "closing": 0
+      },
+      "長期借入金": {
+        "opening": 12485000,
+        "closing": 12230000
+      },
+      "長期未払金": {
+        "opening": 4660000,
+        "closing": 4582500
+      },
+      "資本金": {
+        "opening": 1500000,
+        "closing": 1500000
+      },
+      "繰越利益": {
+        "opening": 14740399,
+        "closing": 18001861
+      }
+    },
+    "2024": {
+      "【税】ＰａｙＰａｙ銀行": {
+        "opening": 30898501,
+        "closing": 27592484
+      },
+      "【税】江東信組（法人）": {
+        "opening": 1944711,
+        "closing": 2393407
+      },
+      "【税】城北信金（法人）": {
+        "opening": 378361,
+        "closing": 310384
+      },
+      "【会】ＰａｙＰａｙ銀行": {
+        "opening": -105831,
+        "closing": 0
+      },
+      "【会】江東信組（法人）": {
+        "opening": -57000,
+        "closing": 0
+      },
+      "売掛金": {
+        "opening": 11065747,
+        "closing": 11200546
+      },
+      "貸倒引当金(売)": {
+        "opening": -50000,
+        "closing": -50000
+      },
+      "PayPal（法人）": {
+        "opening": 85458,
+        "closing": 0
+      },
+      "立替金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "前払費用": {
+        "opening": 440000,
+        "closing": 812709
+      },
+      "未収収益": {
+        "opening": 0,
+        "closing": 59300
+      },
+      "未収入金": {
+        "opening": 0,
+        "closing": 132000
+      },
+      "仮払金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "Paypal（個人）": {
+        "opening": 214290,
+        "closing": 0
+      },
+      "工具器具備品": {
+        "opening": 510490,
+        "closing": 510490
+      },
+      "一括償却資産": {
+        "opening": 0,
+        "closing": 159800
+      },
+      "減価償却累計額": {
+        "opening": -370690,
+        "closing": -423956
+      },
+      "ソフトウェア": {
+        "opening": 3722750,
+        "closing": 3631500
+      },
+      "出資金": {
+        "opening": 20000,
+        "closing": 20000
+      },
+      "敷金": {
+        "opening": 394000,
+        "closing": 262000
+      },
+      "長期前払費用": {
+        "opening": 682590,
+        "closing": 663297
+      },
+      "保険積立金": {
+        "opening": 8883540,
+        "closing": 9149075
+      },
+      "資金諸口": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未払金": {
+        "opening": 1700082,
+        "closing": 1226706
+      },
+      "未払費用": {
+        "opening": 6949465,
+        "closing": 4148756
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 1072500
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 2657000
+      },
+      "消費税引当金": {
+        "opening": 2113600,
+        "closing": 0
+      },
+      "前受金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "預り金": {
+        "opening": 1516232,
+        "closing": 1517844
+      },
+      "仮受金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "【税】アメリカン・エキスプレス": {
+        "opening": 420442,
+        "closing": 730731
+      },
+      "【税】オリコ": {
+        "opening": 5210,
+        "closing": 5247
+      },
+      "【税】freeeカード Unlimited": {
+        "opening": -136003,
+        "closing": 48549
+      },
+      "【会】アメリカン・エキスプレス": {
+        "opening": 146960,
+        "closing": 0
+      },
+      "未払金（白根裕也）": {
+        "opening": 166397,
+        "closing": 0
+      },
+      "未払金（長瀬祐基）": {
+        "opening": 282686,
+        "closing": 0
+      },
+      "役員借入金": {
+        "opening": 864577,
+        "closing": 1331810
+      },
+      "Amazonビジネス（API）": {
+        "opening": 0,
+        "closing": 0
+      },
+      "長期借入金": {
+        "opening": 13825000,
+        "closing": 13510000
+      },
+      "長期未払金": {
+        "opening": 3730000,
+        "closing": 3652500
+      },
+      "資本金": {
+        "opening": 1500000,
+        "closing": 1500000
+      },
+      "繰越利益": {
+        "opening": 18001861,
+        "closing": 25021393
+      }
+    }
+  }
+}

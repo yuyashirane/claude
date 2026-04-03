@@ -59,9 +59,10 @@ freeeが正本。Kintoneは例外管理のみ。全件同期は行わない。
 
 ---
 
-## テスト: 132件通過（npm test）+ excel-csv-parser(21)
+## テスト: 132件通過（npm test）+ 別途59件（個別実行）
 
-pipeline(50) + deal-creator(14) + report(9) + freee-links(5) + kintone-to-freee(17) + rule-csv-generator(37)
+pipeline(50) + deal-creator(14) + report(9) + freee-links(11) + kintone-to-freee(17) + rule-csv-generator(37) = 138件（npm test）
+balance-anomaly(32) + report-details(7) + period-allocation(20) = 59件（個別実行）
 
 ---
 

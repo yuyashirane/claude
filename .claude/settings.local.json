@@ -119,7 +119,27 @@
       "Bash(node tests/test-post-register-checker.js)",
       "Bash(Test-Path \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\tests\\\\test-post-register-checker.js\")",
       "Bash(ls -la \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\data\"\" 2>/dev/null || echo \"data directory check \")",
-      "Bash(node verify-test-run.js)"
+      "Bash(node verify-test-run.js)",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(list\\(d.keys\\(\\)\\)[:5]\\); first=list\\(d.keys\\(\\)\\)[0]; print\\(''''first key:'''', first\\); print\\(''''token fields:'''', list\\(d[first].keys\\(\\)\\) if isinstance\\(d[first], dict\\) else type\\(d[first]\\)\\)\")",
+      "Bash(node src/verify/monthly-checker.js --company 474381 --month 2026-03)",
+      "Bash(node src/verify/monthly-checker.js --company 474381 --month auto)",
+      "Bash(Remove-Item -Recurse -Force \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\data\\\\474381\\\\monthly\"\" -ErrorAction SilentlyContinue; Write-Host \"キャッシュ削除完了 \")",
+      "Bash(cmd /c \"rmdir /s /q C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\data\\\\474381\\\\monthly && echo キャッシュ削除完了\")",
+      "Bash(cmd /c \"if exist C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\data\\\\474381\\\\monthly \\(echo EXISTS\\) else \\(echo DELETED\\)\")",
+      "Bash(cmd /c \"dir C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\freee-auto\\\\data\\\\474381\\\\ 2>&1\")",
+      "Bash(node src/verify/monthly-checker.js --company 474381 --month 2025-09)",
+      "Bash(node src/verify/monthly-checker.js --company 2422271 --month 2026-03)",
+      "Bash(node tests/test-monthly-checker.js)",
+      "Bash(echo \"Exit: $?\")",
+      "Bash(echo \"Exit code: $?\")",
+      "Bash(node tests/test-monthly-report.js)",
+      "Bash(node src/verify/monthly-checker.js --company 474381 --month 2026-03 --no-dry-run)",
+      "Bash(ls data/474381/*.json)",
+      "Bash(node tests/test-balance-anomaly.js)",
+      "Bash(ls tests/test-monthly-report*)",
+      "Bash(node tests/test-report-details.js)",
+      "Bash(node tests/test-period-allocation.js)",
+      "Bash(node \"C:/Users/yuya_/claude/office/freee-auto/src/verify/monthly-checker.js\" --company 474381 --month 2026-03)"
     ]
   }
 }

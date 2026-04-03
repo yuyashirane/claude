@@ -35,7 +35,7 @@ const STYLES = {
     bold: true,
     color: { argb: "FFFFFFFF" },
     size: 10,
-    name: "Yu Gothic",
+    name: "Meiryo UI",
   },
   autoRegisterFill: {
     type: "pattern",
@@ -64,7 +64,7 @@ const STYLES = {
   },
   bodyFont: {
     size: 10,
-    name: "Yu Gothic",
+    name: "Meiryo UI",
   },
   numberFormat: "#,##0",
   dateFormat: "yyyy-mm-dd",
@@ -158,7 +158,7 @@ function createSummarySheet(workbook, data, registerResult) {
   ws.mergeCells("A1:D1");
   const titleCell = ws.getCell("A1");
   titleCell.value = "freee未処理明細 処理結果レポート";
-  titleCell.font = { bold: true, size: 14, name: "Yu Gothic" };
+  titleCell.font = { bold: true, size: 14, name: "Meiryo UI" };
   titleCell.alignment = { horizontal: "center" };
 
   // 処理日時
