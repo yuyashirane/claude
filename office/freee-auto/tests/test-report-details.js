@@ -158,14 +158,14 @@ async function runTests() {
   });
 
   // ── テスト4: 子行の背景色 ──
-  await test('4. 子行の背景色が FFF5F5F5 であること', async () => {
+  await test('4. 子行の背景色が FFF8F9FA であること', async () => {
     const findings = [mkFinding({ details: [mkDetail()] })];
     const rows = await generateAndReadSheet2(findings);
     const detailRow = rows[1];
     const cell = detailRow.getCell(4); // D列
     const argb = cell.fill?.fgColor?.argb;
-    assert.strictEqual(argb, 'FFF5F5F5',
-      `fill.fgColor.argb="${argb}" !== "FFF5F5F5"`);
+    assert.strictEqual(argb, 'FFF8F9FA',
+      `fill.fgColor.argb="${argb}" !== "FFF8F9FA"`);
   });
 
   // ── テスト5: 子行の freeeLink がハイパーリンク ──

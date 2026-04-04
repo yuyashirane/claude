@@ -34,7 +34,7 @@ freee MCP / Gmail MCP（Phase 4）/ Google Drive MCP（Phase 4）
 | CLASSIFY | `src/classify/` | 勘定科目推定、消費税R01-R12判定、信頼度スコア、振り分け |
 | REVIEW | `src/review/` | 中低確度→Kintone App①登録 |
 | REGISTER | `src/register/` | 自動登録ルールCSV生成（freeeにインポートして消込付き登録）。High信頼度+安全→「取引を登録する」ルール（完全自動）、Medium信頼度→「取引を推測する」ルール（科目プリセット→ワンクリック確認）、Low/除外→CSVに含めずKintone App①で人間レビュー。deal-creator.jsは口座連携のない取引（現金等）用に残す |
-| VERIFY | `src/verify/` | 4シートExcelレポート、帳簿チェック |
+| VERIFY | `src/verify/` | 11シートExcelレポート（66チェック）、帳簿チェック（15モジュール）。post-register-checker（モードA: パイプライン直後5チェッカー22項目）+ monthly-checker（モードB: 月次15モジュール66チェック）。Excelレポートはサマリーダッシュボード・指摘一覧・カテゴリ別6シート・BS残高・PL月次推移・取引先別残高の11シート構成 |
 | LEARN | `src/learn/` | 修正→辞書改善（Phase 3） |
 
 ---
@@ -54,15 +54,16 @@ freeeが正本。Kintoneは例外管理のみ。全件同期は行わない。
 
 ## テスト事業所
 
-あしたの会計事務所税理士法人（freee ID: 474381、9月決算）
+あしたの会計事務所税理士法人（freee ID: 474381、10月決算）
+テスト用: 無限テック合同会社（freee ID: 2422271、11月決算）
 `FREEE_ACCOUNT_IDS` は事業所固有。他社はAPI動的取得が必要。
 
 ---
 
-## テスト: 132件通過（npm test）+ 別途59件（個別実行）
+## テスト: 314件通過（npm test）+ 83件（個別実行）= 397件
 
-pipeline(50) + deal-creator(14) + report(9) + freee-links(11) + kintone-to-freee(17) + rule-csv-generator(37) = 138件（npm test）
-balance-anomaly(32) + report-details(7) + period-allocation(20) = 59件（個別実行）
+pipeline(50) + deal-creator(14) + report(9) + freee-links(33) + kintone-to-freee(17) + rule-csv-generator(53) + post-register-checker(49) + monthly-checker(65) + monthly-report(24) = 314件（npm test）
+balance-anomaly(32) + report-details(7) + period-allocation(20) + withholding-tax(24) = 83件（個別実行）
 
 ---
 
@@ -72,6 +73,8 @@ balance-anomaly(32) + report-details(7) + period-allocation(20) = 59件（個別
 - 消費税区分の最終判断は税理士
 - 過去パターン(30pt)未実装 → 現在のスコア上限70pt、自動登録は実質未稼働
 - 顧問先テストは自社アカウント(474381)のみ
+- freee API の deals.partner_name は全件undefined。取引先名の取得には必ず `resolvePartnerName(deal, partners)` （`src/verify/monthly-checks/trial-helpers.js`）を使用すること
+- 月次チェックモジュール追加時は `CHECK_CODE_LABELS`（`src/verify/monthly-report-generator.js`）にも追加必須
 
 ---
 
@@ -110,9 +113,10 @@ CLAUDE.mdには骨格のみ記載。詳細は以下を参照:
 
 ## コマンド
 
-npm test                              # 全テスト（132件）
+npm test                              # 全テスト（314件）
 npm run freee:register                # 取引登録（DRY_RUN設定に従う）
 npm run rule-csv                      # ルールCSV生成
 node src/register/rule-csv-generator.js <result.json>  # ルールCSV生成（CLI直接）
 npm run kintone:test                  # Kintone接続テスト
 npm run report                        # 処理結果レポート生成
+node src/verify/monthly-checker.js --company 474381 --month 2026-03 --no-dry-run  # 月次チェック実行

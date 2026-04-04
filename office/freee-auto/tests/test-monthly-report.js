@@ -20,6 +20,14 @@
  *  14. 不完全データでもクラッシュしない
  *  15. PL月次推移（plTrend付き）
  *  16. PL月次推移の元帳リンク
+ *  17. CHECK_GROUPS: 全6グループシート常時生成
+ *  18. CHECK_GROUPS: シート構造（タイトル+ヘッダー+データ行）
+ *  19. CHECK_GROUPS: findings 0件でも全6グループシート生成
+ *  20. inferFreeeLink: CODE_TO_ACCOUNT マッピング（7コード）
+ *  21. inferFreeeLink: description から科目名抽出
+ *  22. inferFreeeLink: 既存リンクは上書きしない
+ *  23. isValidFreeeLink: 有効/無効URL判定
+ *  24. freeeLink推定がExcel出力に反映される
  *
  * 使い方: node tests/test-monthly-report.js
  */
@@ -30,7 +38,7 @@ const fs     = require('fs');
 const os     = require('os');
 const ExcelJS = require('exceljs');
 
-const { generateMonthlyReport } = require('../src/verify/monthly-report-generator');
+const { generateMonthlyReport, inferFreeeLink, isValidFreeeLink } = require('../src/verify/monthly-report-generator');
 
 // ============================================================
 // テストランナー
@@ -224,8 +232,8 @@ async function runTests() {
     assert.ok(filePath.endsWith('.xlsx'), '.xlsx 拡張子でない');
   });
 
-  // ─── テスト2: シート1サマリーの件数（新レイアウト: B11/B12/B13/B14） ───
-  await test('2. シート1「サマリー」の件数が正しい（行11-14）', async () => {
+  // ─── テスト2: シート1サマリーの件数（横並びレイアウト: B9/C9/D9） ───
+  await test('2. シート1「サマリー」の件数が正しい（行9: B/C/D）', async () => {
     const findings = [
       mkFinding('🔴', 'X-01'), mkFinding('🔴', 'X-02'), mkFinding('🔴', 'X-03'),
       mkFinding('🟡', 'Y-01'), mkFinding('🟡', 'Y-02'), mkFinding('🟡', 'Y-03'),
@@ -242,10 +250,10 @@ async function runTests() {
     const ws = wb.getWorksheet('サマリー');
     assert.ok(ws, 'サマリーシートが存在しない');
 
-    assert.strictEqual(ws.getCell('B11').value, 3, '🔴件数が違う');
-    assert.strictEqual(ws.getCell('B12').value, 5, '🟡件数が違う');
-    assert.strictEqual(ws.getCell('B13').value, 2, '🔵件数が違う');
-    assert.strictEqual(ws.getCell('B14').value, 10, '合計件数が違う');
+    // 行9: 横並びの指摘サマリー（B=🔴, C=🟡, D=🔵）
+    assert.strictEqual(ws.getCell('B9').value, 3, '🔴件数が違う');
+    assert.strictEqual(ws.getCell('C9').value, 5, '🟡件数が違う');
+    assert.strictEqual(ws.getCell('D9').value, 2, '🔵件数が違う');
   });
 
   // ─── テスト3: 空のfindings ───
@@ -260,10 +268,10 @@ async function runTests() {
     const wb = new ExcelJS.Workbook();
     await wb.xlsx.readFile(filePath);
     const ws = wb.getWorksheet('サマリー');
-    assert.strictEqual(ws.getCell('B11').value, 0, '🔴件数が0でない');
-    assert.strictEqual(ws.getCell('B12').value, 0, '🟡件数が0でない');
-    assert.strictEqual(ws.getCell('B13').value, 0, '🔵件数が0でない');
-    assert.strictEqual(ws.getCell('B14').value, 0, '合計が0でない');
+    // 行9: 横並びの指摘サマリー（全0）
+    assert.strictEqual(ws.getCell('B9').value, 0, '🔴件数が0でない');
+    assert.strictEqual(ws.getCell('C9').value, 0, '🟡件数が0でない');
+    assert.strictEqual(ws.getCell('D9').value, 0, '🔵件数が0でない');
   });
 
   // ─── テスト4: 指摘一覧ヘッダーと行数 ───
@@ -394,11 +402,11 @@ async function runTests() {
       outputDir: path.join(baseDir, '999999'),
     });
     assert.ok(fs.existsSync(filePath), 'ファイルが生成されていない');
-    assert.ok(filePath.includes('monthly_check_2026-03'), 'ファイル名にmonthly_check_2026-03が含まれていない');
+    assert.ok(filePath.includes('テスト_帳簿チェック_2026-03'), 'ファイル名に事業所名_帳簿チェック_2026-03が含まれていない');
   });
 
-  // ─── テスト12: カテゴリ別集計（新レイアウト: 行18〜） ───
-  await test('12. シート1のカテゴリ別内訳テーブルが正しく集計される（行18〜）', async () => {
+  // ─── テスト12: CHECK_GROUPS別集計（行13ヘッダー、行14〜データ） ───
+  await test('12. シート1のチェック項目別内訳がCHECK_GROUPS単位で正しく集計される', async () => {
     const findings = [
       mkFinding('🔴', 'A-01', 'cash_deposit'),
       mkFinding('🟡', 'B-01', 'cash_deposit'),
@@ -413,14 +421,21 @@ async function runTests() {
     const wb = new ExcelJS.Workbook();
     await wb.xlsx.readFile(filePath);
     const ws = wb.getWorksheet('サマリー');
-    // カテゴリ別内訳: 行17ヘッダー、行18〜データ（アルファベット順: cash_deposit → loan_lease）
-    const row18 = ws.getRow(18);
-    const row19 = ws.getRow(19);
-    assert.strictEqual(row18.getCell(1).value, 'cash_deposit', 'cash_depositが18行目でない');
-    assert.strictEqual(row18.getCell(2).value, 1, 'cash_deposit の🔴が1でない');
-    assert.strictEqual(row18.getCell(3).value, 1, 'cash_deposit の🟡が1でない');
-    assert.strictEqual(row19.getCell(1).value, 'loan_lease',   'loan_leaseが19行目でない');
-    assert.strictEqual(row19.getCell(4).value, 2, 'loan_lease の🔵が2でない');
+
+    // 行13: ヘッダー
+    assert.strictEqual(ws.getCell('A13').value, 'チェック項目', 'ヘッダーA13が違う');
+
+    // CHECK_GROUPS順: tax(14), withholding(15), advance_tax(16), bs_check(17), pl_check(18), data_tax_misc(19)
+    // cash_deposit + loan_lease は bs_check グループ（行17）
+    const bsRow = ws.getRow(17);
+    assert.strictEqual(bsRow.getCell(1).value, 'BS残高指摘', 'BS残高指摘グループが行17でない');
+    assert.strictEqual(bsRow.getCell(2).value, 1, 'BS残高チェック の🔴が1でない');
+    assert.strictEqual(bsRow.getCell(3).value, 1, 'BS残高チェック の🟡が1でない');
+    assert.strictEqual(bsRow.getCell(4).value, 2, 'BS残高チェック の🔵が2でない');
+    assert.strictEqual(bsRow.getCell(5).value, 4, 'BS残高チェック の合計が4でない');
+
+    // 合計行（行20）
+    assert.strictEqual(ws.getCell('A20').value, '合計', '合計行が行20でない');
   });
 
   // ─── テスト13: autoFilter 設定 ───
@@ -504,6 +519,158 @@ async function runTests() {
     } else {
       assert.strictEqual(linkVal, '元帳', '元帳テキストが違う');
     }
+  });
+
+  // ─── テスト17: 全グループシートが常に生成される（指摘あり/なし両方） ───
+  await test('17. CHECK_GROUPS: 全6グループシートが常に生成される', async () => {
+    const findings = [
+      mkFinding('🔴', 'BA-01', 'balance_anomaly'),
+      mkFinding('🟡', 'TC-06', 'tax_classification'),
+    ];
+    const dir = tmpDir();
+    const filePath = await generateMonthlyReport({
+      companyId: '474381', companyName: 'テスト', targetMonth: '2026-03',
+      findings, monthlyData: mkMonthlyData(), outputDir: dir,
+    });
+    const wb = new ExcelJS.Workbook();
+    await wb.xlsx.readFile(filePath);
+
+    // 指摘ありグループ: データ行がある
+    assert.ok(wb.getWorksheet('BS残高指摘'), 'BS残高指摘シートが存在しない');
+    assert.ok(wb.getWorksheet('消費税区分チェック'), '消費税区分チェックシートが存在しない');
+    // 指摘なしグループも生成される（0件メッセージ付き）
+    assert.ok(wb.getWorksheet('源泉所得税チェック'), '源泉所得税チェックシートが存在しない');
+    assert.ok(wb.getWorksheet('予定納税チェック'), '予定納税チェックシートが存在しない');
+    // 0件シートに「✅ 指摘事項はありません」が表示される
+    const wtSheet = wb.getWorksheet('源泉所得税チェック');
+    assert.strictEqual(wtSheet.getCell('A4').value, '✅ 指摘事項はありません',
+      '0件シートに指摘なしメッセージがない');
+  });
+
+  // ─── テスト18: グループシートの構造（ヘッダー・行数） ───
+  await test('18. CHECK_GROUPS: シートの構造が正しい（タイトル+ヘッダー+データ行）', async () => {
+    const findings = [
+      mkFinding('🔴', 'TC-01', 'tax_classification'),
+      mkFinding('🟡', 'TC-06', 'tax_classification'),
+    ];
+    const dir = tmpDir();
+    const filePath = await generateMonthlyReport({
+      companyId: '474381', companyName: 'テスト', targetMonth: '2026-03',
+      findings, monthlyData: mkMonthlyData(), outputDir: dir,
+    });
+    const wb = new ExcelJS.Workbook();
+    await wb.xlsx.readFile(filePath);
+    const ws = wb.getWorksheet('消費税区分チェック');
+    assert.ok(ws);
+
+    // 行1: グループ名
+    assert.strictEqual(ws.getCell('A1').value, '消費税区分チェック', 'A1がグループ名でない');
+    // 行2: 説明文
+    assert.ok(String(ws.getCell('A2').value).includes('妥当性'), 'A2に説明文がない');
+    // 行4: ヘッダー（カテゴリ列なし: 重要度, コード, 指摘内容, ...）
+    assert.strictEqual(ws.getCell('A4').value, '重要度', 'ヘッダーA4が重要度でない');
+    assert.strictEqual(ws.getCell('B4').value, 'コード', 'ヘッダーB4がコードでない');
+    assert.strictEqual(ws.getCell('C4').value, '指摘内容', 'ヘッダーC4が指摘内容でない');
+    // データ行: 2件
+    assert.strictEqual(ws.getCell('A5').value, '🔴', '5行目が🔴でない');
+    assert.strictEqual(ws.getCell('A6').value, '🟡', '6行目が🟡でない');
+  });
+
+  // ─── テスト19: findings0件でも全グループシート生成（0件メッセージ付き） ───
+  await test('19. CHECK_GROUPS: findings 0件でも全6グループシートが生成される', async () => {
+    const dir = tmpDir();
+    const filePath = await generateMonthlyReport({
+      companyId: '474381', companyName: 'テスト', targetMonth: '2026-03',
+      findings: [], monthlyData: mkMonthlyData(), outputDir: dir,
+    });
+    const wb = new ExcelJS.Workbook();
+    await wb.xlsx.readFile(filePath);
+    // 全グループシートが存在する
+    const groupNames = ['消費税区分チェック', '源泉所得税チェック', '予定納税チェック',
+                        'BS残高指摘', 'PL・期間配分チェック', 'データ品質・その他'];
+    for (const name of groupNames) {
+      const ws = wb.getWorksheet(name);
+      assert.ok(ws, `${name}シートが存在しない`);
+      assert.strictEqual(ws.getCell('A4').value, '✅ 指摘事項はありません',
+        `${name}シートに指摘なしメッセージがない`);
+    }
+  });
+
+  // ─── テスト20: inferFreeeLink — CODE_TO_ACCOUNT マッピング ───
+  await test('20. inferFreeeLink: CODE_TO_ACCOUNT の7コードで総勘定元帳リンクを生成', async () => {
+    const data = { companyId: '474381', targetMonth: '2026-03' };
+    const codes = [
+      { code: 'WT-04', account: '預り金' },
+      { code: 'AT-01', account: '法人税、住民税及び事業税' },
+      { code: 'AT-02', account: '未払消費税等' },
+      { code: 'PY-01', account: '役員報酬' },
+      { code: 'PY-02', account: '法定福利費' },
+      { code: 'OL-01', account: '役員貸付金' },
+      { code: 'RT-01', account: '地代家賃' },
+    ];
+    for (const { code, account } of codes) {
+      const link = inferFreeeLink({ checkCode: code, description: '' }, data);
+      assert.ok(link, `${code} でリンクが生成されない`);
+      assert.ok(link.includes('general_ledgers'), `${code}: 総勘定元帳リンクでない`);
+      assert.ok(link.includes(encodeURIComponent(account)),
+        `${code}: 科目名「${account}」がURLに含まれない`);
+    }
+  });
+
+  // ─── テスト21: inferFreeeLink — description から科目名抽出 ───
+  await test('21. inferFreeeLink: description「〇〇」から科目名を抽出してリンク生成', async () => {
+    const data = { companyId: '474381', targetMonth: '2026-03' };
+    // マッピングにないコードでも description から抽出
+    const f = { checkCode: 'XX-99', description: '「売掛金」の残高が異常です' };
+    const link = inferFreeeLink(f, data);
+    assert.ok(link, 'description から科目名を抽出できなかった');
+    assert.ok(link.includes(encodeURIComponent('売掛金')), 'URL に売掛金が含まれない');
+  });
+
+  // ─── テスト22: inferFreeeLink — 既存リンクは上書きしない ───
+  await test('22. inferFreeeLink: 既存 freeeLink があれば上書きしない', async () => {
+    const data = { companyId: '474381', targetMonth: '2026-03' };
+    const existing = 'https://secure.freee.co.jp/deals/12345';
+    const link = inferFreeeLink({ checkCode: 'PY-01', freeeLink: existing }, data);
+    assert.strictEqual(link, existing, '既存リンクが上書きされた');
+  });
+
+  // ─── テスト23: isValidFreeeLink — 有効/無効URL判定 ───
+  await test('23. isValidFreeeLink: 有効・無効URLの判定', async () => {
+    assert.strictEqual(isValidFreeeLink('https://secure.freee.co.jp/deals/123'), true);
+    assert.strictEqual(isValidFreeeLink('https://secure.freee.co.jp/reports/general_ledgers/show?name=売上高'), true);
+    assert.strictEqual(isValidFreeeLink(null), false);
+    assert.strictEqual(isValidFreeeLink(undefined), false);
+    assert.strictEqual(isValidFreeeLink(''), false);
+    assert.strictEqual(isValidFreeeLink('http://example.com'), false, 'freee.co.jp 以外は無効');
+    assert.strictEqual(isValidFreeeLink('not a url'), false);
+    assert.strictEqual(isValidFreeeLink(12345), false, '数値は無効');
+  });
+
+  // ─── テスト24: freeeLink推定がExcel出力に反映される ───
+  await test('24. freeeLink推定がExcel出力のハイパーリンクに反映される', async () => {
+    const findings = [
+      mkFinding('🔴', 'PY-01', 'payroll'),  // CODE_TO_ACCOUNT に該当 → リンク生成
+    ];
+    // freeeLink を明示的に空にする
+    findings[0].freeeLink = '';
+    const dir = tmpDir();
+    const filePath = await generateMonthlyReport({
+      companyId: '474381', companyName: 'テスト', targetMonth: '2026-03',
+      findings, monthlyData: mkMonthlyData(), outputDir: dir,
+    });
+    const wb = new ExcelJS.Workbook();
+    await wb.xlsx.readFile(filePath);
+    const ws = wb.getWorksheet('指摘一覧');
+    // G2（最初のデータ行のfreeeリンク列）にハイパーリンクが設定されているか
+    const linkCell = ws.getCell('G2');
+    const val = linkCell.value;
+    assert.ok(val && typeof val === 'object' && val.hyperlink,
+      `PY-01 の freeeLink が推定・設定されていない: ${JSON.stringify(val)}`);
+    assert.ok(val.hyperlink.includes('general_ledgers'),
+      `推定リンクが総勘定元帳でない: ${val.hyperlink}`);
+    assert.ok(val.hyperlink.includes(encodeURIComponent('役員報酬')),
+      `推定リンクに役員報酬が含まれない: ${val.hyperlink}`);
   });
 
   // ─── 結果集計 ───

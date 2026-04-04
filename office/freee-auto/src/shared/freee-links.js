@@ -203,6 +203,72 @@ function buildBalanceLink(companyId, accountItemName, accountItemId, endDate, pa
   });
 }
 
+// ============================================================
+// 税区分フィルタ付き総勘定元帳リンク
+// ============================================================
+
+/**
+ * freee tax_code → freee Web画面 URLパラメータの対応マッピング
+ *
+ * freee APIのtax_codeと、freee Web画面の総勘定元帳URLで使うフィルタパラメータの対応。
+ * 注意: このマッピングの正確性はfreee Web画面で実際に確認する必要がある。
+ *       段階的に追加・修正していく想定。
+ */
+const TAX_CODE_TO_URL_PARAMS = {
+  // === 対象外・非課税 ===
+  0:   { taxGroupCode: 0 },                                          // 対象外
+  2:   { taxGroupCode: 0 },                                          // 対象外（別コード）
+
+  // === 課税仕入（標準税率10%）===
+  34:  { taxGroupCode: 34, taxRate: 10, taxReduced: false },          // 課対仕入10%
+  136: { taxGroupCode: 34, taxRate: 10, taxReduced: false },          // 課対仕入10%（別コード）
+
+  // === 課税仕入（軽減税率8%）===
+  163: { taxGroupCode: 34, taxRate: 8, taxReduced: true },            // 課対仕入8%軽減
+
+  // === 課税仕入（控除率指定）===
+  189: { taxGroupCode: 34, taxRate: 10, taxDeductionRate: 80, taxReduced: false },  // 課対仕入(控80)10%
+  190: { taxGroupCode: 34, taxRate: 10, taxDeductionRate: 50, taxReduced: false },  // 課対仕入(控50)10%
+
+  // === 非課税仕入 ===
+  37:  { taxGroupCode: 37 },                                          // 非課仕入
+
+  // === 売上系 ===
+  23:  { taxGroupCode: 23 },                                          // 非課売上
+  129: { taxGroupCode: 21, taxRate: 10, taxReduced: false },          // 課税売上10%
+};
+
+/**
+ * 税区分フィルタ付き総勘定元帳リンクを生成
+ *
+ * @param {string|number} companyId - freee事業所ID
+ * @param {string} accountName - 勘定科目名（日本語）
+ * @param {string} startDate - 'YYYY-MM-DD'
+ * @param {string} endDate - 'YYYY-MM-DD'
+ * @param {Object} [options] - generalLedgerLink のオプション（fiscalYearId, partnerId）
+ * @param {Object} taxFilter - 税区分フィルタパラメータ
+ * @param {number} [taxFilter.taxGroupCode] - 税区分グループコード（0=対象外, 34=課対仕入等）
+ * @param {number} [taxFilter.taxRate] - 税率（10, 8）
+ * @param {number} [taxFilter.taxDeductionRate] - 控除率（80, 50）
+ * @param {boolean} [taxFilter.taxReduced] - 軽減税率フラグ
+ * @returns {string} フィルタ付きfreee総勘定元帳URL
+ */
+function generalLedgerLinkWithTaxFilter(companyId, accountName, startDate, endDate, options, taxFilter) {
+  const baseUrl = generalLedgerLink(companyId, accountName, startDate, endDate, options);
+
+  if (!taxFilter) return baseUrl;
+
+  const extra = new URLSearchParams();
+  if (taxFilter.taxGroupCode != null) extra.set('tax_group_codes', String(taxFilter.taxGroupCode));
+  if (taxFilter.taxRate != null) extra.set('tax_rate', String(taxFilter.taxRate));
+  if (taxFilter.taxDeductionRate != null) extra.set('tax_deduction_rate', String(taxFilter.taxDeductionRate));
+  if (taxFilter.taxReduced != null) extra.set('tax_reduced', String(taxFilter.taxReduced));
+
+  const extraStr = extra.toString();
+  if (!extraStr) return baseUrl;
+  return `${baseUrl}&${extraStr}`;
+}
+
 // 期首日を 'YYYY-MM-DD' 形式で返す
 function formatFiscalStartDate(fiscalYear, startMonth) {
   return `${fiscalYear}-${String(startMonth).padStart(2, '0')}-01`;
@@ -217,6 +283,8 @@ module.exports = {
   trialBsDetailLink,
   journalsByAccountLink,
   generalLedgerLink,
+  generalLedgerLinkWithTaxFilter,
+  TAX_CODE_TO_URL_PARAMS,
   determineLinkStartDate,
   buildBalanceLink,
   formatFiscalStartDate,

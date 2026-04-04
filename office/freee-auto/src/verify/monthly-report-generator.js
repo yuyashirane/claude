@@ -32,79 +32,42 @@ const {
   buildBalanceLink,
 } = require('../shared/freee-links');
 
-// ============================================================
-// スタイル定義（源泉チェックレポートと統一）
-// ============================================================
+// report-config/ から分離済み定数・ヘルパーを読み込み
+const {
+  COLORS, FONTS, BORDER_THIN,
+  DETAIL_ROW_FILL, DETAIL_ROW_FONT, DETAIL_LINK_FONT, LINK_FONT,
+  NUM_FMT, SEVERITY_ORDER,
+} = require('./report-config/styles');
 
-const COLORS = {
-  headerBg:       'FF2F5496', // ヘッダー背景（紺色: 源泉チェックレポートと同一）
-  headerFont:     'FFFFFFFF', // ヘッダー文字（白）
-  severityHigh:   'FFFFC7CE', // 🔴 薄赤
-  severityMed:    'FFFFEB9C', // 🟡 薄黄
-  severityLow:    'FFC6EFCE', // 🔵 薄緑
-  negative:       'FFFFC7CE', // マイナス値
-  warning:        'FFFFEB9C', // 警告（前月比異常等）
-  targetMonthBg:  'FFE8EEF7', // 対象月ハイライト（薄青）
-  targetMonthHdr: 'FF1F3864', // 対象月ヘッダー（濃紺）
-  zeroText:       'FF999999', // ゼロ値テキスト（グレー）
-  tabRed:         'FFCC0000',
-  tabBlue:        'FF2980B9',
-  tabGray:        'FF95A5A6',
-  tabGreen:       'FF27AE60',
-};
+const {
+  CATEGORY_LABELS, CATEGORY_ORDER, CHECK_GROUPS, CHECK_CODE_LABELS,
+  getCategoryLabel,
+} = require('./report-config/labels');
 
-const FONTS = {
-  title:    { name: 'Meiryo UI', size: 14, bold: true },
-  subtitle: { name: 'Meiryo UI', size: 11 },
-  header:   { name: 'Meiryo UI', size: 10, bold: true, color: { argb: COLORS.headerFont } },
-  body:     { name: 'Meiryo UI', size: 10 },
-  bodyBold: { name: 'Meiryo UI', size: 10, bold: true },
-};
-
-const BORDER_THIN = {
-  top:    { style: 'thin' },
-  left:   { style: 'thin' },
-  bottom: { style: 'thin' },
-  right:  { style: 'thin' },
-};
-
-// details 子行スタイル
-const DETAIL_ROW_FILL = { type: 'pattern', pattern: 'solid', fgColor: { argb: 'FFF5F5F5' } };
-const DETAIL_ROW_FONT = { name: 'Meiryo UI', size: 9, color: { argb: 'FF666666' } };
-const DETAIL_LINK_FONT = { name: 'Meiryo UI', size: 9, color: { argb: 'FF0066CC' }, underline: true };
-const LINK_FONT = { name: 'Meiryo UI', size: 10, color: { argb: 'FF0066CC' }, underline: true };
-
-const NUM_FMT = '#,##0';
-
-// severity の表示順 (🔴→🟡→🔵)
-const SEVERITY_ORDER = { '🔴': 0, '🟡': 1, '🔵': 2 };
-
-/** リンクURLからリンク種別に応じた表示テキストを返す */
-function getLinkDisplayText(url) {
-  if (!url) return '';
-  if (url.includes('deal_id=')) return '仕訳を開く';
-  if (url.includes('general_ledgers')) return '元帳を開く';
-  if (url.includes('journals')) return '仕訳帳を開く';
-  return 'freeeで開く';
-}
-
-/** 子行リンクの表示テキスト */
-function getDetailLinkText(url) {
-  if (!url) return '';
-  if (url.includes('deal_id=')) return '取引を開く';
-  if (url.includes('general_ledgers')) return '元帳を開く';
-  return '開く';
-}
+const {
+  CODE_TO_ACCOUNT,
+  getMonthRange,
+  extractAccountNameFromDescription,
+  inferFreeeLink,
+  isValidFreeeLink,
+  getLinkDisplayText,
+  getDetailLinkText,
+} = require('./report-config/link-mappings');
 
 // ============================================================
 // ヘルパー
 // ============================================================
 
-function getOutputPath(companyId, targetMonth, outputDir) {
+function getOutputPath(companyId, targetMonth, outputDir, companyName) {
   const dir = outputDir || path.join(process.cwd(), 'reports', String(companyId));
   fs.mkdirSync(dir, { recursive: true });
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
-  return path.join(dir, `monthly_check_${targetMonth}_${timestamp}.xlsx`);
+  // 事業所名をファイル名に含める（取得できない場合はcompanyIdでフォールバック）
+  const safeCompanyName = (companyName || String(companyId))
+    .replace(/[\\/:*?"<>|]/g, '')  // Windowsのファイル名禁止文字
+    .replace(/\s+/g, '_')          // スペースをアンダースコアに
+    .slice(0, 30);                 // 長すぎる場合は切り詰め
+  return path.join(dir, `${safeCompanyName}_帳簿チェック_${targetMonth}_${timestamp}.xlsx`);
 }
 
 function fillCell(cell, argb) {
@@ -128,15 +91,6 @@ function colLetter(n) {
   return letter;
 }
 
-/** 'YYYY-MM' → { start: 'YYYY-MM-01', end: 'YYYY-MM-DD(末日)' } */
-function getMonthRange(monthStr) {
-  const [year, month] = monthStr.split('-').map(Number);
-  const start = `${year}-${String(month).padStart(2, '0')}-01`;
-  const lastDay = new Date(year, month, 0).getDate();
-  const end = `${year}-${String(month).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
-  return { start, end };
-}
-
 /** ヘッダースタイル適用（指定範囲のセル） */
 function styleHeaderCells(row, from, to) {
   for (let i = from; i <= to; i++) {
@@ -158,106 +112,184 @@ function createSummarySheet(wb, { companyName, companyId, targetMonth, findings 
     properties: { tabColor: { argb: COLORS.headerBg } },
   });
 
-  ws.getColumn('A').width = 30;
-  ws.getColumn('B').width = 40;
-  ws.getColumn('C').width = 8;
-  ws.getColumn('D').width = 8;
-  ws.getColumn('E').width = 8;
+  // 列幅
+  ws.getColumn('A').width = 24;
+  ws.getColumn('B').width = 14;
+  ws.getColumn('C').width = 14;
+  ws.getColumn('D').width = 14;
+  ws.getColumn('E').width = 10;
 
   // ── 行1: タイトル ──
-  ws.mergeCells('A1:G1');
+  ws.mergeCells('A1:F1');
   const title = ws.getCell('A1');
-  title.value     = `${companyName} 月次チェックレポート`;
-  title.font      = FONTS.title;
-  title.alignment = { horizontal: 'center' };
+  title.value     = `${companyName} 帳簿チェックレポート`;
+  title.font      = { name: 'Meiryo UI', size: 16, bold: true };
+  title.alignment = { horizontal: 'left' };
 
-  // ── 行2: サブタイトル ──
+  // ── 行3〜4: メタ情報 ──
   const [y, m] = targetMonth.split('-').map(Number);
   const now     = new Date();
-  const dateStr = `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日`;
-  ws.getCell('A2').value = `対象月: ${y}年${m}月 / チェック実行日: ${dateStr}`;
-  ws.getCell('A2').font  = FONTS.subtitle;
+  ws.getCell('A3').value = '対象月';
+  ws.getCell('A3').font  = FONTS.body;
+  ws.getCell('B3').value = `${y}年${m}月`;
+  ws.getCell('B3').font  = FONTS.bodyBold;
+  ws.getCell('A4').value = 'チェック実行日';
+  ws.getCell('A4').font  = FONTS.body;
+  ws.getCell('B4').value = `${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日`;
+  ws.getCell('B4').font  = FONTS.bodyBold;
 
-  // ── 行4: 判定凡例 ──
-  ws.getCell('A4').value = '【判定凡例】';
-  ws.getCell('A4').font  = FONTS.bodyBold;
+  // ── 行6: 指摘サマリー ──
+  ws.getCell('A6').value = '指摘サマリー';
+  ws.getCell('A6').font  = { name: 'Meiryo UI', size: 13, bold: true };
 
-  const legends = [
-    ['🔴 要修正', '記帳誤りまたは修正が必要な項目', COLORS.severityHigh],
-    ['🟡 要確認', '確認が必要な項目',               COLORS.severityMed],
-    ['🔵 情報',   '参考情報',                       COLORS.severityLow],
-  ];
-  legends.forEach(([label, desc, color], i) => {
-    const row = 5 + i;
-    ws.getCell(`A${row}`).value = label;
-    ws.getCell(`A${row}`).font  = FONTS.body;
-    fillCell(ws.getCell(`A${row}`), color);
-    ws.getCell(`B${row}`).value = desc;
-    ws.getCell(`B${row}`).font  = FONTS.body;
+  // 行8: ヘッダー（紺背景・白文字）
+  const sevLabels = ['', '🔴要修正', '🟡要確認', '🔵情報'];
+  sevLabels.forEach((label, i) => {
+    ws.getRow(8).getCell(i + 1).value = label;
   });
+  styleHeaderCells(ws.getRow(8), 1, 4);
 
-  // ── 行9: 指摘サマリー ──
-  ws.getCell('A9').value = '【指摘サマリー】';
+  // 行9: 数値行（大きなフォント + 重要度色背景）
+  const redCount    = findings.filter(f => f.severity === '🔴').length;
+  const yellowCount = findings.filter(f => f.severity === '🟡').length;
+  const blueCount   = findings.filter(f => f.severity === '🔵').length;
+
+  ws.getCell('A9').value = '件数';
   ws.getCell('A9').font  = FONTS.bodyBold;
+  ws.getCell('A9').border = BORDER_THIN;
 
-  // 行10: ヘッダー
-  ws.getCell('A10').value = '重要度';
-  ws.getCell('B10').value = '件数';
-  styleHeaderCells(ws.getRow(10), 1, 2);
-
-  // 行11-13: 重要度別件数
-  const sevRows = [
-    ['🔴 重大', findings.filter(f => f.severity === '🔴').length, COLORS.severityHigh],
-    ['🟡 警告', findings.filter(f => f.severity === '🟡').length, COLORS.severityMed],
-    ['🔵 情報', findings.filter(f => f.severity === '🔵').length, COLORS.severityLow],
+  const sevData = [
+    { col: 'B', count: redCount,    bg: 'FFFFE0E0' },
+    { col: 'C', count: yellowCount, bg: 'FFFFFFD0' },
+    { col: 'D', count: blueCount,   bg: 'FFE0E8FF' },
   ];
-  sevRows.forEach(([label, cnt, color], i) => {
-    const row = 11 + i;
-    ws.getCell(`A${row}`).value = label;
-    ws.getCell(`A${row}`).font  = FONTS.body;
-    ws.getCell(`B${row}`).value = cnt;
-    ws.getCell(`B${row}`).font  = FONTS.body;
-    fillCell(ws.getCell(`A${row}`), color);
-    fillCell(ws.getCell(`B${row}`), color);
+  for (const { col, count, bg } of sevData) {
+    const cell = ws.getCell(`${col}9`);
+    cell.value     = count;
+    cell.font      = { name: 'Meiryo UI', size: 24, bold: true };
+    cell.alignment = { horizontal: 'center', vertical: 'middle' };
+    cell.border    = BORDER_THIN;
+    fillCell(cell, bg);
+  }
+  ws.getRow(9).height = 40;
+
+  // ── 行11: チェック項目別内訳 ──
+  ws.getCell('A11').value = 'チェック項目別内訳';
+  ws.getCell('A11').font  = { name: 'Meiryo UI', size: 13, bold: true };
+
+  // 行13: ヘッダー
+  const grpHeaders = ['チェック項目', '🔴', '🟡', '🔵', '合計'];
+  grpHeaders.forEach((h, i) => {
+    ws.getRow(13).getCell(i + 1).value = h;
   });
+  styleHeaderCells(ws.getRow(13), 1, 5);
 
-  // 行14: 合計
-  ws.getCell('A14').value = '合計';
-  ws.getCell('A14').font  = FONTS.bodyBold;
-  ws.getCell('B14').value = findings.length;
-  ws.getCell('B14').font  = FONTS.bodyBold;
+  // 行14〜: CHECK_GROUPS 別データ
+  let grpRow = 14;
+  for (const group of CHECK_GROUPS) {
+    const grpFindings = findings.filter(f => group.categories.includes(f.category));
+    const r = grpFindings.filter(f => f.severity === '🔴').length;
+    const y2 = grpFindings.filter(f => f.severity === '🟡').length;
+    const b = grpFindings.filter(f => f.severity === '🔵').length;
+    const total = grpFindings.length;
 
-  // ── 行16: カテゴリ別内訳 ──
-  ws.getCell('A16').value = '【カテゴリ別内訳】';
-  ws.getCell('A16').font  = FONTS.bodyBold;
-
-  // 行17: ヘッダー
-  const catHeaders = ['カテゴリ', '🔴', '🟡', '🔵', '合計'];
-  catHeaders.forEach((h, i) => {
-    ws.getRow(17).getCell(i + 1).value = h;
-  });
-  styleHeaderCells(ws.getRow(17), 1, 5);
-
-  // 行18〜: カテゴリ別データ
-  const categories = [...new Set(findings.map(f => f.category))].sort();
-  categories.forEach((cat, i) => {
-    const row = 18 + i;
-    const catFindings = findings.filter(f => f.category === cat);
-    ws.getCell(`A${row}`).value = cat;
-    ws.getCell(`B${row}`).value = catFindings.filter(f => f.severity === '🔴').length;
-    ws.getCell(`C${row}`).value = catFindings.filter(f => f.severity === '🟡').length;
-    ws.getCell(`D${row}`).value = catFindings.filter(f => f.severity === '🔵').length;
-    ws.getCell(`E${row}`).value = catFindings.length;
+    ws.getCell(`A${grpRow}`).value = group.label;
+    ws.getCell(`B${grpRow}`).value = r || '-';
+    ws.getCell(`C${grpRow}`).value = y2 || '-';
+    ws.getCell(`D${grpRow}`).value = b || '-';
+    ws.getCell(`E${grpRow}`).value = total || '-';
     ['A', 'B', 'C', 'D', 'E'].forEach(col => {
-      ws.getCell(`${col}${row}`).font   = FONTS.body;
-      ws.getCell(`${col}${row}`).border = BORDER_THIN;
+      ws.getCell(`${col}${grpRow}`).font   = FONTS.body;
+      ws.getCell(`${col}${grpRow}`).border = BORDER_THIN;
+      if (col !== 'A') {
+        ws.getCell(`${col}${grpRow}`).alignment = { horizontal: 'center' };
+      }
     });
+    grpRow++;
+  }
+
+  // 合計行（上罫線で区切り）
+  const totalRow = grpRow;
+  ws.getCell(`A${totalRow}`).value = '合計';
+  ws.getCell(`B${totalRow}`).value = redCount || '-';
+  ws.getCell(`C${totalRow}`).value = yellowCount || '-';
+  ws.getCell(`D${totalRow}`).value = blueCount || '-';
+  ws.getCell(`E${totalRow}`).value = findings.length || '-';
+  ['A', 'B', 'C', 'D', 'E'].forEach(col => {
+    const cell = ws.getCell(`${col}${totalRow}`);
+    cell.font   = FONTS.bodyBold;
+    cell.border = {
+      top:    { style: 'medium' },
+      left:   { style: 'thin' },
+      bottom: { style: 'thin' },
+      right:  { style: 'thin' },
+    };
+    if (col !== 'A') cell.alignment = { horizontal: 'center' };
   });
+
+  // ── チェック実行結果 ──
+  const checkTitleRow = totalRow + 2;
+  ws.getCell(`A${checkTitleRow}`).value = 'チェック実行結果';
+  ws.getCell(`A${checkTitleRow}`).font  = { name: 'Meiryo UI', size: 13, bold: true };
+
+  // ヘッダー
+  const checkHeaderRow = checkTitleRow + 2;
+  const chkHeaders = ['コード', 'チェック名', '結果', '件数'];
+  chkHeaders.forEach((h, i) => {
+    ws.getRow(checkHeaderRow).getCell(i + 1).value = h;
+  });
+  styleHeaderCells(ws.getRow(checkHeaderRow), 1, 4);
+
+  // findingsのcheckCodeをカウント
+  const codeCountMap = {};
+  for (const f of findings) {
+    codeCountMap[f.checkCode] = (codeCountMap[f.checkCode] || 0) + 1;
+  }
+
+  // 全チェックコード行
+  let chkRow = checkHeaderRow + 1;
+  for (const [code, label] of Object.entries(CHECK_CODE_LABELS)) {
+    const cnt = codeCountMap[code] || 0;
+    const result = cnt > 0 ? '⚠️' : '✅';
+
+    ws.getCell(`A${chkRow}`).value = code;
+    ws.getCell(`B${chkRow}`).value = label;
+    ws.getCell(`C${chkRow}`).value = result;
+    ws.getCell(`D${chkRow}`).value = cnt;
+    ['A', 'B', 'C', 'D'].forEach(col => {
+      ws.getCell(`${col}${chkRow}`).font   = FONTS.body;
+      ws.getCell(`${col}${chkRow}`).border = BORDER_THIN;
+    });
+    ws.getCell(`C${chkRow}`).alignment = { horizontal: 'center' };
+    ws.getCell(`D${chkRow}`).alignment = { horizontal: 'center' };
+
+    // 指摘ありの行を薄黄ハイライト
+    if (cnt > 0) {
+      ['A', 'B', 'C', 'D'].forEach(col => {
+        fillCell(ws.getCell(`${col}${chkRow}`), COLORS.severityMed);
+      });
+    }
+    chkRow++;
+  }
 }
 
 // ============================================================
 // Sheet 2: 指摘一覧
 // ============================================================
+
+/**
+ * 親行の description を要約する（details がある場合のみ）
+ * details の取引先列挙部分を除去し、概要のみにする
+ */
+function truncateParentDescription(finding) {
+  if (!finding.details || finding.details.length === 0) {
+    return finding.description || '';
+  }
+  const desc = finding.description || '';
+  // 「。」の後に「取引先」「内訳」等が続く場合、最初の文で切る
+  const firstSentence = desc.split(/。\s*(?:取引先|内訳)/)[0];
+  return firstSentence.endsWith('。') ? firstSentence : firstSentence + '。';
+}
 
 function createFindingsSheet(wb, { findings }) {
   const ws = wb.addWorksheet('指摘一覧', {
@@ -282,15 +314,17 @@ function createFindingsSheet(wb, { findings }) {
 
   let totalRows = 0;
   for (const f of sorted) {
+    const hasDetails = Array.isArray(f.details) && f.details.length > 0;
+
     // ── 親行 ──
     const row = ws.addRow({
       severity:       f.severity      || '',
       checkCode:      f.checkCode     || '',
-      category:       f.category      || '',
-      description:    f.description   || '',
+      category:       getCategoryLabel(f.category),
+      description:    truncateParentDescription(f),
       currentValue:   f.currentValue  || '',
       suggestedValue: f.suggestedValue || '',
-      freeeLink:      f.freeeLink ? getLinkDisplayText(f.freeeLink) : '',
+      freeeLink:      '',
     });
     const color = severityFill(f.severity);
     row.eachCell((cell) => {
@@ -304,20 +338,19 @@ function createFindingsSheet(wb, { findings }) {
     row.getCell(6).alignment = { wrapText: true, vertical: 'top' };
 
     // freeeLink をハイパーリンクに変換（列 G = 7）
-    if (f.freeeLink) {
-      const linkText = getLinkDisplayText(f.freeeLink);
+    if (isValidFreeeLink(f.freeeLink)) {
       const linkCell = row.getCell(7);
-      linkCell.value = { text: linkText, hyperlink: f.freeeLink };
-      linkCell.font  = DETAIL_LINK_FONT;
+      linkCell.value = { text: 'freeeで確認', hyperlink: f.freeeLink };
+      linkCell.font  = LINK_FONT;
     }
     totalRows++;
 
     // ── details 子行 ──
-    if (Array.isArray(f.details) && f.details.length > 0) {
+    if (hasDetails) {
       for (const detail of f.details) {
         const dateStr = detail.date || '';
         const desc    = detail.description || '';
-        const prefix  = dateStr ? `    └ ${dateStr}  ${desc}` : `    └ ${desc}`;
+        const prefix  = dateStr ? `\u3000\u3000${dateStr}  ${desc}` : `\u3000\u3000${desc}`;
         const amtStr  = detail.amount != null ? `${detail.amount.toLocaleString()}円` : '';
 
         const detailRow = ws.addRow({
@@ -327,7 +360,7 @@ function createFindingsSheet(wb, { findings }) {
           description:    prefix,
           currentValue:   amtStr,
           suggestedValue: detail.counterAccount || '',
-          freeeLink:      detail.freeeLink ? getDetailLinkText(detail.freeeLink) : '',
+          freeeLink:      '',
         });
 
         detailRow.eachCell((cell) => {
@@ -340,10 +373,9 @@ function createFindingsSheet(wb, { findings }) {
         detailRow.getCell(4).alignment = { wrapText: true, vertical: 'top' };
         detailRow.getCell(6).alignment = { wrapText: true, vertical: 'top' };
 
-        if (detail.freeeLink) {
-          const detailLinkText = getDetailLinkText(detail.freeeLink);
+        if (isValidFreeeLink(detail.freeeLink)) {
           const linkCell = detailRow.getCell(7);
-          linkCell.value = { text: detailLinkText, hyperlink: detail.freeeLink };
+          linkCell.value = { text: '明細を開く', hyperlink: detail.freeeLink };
           linkCell.font  = DETAIL_LINK_FONT;
         }
         totalRows++;
@@ -739,6 +771,127 @@ function createPartnerSheet(wb, { monthlyData }) {
 }
 
 // ============================================================
+// チェック項目別シート（CHECK_GROUPS単位で自動生成）
+// ============================================================
+
+/**
+ * CHECK_GROUPS ごとの指摘専用シートを生成する
+ * 0件のグループも生成し「✅ 指摘事項はありません」を表示
+ */
+function createGroupSheets(wb, { findings }) {
+  for (const group of CHECK_GROUPS) {
+    const groupFindings = findings.filter(f => group.categories.includes(f.category));
+
+    // シート名は31文字制限
+    const sheetName = group.label.slice(0, 31);
+    const ws = wb.addWorksheet(sheetName, {
+      properties: { tabColor: { argb: groupFindings.length > 0 ? COLORS.tabRed : COLORS.tabGreen } },
+    });
+
+    // 列幅設定
+    ws.getColumn(1).width = 8;
+    ws.getColumn(2).width = 10;
+    ws.getColumn(3).width = 70;
+    ws.getColumn(4).width = 18;
+    ws.getColumn(5).width = 40;
+    ws.getColumn(6).width = 14;
+
+    // ── ヘッダーエリア ──
+    ws.mergeCells('A1:F1');
+    ws.getCell('A1').value     = group.label;
+    ws.getCell('A1').font      = { name: 'Meiryo UI', size: 13, bold: true };
+    ws.getCell('A1').alignment = { horizontal: 'left' };
+
+    ws.getCell('A2').value = group.description;
+    ws.getCell('A2').font  = { name: 'Meiryo UI', size: 9, color: { argb: 'FF888888' } };
+
+    // 0件の場合: 「✅ 指摘事項はありません」を表示して終了
+    if (groupFindings.length === 0) {
+      ws.getCell('A4').value = '✅ 指摘事項はありません';
+      ws.getCell('A4').font  = { name: 'Meiryo UI', size: 12, bold: true, color: { argb: 'FF2E7D32' } };
+      continue;
+    }
+
+    // 行4: テーブルヘッダー（カテゴリ列省略）
+    const headers = ['重要度', 'コード', '指摘内容', '現在の値', '推奨値/基準', 'freeeリンク'];
+    const headerRow = ws.getRow(4);
+    headers.forEach((h, i) => { headerRow.getCell(i + 1).value = h; });
+    styleHeaderCells(headerRow, 1, 6);
+
+    // ── データ行（severity ソート） ──
+    const sorted = [...groupFindings].sort(
+      (a, b) => (SEVERITY_ORDER[a.severity] ?? 3) - (SEVERITY_ORDER[b.severity] ?? 3)
+    );
+
+    let totalRows = 0;
+    for (const f of sorted) {
+      const hasDetails = Array.isArray(f.details) && f.details.length > 0;
+
+      // 親行
+      const row = ws.addRow([
+        f.severity      || '',
+        f.checkCode     || '',
+        truncateParentDescription(f),
+        f.currentValue  || '',
+        f.suggestedValue || '',
+        '',
+      ]);
+      const color = severityFill(f.severity);
+      row.eachCell((cell) => {
+        cell.font   = FONTS.body;
+        cell.border = BORDER_THIN;
+        fillCell(cell, color);
+      });
+      row.getCell(3).alignment = { wrapText: true, vertical: 'top' };
+      row.getCell(5).alignment = { wrapText: true, vertical: 'top' };
+
+      if (isValidFreeeLink(f.freeeLink)) {
+        const linkCell = row.getCell(6);
+        linkCell.value = { text: 'freeeで確認', hyperlink: f.freeeLink };
+        linkCell.font  = LINK_FONT;
+      }
+      totalRows++;
+
+      // 子行
+      if (hasDetails) {
+        for (const detail of f.details) {
+          const dateStr = detail.date || '';
+          const desc    = detail.description || '';
+          const prefix  = dateStr ? `\u3000\u3000${dateStr}  ${desc}` : `\u3000\u3000${desc}`;
+          const amtStr  = detail.amount != null ? `${detail.amount.toLocaleString()}円` : '';
+
+          const detailRow = ws.addRow([
+            '',
+            '',
+            prefix,
+            amtStr,
+            detail.counterAccount || '',
+            '',
+          ]);
+          detailRow.eachCell((cell) => {
+            cell.fill   = DETAIL_ROW_FILL;
+            cell.font   = DETAIL_ROW_FONT;
+            cell.border = BORDER_THIN;
+          });
+          detailRow.getCell(3).alignment = { wrapText: true, vertical: 'top' };
+          detailRow.getCell(5).alignment = { wrapText: true, vertical: 'top' };
+
+          if (isValidFreeeLink(detail.freeeLink)) {
+            const linkCell = detailRow.getCell(6);
+            linkCell.value = { text: '明細を開く', hyperlink: detail.freeeLink };
+            linkCell.font  = DETAIL_LINK_FONT;
+          }
+          totalRows++;
+        }
+      }
+    }
+
+    ws.autoFilter = { from: 'A4', to: `F${totalRows + 4}` };
+    ws.views = [{ state: 'frozen', ySplit: 4 }];
+  }
+}
+
+// ============================================================
 // メイン: generateMonthlyReport
 // ============================================================
 
@@ -766,17 +919,26 @@ async function generateMonthlyReport(params) {
     outputDir,
   } = params;
 
+  // freeeLink が null の指摘にリンクを推定付与
+  const enrichedFindings = findings.map(f => {
+    if (f.freeeLink) return f;
+    const inferred = inferFreeeLink(f, monthlyData);
+    if (inferred) return { ...f, freeeLink: inferred };
+    return f;
+  });
+
   const wb = new ExcelJS.Workbook();
   wb.creator = 'freee-auto (Claude Code)';
   wb.created = new Date();
 
-  createSummarySheet (wb, { companyName, companyId, targetMonth, findings });
-  createFindingsSheet(wb, { findings });
+  createSummarySheet (wb, { companyName, companyId, targetMonth, findings: enrichedFindings });
+  createFindingsSheet(wb, { findings: enrichedFindings });
+  createGroupSheets  (wb, { findings: enrichedFindings });
   createBsSheet      (wb, { monthlyData, companyId });
   createPlSheet      (wb, { monthlyData, plTrend, companyId });
   createPartnerSheet (wb, { monthlyData });
 
-  const filePath = getOutputPath(companyId, targetMonth, outputDir);
+  const filePath = getOutputPath(companyId, targetMonth, outputDir, companyName);
   await wb.xlsx.writeFile(filePath);
 
   return filePath;
@@ -786,4 +948,4 @@ async function generateMonthlyReport(params) {
 // エクスポート
 // ============================================================
 
-module.exports = { generateMonthlyReport };
+module.exports = { generateMonthlyReport, inferFreeeLink, isValidFreeeLink };

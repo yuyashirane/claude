@@ -33,6 +33,9 @@ const { revenueReceivableCheck } = require('./monthly-checks/revenue-receivable'
 const { purchasePayableCheck }   = require('./monthly-checks/purchase-payable');   // Step 5: JC3-1〜JC3-4
 const { balanceAnomalyCheck }    = require('./monthly-checks/balance-anomaly');    // Step N: BA-01〜BA-05
 const { periodAllocationCheck } = require('./monthly-checks/period-allocation'); // Step N: PA-01〜PA-08
+const { taxClassificationCheck } = require('./monthly-checks/tax-classification'); // TC-01〜TC-08
+const { withholdingTaxCheck }    = require('./monthly-checks/withholding-tax');    // WT-01〜WT-06
+const { advanceTaxPaymentCheck } = require('./monthly-checks/advance-tax-payment'); // AT-01〜AT-03
 
 // ============================================================
 // Finding 型定義（JSDoc）
@@ -188,6 +191,9 @@ async function monthlyCheck(companyId, targetMonth, options = {}) {
   findings.push(...purchasePayableCheck(data));    // Step 5: PP-01〜PP-04
   findings.push(...balanceAnomalyCheck(data));     // Step N: BA-01〜BA-05（ドリルダウン）
   findings.push(...periodAllocationCheck(data));  // Step N: PA-01〜PA-08（期間配分）
+  findings.push(...taxClassificationCheck(data)); // TC-01〜TC-08（消費税区分）
+  findings.push(...withholdingTaxCheck(data));    // WT-01〜WT-06（源泉所得税）
+  findings.push(...advanceTaxPaymentCheck(data)); // AT-01〜AT-03（予定納税）
 
   // ────────────────────────────────────
   // 3. サマリー生成・出力
@@ -249,22 +255,41 @@ async function monthlyCheck(companyId, targetMonth, options = {}) {
 // ============================================================
 
 if (require.main === module) {
+  const { resolveCompanyId } = require('../shared/company-resolver');
+
   const args = process.argv.slice(2);
-  let companyId, targetMonthArg;
+  let companyId, companyNameArg, targetMonthArg;
   let dryRun = true; // デフォルトはdryRun
 
   for (let i = 0; i < args.length; i++) {
     if (args[i] === '--company'      && args[i + 1]) companyId = args[i + 1];
+    if (args[i] === '--company-name' && args[i + 1]) companyNameArg = args[i + 1];
     if (args[i] === '--month'        && args[i + 1]) targetMonthArg = args[i + 1];
     if (args[i] === '--no-dry-run')  dryRun = false;
     if (args[i] === '--dry-run')     dryRun = true;
   }
 
+  // --company-name が指定された場合、company-map.json から company ID を解決
+  if (!companyId && companyNameArg) {
+    const resolved = resolveCompanyId(companyNameArg);
+    if (resolved) {
+      companyId = resolved.companyId;
+      console.log(`顧問先名「${companyNameArg}」→ ${resolved.companyName} (ID: ${resolved.companyId})`);
+    } else {
+      console.error(`エラー: 「${companyNameArg}」に一致する顧問先が見つかりません。`);
+      console.error('data/company-map.json にエントリを追加してください。');
+      process.exit(1);
+    }
+  }
+
   if (!companyId || !targetMonthArg) {
-    console.error('使用方法: node src/verify/monthly-checker.js --company {id} --month YYYY-MM|auto [--no-dry-run]');
-    console.error('例（直接）: node src/verify/monthly-checker.js --company 474381 --month 2026-03');
-    console.error('例（レポート生成）: node src/verify/monthly-checker.js --company 474381 --month 2026-03 --no-dry-run');
-    console.error('例（自動）: node src/verify/monthly-checker.js --company 474381 --month auto');
+    console.error('使用方法:');
+    console.error('  node src/verify/monthly-checker.js --company {id} --month YYYY-MM|auto [--no-dry-run]');
+    console.error('  node src/verify/monthly-checker.js --company-name {名前} --month YYYY-MM|auto [--no-dry-run]');
+    console.error('');
+    console.error('例（IDで指定）: node src/verify/monthly-checker.js --company 474381 --month 2026-03 --no-dry-run');
+    console.error('例（名前で指定）: node src/verify/monthly-checker.js --company-name あしたの --month 2026-03 --no-dry-run');
+    console.error('例（自動月判定）: node src/verify/monthly-checker.js --company 474381 --month auto');
     process.exit(1);
   }
 

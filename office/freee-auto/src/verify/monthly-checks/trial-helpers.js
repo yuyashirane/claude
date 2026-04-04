@@ -225,6 +225,28 @@ function monthsFromFiscalStart(targetMonth, startMonth) {
 }
 
 // ============================================================
+// deal の取引先名解決
+// ============================================================
+
+/**
+ * deal から取引先名を取得するヘルパー（全チェックモジュール共通）
+ * freee API の deals レスポンスには partner_name が含まれないケースがあり、
+ * partner_id のみの場合は partners マスタから逆引きする。
+ *
+ * @param {Object} deal - freee deal オブジェクト
+ * @param {Array}  partners - partners マスタ配列 [{ id, name, ... }]
+ * @returns {string} 取引先名（解決できない場合は空文字）
+ */
+function resolvePartnerName(deal, partners) {
+  if (deal.partner_name) return deal.partner_name;
+  if (deal.partner_id && Array.isArray(partners)) {
+    const p = partners.find(p => p.id === deal.partner_id);
+    if (p) return p.name || '';
+  }
+  return '';
+}
+
+// ============================================================
 // エクスポート
 // ============================================================
 
@@ -237,4 +259,5 @@ module.exports = {
   getMonthlyAmount,
   getPartnerBalances,
   monthsFromFiscalStart,
+  resolvePartnerName,
 };

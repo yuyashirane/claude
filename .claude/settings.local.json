@@ -139,7 +139,21 @@
       "Bash(ls tests/test-monthly-report*)",
       "Bash(node tests/test-report-details.js)",
       "Bash(node tests/test-period-allocation.js)",
-      "Bash(node \"C:/Users/yuya_/claude/office/freee-auto/src/verify/monthly-checker.js\" --company 474381 --month 2026-03)"
+      "Bash(node \"C:/Users/yuya_/claude/office/freee-auto/src/verify/monthly-checker.js\" --company 474381 --month 2026-03)",
+      "Bash(node tests/test-tax-classification.js)",
+      "Bash(node tests/test-withholding-tax.js)",
+      "Bash(node tests/test-advance-tax-payment.js)",
+      "Bash(node src/verify/monthly-checker.js --company 2422271 --month 2026-03 --no-dry-run)",
+      "Bash(node src/verify/monthly-checker.js --company-name あしたの --month 2026-03 --no-dry-run)",
+      "Bash(node src/verify/monthly-checker.js --company-name \"あしたの会計\" --month 2026-03)",
+      "Bash(node src/verify/monthly-checker.js --company-name \"無限テック\" --month 2026-03)",
+      "Bash(node src/verify/monthly-checker.js --company-name \"存在しない会社\" --month 2026-03)",
+      "Bash(node src/verify/monthly-checker.js --company-name \"あしたの会計\" --month 2026-03 --dry-run)",
+      "Bash(node src/verify/monthly-checker.js --company-name \"無限テック\" --month 2026-03 --dry-run)",
+      "Bash(node src/verify/monthly-checker.js --company-name \"存在しない\" --month 2026-03 --dry-run)",
+      "Bash(bc)",
+      "Bash(awk '/^### モードB/,/^\\\\*\\\\*モードB/' docs/verify-stage-design-v2.md)",
+      "Bash(grep -h \"checkCode:\" src/verify/monthly-checks/*.js)"
     ]
   }
 }

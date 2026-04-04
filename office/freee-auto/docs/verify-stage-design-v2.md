@@ -1,7 +1,7 @@
 # VERIFY ステージ設計書 v2
 
 作成日: 2026-04-02（初版）
-更新日: 2026-04-04（v2: 実装完了状態を反映）
+更新日: 2026-04-04（v2.1: TC/WT/AT追加 + report-config分離 + スキル定義）
 対象プロジェクト: freee-auto（`C:\Users\yuya_\claude\office\freee-auto\`）
 前提: REGISTERパラダイムシフト完了、「大胆に登録 → 事後チェックで修正」方針
 
@@ -52,7 +52,7 @@ VERIFYの役割:
 **タイミング**: 月次で手動実行（`node src/verify/monthly-checker.js --company {id} --month YYYY-MM`）
 **対象**: 対象月の全取引・BS/PL残高
 **目的**: 帳簿全体の整合性確認（月次チェックリスト F-1〜HC-4）
-**チェック数**: 48チェック（DQ-01〜PA-08）
+**チェック数**: 70チェックコード（DQ-01〜AT-03、17モジュール）
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -82,9 +82,12 @@ VERIFYの役割:
 │    ├── JC3-1〜JC3-4: 仕入・経費（PP-01〜04）            │
 │    ├── HC-1〜HC-4: 営業外・税金（ET-01〜07）             │
 │    ├── BS残高異常（BA-01〜05）★v2で追加                  │
-│    └── 期間配分（PA-01〜08）★v2で追加                    │
+│    ├── 期間配分（PA-01〜08）★v2で追加                    │
+│    ├── 消費税区分（TC-01〜08）★v2.1で追加                │
+│    ├── 源泉所得税（WT-01〜06）★v2.1で追加                │
+│    └── 予定納税（AT-01〜03）★v2.1で追加                  │
 │    ↓                                                     │
-│  指摘事項 → Kintone App② / Excelレポート（5シート）     │
+│  指摘事項 → Kintone App② / Excelレポート（11シート）    │
 └─────────────────────────────────────────────────────────┘
 ```
 
@@ -149,12 +152,16 @@ src/verify/
 
 ```
 src/verify/
-├── monthly-checker.js              ✅ オーケストレーター（14モジュール統合）
+├── monthly-checker.js              ✅ オーケストレーター（17モジュール統合、--company-name対応）
 ├── monthly-data-fetcher.js         ✅ freee-MCPデータ取得
 │                                      fetchMonthlyData() — 当月・前月のBS/PL/deals/walletTxns
 │                                      fetchMonthlyPlTrend() — 期首〜対象月の月別PL
 │                                      fetchHistoricalBs() — 過去5期分のBS残高
-├── monthly-report-generator.js     ✅ Excelレポート生成（5シート）
+├── monthly-report-generator.js     ✅ Excelレポート生成（11シート、951行）
+├── report-config/                  ★v2.1で分離
+│   ├── styles.js                   ✅ 色・フォント・罫線定数（87行）
+│   ├── labels.js                   ✅ カテゴリ名・チェックコード名・グループ定義（198行）
+│   └── link-mappings.js            ✅ freeeリンク科目マッピング・推定ロジック（133行）
 ├── monthly-checks/
 │   ├── trial-helpers.js            ✅ BS/PL残高取得ユーティリティ
 │   ├── data-quality.js             ✅ DQ-01〜03: データ品質
@@ -168,12 +175,28 @@ src/verify/
 │   ├── revenue-receivable.js       ✅ RR-01〜03: 売上・売掛金
 │   ├── purchase-payable.js         ✅ PP-01〜04: 仕入・経費
 │   ├── extraordinary-tax.js        ✅ ET-01〜07: 営業外・税金
-│   ├── balance-anomaly.js          ✅ BA-01〜05: BS残高異常 ★v2で追加
-│   └── period-allocation.js        ✅ PA-01〜08: 期間配分 ★v2で追加
+│   ├── balance-anomaly.js          ✅ BA-01〜05: BS残高異常 ★v2
+│   ├── period-allocation.js        ✅ PA-01〜08: 期間配分 ★v2
+│   ├── tax-classification.js       ✅ TC-01〜08: 消費税区分 ★v2.1（801行）
+│   ├── withholding-tax.js          ✅ WT-01〜06: 源泉所得税 ★v2.1（526行）
+│   └── advance-tax-payment.js      ✅ AT-01〜03: 予定納税 ★v2.1（279行）
 ├── post-register-checker.js        ✅ モードA
 ├── checkers/                       ✅ モードA用チェッカー群
 ├── processing-report.js            ✅ 既存
 └── generate-audit-report.js        ✅ 既存（B案で残存）
+
+src/shared/
+├── freee-links.js                  ✅ freeeリンク生成（TAX_CODE_TO_URL_PARAMS追加）
+├── company-resolver.js             ✅ 顧問先名→ID解決 ★v2.1
+└── ...
+
+data/
+├── company-map.json                ✅ 顧問先名⇔freee ID マッピング ★v2.1
+└── ...
+
+.claude/skills/
+├── monthly-check-execution.md      ✅ 月次チェック実行スキル ★v2.1
+└── report-improvement.md           ✅ レポート改善スキル ★v2.1
 ```
 
 ### 4.2 monthly-checker.js（オーケストレーター）— 実装済みの構成
@@ -194,7 +217,7 @@ async function runMonthlyCheck(companyId, targetMonth, options = {}) {
   // 2. 過去期BS取得（動的start_date判定用）
   data.historicalBs = await fetchHistoricalBs(companyId, data.fiscalYear, data.startMonth, 5);
   
-  // 3. 14チェックモジュールを順次実行
+  // 3. 17チェックモジュールを順次実行
   const findings = [];
   findings.push(...dataQualityCheck(data));
   findings.push(...cashDepositCheck(data));
@@ -209,6 +232,9 @@ async function runMonthlyCheck(companyId, targetMonth, options = {}) {
   findings.push(...extraordinaryTaxCheck(data));
   findings.push(...balanceAnomalyCheck(data));      // ★v2
   findings.push(...periodAllocationCheck(data));     // ★v2
+  findings.push(...taxClassificationCheck(data));    // ★v2.1
+  findings.push(...withholdingTaxCheck(data));       // ★v2.1
+  findings.push(...advanceTaxPaymentCheck(data));    // ★v2.1
   
   // 4. PL月次推移取得（レポート用）
   const plTrend = await fetchMonthlyPlTrend(companyId, ...);
@@ -327,6 +353,51 @@ BS残高の異常検知 + ドリルダウン。Finding型に `details` 配列を
 | PA-07 | 🔴 | 未払消費税等の洗い替え未実施 | 同上 |
 | PA-08 | 🔵 | 賞与引当金等の期首残高確認 | 期首月のみ |
 
+#### ★ tax-classification.js（TC-01〜TC-08）— v2.1で追加
+
+消費税区分の妥当性チェック。科目×税区分の組み合わせ検証。
+
+| コード | 重要度 | 内容 | 判定基準 |
+|--------|--------|------|---------|
+| TC-01 | 🔴 | 交際費・福利厚生費の対象外仕入 | 課対仕入であるべき科目に対象外が存在 |
+| TC-02 | 🔴 | 消耗品費・通信費の対象外仕入 | 同上 |
+| TC-03 | 🟡 | 地代家賃の住居用判定 | 住居系キーワードを含む課税仕入 |
+| TC-04 | 🔴 | 海外サービスの税区分ミス | overseas-services.js のDBと照合 |
+| TC-05 | 🟡 | 軽減税率の適用判定 | 食品系・新聞定期購読の税率確認 |
+| TC-06 | 🟡 | 同一科目内の税区分混在 | 1科目に3種以上の税区分 |
+| TC-07 | 🟡 | 売上の非課税・不課税混在 | 売上科目に対象外/非課税が存在 |
+| TC-08 | 🔵 | 高額課税仕入の確認 | 100万円以上の課税仕入取引 |
+
+**TC-06の details 子行:** 税区分ごとの件数・金額・税区分フィルタ付きfreeeリンクを生成。
+`TAX_CODE_TO_URL_PARAMS` マッピングで freee 総勘定元帳の `tax_group_codes` / `tax_rate` / `tax_reduced` パラメータを付与。
+
+**TC-01/02/03/07のリンク:** `generalLedgerLinkWithTaxFilter` で税区分フィルタ付きリンクを生成（対象外/課税仕入のみ表示）。
+
+#### ★ withholding-tax.js（WT-01〜WT-06）— v2.1で追加
+
+源泉所得税の徴収漏れ・計算誤り・納付漏れの検知。
+
+| コード | 重要度 | 内容 | 判定基準 |
+|--------|--------|------|---------|
+| WT-01 | 🔴 | 士業報酬の源泉徴収漏れ | 支払報酬料の取引先に預り金計上なし |
+| WT-02 | 🟡 | デザイン・翻訳等の源泉対象報酬 | 外注費のキーワードマッチング |
+| WT-03 | 🟡 | 源泉税額の計算誤り | 10.21%基準との乖離チェック |
+| WT-04 | 🟡 | 預り金残高の異常増加 | 前月比で大幅増加（納付漏れ疑い） |
+| WT-05 | 🔵 | 納期の特例リマインダー | 6月・12月に特例納付を注意喚起 |
+| WT-06 | 🟡 | 非居住者への支払い | 海外事業者への20.42%源泉確認 |
+
+#### ★ advance-tax-payment.js（AT-01〜AT-03）— v2.1で追加
+
+法人税・消費税の中間納付（予定納税）タイミングチェック。
+
+| コード | 重要度 | 内容 | 判定基準 |
+|--------|--------|------|---------|
+| AT-01 | 🟡 | 法人税の中間納付漏れ | 期首6ヶ月後の中間申告期限チェック |
+| AT-02 | 🟡 | 消費税の中間納付漏れ | 同上 |
+| AT-03 | 🔵 | 予定納税残高の停滞 | 仮払法人税・仮払消費税の残高不変 |
+
+**制約:** 前期税額データは freee API から取得不可。中間申告の要否判定は注意喚起レベル（前期税額の閾値判定は人間が確認）。
+
 ---
 
 ## 5. freeeリンク生成システム ★v2で新規追加
@@ -376,15 +447,42 @@ journalDealLink()             — 仕訳帳（特定取引）リンク ★v2
 buildBalanceLink()            — 残高系指摘の最適リンク自動選択 ★v2
 determineLinkStartDate()      — 動的start_date判定 ★v2
 formatFiscalStartDate()       — 期首日フォーマット ★v2
+TAX_CODE_TO_URL_PARAMS        — freee税区分コード→URLパラメータマッピング ★v2.1
+generalLedgerLinkWithTaxFilter() — 税区分フィルタ付き総勘定元帳リンク ★v2.1
 ```
+
+### 5.4 税区分フィルタ付きリンク（★v2.1で追加）
+
+freee総勘定元帳は税区分でのフィルタリングをサポート。URLパラメータ:
+- `tax_group_codes` — 税区分グループ（0: 対象外、34: 課税仕入、37: 非課税仕入 等）
+- `tax_rate` — 税率（8 or 10）
+- `tax_deduction_rate` — 控除率（80 or 50、経過措置用）
+- `tax_reduced` — 軽減税率フラグ（true/false）
+
+`TAX_CODE_TO_URL_PARAMS` で freee API の tax_code 整数値からURLパラメータへ変換。
+TC-01〜TC-07 の freeeリンクに税区分フィルタを付与し、該当税区分の仕訳のみ表示。
 
 ---
 
-## 6. Excelレポート仕様 ✅ 実装済み（ブラッシュアップ完了）
+## 6. Excelレポート仕様 ✅ 実装済み（v2.1: 11シート + report-config分離）
 
 ### 出力先
 
-`reports/{companyId}/monthly_check_{targetMonth}_{timestamp}.xlsx`
+`reports/{companyId}/{事業所名}_帳簿チェック_{targetMonth}_{timestamp}.xlsx`
+
+### 実装構成
+
+```
+src/verify/
+├── monthly-report-generator.js     951行（シート生成ロジック本体）
+└── report-config/                  ★v2.1で分離（旧: generator内にインライン）
+    ├── styles.js                   87行 — COLORS, FONTS, BORDER_THIN, 重要度ソート順等
+    ├── labels.js                   198行 — CATEGORY_LABELS(16), CATEGORY_ORDER, CHECK_GROUPS(6), CHECK_CODE_LABELS(~70)
+    └── link-mappings.js            133行 — CODE_TO_ACCOUNT(7), inferFreeeLink(), getMonthRange() 等
+```
+
+分離前は monthly-report-generator.js が約1,254行。定数~310行を3ファイルに抽出し951行に。
+後方互換のため `inferFreeeLink` / `isValidFreeeLink` は generator から re-export。
 
 ### デザイン基準
 
@@ -394,9 +492,9 @@ formatFiscalStartDate()       — 期首日フォーマット ★v2
 - 数値: #,##0（3桁区切り）
 - 長文セル: wrapText有効
 
-### シート構成（5シート）
+### シート構成（11シート）
 
-#### シート1: サマリー
+#### シート1: サマリーダッシュボード
 - タイトル: 「{事業所名} 月次チェックレポート」14pt bold
 - サブタイトル: 「対象月: YYYY年MM月 / チェック実行日: YYYY年MM月DD日」
 - 判定凡例: 🔴🟡🔵のインライン凡例（背景色付き）
@@ -410,17 +508,27 @@ formatFiscalStartDate()       — 期首日フォーマット ★v2
 - フリーズ: A2
 - **details子行展開:** Finding に details 配列がある場合、親行の直下に薄グレー背景（FFF5F5F5）の子行を展開
   - 子行: 日付 / 金額 / 相手科目 / 摘要 / freeeリンク
+  - TC-06の子行: 税区分名（件数・金額）/ freeeリンク（税区分フィルタ付き元帳）
 - **freeeリンク表示テキスト:** リンク種別に応じて自動出し分け
   - deal_id含む → 「仕訳を開く」
   - general_ledgers含む → 「元帳を開く」
   - journals含む → 「仕訳帳を開く」
 
-#### シート3: BS残高チェック
+#### シート3〜8: カテゴリ別指摘シート（6グループ）
+CHECK_GROUPS定義に基づき、カテゴリをグループ化してシート分割:
+- 現金・預金・借入金
+- 固定資産・家賃
+- 人件費・外注
+- 売上・仕入
+- 営業外・税金・役員関係
+- 残高異常・期間配分・消費税・源泉税・予定納税
+
+#### シート9: BS残高チェック
 - 列: 科目名(30) / 当月残高(16) / 前月残高(16) / 前月差(16) / 変動率(10) / 判定(10) / 元帳リンク(14)
 - マイナス残高: 薄赤背景（FFFFE0E0）
 - 元帳リンク: `buildBalanceLink` 使用（動的start_date + 年度判定）
 
-#### シート4: PL月次推移 ★v2で大幅改修
+#### シート10: PL月次推移
 - 期首〜対象月の月別単月金額を横に並べる（freee月次推移レポートに準拠）
 - 列: 科目名 / 10月 / 11月 / ... / 対象月 / 累計（SUM式）/ 元帳リンク
 - 対象月の列: ハイライト（薄青背景）
@@ -428,7 +536,7 @@ formatFiscalStartDate()       — 期首日フォーマット ★v2
 - 異常値: 前月比50%超変動セルに薄黄背景
 - データ取得: `fetchMonthlyPlTrend()` で各月YTD累計→差分で単月算出
 
-#### シート5: 取引先別残高
+#### シート11: 取引先別残高
 - 列: 科目名(22) / 取引先名(30) / 残高(16,#,##0) / 滞留判定(12)
 - 滞留セル: 黄色背景（FFFFEB9C）
 
@@ -446,6 +554,34 @@ formatFiscalStartDate()       — 期首日フォーマット ★v2
 
 ---
 
+## 8b. スキル定義（★v2.1で追加）
+
+Claude Code の `.claude/skills/` にスキルファイルを配置。ユーザーの自然言語指示を特定の実行手順にマッピング。
+
+### monthly-check-execution.md（月次チェック実行スキル）
+
+**発動場面:** 「○○の○月のチェックをして」「帳簿チェックをお願い」等
+**実行フロー:**
+1. 顧問先名 or freee company ID + 対象月を特定
+2. 名前指定の場合: `company-resolver.js` → `data/company-map.json` で ID 解決
+3. `monthly-checker.js --company-name "{名前}" --month {YYYY-MM} --no-dry-run` 実行
+4. 結果を🔴/🟡/🔵別件数 + Excelレポートパスで報告
+5. フォローアップ: 🔴優先カテゴリ別要約、freeeリンク案内
+
+**既知の制限:** deals 500件上限、partner_name undefined、前期税額データ取得不可
+
+### report-improvement.md（レポート改善スキル）
+
+**発動場面:** 「レポートの色を変えて」「新しいチェックコードを追加して」等
+**対象ファイルマッピング:**
+- 色・フォント → `report-config/styles.js`
+- ラベル・グループ → `report-config/labels.js`
+- freeeリンクマッピング → `report-config/link-mappings.js`
+- シート構成・列定義 → `monthly-report-generator.js`
+- チェックロジック → `monthly-checks/[モジュール名].js`
+
+---
+
 ## 9. 実装状態（2026-04-04時点）
 
 ### Phase 1: モードA ✅ 完了
@@ -454,36 +590,58 @@ formatFiscalStartDate()       — 期首日フォーマット ★v2
 
 ### Phase 2: モードB ✅ 完了
 
-48チェック実装済み（既存35 + BA系5 + PA系8）。
+17モジュール・70チェックコード実装済み（既存53 + TC系8 + WT系6 + AT系3）。
 
 ### Phase 3: Excelレポート ✅ 完了
 
-5シート構成。ブラッシュアップ済み（デザイン統一 + PL月次推移拡張 + freeeリンク改修）。
+11シート構成。report-config分離済み（styles/labels/link-mappings）。
 
-### Phase 4: 次フェーズ（計画中）
+### Phase 4: CLI・スキル拡張 ✅ 完了
+
+- `--company-name` オプション（company-resolver.js による顧問先名→ID解決）
+- `.claude/skills/monthly-check-execution.md`（月次チェック実行スキル）
+- `.claude/skills/report-improvement.md`（レポート改善スキル）
+
+### Phase 5: 次フェーズ（計画中）
 
 | 項目 | 優先度 | 概要 |
 |------|--------|------|
-| 消費税区分チェック | 最優先 | 科目×消費税区分の妥当性。新規モジュール `tax-classification.js` |
-| 源泉所得税チェック | 高 | 士業・外注報酬の源泉徴収漏れ検知。withholding-tax-checkスキル活用 |
-| 予定納税チェック | 高 | 法人税・消費税の中間納付処理確認 |
-| レポート精緻化 | 並行 | ノイズ削減、description改善、閾値チューニング |
+| レポート精緻化 | 高 | ノイズ削減、description改善、閾値チューニング |
+| 2422271テスト検証 | 高 | テスト事業所（無限テック）での全チェック動作確認 |
 | LEARNステージ | 中 | 辞書改善フィードバック、カタカナマッピング、顧客別例外ルール |
 | 喜明堂テスト | 後 | 新規顧客でのパイプライン全体通しテスト |
+| Kintone App②送付 | 後 | 🔴🟡指摘のKintone自動送付（Step 14） |
 
 ---
 
 ## 10. テスト状態
 
+### npm test（323件）
+
 | テストファイル | 件数 |
 |--------------|------|
-| test-freee-links.js | 33 |
+| test-pipeline.js | 50 |
+| test-deal-creator.js | 14 |
+| test-processing-report.js | 9 |
+| test-freee-links.js | 42 |
+| test-kintone-to-freee.js | 17 |
+| test-rule-csv-generator.js | 53 |
+| test-post-register-checker.js | 49 |
+| test-monthly-checker.js | 65 |
+| test-monthly-report.js | 24 |
+
+### 個別実行（93件）
+
+| テストファイル | 件数 |
+|--------------|------|
 | test-balance-anomaly.js | 32 |
-| test-period-allocation.js | 20 |
-| test-monthly-report.js | 16 |
 | test-report-details.js | 7 |
-| その他既存テスト | 149 |
-| **合計** | **257** |
+| test-period-allocation.js | 20 |
+| test-withholding-tax.js | 24 |
+| test-tax-classification.js | 29 ★v2.1 |
+| test-advance-tax-payment.js | 17 ★v2.1 |
+
+### 合計: 416件（npm test 323 + 個別 93）
 
 ---
 
@@ -522,7 +680,7 @@ formatFiscalStartDate()       — 期首日フォーマット ★v2
 
 ---
 
-## 付録: チェックコード一覧（70チェック）
+## 付録: チェックコード一覧（92チェックコード）
 
 ### モードA（22チェック）
 
@@ -551,7 +709,7 @@ formatFiscalStartDate()       — 期首日フォーマット ★v2
 | N-01 | 新規取引先 | 🟡 | 新規取引先（インボイス確認） |
 | N-02 | 新規取引先 | 🔵 | インボイス区分確認 |
 
-### モードB（48チェック）
+### モードB（65チェック）
 
 | コード | カテゴリ | 重要度 | 内容 | 実装状態 |
 |--------|---------|--------|------|---------|
@@ -608,9 +766,26 @@ formatFiscalStartDate()       — 期首日フォーマット ★v2
 | PA-06 | 期間配分 | 🔴 | 未払法人税等の洗い替え未実施 | ✅ ★v2 |
 | PA-07 | 期間配分 | 🔴 | 未払消費税等の洗い替え未実施 | ✅ ★v2 |
 | PA-08 | 期間配分 | 🔵 | 賞与引当金等の期首残高確認 | ✅ ★v2 |
+| TC-01 | 消費税区分 | 🔴 | 交際費・福利厚生費の対象外仕入 | ✅ ★v2.1 |
+| TC-02 | 消費税区分 | 🔴 | 消耗品費・通信費の対象外仕入 | ✅ ★v2.1 |
+| TC-03 | 消費税区分 | 🟡 | 地代家賃の住居用判定 | ✅ ★v2.1 |
+| TC-04 | 消費税区分 | 🔴 | 海外サービスの税区分ミス | ✅ ★v2.1 |
+| TC-05 | 消費税区分 | 🟡 | 軽減税率の適用判定 | ✅ ★v2.1 |
+| TC-06 | 消費税区分 | 🟡 | 同一科目内の税区分混在 | ✅ ★v2.1 |
+| TC-07 | 消費税区分 | 🟡 | 売上の非課税・不課税混在 | ✅ ★v2.1 |
+| TC-08 | 消費税区分 | 🔵 | 高額課税仕入の確認 | ✅ ★v2.1 |
+| WT-01 | 源泉所得税 | 🔴 | 士業報酬の源泉徴収漏れ | ✅ ★v2.1 |
+| WT-02 | 源泉所得税 | 🟡 | デザイン・翻訳等の源泉対象報酬 | ✅ ★v2.1 |
+| WT-03 | 源泉所得税 | 🟡 | 源泉税額の計算誤り | ✅ ★v2.1 |
+| WT-04 | 源泉所得税 | 🟡 | 預り金残高の異常増加 | ✅ ★v2.1 |
+| WT-05 | 源泉所得税 | 🔵 | 納期の特例リマインダー | ✅ ★v2.1 |
+| WT-06 | 源泉所得税 | 🟡 | 非居住者への支払い | ✅ ★v2.1 |
+| AT-01 | 予定納税 | 🟡 | 法人税の中間納付漏れ | ✅ ★v2.1 |
+| AT-02 | 予定納税 | 🟡 | 消費税の中間納付漏れ | ✅ ★v2.1 |
+| AT-03 | 予定納税 | 🔵 | 予定納税残高の停滞 | ✅ ★v2.1 |
 
-**モードB合計: 48チェック（🔴 12件、🟡 24件、🔵 12件）**
-**モードA+B合計: 70チェック**
+**モードB合計: 70チェックコード（🔴 16件、🟡 40件、🔵 14件）**
+**モードA+B合計: 92チェックコード**
 
 ---
 
@@ -626,3 +801,6 @@ formatFiscalStartDate()       — 期首日フォーマット ★v2
 | 474381は10月決算の変則期 | 対応済み | fiscal_yearは期首年（2025）。detectFiscalYear修正済み |
 | BA-02のノイズ（13件） | 許容範囲 | 保険積立金・出資金等の除外を今後検討 |
 | 2422271（テスト事業所）未検証 | 未着手 | ①完了後に検証推奨 |
+| TAX_CODE_TO_URL_PARAMSの網羅性 | 部分対応 | 主要10税区分を登録済み。未登録税区分はTC-06子行のfreeLinkがnull |
+| 前期税額データ取得不可 | 制約 | AT系チェックは注意喚起レベル。前期税額の閾値判定は人間が確認 |
+| deals.partner_nameがundefined | 対応済み | resolvePartnerName()で代替。WT系でも同様に使用 |

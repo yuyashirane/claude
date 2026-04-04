@@ -17,6 +17,8 @@ const {
   trialBsDetailLink,
   journalsByAccountLink,
   generalLedgerLink,
+  generalLedgerLinkWithTaxFilter,
+  TAX_CODE_TO_URL_PARAMS,
   determineLinkStartDate,
   buildBalanceLink,
   formatFiscalStartDate,
@@ -294,6 +296,106 @@ test('formatFiscalStartDate: 2桁月の場合', () => {
 
 test('formatFiscalStartDate: 1桁月はゼロパディング', () => {
   assert.strictEqual(formatFiscalStartDate(2025, 4), '2025-04-01');
+});
+
+// ── generalLedgerLinkWithTaxFilter ──
+console.log('\n--- generalLedgerLinkWithTaxFilter ---');
+
+test('generalLedgerLinkWithTaxFilter: 課対仕入10%のフィルタ付きリンク', () => {
+  const url = generalLedgerLinkWithTaxFilter(
+    474381, '通信費', '2026-03-01', '2026-03-31',
+    { fiscalYearId: 10840688 },
+    { taxGroupCode: 34, taxRate: 10, taxReduced: false }
+  );
+  assert.ok(url.includes('/general_ledgers/show'));
+  assert.ok(url.includes('name='));
+  assert.ok(url.includes('tax_group_codes=34'));
+  assert.ok(url.includes('tax_rate=10'));
+  assert.ok(url.includes('tax_reduced=false'));
+  assert.ok(!url.includes('tax_deduction_rate'));
+});
+
+test('generalLedgerLinkWithTaxFilter: 控除率80%のフィルタ付きリンク', () => {
+  const url = generalLedgerLinkWithTaxFilter(
+    474381, '支払手数料', '2026-03-01', '2026-03-31',
+    { fiscalYearId: 10840688 },
+    { taxGroupCode: 34, taxRate: 10, taxDeductionRate: 80, taxReduced: false }
+  );
+  assert.ok(url.includes('tax_deduction_rate=80'));
+  assert.ok(url.includes('tax_group_codes=34'));
+  assert.ok(url.includes('tax_rate=10'));
+});
+
+test('generalLedgerLinkWithTaxFilter: 対象外（taxGroupCode=0のみ）', () => {
+  const url = generalLedgerLinkWithTaxFilter(
+    474381, '給料手当', '2026-03-01', '2026-03-31',
+    { fiscalYearId: 10840688 },
+    { taxGroupCode: 0 }
+  );
+  assert.ok(url.includes('tax_group_codes=0'));
+  assert.ok(!url.includes('tax_rate'));
+  assert.ok(!url.includes('tax_reduced'));
+});
+
+test('generalLedgerLinkWithTaxFilter: taxFilterが空オブジェクト → ベースURLのまま', () => {
+  const base = generalLedgerLink(474381, '通信費', '2026-03-01', '2026-03-31', { fiscalYearId: 10840688 });
+  const url = generalLedgerLinkWithTaxFilter(
+    474381, '通信費', '2026-03-01', '2026-03-31',
+    { fiscalYearId: 10840688 },
+    {}
+  );
+  assert.strictEqual(url, base);
+});
+
+test('generalLedgerLinkWithTaxFilter: taxFilterがnull → ベースURLのまま', () => {
+  const base = generalLedgerLink(474381, '通信費', '2026-03-01', '2026-03-31', { fiscalYearId: 10840688 });
+  const url = generalLedgerLinkWithTaxFilter(
+    474381, '通信費', '2026-03-01', '2026-03-31',
+    { fiscalYearId: 10840688 },
+    null
+  );
+  assert.strictEqual(url, base);
+});
+
+// ── TAX_CODE_TO_URL_PARAMS ──
+console.log('\n--- TAX_CODE_TO_URL_PARAMS ---');
+
+test('TAX_CODE_TO_URL_PARAMS: tax_code 189 → 控除率80%付き課対仕入10%', () => {
+  const p = TAX_CODE_TO_URL_PARAMS[189];
+  assert.ok(p);
+  assert.strictEqual(p.taxGroupCode, 34);
+  assert.strictEqual(p.taxRate, 10);
+  assert.strictEqual(p.taxDeductionRate, 80);
+  assert.strictEqual(p.taxReduced, false);
+});
+
+test('TAX_CODE_TO_URL_PARAMS: tax_code 163 → 軽減税率8%', () => {
+  const p = TAX_CODE_TO_URL_PARAMS[163];
+  assert.ok(p);
+  assert.strictEqual(p.taxGroupCode, 34);
+  assert.strictEqual(p.taxRate, 8);
+  assert.strictEqual(p.taxReduced, true);
+});
+
+test('TAX_CODE_TO_URL_PARAMS: tax_code 2 → 対象外', () => {
+  const p = TAX_CODE_TO_URL_PARAMS[2];
+  assert.ok(p);
+  assert.strictEqual(p.taxGroupCode, 0);
+  assert.ok(!('taxRate' in p));
+});
+
+test('TAX_CODE_TO_URL_PARAMS → generalLedgerLinkWithTaxFilter 統合', () => {
+  const filter = TAX_CODE_TO_URL_PARAMS[189];
+  const url = generalLedgerLinkWithTaxFilter(
+    474381, '外注費', '2026-03-01', '2026-03-31',
+    { fiscalYearId: 10840688 },
+    filter
+  );
+  assert.ok(url.includes('tax_group_codes=34'));
+  assert.ok(url.includes('tax_rate=10'));
+  assert.ok(url.includes('tax_deduction_rate=80'));
+  assert.ok(url.includes('tax_reduced=false'));
+  assert.ok(url.includes('/general_ledgers/show'));
 });
 
 console.log(`\n--- freee-links: ${passed} passed / ${failed} failed / ${passed + failed} total ---\n`);
