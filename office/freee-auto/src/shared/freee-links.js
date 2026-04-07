@@ -44,16 +44,19 @@ function trialBsDetailLink(companyId, accountItemId) {
 // accountName を渡すと name パラメータ付与（科目名フィルタ表示名に反映）
 // options.partnerId を渡すと partner_id パラメータ付与（取引先フィルタ）
 function journalsByAccountLink(companyId, accountItemId, startDate, endDate, accountName, options) {
+  // URL長を255文字以内に抑えるため、freeeデフォルト値のパラメータは省略
+  // (page, per_page, order_by, direction, account_item_id)
+  // name パラメータで科目フィルタが成立するため account_item_id は不要
   const params = new URLSearchParams({
-    page:            '1',
-    per_page:        '50',
-    order_by:        'txn_date',
-    direction:       'asc',
-    account_item_id: String(accountItemId),
-    end_date:        endDate,
-    start_date:      startDate,
+    start_date: startDate,
+    end_date:   endDate,
   });
-  if (accountName) params.set('name', accountName);
+  if (accountName) {
+    params.set('name', accountName);
+  } else {
+    // accountName がない場合のみ account_item_id でフィルタ
+    params.set('account_item_id', String(accountItemId));
+  }
   if (options?.partnerId) params.set('partner_id', String(options.partnerId));
   return `${FREEE_BASE}/reports/journals?${params.toString()}`;
 }
@@ -65,7 +68,7 @@ function journalsByAccountLink(companyId, accountItemId, startDate, endDate, acc
 //   - パス: /reports/general_ledgers/show
 //   - 科目指定: name パラメータ（科目名をURLエンコード）
 //   - 会計年度: fiscal_year_id（freee内部ID。fiscal_yearの数値とは別物）
-//   - 調整仕訳: adjustment=all（全仕訳を含む）
+//   - 調整仕訳: adjustment パラメータは省略（freeeデフォルトで十分）
 //   - 取引先: partner_id（任意）
 //
 // @param {number|string} companyId - 事業所ID（将来の拡張用）
@@ -77,7 +80,6 @@ function journalsByAccountLink(companyId, accountItemId, startDate, endDate, acc
 // @param {number|string} [options.fiscalYearId] - freee fiscal_year_id
 function generalLedgerLink(companyId, accountItemName, startDate, endDate, options) {
   const params = new URLSearchParams();
-  params.set('adjustment', 'all');
   params.set('name', accountItemName);  // URLSearchParams が自動エンコード
   params.set('start_date', startDate);
   params.set('end_date', endDate);

@@ -171,26 +171,76 @@ function mkPlTrend() {
   return {
     months: ['2025-10', '2025-11', '2025-12', '2026-01', '2026-02', '2026-03'],
     accounts: {
+      // 明細科目
       '売上高': {
         id: 201, category: '売上高',
         monthlyAmounts: [500000, 520000, 480000, 510000, 490000, 500000],
-        total: 3000000,
+        total: 3000000, isSummary: false,
       },
       '仕入高': {
         id: 202, category: '売上原価',
         monthlyAmounts: [250000, 260000, 240000, 250000, 250000, 250000],
-        total: 1500000,
+        total: 1500000, isSummary: false,
       },
       '給与手当': {
-        id: 203, category: '販管費',
+        id: 203, category: '販売管理費',
         monthlyAmounts: [100000, 100000, 100000, 100000, 100000, 100000],
-        total: 600000,
+        total: 600000, isSummary: false,
+      },
+      // 集計行
+      '__summary__売上高': {
+        id: null, category: '売上高',
+        monthlyAmounts: [500000, 520000, 480000, 510000, 490000, 500000],
+        total: 3000000, isSummary: true,
+      },
+      '__summary__売上原価': {
+        id: null, category: '売上原価',
+        monthlyAmounts: [250000, 260000, 240000, 250000, 250000, 250000],
+        total: 1500000, isSummary: true,
+      },
+      '__summary__売上総損益金額': {
+        id: null, category: '売上総損益金額',
+        monthlyAmounts: [250000, 260000, 240000, 260000, 240000, 250000],
+        total: 1500000, isSummary: true,
+      },
+      '__summary__販売管理費': {
+        id: null, category: '販売管理費',
+        monthlyAmounts: [100000, 100000, 100000, 100000, 100000, 100000],
+        total: 600000, isSummary: true,
+      },
+      '__summary__営業損益金額': {
+        id: null, category: '営業損益金額',
+        monthlyAmounts: [150000, 160000, 140000, 160000, 140000, 150000],
+        total: 900000, isSummary: true,
+      },
+      '__summary__経常損益金額': {
+        id: null, category: '経常損益金額',
+        monthlyAmounts: [150000, 160000, 140000, 160000, 140000, 150000],
+        total: 900000, isSummary: true,
+      },
+      '__summary__税引前当期純損益金額': {
+        id: null, category: '税引前当期純損益金額',
+        monthlyAmounts: [150000, 160000, 140000, 160000, 140000, 150000],
+        total: 900000, isSummary: true,
+      },
+      '__summary__当期純損益金額': {
+        id: null, category: '当期純損益金額',
+        monthlyAmounts: [150000, 160000, 140000, 160000, 140000, 150000],
+        total: 900000, isSummary: true,
       },
     },
     accountList: [
-      { id: 201, name: '売上高',   category: '売上高' },
-      { id: 202, name: '仕入高',   category: '売上原価' },
-      { id: 203, name: '給与手当', category: '販管費' },
+      { id: 201,  name: '売上高',   category: '売上高',   isSummary: false },
+      { id: null,  name: '売上高',   category: '売上高',   isSummary: true },
+      { id: 202,  name: '仕入高',   category: '売上原価', isSummary: false },
+      { id: null,  name: '売上原価', category: '売上原価', isSummary: true },
+      { id: null,  name: '売上総損益金額', category: '売上総損益金額', isSummary: true },
+      { id: 203,  name: '給与手当', category: '販売管理費', isSummary: false },
+      { id: null,  name: '販売管理費', category: '販売管理費', isSummary: true },
+      { id: null,  name: '営業損益金額', category: '営業損益金額', isSummary: true },
+      { id: null,  name: '経常損益金額', category: '経常損益金額', isSummary: true },
+      { id: null,  name: '税引前当期純損益金額', category: '税引前当期純損益金額', isSummary: true },
+      { id: null,  name: '当期純損益金額', category: '当期純損益金額', isSummary: true },
     ],
     fetchedAt: new Date().toISOString(),
   };
@@ -491,10 +541,14 @@ async function runTests() {
     assert.strictEqual(ws.getCell('H3').value, '累計',   'H3が累計でない');
     assert.strictEqual(ws.getCell('I3').value, '元帳',   'I3が元帳でない');
 
-    // 行4: 最初のデータ行（売上高）
+    // 行4: 最初のデータ行（売上高 = 集計行）
     assert.strictEqual(ws.getCell('A4').value, '売上高', 'A4が売上高でない');
 
-    // 3科目 + タイトル1行 + 空行1行 + ヘッダー1行 = データ開始行4、最終行6
+    // 行5: 仕入高（明細科目、インデント付き）
+    assert.strictEqual(ws.getCell('A5').value, '  仕入高', 'A5が仕入高でない');
+
+    // 行8: 給与手当（販管費の明細科目、インデント付き）
+    assert.strictEqual(ws.getCell('A8').value, '  給与手当', 'A8が給与手当でない');
   });
 
   // ─── テスト16: PL月次推移の元帳リンク ───
@@ -509,13 +563,20 @@ async function runTests() {
     await wb.xlsx.readFile(filePath);
     const ws = wb.getWorksheet('PL月次推移');
 
-    // I4（売上高の元帳リンク）
-    const linkCell = ws.getCell('I4');
+    // I4（売上高 = 集計行）は元帳リンクなし
+    const summaryLinkCell = ws.getCell('I4');
+    const summaryLinkVal = summaryLinkCell.value;
+    const hasSummaryLink = typeof summaryLinkVal === 'object' && summaryLinkVal !== null && summaryLinkVal.hyperlink;
+    assert.ok(!hasSummaryLink, '集計行に元帳リンクが設定されている（不要）');
+
+    // I5（仕入高 = 明細科目）は元帳リンクあり
+    const linkCell = ws.getCell('I5');
     const linkVal = linkCell.value;
     // ExcelJSではハイパーリンクテキストはオブジェクト { text, hyperlink } で格納される
     if (typeof linkVal === 'object' && linkVal !== null) {
       assert.strictEqual(linkVal.text, '元帳', '元帳リンクのテキストが違う');
-      assert.ok(linkVal.hyperlink.includes('account_item_id=201'), '元帳リンクに科目IDがない');
+      assert.ok(linkVal.hyperlink.includes('/reports/general_ledgers/show?'), '総勘定元帳リンクでない');
+      assert.ok(linkVal.hyperlink.includes('name='), '元帳リンクに科目名フィルタがない');
     } else {
       assert.strictEqual(linkVal, '元帳', '元帳テキストが違う');
     }

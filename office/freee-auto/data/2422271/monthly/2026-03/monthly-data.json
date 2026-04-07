@@ -5,7 +5,7 @@
       "fiscal_year": 2025,
       "start_month": 3,
       "end_month": 3,
-      "created_at": "2026-04-03T14:07:40+09:00",
+      "created_at": "2026-04-07T15:42:27+09:00",
       "balances": [
         {
           "account_item_id": 386413777,
@@ -14,9 +14,9 @@
           "hierarchy_level": 3,
           "opening_balance": 130050,
           "debit_amount": 969319,
-          "credit_amount": 843333,
-          "closing_balance": 256036,
-          "composition_ratio": 0.65
+          "credit_amount": 963333,
+          "closing_balance": 136036,
+          "composition_ratio": 0.35
         },
         {
           "account_item_id": 401773187,
@@ -49,7 +49,7 @@
           "debit_amount": 700137,
           "credit_amount": 398425,
           "closing_balance": 1507624,
-          "composition_ratio": 3.82
+          "composition_ratio": 3.83
         },
         {
           "account_item_id": 431948860,
@@ -71,7 +71,7 @@
           "debit_amount": 4360299,
           "credit_amount": 4615643,
           "closing_balance": 5346390,
-          "composition_ratio": 13.56
+          "composition_ratio": 13.57
         },
         {
           "account_item_id": 558959100,
@@ -90,10 +90,10 @@
           "account_category_name": "現金・預金",
           "hierarchy_level": 3,
           "opening_balance": 932816,
-          "debit_amount": 3813685,
-          "credit_amount": 1414310,
-          "closing_balance": 3332191,
-          "composition_ratio": 8.45
+          "debit_amount": 3933685,
+          "credit_amount": 1421913,
+          "closing_balance": 3444588,
+          "composition_ratio": 8.74
         },
         {
           "account_item_id": 386413585,
@@ -189,10 +189,10 @@
           "hierarchy_level": 2,
           "parent_account_category_name": "資産",
           "opening_balance": 19583650,
-          "debit_amount": 10805093,
-          "credit_amount": 12721799,
-          "closing_balance": 17666944,
-          "composition_ratio": 44.82
+          "debit_amount": 10925093,
+          "credit_amount": 12849402,
+          "closing_balance": 17659341,
+          "composition_ratio": 44.81
         },
         {
           "account_item_id": 386413606,
@@ -247,7 +247,7 @@
           "debit_amount": 0,
           "credit_amount": 0,
           "closing_balance": 3143403,
-          "composition_ratio": 7.97
+          "composition_ratio": 7.98
         },
         {
           "account_category_name": "有形固定資産",
@@ -258,7 +258,7 @@
           "debit_amount": 0,
           "credit_amount": 300673,
           "closing_balance": 10230410,
-          "composition_ratio": 25.95
+          "composition_ratio": 25.96
         },
         {
           "account_item_id": 386413623,
@@ -291,7 +291,7 @@
           "debit_amount": 0,
           "credit_amount": 172583,
           "closing_balance": 8949352,
-          "composition_ratio": 22.7
+          "composition_ratio": 22.71
         },
         {
           "account_item_id": 386413632,
@@ -313,7 +313,7 @@
           "debit_amount": 30000,
           "credit_amount": 0,
           "closing_balance": 1740000,
-          "composition_ratio": 4.41
+          "composition_ratio": 4.42
         },
         {
           "account_category_name": "投資その他の資産",
@@ -324,7 +324,7 @@
           "debit_amount": 30000,
           "credit_amount": 172583,
           "closing_balance": 11265362,
-          "composition_ratio": 28.58
+          "composition_ratio": 28.59
         },
         {
           "account_category_name": "固定資産",
@@ -335,7 +335,7 @@
           "debit_amount": 30000,
           "credit_amount": 473256,
           "closing_balance": 21495772,
-          "composition_ratio": 54.53
+          "composition_ratio": 54.54
         },
         {
           "account_item_id": 386413635,
@@ -364,9 +364,9 @@
           "total_line": true,
           "hierarchy_level": 1,
           "opening_balance": 41777370,
-          "debit_amount": 10835093,
-          "credit_amount": 13195055,
-          "closing_balance": 39417408,
+          "debit_amount": 10955093,
+          "credit_amount": 13322658,
+          "closing_balance": 39409805,
           "composition_ratio": 100
         },
         {
@@ -463,10 +463,10 @@
           "account_category_name": "他流動負債",
           "hierarchy_level": 3,
           "opening_balance": 16399,
-          "debit_amount": 1403580,
-          "credit_amount": 882457,
-          "closing_balance": -504724,
-          "composition_ratio": 1.28
+          "debit_amount": 1411183,
+          "credit_amount": 1131138,
+          "closing_balance": -263646,
+          "composition_ratio": 0.67
         },
         {
           "account_item_id": 386413647,
@@ -485,10 +485,10 @@
           "account_category_name": "他流動負債",
           "hierarchy_level": 3,
           "opening_balance": 22735,
-          "debit_amount": 560084,
+          "debit_amount": 779760,
           "credit_amount": 84330,
-          "closing_balance": -453019,
-          "composition_ratio": 1.15
+          "closing_balance": -672695,
+          "composition_ratio": 1.71
         },
         {
           "account_item_id": 386413652,
@@ -529,10 +529,10 @@
           "hierarchy_level": 2,
           "parent_account_category_name": "負債",
           "opening_balance": 4808720,
-          "debit_amount": 5288783,
-          "credit_amount": 3522165,
-          "closing_balance": 3042102,
-          "composition_ratio": 7.72
+          "debit_amount": 5516062,
+          "credit_amount": 3770846,
+          "closing_balance": 3063504,
+          "composition_ratio": 7.77
         },
         {
           "account_item_id": 386413659,
@@ -543,7 +543,7 @@
           "debit_amount": 886000,
           "credit_amount": 0,
           "closing_balance": 37518000,
-          "composition_ratio": 95.18
+          "composition_ratio": 95.2
         },
         {
           "account_category_name": "固定負債",
@@ -554,7 +554,7 @@
           "debit_amount": 886000,
           "credit_amount": 0,
           "closing_balance": 37518000,
-          "composition_ratio": 95.18
+          "composition_ratio": 95.2
         },
         {
           "account_category_name": "負債",
@@ -562,10 +562,10 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "負債及び純資産",
           "opening_balance": 43212720,
-          "debit_amount": 6174783,
-          "credit_amount": 3522165,
-          "closing_balance": 40560102,
-          "composition_ratio": 102.9
+          "debit_amount": 6402062,
+          "credit_amount": 3770846,
+          "closing_balance": 40581504,
+          "composition_ratio": 102.97
         },
         {
           "account_item_id": 386413663,
@@ -598,7 +598,7 @@
           "debit_amount": 0,
           "credit_amount": 0,
           "closing_balance": 4967958,
-          "composition_ratio": 12.6
+          "composition_ratio": 12.61
         },
         {
           "account_category_name": "当期純損益金額",
@@ -606,10 +606,10 @@
           "hierarchy_level": 5,
           "parent_account_category_name": "その他利益剰余金",
           "opening_balance": -8003308,
-          "debit_amount": 1697639,
+          "debit_amount": 1726644,
           "credit_amount": 1990295,
-          "closing_balance": -7710652,
-          "composition_ratio": 19.56
+          "closing_balance": -7739657,
+          "composition_ratio": 19.64
         },
         {
           "account_category_name": "その他利益剰余金",
@@ -617,10 +617,10 @@
           "hierarchy_level": 4,
           "parent_account_category_name": "利益剰余金",
           "opening_balance": -3035350,
-          "debit_amount": 1697639,
+          "debit_amount": 1726644,
           "credit_amount": 1990295,
-          "closing_balance": -2742694,
-          "composition_ratio": 6.96
+          "closing_balance": -2771699,
+          "composition_ratio": 7.03
         },
         {
           "account_category_name": "利益剰余金",
@@ -628,10 +628,10 @@
           "hierarchy_level": 3,
           "parent_account_category_name": "株主資本",
           "opening_balance": -3035350,
-          "debit_amount": 1697639,
+          "debit_amount": 1726644,
           "credit_amount": 1990295,
-          "closing_balance": -2742694,
-          "composition_ratio": 6.96
+          "closing_balance": -2771699,
+          "composition_ratio": 7.03
         },
         {
           "account_category_name": "株主資本",
@@ -639,10 +639,10 @@
           "hierarchy_level": 2,
           "parent_account_category_name": "純資産",
           "opening_balance": -1435350,
-          "debit_amount": 1697639,
+          "debit_amount": 1726644,
           "credit_amount": 1990295,
-          "closing_balance": -1142694,
-          "composition_ratio": 2.9
+          "closing_balance": -1171699,
+          "composition_ratio": 2.97
         },
         {
           "account_category_name": "評価・換算差額等",
@@ -672,19 +672,19 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "負債及び純資産",
           "opening_balance": -1435350,
-          "debit_amount": 1697639,
+          "debit_amount": 1726644,
           "credit_amount": 1990295,
-          "closing_balance": -1142694,
-          "composition_ratio": 2.9
+          "closing_balance": -1171699,
+          "composition_ratio": 2.97
         },
         {
           "account_category_name": "負債及び純資産",
           "total_line": true,
           "hierarchy_level": 1,
           "opening_balance": 41777370,
-          "debit_amount": 7872422,
-          "credit_amount": 5512460,
-          "closing_balance": 39417408,
+          "debit_amount": 8128706,
+          "credit_amount": 5761141,
+          "closing_balance": 39409805,
           "composition_ratio": 100
         }
       ]
@@ -699,7 +699,7 @@
       "start_month": 3,
       "end_month": 3,
       "breakdown_display_type": "item",
-      "created_at": "2026-04-03T14:07:40+09:00",
+      "created_at": "2026-04-07T15:42:27+09:00",
       "balances": [
         {
           "account_item_id": 386413777,
@@ -710,18 +710,18 @@
               "name": "未選択",
               "opening_balance": 130050,
               "debit_amount": 969319,
-              "credit_amount": 843333,
-              "closing_balance": 256036,
-              "composition_ratio": 0.65
+              "credit_amount": 963333,
+              "closing_balance": 136036,
+              "composition_ratio": 0.35
             }
           ],
           "account_category_name": "現金・預金",
           "hierarchy_level": 3,
           "opening_balance": 130050,
           "debit_amount": 969319,
-          "credit_amount": 843333,
-          "closing_balance": 256036,
-          "composition_ratio": 0.65
+          "credit_amount": 963333,
+          "closing_balance": 136036,
+          "composition_ratio": 0.35
         },
         {
           "account_item_id": 401773187,
@@ -778,7 +778,7 @@
               "debit_amount": 700137,
               "credit_amount": 398425,
               "closing_balance": 1507624,
-              "composition_ratio": 3.82
+              "composition_ratio": 3.83
             }
           ],
           "account_category_name": "現金・預金",
@@ -787,7 +787,7 @@
           "debit_amount": 700137,
           "credit_amount": 398425,
           "closing_balance": 1507624,
-          "composition_ratio": 3.82
+          "composition_ratio": 3.83
         },
         {
           "account_item_id": 431948860,
@@ -822,7 +822,7 @@
               "debit_amount": 4360299,
               "credit_amount": 4615643,
               "closing_balance": 5346390,
-              "composition_ratio": 13.56
+              "composition_ratio": 13.57
             }
           ],
           "account_category_name": "現金・預金",
@@ -831,7 +831,7 @@
           "debit_amount": 4360299,
           "credit_amount": 4615643,
           "closing_balance": 5346390,
-          "composition_ratio": 13.56
+          "composition_ratio": 13.57
         },
         {
           "account_item_id": 558959100,
@@ -863,19 +863,19 @@
               "id": 0,
               "name": "未選択",
               "opening_balance": 932816,
-              "debit_amount": 3813685,
-              "credit_amount": 1414310,
-              "closing_balance": 3332191,
-              "composition_ratio": 8.45
+              "debit_amount": 3933685,
+              "credit_amount": 1421913,
+              "closing_balance": 3444588,
+              "composition_ratio": 8.74
             }
           ],
           "account_category_name": "現金・預金",
           "hierarchy_level": 3,
           "opening_balance": 932816,
-          "debit_amount": 3813685,
-          "credit_amount": 1414310,
-          "closing_balance": 3332191,
-          "composition_ratio": 8.45
+          "debit_amount": 3933685,
+          "credit_amount": 1421913,
+          "closing_balance": 3444588,
+          "composition_ratio": 8.74
         },
         {
           "account_item_id": 386413585,
@@ -1059,10 +1059,10 @@
           "hierarchy_level": 2,
           "parent_account_category_name": "資産",
           "opening_balance": 19583650,
-          "debit_amount": 10805093,
-          "credit_amount": 12721799,
-          "closing_balance": 17666944,
-          "composition_ratio": 44.82
+          "debit_amount": 10925093,
+          "credit_amount": 12849402,
+          "closing_balance": 17659341,
+          "composition_ratio": 44.81
         },
         {
           "account_item_id": 386413606,
@@ -1163,7 +1163,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 3143403,
-              "composition_ratio": 7.97
+              "composition_ratio": 7.98
             }
           ],
           "account_category_name": "有形固定資産",
@@ -1172,7 +1172,7 @@
           "debit_amount": 0,
           "credit_amount": 0,
           "closing_balance": 3143403,
-          "composition_ratio": 7.97
+          "composition_ratio": 7.98
         },
         {
           "account_category_name": "有形固定資産",
@@ -1183,7 +1183,7 @@
           "debit_amount": 0,
           "credit_amount": 300673,
           "closing_balance": 10230410,
-          "composition_ratio": 25.95
+          "composition_ratio": 25.96
         },
         {
           "account_item_id": 386413623,
@@ -1276,7 +1276,7 @@
           "debit_amount": 0,
           "credit_amount": 172583,
           "closing_balance": 8949352,
-          "composition_ratio": 22.7
+          "composition_ratio": 22.71
         },
         {
           "account_item_id": 386413632,
@@ -1311,7 +1311,7 @@
               "debit_amount": 30000,
               "credit_amount": 0,
               "closing_balance": 1740000,
-              "composition_ratio": 4.41
+              "composition_ratio": 4.42
             }
           ],
           "account_category_name": "投資その他の資産",
@@ -1320,7 +1320,7 @@
           "debit_amount": 30000,
           "credit_amount": 0,
           "closing_balance": 1740000,
-          "composition_ratio": 4.41
+          "composition_ratio": 4.42
         },
         {
           "account_category_name": "投資その他の資産",
@@ -1331,7 +1331,7 @@
           "debit_amount": 30000,
           "credit_amount": 172583,
           "closing_balance": 11265362,
-          "composition_ratio": 28.58
+          "composition_ratio": 28.59
         },
         {
           "account_category_name": "固定資産",
@@ -1342,7 +1342,7 @@
           "debit_amount": 30000,
           "credit_amount": 473256,
           "closing_balance": 21495772,
-          "composition_ratio": 54.53
+          "composition_ratio": 54.54
         },
         {
           "account_item_id": 386413635,
@@ -1382,9 +1382,9 @@
           "total_line": true,
           "hierarchy_level": 1,
           "opening_balance": 41777370,
-          "debit_amount": 10835093,
-          "credit_amount": 13195055,
-          "closing_balance": 39417408,
+          "debit_amount": 10955093,
+          "credit_amount": 13322658,
+          "closing_balance": 39409805,
           "composition_ratio": 100
         },
         {
@@ -1571,19 +1571,19 @@
               "id": 0,
               "name": "未選択",
               "opening_balance": 16399,
-              "debit_amount": 1403580,
-              "credit_amount": 882457,
-              "closing_balance": -504724,
-              "composition_ratio": 1.28
+              "debit_amount": 1411183,
+              "credit_amount": 1131138,
+              "closing_balance": -263646,
+              "composition_ratio": 0.67
             }
           ],
           "account_category_name": "他流動負債",
           "hierarchy_level": 3,
           "opening_balance": 16399,
-          "debit_amount": 1403580,
-          "credit_amount": 882457,
-          "closing_balance": -504724,
-          "composition_ratio": 1.28
+          "debit_amount": 1411183,
+          "credit_amount": 1131138,
+          "closing_balance": -263646,
+          "composition_ratio": 0.67
         },
         {
           "account_item_id": 386413647,
@@ -1615,19 +1615,19 @@
               "id": 0,
               "name": "未選択",
               "opening_balance": 22735,
-              "debit_amount": 560084,
+              "debit_amount": 779760,
               "credit_amount": 84330,
-              "closing_balance": -453019,
-              "composition_ratio": 1.15
+              "closing_balance": -672695,
+              "composition_ratio": 1.71
             }
           ],
           "account_category_name": "他流動負債",
           "hierarchy_level": 3,
           "opening_balance": 22735,
-          "debit_amount": 560084,
+          "debit_amount": 779760,
           "credit_amount": 84330,
-          "closing_balance": -453019,
-          "composition_ratio": 1.15
+          "closing_balance": -672695,
+          "composition_ratio": 1.71
         },
         {
           "account_item_id": 386413652,
@@ -1746,10 +1746,10 @@
           "hierarchy_level": 2,
           "parent_account_category_name": "負債",
           "opening_balance": 4808720,
-          "debit_amount": 5288783,
-          "credit_amount": 3522165,
-          "closing_balance": 3042102,
-          "composition_ratio": 7.72
+          "debit_amount": 5516062,
+          "credit_amount": 3770846,
+          "closing_balance": 3063504,
+          "composition_ratio": 7.77
         },
         {
           "account_item_id": 386413659,
@@ -1762,7 +1762,7 @@
               "debit_amount": 61000,
               "credit_amount": 0,
               "closing_balance": 1342000,
-              "composition_ratio": 3.4
+              "composition_ratio": 3.41
             },
             {
               "id": 195593383,
@@ -1834,7 +1834,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 5000000,
-              "composition_ratio": 12.68
+              "composition_ratio": 12.69
             }
           ],
           "account_category_name": "固定負債",
@@ -1843,7 +1843,7 @@
           "debit_amount": 886000,
           "credit_amount": 0,
           "closing_balance": 37518000,
-          "composition_ratio": 95.18
+          "composition_ratio": 95.2
         },
         {
           "account_category_name": "固定負債",
@@ -1854,7 +1854,7 @@
           "debit_amount": 886000,
           "credit_amount": 0,
           "closing_balance": 37518000,
-          "composition_ratio": 95.18
+          "composition_ratio": 95.2
         },
         {
           "account_category_name": "負債",
@@ -1862,10 +1862,10 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "負債及び純資産",
           "opening_balance": 43212720,
-          "debit_amount": 6174783,
-          "credit_amount": 3522165,
-          "closing_balance": 40560102,
-          "composition_ratio": 102.9
+          "debit_amount": 6402062,
+          "credit_amount": 3770846,
+          "closing_balance": 40581504,
+          "composition_ratio": 102.97
         },
         {
           "account_item_id": 386413663,
@@ -1911,7 +1911,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 4967958,
-              "composition_ratio": 12.6
+              "composition_ratio": 12.61
             }
           ],
           "account_category_name": "繰越利益剰余金",
@@ -1920,7 +1920,7 @@
           "debit_amount": 0,
           "credit_amount": 0,
           "closing_balance": 4967958,
-          "composition_ratio": 12.6
+          "composition_ratio": 12.61
         },
         {
           "account_category_name": "当期純損益金額",
@@ -1928,10 +1928,10 @@
           "hierarchy_level": 5,
           "parent_account_category_name": "その他利益剰余金",
           "opening_balance": -8003308,
-          "debit_amount": 1697639,
+          "debit_amount": 1726644,
           "credit_amount": 1990295,
-          "closing_balance": -7710652,
-          "composition_ratio": 19.56
+          "closing_balance": -7739657,
+          "composition_ratio": 19.64
         },
         {
           "account_category_name": "その他利益剰余金",
@@ -1939,10 +1939,10 @@
           "hierarchy_level": 4,
           "parent_account_category_name": "利益剰余金",
           "opening_balance": -3035350,
-          "debit_amount": 1697639,
+          "debit_amount": 1726644,
           "credit_amount": 1990295,
-          "closing_balance": -2742694,
-          "composition_ratio": 6.96
+          "closing_balance": -2771699,
+          "composition_ratio": 7.03
         },
         {
           "account_category_name": "利益剰余金",
@@ -1950,10 +1950,10 @@
           "hierarchy_level": 3,
           "parent_account_category_name": "株主資本",
           "opening_balance": -3035350,
-          "debit_amount": 1697639,
+          "debit_amount": 1726644,
           "credit_amount": 1990295,
-          "closing_balance": -2742694,
-          "composition_ratio": 6.96
+          "closing_balance": -2771699,
+          "composition_ratio": 7.03
         },
         {
           "account_category_name": "株主資本",
@@ -1961,10 +1961,10 @@
           "hierarchy_level": 2,
           "parent_account_category_name": "純資産",
           "opening_balance": -1435350,
-          "debit_amount": 1697639,
+          "debit_amount": 1726644,
           "credit_amount": 1990295,
-          "closing_balance": -1142694,
-          "composition_ratio": 2.9
+          "closing_balance": -1171699,
+          "composition_ratio": 2.97
         },
         {
           "account_category_name": "評価・換算差額等",
@@ -1994,19 +1994,19 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "負債及び純資産",
           "opening_balance": -1435350,
-          "debit_amount": 1697639,
+          "debit_amount": 1726644,
           "credit_amount": 1990295,
-          "closing_balance": -1142694,
-          "composition_ratio": 2.9
+          "closing_balance": -1171699,
+          "composition_ratio": 2.97
         },
         {
           "account_category_name": "負債及び純資産",
           "total_line": true,
           "hierarchy_level": 1,
           "opening_balance": 41777370,
-          "debit_amount": 7872422,
-          "credit_amount": 5512460,
-          "closing_balance": 39417408,
+          "debit_amount": 8128706,
+          "credit_amount": 5761141,
+          "closing_balance": 39409805,
           "composition_ratio": 100
         }
       ]
@@ -2021,7 +2021,7 @@
       "start_month": 3,
       "end_month": 3,
       "breakdown_display_type": "partner",
-      "created_at": "2026-04-03T14:07:40+09:00",
+      "created_at": "2026-04-07T15:42:28+09:00",
       "balances": [
         {
           "account_item_id": 386413777,
@@ -2032,18 +2032,18 @@
               "name": "未選択",
               "opening_balance": 130050,
               "debit_amount": 969319,
-              "credit_amount": 843333,
-              "closing_balance": 256036,
-              "composition_ratio": 0.65
+              "credit_amount": 963333,
+              "closing_balance": 136036,
+              "composition_ratio": 0.35
             }
           ],
           "account_category_name": "現金・預金",
           "hierarchy_level": 3,
           "opening_balance": 130050,
           "debit_amount": 969319,
-          "credit_amount": 843333,
-          "closing_balance": 256036,
-          "composition_ratio": 0.65
+          "credit_amount": 963333,
+          "closing_balance": 136036,
+          "composition_ratio": 0.35
         },
         {
           "account_item_id": 401773187,
@@ -2056,7 +2056,7 @@
               "debit_amount": 0,
               "credit_amount": 1907998,
               "closing_balance": 120891306,
-              "composition_ratio": 306.7
+              "composition_ratio": 306.75
             },
             {
               "id": 102123710,
@@ -2083,7 +2083,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -21011584,
-              "composition_ratio": 53.31
+              "composition_ratio": 53.32
             },
             {
               "id": 40487926,
@@ -2101,7 +2101,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 3111980,
-              "composition_ratio": 7.89
+              "composition_ratio": 7.9
             },
             {
               "id": 27990356,
@@ -2110,7 +2110,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -3553326,
-              "composition_ratio": 9.01
+              "composition_ratio": 9.02
             },
             {
               "id": 27990311,
@@ -2119,7 +2119,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 35530000,
-              "composition_ratio": 90.14
+              "composition_ratio": 90.16
             },
             {
               "id": 30658922,
@@ -2146,7 +2146,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 2748937,
-              "composition_ratio": 6.97
+              "composition_ratio": 6.98
             },
             {
               "id": 41128524,
@@ -2155,7 +2155,7 @@
               "debit_amount": 30000,
               "credit_amount": 0,
               "closing_balance": -16641182,
-              "composition_ratio": 42.22
+              "composition_ratio": 42.23
             },
             {
               "id": 28490909,
@@ -2164,7 +2164,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -8893235,
-              "composition_ratio": 22.56
+              "composition_ratio": 22.57
             },
             {
               "id": 40325634,
@@ -2209,7 +2209,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -13614433,
-              "composition_ratio": 34.54
+              "composition_ratio": 34.55
             },
             {
               "id": 32319021,
@@ -2380,7 +2380,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -3218353,
-              "composition_ratio": 8.16
+              "composition_ratio": 8.17
             },
             {
               "id": 37620959,
@@ -2452,7 +2452,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -49380001,
-              "composition_ratio": 125.27
+              "composition_ratio": 125.3
             },
             {
               "id": 44536326,
@@ -2461,7 +2461,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -6820000,
-              "composition_ratio": 17.3
+              "composition_ratio": 17.31
             },
             {
               "id": 48236587,
@@ -2488,7 +2488,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -8551044,
-              "composition_ratio": 21.69
+              "composition_ratio": 21.7
             },
             {
               "id": 34063870,
@@ -2497,7 +2497,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 13695000,
-              "composition_ratio": 34.74
+              "composition_ratio": 34.75
             },
             {
               "id": 34063830,
@@ -2515,7 +2515,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 10663510,
-              "composition_ratio": 27.05
+              "composition_ratio": 27.06
             },
             {
               "id": 29383060,
@@ -2524,7 +2524,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 4125000,
-              "composition_ratio": 10.46
+              "composition_ratio": 10.47
             },
             {
               "id": 27990442,
@@ -2533,7 +2533,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -44246802,
-              "composition_ratio": 112.25
+              "composition_ratio": 112.27
             },
             {
               "id": 30661460,
@@ -2542,7 +2542,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -15196500,
-              "composition_ratio": 38.55
+              "composition_ratio": 38.56
             },
             {
               "id": 32459041,
@@ -2578,7 +2578,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -11502700,
-              "composition_ratio": 29.18
+              "composition_ratio": 29.19
             },
             {
               "id": 48236934,
@@ -2614,7 +2614,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 4125000,
-              "composition_ratio": 10.46
+              "composition_ratio": 10.47
             },
             {
               "id": 53114866,
@@ -2650,7 +2650,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 75928419,
-              "composition_ratio": 192.63
+              "composition_ratio": 192.66
             },
             {
               "id": 52246949,
@@ -2704,7 +2704,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -23413377,
-              "composition_ratio": 59.4
+              "composition_ratio": 59.41
             },
             {
               "id": 66380321,
@@ -2722,7 +2722,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -4735244,
-              "composition_ratio": 12.01
+              "composition_ratio": 12.02
             },
             {
               "id": 102110557,
@@ -2843,7 +2843,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -270000,
-              "composition_ratio": 0.68
+              "composition_ratio": 0.69
             },
             {
               "id": 36223497,
@@ -2910,7 +2910,7 @@
               "debit_amount": 700000,
               "credit_amount": 4172,
               "closing_balance": 13886262,
-              "composition_ratio": 35.23
+              "composition_ratio": 35.24
             },
             {
               "id": 34372573,
@@ -3072,7 +3072,7 @@
           "debit_amount": 700137,
           "credit_amount": 398425,
           "closing_balance": 1507624,
-          "composition_ratio": 3.82
+          "composition_ratio": 3.83
         },
         {
           "account_item_id": 431948860,
@@ -3134,7 +3134,7 @@
               "debit_amount": 2440000,
               "credit_amount": 1291187,
               "closing_balance": -309953844,
-              "composition_ratio": 786.34
+              "composition_ratio": 786.49
             },
             {
               "id": 102521574,
@@ -3170,7 +3170,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 31057938,
-              "composition_ratio": 78.79
+              "composition_ratio": 78.81
             },
             {
               "id": 50113384,
@@ -3188,7 +3188,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 21879000,
-              "composition_ratio": 55.51
+              "composition_ratio": 55.52
             },
             {
               "id": 58363422,
@@ -3197,7 +3197,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 3080000,
-              "composition_ratio": 7.81
+              "composition_ratio": 7.82
             },
             {
               "id": 67435327,
@@ -3233,7 +3233,7 @@
               "debit_amount": 46118,
               "credit_amount": 921398,
               "closing_balance": -9682830,
-              "composition_ratio": 24.56
+              "composition_ratio": 24.57
             },
             {
               "id": 40384325,
@@ -3287,7 +3287,7 @@
               "debit_amount": 0,
               "credit_amount": 2053456,
               "closing_balance": -62133158,
-              "composition_ratio": 157.63
+              "composition_ratio": 157.66
             },
             {
               "id": 30659841,
@@ -3359,7 +3359,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 29303766,
-              "composition_ratio": 74.34
+              "composition_ratio": 74.36
             },
             {
               "id": 63654313,
@@ -3377,7 +3377,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 12756040,
-              "composition_ratio": 32.36
+              "composition_ratio": 32.37
             },
             {
               "id": 67732845,
@@ -3386,7 +3386,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 9229220,
-              "composition_ratio": 23.41
+              "composition_ratio": 23.42
             },
             {
               "id": 55150029,
@@ -3431,7 +3431,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 7143400,
-              "composition_ratio": 18.12
+              "composition_ratio": 18.13
             },
             {
               "id": 43248494,
@@ -3440,7 +3440,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 13970682,
-              "composition_ratio": 35.44
+              "composition_ratio": 35.45
             },
             {
               "id": 40873243,
@@ -3458,7 +3458,7 @@
               "debit_amount": 1870000,
               "credit_amount": 0,
               "closing_balance": 177707870,
-              "composition_ratio": 450.84
+              "composition_ratio": 450.92
             },
             {
               "id": 45099984,
@@ -3476,7 +3476,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 24477766,
-              "composition_ratio": 62.1
+              "composition_ratio": 62.11
             },
             {
               "id": 53932069,
@@ -3485,7 +3485,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 17254357,
-              "composition_ratio": 43.77
+              "composition_ratio": 43.78
             },
             {
               "id": 40255186,
@@ -3530,7 +3530,7 @@
           "debit_amount": 4360299,
           "credit_amount": 4615643,
           "closing_balance": 5346390,
-          "composition_ratio": 13.56
+          "composition_ratio": 13.57
         },
         {
           "account_item_id": 558959100,
@@ -3543,7 +3543,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -21195055,
-              "composition_ratio": 53.77
+              "composition_ratio": 53.78
             },
             {
               "id": 66380373,
@@ -3561,7 +3561,7 @@
               "debit_amount": 3580,
               "credit_amount": 600386,
               "closing_balance": 21330956,
-              "composition_ratio": 54.12
+              "composition_ratio": 54.13
             }
           ],
           "account_category_name": "現金・預金",
@@ -3580,10 +3580,10 @@
               "id": 0,
               "name": "未選択",
               "opening_balance": 3601741,
-              "debit_amount": 3761684,
-              "credit_amount": 1403580,
-              "closing_balance": 5959845,
-              "composition_ratio": 15.12
+              "debit_amount": 3881684,
+              "credit_amount": 1411183,
+              "closing_balance": 6072242,
+              "composition_ratio": 15.41
             },
             {
               "id": 105667328,
@@ -3697,10 +3697,10 @@
           "account_category_name": "現金・預金",
           "hierarchy_level": 3,
           "opening_balance": 932816,
-          "debit_amount": 3813685,
-          "credit_amount": 1414310,
-          "closing_balance": 3332191,
-          "composition_ratio": 8.45
+          "debit_amount": 3933685,
+          "credit_amount": 1421913,
+          "closing_balance": 3444588,
+          "composition_ratio": 8.74
         },
         {
           "account_item_id": 386413585,
@@ -3996,10 +3996,10 @@
           "hierarchy_level": 2,
           "parent_account_category_name": "資産",
           "opening_balance": 19583650,
-          "debit_amount": 10805093,
-          "credit_amount": 12721799,
-          "closing_balance": 17666944,
-          "composition_ratio": 44.82
+          "debit_amount": 10925093,
+          "credit_amount": 12849402,
+          "closing_balance": 17659341,
+          "composition_ratio": 44.81
         },
         {
           "account_item_id": 386413606,
@@ -4127,7 +4127,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 3143403,
-              "composition_ratio": 7.97
+              "composition_ratio": 7.98
             }
           ],
           "account_category_name": "有形固定資産",
@@ -4136,7 +4136,7 @@
           "debit_amount": 0,
           "credit_amount": 0,
           "closing_balance": 3143403,
-          "composition_ratio": 7.97
+          "composition_ratio": 7.98
         },
         {
           "account_category_name": "有形固定資産",
@@ -4147,7 +4147,7 @@
           "debit_amount": 0,
           "credit_amount": 300673,
           "closing_balance": 10230410,
-          "composition_ratio": 25.95
+          "composition_ratio": 25.96
         },
         {
           "account_item_id": 386413623,
@@ -4249,7 +4249,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 7230668,
-              "composition_ratio": 18.34
+              "composition_ratio": 18.35
             },
             {
               "id": 48119156,
@@ -4285,7 +4285,7 @@
           "debit_amount": 0,
           "credit_amount": 172583,
           "closing_balance": 8949352,
-          "composition_ratio": 22.7
+          "composition_ratio": 22.71
         },
         {
           "account_item_id": 386413632,
@@ -4320,7 +4320,7 @@
               "debit_amount": 30000,
               "credit_amount": 0,
               "closing_balance": 1740000,
-              "composition_ratio": 4.41
+              "composition_ratio": 4.42
             }
           ],
           "account_category_name": "投資その他の資産",
@@ -4329,7 +4329,7 @@
           "debit_amount": 30000,
           "credit_amount": 0,
           "closing_balance": 1740000,
-          "composition_ratio": 4.41
+          "composition_ratio": 4.42
         },
         {
           "account_category_name": "投資その他の資産",
@@ -4340,7 +4340,7 @@
           "debit_amount": 30000,
           "credit_amount": 172583,
           "closing_balance": 11265362,
-          "composition_ratio": 28.58
+          "composition_ratio": 28.59
         },
         {
           "account_category_name": "固定資産",
@@ -4351,7 +4351,7 @@
           "debit_amount": 30000,
           "credit_amount": 473256,
           "closing_balance": 21495772,
-          "composition_ratio": 54.53
+          "composition_ratio": 54.54
         },
         {
           "account_item_id": 386413635,
@@ -4391,9 +4391,9 @@
           "total_line": true,
           "hierarchy_level": 1,
           "opening_balance": 41777370,
-          "debit_amount": 10835093,
-          "credit_amount": 13195055,
-          "closing_balance": 39417408,
+          "debit_amount": 10955093,
+          "credit_amount": 13322658,
+          "closing_balance": 39409805,
           "composition_ratio": 100
         },
         {
@@ -5658,10 +5658,10 @@
               "id": 0,
               "name": "未選択",
               "opening_balance": -1789458,
-              "debit_amount": 1403580,
-              "credit_amount": 610980,
-              "closing_balance": -2582058,
-              "composition_ratio": 6.55
+              "debit_amount": 1411183,
+              "credit_amount": 831246,
+              "closing_balance": -2369395,
+              "composition_ratio": 6.01
             },
             {
               "id": 34372573,
@@ -5722,9 +5722,9 @@
               "name": "サミット㈱",
               "opening_balance": 18035,
               "debit_amount": 0,
-              "credit_amount": 10858,
-              "closing_balance": 28893,
-              "composition_ratio": 0.07
+              "credit_amount": 11609,
+              "closing_balance": 29644,
+              "composition_ratio": 0.08
             },
             {
               "id": 36221425,
@@ -5758,9 +5758,9 @@
               "name": "㈱ビッグ・エー",
               "opening_balance": 24569,
               "debit_amount": 0,
-              "credit_amount": 7910,
-              "closing_balance": 32479,
-              "composition_ratio": 0.08
+              "credit_amount": 12544,
+              "closing_balance": 37113,
+              "composition_ratio": 0.09
             },
             {
               "id": 108871505,
@@ -5776,18 +5776,18 @@
               "name": "㈱丸菱LINKed",
               "opening_balance": 200480,
               "debit_amount": 0,
-              "credit_amount": 17920,
-              "closing_balance": 218400,
-              "composition_ratio": 0.55
+              "credit_amount": 40950,
+              "closing_balance": 241430,
+              "composition_ratio": 0.61
             }
           ],
           "account_category_name": "他流動負債",
           "hierarchy_level": 3,
           "opening_balance": 16399,
-          "debit_amount": 1403580,
-          "credit_amount": 882457,
-          "closing_balance": -504724,
-          "composition_ratio": 1.28
+          "debit_amount": 1411183,
+          "credit_amount": 1131138,
+          "closing_balance": -263646,
+          "composition_ratio": 0.67
         },
         {
           "account_item_id": 386413647,
@@ -5819,10 +5819,10 @@
               "id": 0,
               "name": "未選択",
               "opening_balance": -1627931,
-              "debit_amount": 560084,
+              "debit_amount": 779760,
               "credit_amount": 0,
-              "closing_balance": -2188015,
-              "composition_ratio": 5.55
+              "closing_balance": -2407691,
+              "composition_ratio": 6.11
             },
             {
               "id": 34372573,
@@ -5837,10 +5837,10 @@
           "account_category_name": "他流動負債",
           "hierarchy_level": 3,
           "opening_balance": 22735,
-          "debit_amount": 560084,
+          "debit_amount": 779760,
           "credit_amount": 84330,
-          "closing_balance": -453019,
-          "composition_ratio": 1.15
+          "closing_balance": -672695,
+          "composition_ratio": 1.71
         },
         {
           "account_item_id": 386413652,
@@ -5853,7 +5853,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": -8629220,
-              "composition_ratio": 21.89
+              "composition_ratio": 21.9
             },
             {
               "id": 30658922,
@@ -5889,7 +5889,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 14595952,
-              "composition_ratio": 37.03
+              "composition_ratio": 37.04
             },
             {
               "id": 30659841,
@@ -5977,10 +5977,10 @@
           "hierarchy_level": 2,
           "parent_account_category_name": "負債",
           "opening_balance": 4808720,
-          "debit_amount": 5288783,
-          "credit_amount": 3522165,
-          "closing_balance": 3042102,
-          "composition_ratio": 7.72
+          "debit_amount": 5516062,
+          "credit_amount": 3770846,
+          "closing_balance": 3063504,
+          "composition_ratio": 7.77
         },
         {
           "account_item_id": 386413659,
@@ -5993,7 +5993,7 @@
               "debit_amount": 286000,
               "credit_amount": 0,
               "closing_balance": 12417000,
-              "composition_ratio": 31.5
+              "composition_ratio": 31.51
             },
             {
               "id": 29216979,
@@ -6011,7 +6011,7 @@
               "debit_amount": 552000,
               "credit_amount": 0,
               "closing_balance": 24269000,
-              "composition_ratio": 61.57
+              "composition_ratio": 61.58
             }
           ],
           "account_category_name": "固定負債",
@@ -6020,7 +6020,7 @@
           "debit_amount": 886000,
           "credit_amount": 0,
           "closing_balance": 37518000,
-          "composition_ratio": 95.18
+          "composition_ratio": 95.2
         },
         {
           "account_category_name": "固定負債",
@@ -6031,7 +6031,7 @@
           "debit_amount": 886000,
           "credit_amount": 0,
           "closing_balance": 37518000,
-          "composition_ratio": 95.18
+          "composition_ratio": 95.2
         },
         {
           "account_category_name": "負債",
@@ -6039,10 +6039,10 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "負債及び純資産",
           "opening_balance": 43212720,
-          "debit_amount": 6174783,
-          "credit_amount": 3522165,
-          "closing_balance": 40560102,
-          "composition_ratio": 102.9
+          "debit_amount": 6402062,
+          "credit_amount": 3770846,
+          "closing_balance": 40581504,
+          "composition_ratio": 102.97
         },
         {
           "account_item_id": 386413663,
@@ -6088,7 +6088,7 @@
               "debit_amount": 0,
               "credit_amount": 0,
               "closing_balance": 4967958,
-              "composition_ratio": 12.6
+              "composition_ratio": 12.61
             }
           ],
           "account_category_name": "繰越利益剰余金",
@@ -6097,7 +6097,7 @@
           "debit_amount": 0,
           "credit_amount": 0,
           "closing_balance": 4967958,
-          "composition_ratio": 12.6
+          "composition_ratio": 12.61
         },
         {
           "account_category_name": "当期純損益金額",
@@ -6105,10 +6105,10 @@
           "hierarchy_level": 5,
           "parent_account_category_name": "その他利益剰余金",
           "opening_balance": -8003308,
-          "debit_amount": 1697639,
+          "debit_amount": 1726644,
           "credit_amount": 1990295,
-          "closing_balance": -7710652,
-          "composition_ratio": 19.56
+          "closing_balance": -7739657,
+          "composition_ratio": 19.64
         },
         {
           "account_category_name": "その他利益剰余金",
@@ -6116,10 +6116,10 @@
           "hierarchy_level": 4,
           "parent_account_category_name": "利益剰余金",
           "opening_balance": -3035350,
-          "debit_amount": 1697639,
+          "debit_amount": 1726644,
           "credit_amount": 1990295,
-          "closing_balance": -2742694,
-          "composition_ratio": 6.96
+          "closing_balance": -2771699,
+          "composition_ratio": 7.03
         },
         {
           "account_category_name": "利益剰余金",
@@ -6127,10 +6127,10 @@
           "hierarchy_level": 3,
           "parent_account_category_name": "株主資本",
           "opening_balance": -3035350,
-          "debit_amount": 1697639,
+          "debit_amount": 1726644,
           "credit_amount": 1990295,
-          "closing_balance": -2742694,
-          "composition_ratio": 6.96
+          "closing_balance": -2771699,
+          "composition_ratio": 7.03
         },
         {
           "account_category_name": "株主資本",
@@ -6138,10 +6138,10 @@
           "hierarchy_level": 2,
           "parent_account_category_name": "純資産",
           "opening_balance": -1435350,
-          "debit_amount": 1697639,
+          "debit_amount": 1726644,
           "credit_amount": 1990295,
-          "closing_balance": -1142694,
-          "composition_ratio": 2.9
+          "closing_balance": -1171699,
+          "composition_ratio": 2.97
         },
         {
           "account_category_name": "評価・換算差額等",
@@ -6171,19 +6171,19 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "負債及び純資産",
           "opening_balance": -1435350,
-          "debit_amount": 1697639,
+          "debit_amount": 1726644,
           "credit_amount": 1990295,
-          "closing_balance": -1142694,
-          "composition_ratio": 2.9
+          "closing_balance": -1171699,
+          "composition_ratio": 2.97
         },
         {
           "account_category_name": "負債及び純資産",
           "total_line": true,
           "hierarchy_level": 1,
           "opening_balance": 41777370,
-          "debit_amount": 7872422,
-          "credit_amount": 5512460,
-          "closing_balance": 39417408,
+          "debit_amount": 8128706,
+          "credit_amount": 5761141,
+          "closing_balance": 39409805,
           "composition_ratio": 100
         }
       ]
@@ -6197,7 +6197,7 @@
       "fiscal_year": 2025,
       "start_month": 11,
       "end_month": 3,
-      "created_at": "2026-04-03T14:07:39+09:00",
+      "created_at": "2026-04-07T15:42:27+09:00",
       "balances": [
         {
           "account_item_id": 386413677,
@@ -6238,10 +6238,10 @@
           "hierarchy_level": 2,
           "parent_account_category_name": "売上総損益金額",
           "opening_balance": 0,
-          "debit_amount": 4382164,
+          "debit_amount": 4408579,
           "credit_amount": 236110,
-          "closing_balance": 4146054,
-          "composition_ratio": 23.33
+          "closing_balance": 4172469,
+          "composition_ratio": 23.48
         },
         {
           "account_category_name": "期首商品棚卸",
@@ -6271,10 +6271,10 @@
           "hierarchy_level": 4,
           "parent_account_category_name": "商品売上原価",
           "opening_balance": 0,
-          "debit_amount": 4028899,
+          "debit_amount": 4055314,
           "credit_amount": 600,
-          "closing_balance": 4028299,
-          "composition_ratio": 22.67
+          "closing_balance": 4054714,
+          "composition_ratio": 22.82
         },
         {
           "account_item_id": 386413683,
@@ -6282,10 +6282,10 @@
           "account_category_name": "当期商品仕入",
           "hierarchy_level": 5,
           "opening_balance": 0,
-          "debit_amount": 4028899,
+          "debit_amount": 4055314,
           "credit_amount": 600,
-          "closing_balance": 4028299,
-          "composition_ratio": 22.67
+          "closing_balance": 4054714,
+          "composition_ratio": 22.82
         },
         {
           "account_category_name": "他勘定振替高(商)",
@@ -6326,10 +6326,10 @@
           "hierarchy_level": 3,
           "parent_account_category_name": "売上原価",
           "opening_balance": 0,
-          "debit_amount": 4382164,
+          "debit_amount": 4408579,
           "credit_amount": 236110,
-          "closing_balance": 4146054,
-          "composition_ratio": 23.33
+          "closing_balance": 4172469,
+          "composition_ratio": 23.48
         },
         {
           "account_category_name": "売上総損益金額",
@@ -6337,10 +6337,10 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "営業損益金額",
           "opening_balance": 0,
-          "debit_amount": 4459148,
+          "debit_amount": 4485563,
           "credit_amount": 18084904,
-          "closing_balance": 13625756,
-          "composition_ratio": 76.67
+          "closing_balance": 13599341,
+          "composition_ratio": 76.52
         },
         {
           "account_item_id": 386413689,
@@ -6447,10 +6447,10 @@
           "account_category_name": "販売管理費",
           "hierarchy_level": 3,
           "opening_balance": 0,
-          "debit_amount": 379330,
+          "debit_amount": 379530,
           "credit_amount": 0,
-          "closing_balance": 379330,
-          "composition_ratio": 2.13
+          "closing_balance": 379530,
+          "composition_ratio": 2.14
         },
         {
           "account_item_id": 386413705,
@@ -6480,9 +6480,9 @@
           "account_category_name": "販売管理費",
           "hierarchy_level": 3,
           "opening_balance": 0,
-          "debit_amount": 3186752,
+          "debit_amount": 3187142,
           "credit_amount": 69621,
-          "closing_balance": 3117131,
+          "closing_balance": 3117521,
           "composition_ratio": 17.54
         },
         {
@@ -6513,10 +6513,10 @@
           "account_category_name": "販売管理費",
           "hierarchy_level": 3,
           "opening_balance": 0,
-          "debit_amount": 2352766,
+          "debit_amount": 2354766,
           "credit_amount": 0,
-          "closing_balance": 2352766,
-          "composition_ratio": 13.24
+          "closing_balance": 2354766,
+          "composition_ratio": 13.25
         },
         {
           "account_item_id": 386413715,
@@ -6542,7 +6542,7 @@
         },
         {
           "account_item_id": 999291339,
-          "account_item_name": "衛生費",
+          "account_item_name": "衛��費",
           "account_category_name": "販売管理費",
           "hierarchy_level": 3,
           "opening_balance": 0,
@@ -6623,10 +6623,10 @@
           "hierarchy_level": 2,
           "parent_account_category_name": "営業損益金額",
           "opening_balance": 0,
-          "debit_amount": 21617142,
+          "debit_amount": 21619732,
           "credit_amount": 206599,
-          "closing_balance": 21410543,
-          "composition_ratio": 120.47
+          "closing_balance": 21413133,
+          "composition_ratio": 120.49
         },
         {
           "account_category_name": "営業損益金額",
@@ -6634,10 +6634,10 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "経常損益金額",
           "opening_balance": 0,
-          "debit_amount": 26076290,
+          "debit_amount": 26105295,
           "credit_amount": 18291503,
-          "closing_balance": -7784787,
-          "composition_ratio": 43.8
+          "closing_balance": -7813792,
+          "composition_ratio": 43.97
         },
         {
           "account_category_name": "営業外収益",
@@ -6700,10 +6700,10 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "税引前当期純損益金額",
           "opening_balance": 0,
-          "debit_amount": 26475346,
+          "debit_amount": 26504351,
           "credit_amount": 18654493,
-          "closing_balance": -7820853,
-          "composition_ratio": 44.01
+          "closing_balance": -7849858,
+          "composition_ratio": 44.17
         },
         {
           "account_category_name": "特別利益",
@@ -6755,10 +6755,10 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "当期純損益金額",
           "opening_balance": 0,
-          "debit_amount": 26641001,
+          "debit_amount": 26670006,
           "credit_amount": 18932774,
-          "closing_balance": -7708227,
-          "composition_ratio": 43.37
+          "closing_balance": -7737232,
+          "composition_ratio": 43.54
         },
         {
           "account_category_name": "法人税等",
@@ -6799,10 +6799,10 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "その他利益剰余金",
           "opening_balance": 0,
-          "debit_amount": 26643426,
+          "debit_amount": 26672431,
           "credit_amount": 18932774,
-          "closing_balance": -7710652,
-          "composition_ratio": 43.39
+          "closing_balance": -7739657,
+          "composition_ratio": 43.55
         }
       ]
     },
@@ -6816,7 +6816,7 @@
       "start_month": 11,
       "end_month": 3,
       "breakdown_display_type": "partner",
-      "created_at": "2026-04-03T14:07:39+09:00",
+      "created_at": "2026-04-07T15:42:27+09:00",
       "balances": [
         {
           "account_item_id": 386413677,
@@ -6951,10 +6951,10 @@
           "hierarchy_level": 2,
           "parent_account_category_name": "売上総損益金額",
           "opening_balance": 0,
-          "debit_amount": 4382164,
+          "debit_amount": 4408579,
           "credit_amount": 236110,
-          "closing_balance": 4146054,
-          "composition_ratio": 23.33
+          "closing_balance": 4172469,
+          "composition_ratio": 23.48
         },
         {
           "account_category_name": "期首商品棚卸",
@@ -6995,10 +6995,10 @@
           "hierarchy_level": 4,
           "parent_account_category_name": "商品売上原価",
           "opening_balance": 0,
-          "debit_amount": 4028899,
+          "debit_amount": 4055314,
           "credit_amount": 600,
-          "closing_balance": 4028299,
-          "composition_ratio": 22.67
+          "closing_balance": 4054714,
+          "composition_ratio": 22.82
         },
         {
           "account_item_id": 386413683,
@@ -7044,10 +7044,10 @@
               "id": 109067196,
               "name": "㈱丸菱LINKed",
               "opening_balance": 0,
-              "debit_amount": 210400,
+              "debit_amount": 231430,
               "credit_amount": 0,
-              "closing_balance": 210400,
-              "composition_ratio": 1.18
+              "closing_balance": 231430,
+              "composition_ratio": 1.3
             },
             {
               "id": 113258233,
@@ -7077,31 +7077,31 @@
               "composition_ratio": 0.26
             },
             {
-              "id": 109575212,
-              "name": "サミット㈱",
-              "opening_balance": 0,
-              "debit_amount": 35461,
-              "credit_amount": 0,
-              "closing_balance": 35461,
-              "composition_ratio": 0.2
-            },
-            {
               "id": 87653628,
               "name": "㈱ビッグ・エー",
               "opening_balance": 0,
-              "debit_amount": 32479,
+              "debit_amount": 37113,
               "credit_amount": 0,
-              "closing_balance": 32479,
-              "composition_ratio": 0.18
+              "closing_balance": 37113,
+              "composition_ratio": 0.21
+            },
+            {
+              "id": 109575212,
+              "name": "サミット㈱",
+              "opening_balance": 0,
+              "debit_amount": 36212,
+              "credit_amount": 0,
+              "closing_balance": 36212,
+              "composition_ratio": 0.2
             }
           ],
           "account_category_name": "当期商品仕入",
           "hierarchy_level": 5,
           "opening_balance": 0,
-          "debit_amount": 4028899,
+          "debit_amount": 4055314,
           "credit_amount": 600,
-          "closing_balance": 4028299,
-          "composition_ratio": 22.67
+          "closing_balance": 4054714,
+          "composition_ratio": 22.82
         },
         {
           "account_category_name": "他勘定振替高(商)",
@@ -7153,10 +7153,10 @@
           "hierarchy_level": 3,
           "parent_account_category_name": "売上原価",
           "opening_balance": 0,
-          "debit_amount": 4382164,
+          "debit_amount": 4408579,
           "credit_amount": 236110,
-          "closing_balance": 4146054,
-          "composition_ratio": 23.33
+          "closing_balance": 4172469,
+          "composition_ratio": 23.48
         },
         {
           "account_category_name": "売上総損益金額",
@@ -7164,10 +7164,10 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "営業損益金額",
           "opening_balance": 0,
-          "debit_amount": 4459148,
+          "debit_amount": 4485563,
           "credit_amount": 18084904,
-          "closing_balance": 13625756,
-          "composition_ratio": 76.67
+          "closing_balance": 13599341,
+          "composition_ratio": 76.52
         },
         {
           "account_item_id": 386413689,
@@ -7501,9 +7501,9 @@
               "id": 0,
               "name": "未選択",
               "opening_balance": 0,
-              "debit_amount": 321760,
+              "debit_amount": 321960,
               "credit_amount": 0,
-              "closing_balance": 321760,
+              "closing_balance": 321960,
               "composition_ratio": 1.81
             },
             {
@@ -7528,10 +7528,10 @@
           "account_category_name": "販売管理費",
           "hierarchy_level": 3,
           "opening_balance": 0,
-          "debit_amount": 379330,
+          "debit_amount": 379530,
           "credit_amount": 0,
-          "closing_balance": 379330,
-          "composition_ratio": 2.13
+          "closing_balance": 379530,
+          "composition_ratio": 2.14
         },
         {
           "account_item_id": 386413705,
@@ -7702,9 +7702,9 @@
               "id": 0,
               "name": "未選択",
               "opening_balance": 0,
-              "debit_amount": 637800,
+              "debit_amount": 638190,
               "credit_amount": 8198,
-              "closing_balance": 629602,
+              "closing_balance": 629992,
               "composition_ratio": 3.54
             },
             {
@@ -7783,9 +7783,9 @@
           "account_category_name": "販売管理費",
           "hierarchy_level": 3,
           "opening_balance": 0,
-          "debit_amount": 3186752,
+          "debit_amount": 3187142,
           "credit_amount": 69621,
-          "closing_balance": 3117131,
+          "closing_balance": 3117521,
           "composition_ratio": 17.54
         },
         {
@@ -7927,21 +7927,21 @@
               "composition_ratio": 0.06
             },
             {
+              "id": 109067196,
+              "name": "㈱丸菱LINKed",
+              "opening_balance": 0,
+              "debit_amount": 10000,
+              "credit_amount": 0,
+              "closing_balance": 10000,
+              "composition_ratio": 0.06
+            },
+            {
               "id": 113497830,
               "name": "㈱リクルート",
               "opening_balance": 0,
               "debit_amount": 9570,
               "credit_amount": 0,
               "closing_balance": 9570,
-              "composition_ratio": 0.05
-            },
-            {
-              "id": 109067196,
-              "name": "㈱丸菱LINKed",
-              "opening_balance": 0,
-              "debit_amount": 8000,
-              "credit_amount": 0,
-              "closing_balance": 8000,
               "composition_ratio": 0.05
             },
             {
@@ -8011,10 +8011,10 @@
           "account_category_name": "販売管理費",
           "hierarchy_level": 3,
           "opening_balance": 0,
-          "debit_amount": 2352766,
+          "debit_amount": 2354766,
           "credit_amount": 0,
-          "closing_balance": 2352766,
-          "composition_ratio": 13.24
+          "closing_balance": 2354766,
+          "composition_ratio": 13.25
         },
         {
           "account_item_id": 386413715,
@@ -8283,10 +8283,10 @@
           "hierarchy_level": 2,
           "parent_account_category_name": "営業損益金額",
           "opening_balance": 0,
-          "debit_amount": 21617142,
+          "debit_amount": 21619732,
           "credit_amount": 206599,
-          "closing_balance": 21410543,
-          "composition_ratio": 120.47
+          "closing_balance": 21413133,
+          "composition_ratio": 120.49
         },
         {
           "account_category_name": "営業損益金額",
@@ -8294,10 +8294,10 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "経常損益金額",
           "opening_balance": 0,
-          "debit_amount": 26076290,
+          "debit_amount": 26105295,
           "credit_amount": 18291503,
-          "closing_balance": -7784787,
-          "composition_ratio": 43.8
+          "closing_balance": -7813792,
+          "composition_ratio": 43.97
         },
         {
           "account_category_name": "営業外収益",
@@ -8492,10 +8492,10 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "税引前当期純損益金額",
           "opening_balance": 0,
-          "debit_amount": 26475346,
+          "debit_amount": 26504351,
           "credit_amount": 18654493,
-          "closing_balance": -7820853,
-          "composition_ratio": 44.01
+          "closing_balance": -7849858,
+          "composition_ratio": 44.17
         },
         {
           "account_category_name": "特別利益",
@@ -8569,10 +8569,10 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "当期純損益金額",
           "opening_balance": 0,
-          "debit_amount": 26641001,
+          "debit_amount": 26670006,
           "credit_amount": 18932774,
-          "closing_balance": -7708227,
-          "composition_ratio": 43.37
+          "closing_balance": -7737232,
+          "composition_ratio": 43.54
         },
         {
           "account_category_name": "法人税等",
@@ -8678,10 +8678,10 @@
           "hierarchy_level": 1,
           "parent_account_category_name": "その他利益剰余金",
           "opening_balance": 0,
-          "debit_amount": 26643426,
+          "debit_amount": 26672431,
           "credit_amount": 18932774,
-          "closing_balance": -7710652,
-          "composition_ratio": 43.39
+          "closing_balance": -7739657,
+          "composition_ratio": 43.55
         }
       ]
     },
@@ -8689,6 +8689,120 @@
     "up_to_date_reasons": []
   },
   "deals": [
+    {
+      "id": 3460718523,
+      "company_id": 2422271,
+      "issue_date": "2026-03-31",
+      "due_date": null,
+      "amount": 200,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": null,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9392109271,
+          "account_item_id": 386413704,
+          "tax_code": 136,
+          "item_id": 180489173,
+          "section_id": 3660323,
+          "tag_ids": [],
+          "amount": 200,
+          "vat": 18,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9392109273,
+          "date": "2026-03-31",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 2455197,
+          "amount": 200
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3455801696,
+      "company_id": 2422271,
+      "issue_date": "2026-03-31",
+      "due_date": null,
+      "amount": 751,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 109575212,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9378323994,
+          "account_item_id": 386413683,
+          "tax_code": 163,
+          "item_id": null,
+          "section_id": 3660323,
+          "tag_ids": [],
+          "amount": 751,
+          "vat": 55,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9378323999,
+          "date": "2026-03-31",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 2455197,
+          "amount": 751
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3455801617,
+      "company_id": 2422271,
+      "issue_date": "2026-03-31",
+      "due_date": null,
+      "amount": 390,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": null,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9378323791,
+          "account_item_id": 386413708,
+          "tax_code": 136,
+          "item_id": 180489161,
+          "section_id": 3660323,
+          "tag_ids": [],
+          "amount": 390,
+          "vat": 35,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9378323792,
+          "date": "2026-03-31",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 2455197,
+          "amount": 390
+        }
+      ],
+      "receipts": []
+    },
     {
       "id": 3455437872,
       "company_id": 2422271,
@@ -9524,6 +9638,44 @@
           "from_walletable_type": "bank_account",
           "from_walletable_id": 1954726,
           "amount": 13183
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3455801312,
+      "company_id": 2422271,
+      "issue_date": "2026-03-29",
+      "due_date": null,
+      "amount": 2000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 109067196,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9378322912,
+          "account_item_id": 386413714,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": 3660323,
+          "tag_ids": [],
+          "amount": 2000,
+          "vat": 181,
+          "description": "月額サービス利用料",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9378322916,
+          "date": "2026-03-29",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 2455197,
+          "amount": 2000
         }
       ],
       "receipts": []
@@ -11022,6 +11174,44 @@
       "receipts": []
     },
     {
+      "id": 3455800823,
+      "company_id": 2422271,
+      "issue_date": "2026-03-25",
+      "due_date": null,
+      "amount": 874,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 87653628,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9378321597,
+          "account_item_id": 386413683,
+          "tax_code": 163,
+          "item_id": null,
+          "section_id": 3660323,
+          "tag_ids": [],
+          "amount": 874,
+          "vat": 64,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9378321598,
+          "date": "2026-03-25",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 2455197,
+          "amount": 874
+        }
+      ],
+      "receipts": []
+    },
+    {
       "id": 3446616589,
       "company_id": 2422271,
       "issue_date": "2026-03-25",
@@ -11438,6 +11628,82 @@
       "receipts": []
     },
     {
+      "id": 3455800757,
+      "company_id": 2422271,
+      "issue_date": "2026-03-24",
+      "due_date": null,
+      "amount": 12070,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 109067196,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9378321436,
+          "account_item_id": 386413683,
+          "tax_code": 163,
+          "item_id": null,
+          "section_id": 3660323,
+          "tag_ids": [],
+          "amount": 12070,
+          "vat": 894,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9378321439,
+          "date": "2026-03-24",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 2455197,
+          "amount": 12070
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3455800678,
+      "company_id": 2422271,
+      "issue_date": "2026-03-24",
+      "due_date": null,
+      "amount": 3760,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 87653628,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9378321242,
+          "account_item_id": 386413683,
+          "tax_code": 163,
+          "item_id": null,
+          "section_id": 3660323,
+          "tag_ids": [],
+          "amount": 3760,
+          "vat": 278,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9378321247,
+          "date": "2026-03-24",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 2455197,
+          "amount": 3760
+        }
+      ],
+      "receipts": []
+    },
+    {
       "id": 3446616575,
       "company_id": 2422271,
       "issue_date": "2026-03-24",
@@ -11735,6 +12001,44 @@
           "from_walletable_type": "bank_account",
           "from_walletable_id": 1793483,
           "amount": 145
+        }
+      ],
+      "receipts": []
+    },
+    {
+      "id": 3455800590,
+      "company_id": 2422271,
+      "issue_date": "2026-03-23",
+      "due_date": null,
+      "amount": 8960,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 109067196,
+      "partner_code": null,
+      "ref_number": null,
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9378321037,
+          "account_item_id": 386413683,
+          "tax_code": 163,
+          "item_id": null,
+          "section_id": 3660323,
+          "tag_ids": [],
+          "amount": 8960,
+          "vat": 663,
+          "description": "",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 9378321042,
+          "date": "2026-03-23",
+          "from_walletable_type": "credit_card",
+          "from_walletable_id": 2455197,
+          "amount": 8960
         }
       ],
       "receipts": []
@@ -23427,16 +23731,1276 @@
   ],
   "walletTxns": [
     {
+      "id": 2216642020,
+      "company_id": 2422271,
+      "amount": 153740,
+      "balance": 239547,
+      "description": "Vデビット　DP5*SHIMOJIMA ONLINE SHOP　1A096017",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642019,
+      "company_id": 2422271,
+      "amount": 45305,
+      "balance": 393287,
+      "description": "Vデビット　DP5*SHIMOJIMA ONLINE SHOP　1A096015",
+      "due_amount": 45305,
+      "date": "2026-04-06",
+      "entry_side": "income",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216642018,
+      "company_id": 2422271,
+      "amount": 45305,
+      "balance": 347982,
+      "description": "Vデビット　DP5*SHIMOJIMA ONLINE SHOP　1A096015",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642017,
+      "company_id": 2422271,
+      "amount": 54271,
+      "balance": 393287,
+      "description": "Vデビット　DP5*SHIMOJIMA ONLINE SHOP　1A096013",
+      "due_amount": 54271,
+      "date": "2026-04-06",
+      "entry_side": "income",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216642016,
+      "company_id": 2422271,
+      "amount": 54271,
+      "balance": 339016,
+      "description": "Vデビット　DP5*SHIMOJIMA ONLINE SHOP　1A096013",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642015,
+      "company_id": 2422271,
+      "amount": 145,
+      "balance": 393287,
+      "description": "振込手数料",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642014,
+      "company_id": 2422271,
+      "amount": 39000,
+      "balance": 393432,
+      "description": "振込 サトウ　ナツキ",
+      "due_amount": 39000,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216641997,
+      "company_id": 2422271,
+      "amount": 396000,
+      "balance": 754303,
+      "description": "振込 カ）ミ－ス",
+      "due_amount": 396000,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 1954726,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216641996,
+      "company_id": 2422271,
+      "amount": 13183,
+      "balance": 1150303,
+      "description": "Visaデビット利用 FACEBK *Q6ESRGMXA2 承認番号：579108",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 1954726,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216641982,
+      "company_id": 2422271,
+      "amount": 54223,
+      "balance": 1286749,
+      "description": "証書貸付　　　　　　　　　　　　　　　　　　　　　　　　　　",
+      "due_amount": 54223,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 2524762,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216641981,
+      "company_id": 2422271,
+      "amount": 234133,
+      "balance": 1340972,
+      "description": "証書貸付　　　　　　　　　　　　　　　　　　　　　　　　　　",
+      "due_amount": 234133,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 2524762,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216641980,
+      "company_id": 2422271,
+      "amount": 174448,
+      "balance": 1575105,
+      "description": "証書貸付　　　　　　　　　　　　　　　　　　　　　　　　　　",
+      "due_amount": 174448,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 2524762,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216641979,
+      "company_id": 2422271,
+      "amount": 128737,
+      "balance": 1749553,
+      "description": "証書貸付　　　　　　　　　　　　　　　　　　　　　　　　　　",
+      "due_amount": 128737,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 2524762,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216641978,
+      "company_id": 2422271,
+      "amount": 49271,
+      "balance": 1307937,
+      "description": "証貸返済",
+      "due_amount": 49271,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 1816327,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216641975,
+      "company_id": 2422271,
+      "amount": 275,
+      "balance": 4043665,
+      "description": "手数料　　　　　　　　ＦＢ振込料",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 2524752,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216641974,
+      "company_id": 2422271,
+      "amount": 1000000,
+      "balance": 4043940,
+      "description": "都度振込　　　　　　　ムゲンテツク（ド",
+      "due_amount": 1000000,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 2524752,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216263393,
+      "company_id": 2422271,
+      "amount": 131779,
+      "balance": 5043940,
+      "description": "政策公庫　　　　　　　セイサクコウコ（コク）",
+      "due_amount": 131779,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 2524752,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216263392,
+      "company_id": 2422271,
+      "amount": 118345,
+      "balance": 5175719,
+      "description": "政策公庫　　　　　　　セイサクコウコ（コク）",
+      "due_amount": 118345,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 2524752,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216263391,
+      "company_id": 2422271,
+      "amount": 62436,
+      "balance": 5294064,
+      "description": "政策公庫　　　　　　　セイサクコウコ（コク）",
+      "due_amount": 62436,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 2524752,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216050528,
+      "company_id": 2422271,
+      "amount": 29105,
+      "balance": 432432,
+      "description": "Vデビット　DP8 SHIJOSYOTENONLINE　1A096012",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050527,
+      "company_id": 2422271,
+      "amount": 16129,
+      "balance": 461537,
+      "description": "Vデビット　GYOMU SUPER KAWAGUCHIEKIM　1A096011",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050526,
+      "company_id": 2422271,
+      "amount": 3114,
+      "balance": 477666,
+      "description": "Vデビット　SHIMOJIMA KAWAGUCHITEN　1A096010",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050525,
+      "company_id": 2422271,
+      "amount": 23563,
+      "balance": 480780,
+      "description": "Vデビット　DP04*ORDERIE　1A096009",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050524,
+      "company_id": 2422271,
+      "amount": 1631,
+      "balance": 504343,
+      "description": "Vデビット　DP04*ORDERIE　1A096008",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050523,
+      "company_id": 2422271,
+      "amount": 14862,
+      "balance": 505974,
+      "description": "Vデビット　DP5*SHIMOJIMA ONLINE SHOP　1A096007",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050522,
+      "company_id": 2422271,
+      "amount": 31825,
+      "balance": 520836,
+      "description": "Vデビット　PROFESSIONALS　1A096006",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050521,
+      "company_id": 2422271,
+      "amount": 51555,
+      "balance": 552661,
+      "description": "Vデビット　DP04*ORDERIE　1A096005",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050520,
+      "company_id": 2422271,
+      "amount": 12705,
+      "balance": 604216,
+      "description": "Vデビット　DP04*ORDERIE　1A096004",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050519,
+      "company_id": 2422271,
+      "amount": 593,
+      "balance": 616921,
+      "description": "Vデビット　FACEBK *BVUUUKVSQ2　1A096003",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050518,
+      "company_id": 2422271,
+      "amount": 1704,
+      "balance": 617514,
+      "description": "Vデビット　FACEBK *ELLABG5P92　1A096002",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050517,
+      "company_id": 2422271,
+      "amount": 268018,
+      "balance": 619218,
+      "description": "振込 カ）リクル−ト　ペイメント",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "income",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050516,
+      "company_id": 2422271,
+      "amount": 400,
+      "balance": 351200,
+      "description": "Vデビット　TAIMUZUCHIYUSHIYAJIYO I　1A096001",
+      "due_amount": 0,
+      "date": "2026-04-06",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050515,
+      "company_id": 2422271,
+      "amount": 10666,
+      "balance": 351600,
+      "description": "Vデビット　HO-MUSENTA-MUSASHIKUKISHI　1A095004",
+      "due_amount": 0,
+      "date": "2026-04-05",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050514,
+      "company_id": 2422271,
+      "amount": 17804,
+      "balance": 362266,
+      "description": "Vデビット　KAINZUHO-MU　1A095003",
+      "due_amount": 0,
+      "date": "2026-04-05",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050513,
+      "company_id": 2422271,
+      "amount": 19581,
+      "balance": 380070,
+      "description": "Vデビット　KAINZUHO-MU　1A095002",
+      "due_amount": 0,
+      "date": "2026-04-05",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050512,
+      "company_id": 2422271,
+      "amount": 15620,
+      "balance": 399651,
+      "description": "Vデビット　MEGADONQUIJOTE HASUDA　1A095001",
+      "due_amount": 0,
+      "date": "2026-04-05",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050511,
+      "company_id": 2422271,
+      "amount": 145,
+      "balance": 415271,
+      "description": "振込手数料",
+      "due_amount": 0,
+      "date": "2026-04-05",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050510,
+      "company_id": 2422271,
+      "amount": 44333,
+      "balance": 415416,
+      "description": "振込 カ）クロスコ−ポレ−シヨン",
+      "due_amount": 44333,
+      "date": "2026-04-05",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216642119,
+      "company_id": 2422271,
+      "amount": 13863,
+      "balance": null,
+      "description": "業務スーパー川口八幡木店",
+      "due_amount": 0,
+      "date": "2026-04-04",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642118,
+      "company_id": 2422271,
+      "amount": 3281,
+      "balance": null,
+      "description": "ジャパンミート鳩ケ谷店",
+      "due_amount": 0,
+      "date": "2026-04-04",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216641995,
+      "company_id": 2422271,
+      "amount": 13183,
+      "balance": 1163486,
+      "description": "Visaデビット利用 FACEBK *VLF6TGZXA2 承認番号：562451 TID：346094452520942",
+      "due_amount": 0,
+      "date": "2026-04-04",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 1954726,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216641986,
+      "company_id": 2422271,
+      "amount": 229,
+      "balance": 1542217,
+      "description": "振込手数料（内消費税 ￥20）",
+      "due_amount": 229,
+      "date": "2026-04-04",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 1954802,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216641985,
+      "company_id": 2422271,
+      "amount": 200000,
+      "balance": 1542446,
+      "description": "三井住友銀行　山本支店　普通預金　3854103　ミヤハラ　ユウマ（依頼人名：ムケ゛ンテツク（ト゛　振込予定日：2026年04月04日　管理番号：20260404-51985406）",
+      "due_amount": 200000,
+      "date": "2026-04-04",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 1954802,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216050509,
+      "company_id": 2422271,
+      "amount": 13863,
+      "balance": 459749,
+      "description": "Vデビット　業務スーパー川口八幡木店　1A094002",
+      "due_amount": 0,
+      "date": "2026-04-04",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050508,
+      "company_id": 2422271,
+      "amount": 3281,
+      "balance": 473612,
+      "description": "Vデビット　ジャパンミート鳩ケ谷店　1A094001",
+      "due_amount": 0,
+      "date": "2026-04-04",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642117,
+      "company_id": 2422271,
+      "amount": 3436,
+      "balance": null,
+      "description": "ららテラス川口",
+      "due_amount": 3436,
+      "date": "2026-04-03",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216642116,
+      "company_id": 2422271,
+      "amount": 1704,
+      "balance": null,
+      "description": "FACEBK *HEJWPGZN92",
+      "due_amount": 0,
+      "date": "2026-04-03",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642115,
+      "company_id": 2422271,
+      "amount": 1135,
+      "balance": null,
+      "description": "ドラッグセイムス　川口元郷店",
+      "due_amount": 0,
+      "date": "2026-04-03",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642114,
+      "company_id": 2422271,
+      "amount": 5042,
+      "balance": null,
+      "description": "シモジマオンラインショップ",
+      "due_amount": 0,
+      "date": "2026-04-03",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642113,
+      "company_id": 2422271,
+      "amount": 83056,
+      "balance": null,
+      "description": "ＡＭＡＺＯＮ．ＣＯ．ＪＰ",
+      "due_amount": 0,
+      "date": "2026-04-03",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642112,
+      "company_id": 2422271,
+      "amount": 2006,
+      "balance": null,
+      "description": "ＡＭＡＺＯＮ．ＣＯ．ＪＰ",
+      "due_amount": 0,
+      "date": "2026-04-03",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216641994,
+      "company_id": 2422271,
+      "amount": 13183,
+      "balance": 1176669,
+      "description": "Visaデビット利用 FACEBK *CXHL9HRXA2 承認番号：404854 TID：386093323220885",
+      "due_amount": 0,
+      "date": "2026-04-03",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 1954726,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050507,
+      "company_id": 2422271,
+      "amount": 3436,
+      "balance": 476893,
+      "description": "Vデビット　ららテラス川口　1A093007",
+      "due_amount": 0,
+      "date": "2026-04-03",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050506,
+      "company_id": 2422271,
+      "amount": 38800,
+      "balance": 480329,
+      "description": "Vデビット　USEN HOKENRYOU　1A093006",
+      "due_amount": 0,
+      "date": "2026-04-03",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216050505,
+      "company_id": 2422271,
+      "amount": 1704,
+      "balance": 519129,
+      "description": "Vデビット　FACEBK *HEJWPGZN92　1A093005",
+      "due_amount": 0,
+      "date": "2026-04-03",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196077,
+      "company_id": 2422271,
+      "amount": 1135,
+      "balance": 520833,
+      "description": "Vデビット　ドラッグセイムス　川口元郷店　1A093004",
+      "due_amount": 0,
+      "date": "2026-04-03",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196076,
+      "company_id": 2422271,
+      "amount": 5042,
+      "balance": 521968,
+      "description": "Vデビット　シモジマオンラインショップ　1A093003",
+      "due_amount": 0,
+      "date": "2026-04-03",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196075,
+      "company_id": 2422271,
+      "amount": 83056,
+      "balance": 527010,
+      "description": "Vデビット　ＡＭＡＺＯＮ．ＣＯ．ＪＰ　1A093002",
+      "due_amount": 0,
+      "date": "2026-04-03",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196074,
+      "company_id": 2422271,
+      "amount": 2006,
+      "balance": 610066,
+      "description": "Vデビット　ＡＭＡＺＯＮ．ＣＯ．ＪＰ　1A093001",
+      "due_amount": 0,
+      "date": "2026-04-03",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214128468,
+      "company_id": 2422271,
+      "amount": 83056,
+      "balance": null,
+      "description": "【商品本体】 Hisense ハイセンス ルームエアコン 【GBFT Online限定標準工事費込み】 工事保証3年付属 Sシリーズ HA-S40H2-W 清潔機能搭載スタンダードモデル （消費税率10％） （注文番号:250-7913487-0220642）（適格）",
+      "due_amount": 83056,
+      "date": "2026-04-03",
+      "entry_side": "expense",
+      "walletable_type": "wallet",
+      "walletable_id": 7467699,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216652846,
+      "company_id": 2422271,
+      "amount": 1848,
+      "balance": null,
+      "description": "カブシキガイシャクベル",
+      "due_amount": 0,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 1435600,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216652845,
+      "company_id": 2422271,
+      "amount": 51807,
+      "balance": null,
+      "description": "ＩＮＤＥＥＤ　ＪＰＩ２６－００５５１０４３",
+      "due_amount": 0,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 1435600,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216652844,
+      "company_id": 2422271,
+      "amount": 2954,
+      "balance": null,
+      "description": "クロネコヤマト　ヤマトウンユ",
+      "due_amount": 2954,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 1435600,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216642111,
+      "company_id": 2422271,
+      "amount": 1003,
+      "balance": null,
+      "description": "ＡＭＡＺＯＮ．ＣＯ．ＪＰ",
+      "due_amount": 0,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642110,
+      "company_id": 2422271,
+      "amount": 1003,
+      "balance": null,
+      "description": "ＡＭＡＺＯＮ．ＣＯ．ＪＰ",
+      "due_amount": 0,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642109,
+      "company_id": 2422271,
+      "amount": 1003,
+      "balance": null,
+      "description": "ＡＭＡＺＯＮ．ＣＯ．ＪＰ",
+      "due_amount": 0,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642108,
+      "company_id": 2422271,
+      "amount": 8800,
+      "balance": null,
+      "description": "スマレジ",
+      "due_amount": 8800,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216642107,
+      "company_id": 2422271,
+      "amount": 17642,
+      "balance": null,
+      "description": "業務スーパー川口八幡木店",
+      "due_amount": 0,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642106,
+      "company_id": 2422271,
+      "amount": 21036,
+      "balance": null,
+      "description": "ＡＭＡＺＯＮ．ＣＯ．ＪＰ",
+      "due_amount": 0,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196073,
+      "company_id": 2422271,
+      "amount": 1003,
+      "balance": 612072,
+      "description": "Vデビット　AMAZON CO JP　1A092006",
+      "due_amount": 0,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196072,
+      "company_id": 2422271,
+      "amount": 1003,
+      "balance": 613075,
+      "description": "Vデビット　AMAZON CO JP　1A092005",
+      "due_amount": 0,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196071,
+      "company_id": 2422271,
+      "amount": 1003,
+      "balance": 614078,
+      "description": "Vデビット　AMAZON CO JP　1A092004",
+      "due_amount": 0,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196070,
+      "company_id": 2422271,
+      "amount": 21036,
+      "balance": 615081,
+      "description": "Vデビット　ＡＭＡＺＯＮ．ＣＯ．ＪＰ　1A092003",
+      "due_amount": 0,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196069,
+      "company_id": 2422271,
+      "amount": 17642,
+      "balance": 636117,
+      "description": "Vデビット　業務スーパー川口八幡木店　1A092002",
+      "due_amount": 0,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196068,
+      "company_id": 2422271,
+      "amount": 8800,
+      "balance": 653759,
+      "description": "Vデビット　スマレジ　1A092001",
+      "due_amount": 0,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214128467,
+      "company_id": 2422271,
+      "amount": 21036,
+      "balance": null,
+      "description": "【商品本体】 サンコープラスチック(SankoPlastic) 保存容器 フードテナー No.10 クリア 幅57.3×奥行38.6×高さ7.8cm 20個セット 日本製 ケース販売 プラスチック 食品用 コンテナ お餅 パン ケーキ 麺類 食器 保管 運搬 業務用 071460 （消費税率10％） （注文番号:250-7290591-3245445）（適格）",
+      "due_amount": 21036,
+      "date": "2026-04-02",
+      "entry_side": "expense",
+      "walletable_type": "wallet",
+      "walletable_id": 7467699,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
       "id": 2213958270,
       "company_id": 2422271,
       "amount": 13183,
       "balance": 1189852,
-      "description": "Visaデビット利用 FACEBK *5FULJGZXA2 承認番号：557933",
+      "description": "Visaデビット利用 FACEBK *5FULJGZXA2 承認番号：557933 TID：346092074425984",
       "due_amount": 0,
       "date": "2026-04-02",
       "entry_side": "expense",
       "walletable_type": "bank_account",
       "walletable_id": 1954726,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216652847,
+      "company_id": 2422271,
+      "amount": 12903,
+      "balance": null,
+      "description": "エコキューデン",
+      "due_amount": 0,
+      "date": "2026-04-01",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 1435600,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642105,
+      "company_id": 2422271,
+      "amount": 2453,
+      "balance": null,
+      "description": "ドラッグセイムス　川口元郷店",
+      "due_amount": 0,
+      "date": "2026-04-01",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642104,
+      "company_id": 2422271,
+      "amount": 2343,
+      "balance": null,
+      "description": "ジャパンミート鳩ケ谷店",
+      "due_amount": 0,
+      "date": "2026-04-01",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642103,
+      "company_id": 2422271,
+      "amount": 3316,
+      "balance": null,
+      "description": "ＡＭＡＺＯＮ．ＣＯ．ＪＰ",
+      "due_amount": 0,
+      "date": "2026-04-01",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216642102,
+      "company_id": 2422271,
+      "amount": 1248,
+      "balance": null,
+      "description": "シモジマ川口店",
+      "due_amount": 0,
+      "date": "2026-04-01",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2216641984,
+      "company_id": 2422271,
+      "amount": 229,
+      "balance": 1742446,
+      "description": "振込手数料（内消費税 ￥20）",
+      "due_amount": 229,
+      "date": "2026-04-01",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 1954802,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2216641983,
+      "company_id": 2422271,
+      "amount": 489500,
+      "balance": 1742675,
+      "description": "武蔵野銀行　新座支店　普通預金　1116408　カ．エスフ゜ラステ゛サ゛インス゛（依頼人名：ムケ゛ンテツク（ト゛　振込予定日：2026年04月01日　管理番号：20260401-51842846）",
+      "due_amount": 489500,
+      "date": "2026-04-01",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 1954802,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2214196067,
+      "company_id": 2422271,
+      "amount": 2453,
+      "balance": 662559,
+      "description": "Vデビット　ドラッグセイムス　川口元郷店　1A091005",
+      "due_amount": 0,
+      "date": "2026-04-01",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196066,
+      "company_id": 2422271,
+      "amount": 2343,
+      "balance": 665012,
+      "description": "Vデビット　ジャパンミート鳩ケ谷店　1A091004",
+      "due_amount": 0,
+      "date": "2026-04-01",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196065,
+      "company_id": 2422271,
+      "amount": 1248,
+      "balance": 667355,
+      "description": "Vデビット　シモジマ川口店　1A091003",
+      "due_amount": 0,
+      "date": "2026-04-01",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196064,
+      "company_id": 2422271,
+      "amount": 3316,
+      "balance": 668603,
+      "description": "Vデビット　ＡＭＡＺＯＮ．ＣＯ．ＪＰ　1A091002",
+      "due_amount": 0,
+      "date": "2026-04-01",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196063,
+      "company_id": 2422271,
+      "amount": 1704,
+      "balance": 671919,
+      "description": "Vデビット　FACEBK *ULZ5JEVN92　1A091001",
+      "due_amount": 0,
+      "date": "2026-04-01",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196062,
+      "company_id": 2422271,
+      "amount": 168,
+      "balance": 673623,
+      "description": "決算お利息 3月分",
+      "due_amount": 168,
+      "date": "2026-04-01",
+      "entry_side": "income",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 1,
+      "rule_matched": false
+    },
+    {
+      "id": 2214155089,
+      "company_id": 2422271,
+      "amount": 1704,
+      "balance": null,
+      "description": "FACEBK *ULZ5JEVN92",
+      "due_amount": 0,
+      "date": "2026-04-01",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
       "status": 2,
       "rule_matched": true
     },
@@ -23455,1231 +25019,41 @@
       "rule_matched": false
     },
     {
-      "id": 2213958268,
+      "id": 2216642101,
       "company_id": 2422271,
-      "amount": 13183,
-      "balance": 1202888,
-      "description": "Visaデビット利用 FACEBK *DXFBDGZXA2 承認番号：529999 TID：386090514527428",
-      "due_amount": 0,
-      "date": "2026-03-31",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 1954726,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208097716,
-      "company_id": 2422271,
-      "amount": 1870000,
-      "balance": 5356500,
-      "description": "振込入金＊　　　　　　カ）ユニコ−ン",
-      "due_amount": 0,
-      "date": "2026-03-31",
-      "entry_side": "income",
-      "walletable_type": "bank_account",
-      "walletable_id": 2524752,
-      "status": 2,
-      "rule_matched": false
-    },
-    {
-      "id": 2208097715,
-      "company_id": 2422271,
-      "amount": 1540,
-      "balance": 3486500,
-      "description": "手数料　　　　　　　　ＦＢ振込料",
-      "due_amount": 0,
-      "date": "2026-03-31",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 2524752,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208097714,
-      "company_id": 2422271,
-      "amount": 16300,
-      "balance": 3488040,
-      "description": "　　　　　　　　　　　ＪＳカンリクミアイヒトウ",
-      "due_amount": 0,
-      "date": "2026-03-31",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 2524752,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208097713,
-      "company_id": 2422271,
-      "amount": 526207,
-      "balance": 3504340,
-      "description": "年　金　　　　　　　　シヤカイホケンリヨウ",
-      "due_amount": 0,
-      "date": "2026-03-31",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 2524752,
-      "status": 2,
-      "rule_matched": false
-    },
-    {
-      "id": 2208097057,
-      "company_id": 2422271,
-      "amount": 143,
-      "balance": 1216071,
-      "description": "振込手数料",
-      "due_amount": 0,
-      "date": "2026-03-31",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 1954726,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208097056,
-      "company_id": 2422271,
-      "amount": 20316,
-      "balance": 1216214,
-      "description": "振込 ミツビシユ－エフジエイ サトウ　チアキ",
-      "due_amount": 20316,
-      "date": "2026-03-31",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 1954726,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208097055,
-      "company_id": 2422271,
-      "amount": 143,
-      "balance": 1236530,
-      "description": "振込手数料",
-      "due_amount": 0,
-      "date": "2026-03-31",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 1954726,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208097054,
-      "company_id": 2422271,
-      "amount": 21875,
-      "balance": 1236673,
-      "description": "振込 ダイシホクエツ サイトウ　ミク",
-      "due_amount": 21875,
-      "date": "2026-03-31",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 1954726,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208097053,
-      "company_id": 2422271,
-      "amount": 456598,
-      "balance": 1258548,
-      "description": "振込  ＳＢペイメントサ－ビス（カ",
-      "due_amount": 456598,
-      "date": "2026-03-31",
-      "entry_side": "income",
-      "walletable_type": "bank_account",
-      "walletable_id": 1954726,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208097013,
-      "company_id": 2422271,
-      "amount": 3009,
+      "amount": 200,
       "balance": null,
-      "description": "【商品本体】 高儀 TAKAGI ステンレス角バット網 8枚取 日本製 （消費税率10％） （注文番号:250-2793508-1299044）（適格）",
-      "due_amount": 3009,
+      "description": "タイムズライオンズスクエア川口",
+      "due_amount": 0,
       "date": "2026-03-31",
       "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
     },
     {
-      "id": 2208097012,
+      "id": 2216642100,
       "company_id": 2422271,
-      "amount": 6651,
+      "amount": 5940,
       "balance": null,
-      "description": "【商品本体】 谷口金属 お菓子作りに最適な軽量 ケーキバット 1号 35×25.4×1.9cm お菓子作り以外にも使用可能 プロ仕様 業務用 オーブン 冷蔵 対応 日本製 ケーキ お菓子 料理 下ごしらえ （消費税率10％） （注文番号:250-2793508-1299044）（適格）",
-      "due_amount": 6651,
+      "description": "ＡＭＡＺＯＮ．ＣＯ．ＪＰ",
+      "due_amount": 0,
       "date": "2026-03-31",
       "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
+      "walletable_type": "credit_card",
+      "walletable_id": 2455197,
+      "status": 2,
+      "rule_matched": true
     },
     {
-      "id": 2208097011,
-      "company_id": 2422271,
-      "amount": 2217,
-      "balance": null,
-      "description": "【商品本体】 谷口金属 お菓子作りに最適な軽量 ケーキバット 1号 35×25.4×1.9cm お菓子作り以外にも使用可能 プロ仕様 業務用 オーブン 冷蔵 対応 日本製 ケーキ お菓子 料理 下ごしらえ （消費税率10％） （注文番号:250-2793508-1299044）（適格）",
-      "due_amount": 2217,
-      "date": "2026-03-31",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208096939,
+      "id": 2216642099,
       "company_id": 2422271,
       "amount": 11454,
-      "balance": 561058,
-      "description": "Vデビット　AMAZON CO JP　1A090003",
-      "due_amount": 0,
-      "date": "2026-03-31",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096938,
-      "company_id": 2422271,
-      "amount": 46800,
-      "balance": 572512,
-      "description": "Vデビット　EDIONNETTOSHOPPU　1A090002",
-      "due_amount": 0,
-      "date": "2026-03-31",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096937,
-      "company_id": 2422271,
-      "amount": 11974,
-      "balance": 619312,
-      "description": "振込 ＵＢＥＲ　ＥＡＴＳ　ＪＡＰＡＮ　（ド",
-      "due_amount": 11974,
-      "date": "2026-03-31",
-      "entry_side": "income",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208096936,
-      "company_id": 2422271,
-      "amount": 11877,
-      "balance": 607338,
-      "description": "Vデビット　AMAZON CO JP　1A090001",
-      "due_amount": 0,
-      "date": "2026-03-31",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096445,
-      "company_id": 2422271,
-      "amount": 1435,
-      "balance": 2232175,
-      "description": "預金利息",
-      "due_amount": 1435,
-      "date": "2026-03-31",
-      "entry_side": "income",
-      "walletable_type": "bank_account",
-      "walletable_id": 1954802,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208097010,
-      "company_id": 2422271,
-      "amount": 33980,
-      "balance": null,
-      "description": "【商品本体】 厨房専門店 安吉 ワゴンステンレス 棚板820mm×500mm キャスター付き 5段 ステンレスカート 組立式 PRO-L5 業務用 KIPROSTAR(キプロスター) （消費税率10％） （注文番号:250-5249483-4123025）（適格）",
-      "due_amount": 33980,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208097009,
-      "company_id": 2422271,
-      "amount": 3136,
-      "balance": null,
-      "description": "【商品本体】 サンコープラスチック(SankoPlastic) 日本製 食品用コンテナ フードテナー NO10、20共通蓋 クリアー 552388 （消費税率10％） （注文番号:250-2793508-1299044）（適格）",
-      "due_amount": 3136,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208097008,
-      "company_id": 2422271,
-      "amount": 784,
-      "balance": null,
-      "description": "【商品本体】 サンコープラスチック(SankoPlastic) 日本製 食品用コンテナ フードテナー NO10、20共通蓋 クリアー 552388 （消費税率10％） （注文番号:250-2793508-1299044）（適格）",
-      "due_amount": 784,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208097007,
-      "company_id": 2422271,
-      "amount": 16800,
-      "balance": null,
-      "description": "【商品本体】 タブレット Android16 10インチ wi-fiモデル 8コアCPU 24GB RAM+128GB ROM+2TB拡張 アンドロイド たぶれっと 軽量 高刷新率 tablet 大画面 8000mAh大容量バッテリー Type-C充電 WidevineL1 BT5.2/顔認証/2.4G&5GWi-Fi/分割画面/無線投影/学習・ビジネス・子供対応 日本語説明書 (メモリー128ギガ) （消費税率10％） （注文番号:250-3774639-9084628）（免税）",
-      "due_amount": 16800,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208097006,
-      "company_id": 2422271,
-      "amount": 16359,
-      "balance": null,
-      "description": "【商品本体】 Hotdogger 屋外看板 A1ポスター 重し土台付 スタンド ディスプレイ A型 両面 立て看板 （消費税率10％） （注文番号:250-2649240-7203800）（適格）",
-      "due_amount": 16359,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208097005,
-      "company_id": 2422271,
-      "amount": 32718,
-      "balance": null,
-      "description": "【商品本体】 Hotdogger 屋外看板 A1ポスター 重し土台付 スタンド ディスプレイ A型 両面 立て看板 （消費税率10％） （注文番号:250-2649240-7203800）（適格）",
-      "due_amount": 32718,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208097004,
-      "company_id": 2422271,
-      "amount": 17776,
-      "balance": null,
-      "description": "【商品本体】 ハンバーガー用テイクアウト紙容器・紙箱 EC6 白 800入 （消費税率10％） （注文番号:249-6546201-2832658）（適格）",
-      "due_amount": 17776,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208096935,
-      "company_id": 2422271,
-      "amount": 145,
-      "balance": 619215,
-      "description": "振込手数料",
-      "due_amount": 0,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096934,
-      "company_id": 2422271,
-      "amount": 6600,
-      "balance": 619360,
-      "description": "振込 カ）リクル−ト",
-      "due_amount": 6600,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208096933,
-      "company_id": 2422271,
-      "amount": 28600,
-      "balance": 625960,
-      "description": "Vデビット　ＤＰ４＊スマレジストア　ＢｔｏＢ　1A078011",
-      "due_amount": 28600,
-      "date": "2026-03-30",
-      "entry_side": "income",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208096932,
-      "company_id": 2422271,
-      "amount": 3920,
-      "balance": 597360,
-      "description": "Vデビット　AMAZON CO JP　1A089005",
-      "due_amount": 0,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096931,
-      "company_id": 2422271,
-      "amount": 33980,
-      "balance": 601280,
-      "description": "Vデビット　AMAZON CO JP　1A089004",
-      "due_amount": 0,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096930,
-      "company_id": 2422271,
-      "amount": 17776,
-      "balance": 635260,
-      "description": "Vデビット　AMAZON CO JP　1A089002",
-      "due_amount": 0,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096929,
-      "company_id": 2422271,
-      "amount": 16800,
-      "balance": 653036,
-      "description": "Vデビット　AMAZON CO JP　1A089001",
-      "due_amount": 0,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096928,
-      "company_id": 2422271,
-      "amount": 10000,
-      "balance": 669836,
-      "description": "振込 カ）リクル−ト",
-      "due_amount": 0,
-      "date": "2026-03-30",
-      "entry_side": "income",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206793456,
-      "company_id": 2422271,
-      "amount": 37180,
-      "balance": 684262,
-      "description": "口座振替　ＺＨゼイリシホウシユウ",
-      "due_amount": 0,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 1793483,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206583154,
-      "company_id": 2422271,
-      "amount": 88030,
-      "balance": 801950,
-      "description": "Visaデビット利用 AIOINISSAYDOWASONPO 承認番号：482466 TID：356089472550430",
-      "due_amount": 88030,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 1954726,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2206583153,
-      "company_id": 2422271,
-      "amount": 13183,
-      "balance": 889980,
-      "description": "Visaデビット利用 FACEBK *D24XTH9YA2 承認番号：440333 TID：386089309956951",
-      "due_amount": 0,
-      "date": "2026-03-30",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 1954726,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206583152,
-      "company_id": 2422271,
-      "amount": 509577,
-      "balance": 903163,
-      "description": "振込  ライフカ－ド（カ",
-      "due_amount": 509577,
-      "date": "2026-03-30",
-      "entry_side": "income",
-      "walletable_type": "bank_account",
-      "walletable_id": 1954726,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208096927,
-      "company_id": 2422271,
-      "amount": 506,
-      "balance": 659836,
-      "description": "Vデビット　FACEBK *TUD75FMN92　1A088006",
-      "due_amount": 0,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096926,
-      "company_id": 2422271,
-      "amount": 3900,
-      "balance": 660342,
-      "description": "Vデビット　AMAZON CO JP　1A088005",
-      "due_amount": 0,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096925,
-      "company_id": 2422271,
-      "amount": 32205,
-      "balance": 664242,
-      "description": "Vデビット　AMAZON CO JP　1A088004",
-      "due_amount": 0,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096924,
-      "company_id": 2422271,
-      "amount": 1759,
-      "balance": 696447,
-      "description": "Vデビット　AMAZON CO JP　1A088003",
-      "due_amount": 0,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096923,
-      "company_id": 2422271,
-      "amount": 3099,
-      "balance": 698206,
-      "description": "Vデビット　AMAZON CO JP　1A088002",
-      "due_amount": 0,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096922,
-      "company_id": 2422271,
-      "amount": 2000,
-      "balance": 701305,
-      "description": "Vデビット　DP04*ORDERIE　1A088001",
-      "due_amount": 0,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206824393,
-      "company_id": 2422271,
-      "amount": 506,
-      "balance": null,
-      "description": "FACEBK *TUD75FMN92",
-      "due_amount": 0,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "credit_card",
-      "walletable_id": 2455197,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206583151,
-      "company_id": 2422271,
-      "amount": 13183,
-      "balance": 393586,
-      "description": "Visaデビット利用 FACEBK *KGN3YFMXA2 承認番号：533401 TID：386088000630202",
-      "due_amount": 0,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 1954726,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2205247287,
-      "company_id": 2422271,
-      "amount": 650,
-      "balance": null,
-      "description": "【商品本体】 クレセル 冷蔵庫用温度計 アナログ AP-61 吸盤付き AP-61 （消費税率10％） （注文番号:250-9553108-1015002）（適格）",
-      "due_amount": 650,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2205247286,
-      "company_id": 2422271,
-      "amount": 3250,
-      "balance": null,
-      "description": "【商品本体】 クレセル 冷蔵庫用温度計 アナログ AP-61 吸盤付き AP-61 （消費税率10％） （注文番号:250-9553108-1015002）（適格）",
-      "due_amount": 3250,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2205247285,
-      "company_id": 2422271,
-      "amount": 1759,
-      "balance": null,
-      "description": "【商品本体】 壁紙 木目 10m おしゃれ はがせる 壁紙シール 白 厚手 透けない 木目調 カッティングシート、防水 簡単 diy キッチン 家具用リメイクシート（ホワイト木目調 幅44cmX10m） （消費税率10％） （注文番号:250-2088968-1859065）（免税）",
-      "due_amount": 1759,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2205247284,
-      "company_id": 2422271,
-      "amount": 22800,
-      "balance": null,
-      "description": "【商品本体】 TP-Link Tapo 防犯カメラ ペットカメラ 屋外 ソーラー 監視カメラ みまもりカメラ 見守りカメラ スマホ対応 太陽光 Wi-Fi 4K 8MP 800万画素 パン/チルト 360°AI検知 フルカラー IP65 防水防塵 音声通話 Tapo C660 KIT【Amazon.co.jp限定】 （消費税率10％） （注文番号:250-3504704-9446257）（適格）",
-      "due_amount": 22800,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2205247283,
-      "company_id": 2422271,
-      "amount": 9405,
-      "balance": null,
-      "description": "【商品本体】 TP-Link Tapo みまもりカメラ ペットカメラ ベビーモニター 顔認識 顔AI検知 4K 8MP 800万画素 双方向音声 パン/チルト 360° AI検知 自動追尾 ナイトビジョン セキュリティ対策 iphone/スマホ対応 メーカー保証3年 Tapo C260/A （消費税率10％） （注文番号:250-3504704-9446257）（適格）",
-      "due_amount": 9405,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2205247282,
-      "company_id": 2422271,
-      "amount": 3099,
-      "balance": null,
-      "description": "【商品本体】 透けない 壁紙 おしゃれ はがせる 壁紙シール 白 厚手 木目調 カッティングシート、防水 簡単 diy キッチン 家具用リメイクシート（ホワイト木目調 幅60cmX10m） （消費税率10％） （注文番号:250-2088968-1859065）（免税）",
-      "due_amount": 3099,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2205247281,
-      "company_id": 2422271,
-      "amount": 8183,
-      "balance": null,
-      "description": "【商品本体】 Snowon led看板 電飾看板 光る看板 掲示板 屋外 a型 スタンド 立て看板 手書き 7色点滅 8色マーカー付 デジタルサイネージ 黒板 ネオン 飲食店 カフェ メニューボード DIYメッセージ 60×80cm （消費税率10％） （注文番号:250-4487479-4446235）（適格）",
-      "due_amount": 8183,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2205247280,
-      "company_id": 2422271,
-      "amount": 8183,
-      "balance": null,
-      "description": "【商品本体】 Snowon led看板 電飾看板 光る看板 掲示板 屋外 a型 スタンド 立て看板 手書き 7色点滅 8色マーカー付 デジタルサイネージ 黒板 ネオン 飲食店 カフェ メニューボード DIYメッセージ 60×80cm （消費税率10％） （注文番号:250-4487479-4446235）（適格）",
-      "due_amount": 8183,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2205247279,
-      "company_id": 2422271,
-      "amount": 8183,
-      "balance": null,
-      "description": "【商品本体】 Snowon led看板 電飾看板 光る看板 掲示板 屋外 a型 スタンド 立て看板 手書き 7色点滅 8色マーカー付 デジタルサイネージ 黒板 ネオン 飲食店 カフェ メニューボード DIYメッセージ 60×80cm （消費税率10％） （注文番号:250-4487479-4446235）（適格）",
-      "due_amount": 8183,
-      "date": "2026-03-29",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208096921,
-      "company_id": 2422271,
-      "amount": 506,
-      "balance": 703305,
-      "description": "Vデビット　FACEBK *D3Z4CGDN92　1A087005",
-      "due_amount": 0,
-      "date": "2026-03-28",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096920,
-      "company_id": 2422271,
-      "amount": 290,
-      "balance": 703811,
-      "description": "Vデビット　FACEBK *RDKUYJ9SQ2　1A087004",
-      "due_amount": 0,
-      "date": "2026-03-28",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096919,
-      "company_id": 2422271,
-      "amount": 70000,
-      "balance": 704101,
-      "description": "ローソンATM入金",
-      "due_amount": 0,
-      "date": "2026-03-28",
-      "entry_side": "income",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096918,
-      "company_id": 2422271,
-      "amount": 238,
-      "balance": 634101,
-      "description": "Vデビット　FACEBK *4U4PZFHN92　1A087003",
-      "due_amount": 0,
-      "date": "2026-03-28",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096917,
-      "company_id": 2422271,
-      "amount": 3542,
-      "balance": 634339,
-      "description": "Vデビット　FACEBK *23BT3K59J2　1A087002",
-      "due_amount": 0,
-      "date": "2026-03-28",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096916,
-      "company_id": 2422271,
-      "amount": 3340,
-      "balance": 637881,
-      "description": "Vデビット　AMAZON CO JP　1A087001",
-      "due_amount": 0,
-      "date": "2026-03-28",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206824392,
-      "company_id": 2422271,
-      "amount": 3542,
-      "balance": null,
-      "description": "FACEBK *23BT3K59J2",
-      "due_amount": 0,
-      "date": "2026-03-28",
-      "entry_side": "expense",
-      "walletable_type": "credit_card",
-      "walletable_id": 2455197,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206824391,
-      "company_id": 2422271,
-      "amount": 238,
-      "balance": null,
-      "description": "FACEBK *4U4PZFHN92",
-      "due_amount": 0,
-      "date": "2026-03-28",
-      "entry_side": "expense",
-      "walletable_type": "credit_card",
-      "walletable_id": 2455197,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206824390,
-      "company_id": 2422271,
-      "amount": 290,
-      "balance": null,
-      "description": "FACEBK *RDKUYJ9SQ2",
-      "due_amount": 0,
-      "date": "2026-03-28",
-      "entry_side": "expense",
-      "walletable_type": "credit_card",
-      "walletable_id": 2455197,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206824389,
-      "company_id": 2422271,
-      "amount": 506,
-      "balance": null,
-      "description": "FACEBK *D3Z4CGDN92",
-      "due_amount": 0,
-      "date": "2026-03-28",
-      "entry_side": "expense",
-      "walletable_type": "credit_card",
-      "walletable_id": 2455197,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206583150,
-      "company_id": 2422271,
-      "amount": 1621,
-      "balance": 406769,
-      "description": "Visaデビット利用 FACEBK *XQQHUFMXA2 承認番号：516845 TID：346086791654633",
-      "due_amount": 0,
-      "date": "2026-03-28",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 1954726,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2205247278,
-      "company_id": 2422271,
-      "amount": 24443,
-      "balance": null,
-      "description": "【商品本体】 HSHBGS カフェドアーズ 木製 両開き スイングドア 両方向に開く パティオ フェンスゲート 自動閉鎖 カウンタードア キッチンドアヒンジ付き パーティションドア 廊下 台所 戸口棒カウボーイのドア(ホワイト,幅90x高さ90cm) （消費税率10％） （注文番号:250-2650254-1098262）（免税）",
-      "due_amount": 24443,
-      "date": "2026-03-28",
-      "entry_side": "expense",
-      "walletable_type": "wallet",
-      "walletable_id": 7467699,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208097712,
-      "company_id": 2422271,
-      "amount": 2053456,
-      "balance": 4030547,
-      "description": "給与振込　　　　　　　ＦＢサ−ビス",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 2524752,
-      "status": 2,
-      "rule_matched": false
-    },
-    {
-      "id": 2208097711,
-      "company_id": 2422271,
-      "amount": 16200,
-      "balance": 6084003,
-      "description": "　　　　　　　　　　　ＮＳカンリヒトウ",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 2524752,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208097710,
-      "company_id": 2422271,
-      "amount": 178387,
-      "balance": 6100203,
-      "description": "　　　　　　　　　　　オリコ",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 2524752,
-      "status": 2,
-      "rule_matched": false
-    },
-    {
-      "id": 2208097709,
-      "company_id": 2422271,
-      "amount": 30000,
-      "balance": 6278590,
-      "description": "共済掛金　　　　　　　トウサンボウシ",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 2524752,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096915,
-      "company_id": 2422271,
-      "amount": 147903,
-      "balance": 641221,
-      "description": "振込 ニシヤマ　レイゴ",
-      "due_amount": 147903,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208096914,
-      "company_id": 2422271,
-      "amount": 217,
-      "balance": 789124,
-      "description": "Vデビット　FACEBK *V6454FRN92　1A086012",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096913,
-      "company_id": 2422271,
-      "amount": 145,
-      "balance": 789341,
-      "description": "振込手数料",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096912,
-      "company_id": 2422271,
-      "amount": 110000,
-      "balance": 789486,
-      "description": "振込 ミヤハラ　ユウマ",
-      "due_amount": 110000,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2208096911,
-      "company_id": 2422271,
-      "amount": 8183,
-      "balance": 899486,
-      "description": "Vデビット　AMAZON CO JP　1A086011",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096910,
-      "company_id": 2422271,
-      "amount": 8183,
-      "balance": 907669,
-      "description": "Vデビット　AMAZON CO JP　1A086010",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096909,
-      "company_id": 2422271,
-      "amount": 8183,
-      "balance": 915852,
-      "description": "Vデビット　AMAZON CO JP　1A086009",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096908,
-      "company_id": 2422271,
-      "amount": 9612,
-      "balance": 924035,
-      "description": "Vデビット　業務スーパー川口八幡木店　1A086008",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096907,
-      "company_id": 2422271,
-      "amount": 20463,
-      "balance": 933647,
-      "description": "Vデビット　業務スーパー川口八幡木店　1A086007",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096906,
-      "company_id": 2422271,
-      "amount": 24443,
-      "balance": 954110,
-      "description": "Vデビット　ＡＭＡＺＯＮ．ＣＯ．ＪＰ　1A086006",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096905,
-      "company_id": 2422271,
-      "amount": 49077,
-      "balance": 978553,
-      "description": "Vデビット　AMAZON CO JP　1A086005",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096904,
-      "company_id": 2422271,
-      "amount": 5280,
-      "balance": 1027630,
-      "description": "Vデビット　ＡＭＡＺＯＮ．ＣＯ．ＪＰ　1A086004",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096903,
-      "company_id": 2422271,
-      "amount": 6065,
-      "balance": 1032910,
-      "description": "Vデビット　ＡＭＡＺＯＮ．ＣＯ．ＪＰ　1A086003",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096902,
-      "company_id": 2422271,
-      "amount": 49381,
-      "balance": 1038975,
-      "description": "Vデビット　ＡＭＡＺＯＮ．ＣＯ．ＪＰ　1A086002",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096901,
-      "company_id": 2422271,
-      "amount": 7920,
-      "balance": 1088356,
-      "description": "Vデビット　日本ニーダー　オンラインショップ　1A086001",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2208096900,
-      "company_id": 2422271,
-      "amount": 50330,
-      "balance": 1096276,
-      "description": "ＳＭＢＣ（チンリヨウトウ",
-      "due_amount": 50330,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 4423238,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2206824388,
-      "company_id": 2422271,
-      "amount": 7920,
-      "balance": null,
-      "description": "日本ニーダー　オンラインショップ",
-      "due_amount": 7920,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "credit_card",
-      "walletable_id": 2455197,
-      "status": 1,
-      "rule_matched": false
-    },
-    {
-      "id": 2206824387,
-      "company_id": 2422271,
-      "amount": 49381,
       "balance": null,
       "description": "ＡＭＡＺＯＮ．ＣＯ．ＪＰ",
       "due_amount": 0,
-      "date": "2026-03-27",
+      "date": "2026-03-31",
       "entry_side": "expense",
       "walletable_type": "credit_card",
       "walletable_id": 2455197,
@@ -24687,142 +25061,72 @@
       "rule_matched": true
     },
     {
-      "id": 2206824386,
+      "id": 2214745426,
       "company_id": 2422271,
-      "amount": 6065,
+      "amount": 546,
       "balance": null,
-      "description": "ＡＭＡＺＯＮ．ＣＯ．ＪＰ",
-      "due_amount": 0,
-      "date": "2026-03-27",
+      "description": "タカハシ　ミエルカワグチテン／ＮＦＣ",
+      "due_amount": 546,
+      "date": "2026-03-31",
       "entry_side": "expense",
       "walletable_type": "credit_card",
-      "walletable_id": 2455197,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206824385,
-      "company_id": 2422271,
-      "amount": 5280,
-      "balance": null,
-      "description": "ＡＭＡＺＯＮ．ＣＯ．ＪＰ",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "credit_card",
-      "walletable_id": 2455197,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206824384,
-      "company_id": 2422271,
-      "amount": 24443,
-      "balance": null,
-      "description": "ＡＭＡＺＯＮ．ＣＯ．ＪＰ",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "credit_card",
-      "walletable_id": 2455197,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206824383,
-      "company_id": 2422271,
-      "amount": 20463,
-      "balance": null,
-      "description": "業務スーパー川口八幡木店",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "credit_card",
-      "walletable_id": 2455197,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206824382,
-      "company_id": 2422271,
-      "amount": 9612,
-      "balance": null,
-      "description": "業務スーパー川口八幡木店",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "credit_card",
-      "walletable_id": 2455197,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206824381,
-      "company_id": 2422271,
-      "amount": 217,
-      "balance": null,
-      "description": "FACEBK *V6454FRN92",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "credit_card",
-      "walletable_id": 2455197,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206583149,
-      "company_id": 2422271,
-      "amount": 13183,
-      "balance": 408390,
-      "description": "Visaデビット利用 FACEBK *ASWQXGVXA2 承認番号：598695 TID：386086465990371",
-      "due_amount": 0,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 1954726,
-      "status": 2,
-      "rule_matched": true
-    },
-    {
-      "id": 2206583148,
-      "company_id": 2422271,
-      "amount": 30800,
-      "balance": 421573,
-      "description": "AP(CB-POS",
-      "due_amount": 30800,
-      "date": "2026-03-27",
-      "entry_side": "expense",
-      "walletable_type": "bank_account",
-      "walletable_id": 1954726,
+      "walletable_id": 1435614,
       "status": 1,
       "rule_matched": false
     },
     {
-      "id": 2206583147,
+      "id": 2214196061,
       "company_id": 2422271,
-      "amount": 29905,
-      "balance": 452373,
-      "description": "ﾗｲﾌｶ-ﾄﾞ(ｶ",
-      "due_amount": 29905,
-      "date": "2026-03-27",
+      "amount": 751,
+      "balance": 673455,
+      "description": "Vデビット　サミット／ＮＦＣ　1A090008",
+      "due_amount": 0,
+      "date": "2026-03-31",
       "entry_side": "expense",
       "walletable_type": "bank_account",
-      "walletable_id": 1954726,
-      "status": 1,
-      "rule_matched": false
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
     },
     {
-      "id": 2208131511,
+      "id": 2214196060,
       "company_id": 2422271,
-      "amount": 1481,
-      "balance": null,
-      "description": "ゼロサンプラス",
+      "amount": 322,
+      "balance": 674206,
+      "description": "Vデビット　ローソン　1A090007",
       "due_amount": 0,
-      "date": "2026-03-26",
+      "date": "2026-03-31",
       "entry_side": "expense",
-      "walletable_type": "credit_card",
-      "walletable_id": 1435600,
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196059,
+      "company_id": 2422271,
+      "amount": 390,
+      "balance": 674528,
+      "description": "Vデビット　ドラッグセイムス　川口元郷店　1A090006",
+      "due_amount": 0,
+      "date": "2026-03-31",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
+      "status": 2,
+      "rule_matched": true
+    },
+    {
+      "id": 2214196058,
+      "company_id": 2422271,
+      "amount": 200,
+      "balance": 674918,
+      "description": "Vデビット　タイムズライオンズスクエア川口　1A090005",
+      "due_amount": 0,
+      "date": "2026-03-31",
+      "entry_side": "expense",
+      "walletable_type": "bank_account",
+      "walletable_id": 4423238,
       "status": 2,
       "rule_matched": true
     }
@@ -25264,7 +25568,7 @@
         "fiscal_year": 2025,
         "start_month": 2,
         "end_month": 2,
-        "created_at": "2026-04-03T14:07:55+09:00",
+        "created_at": "2026-04-07T15:42:42+09:00",
         "balances": [
           {
             "account_item_id": 386413777,
@@ -25957,7 +26261,7 @@
         "fiscal_year": 2025,
         "start_month": 11,
         "end_month": 2,
-        "created_at": "2026-04-03T14:07:54+09:00",
+        "created_at": "2026-04-07T15:42:42+09:00",
         "balances": [
           {
             "account_item_id": 386413677,
@@ -26576,7 +26880,7 @@
         "start_month": 2,
         "end_month": 2,
         "breakdown_display_type": "partner",
-        "created_at": "2026-04-03T14:07:55+09:00",
+        "created_at": "2026-04-07T15:42:43+09:00",
         "balances": [
           {
             "account_item_id": 386413777,
@@ -30735,7 +31039,7 @@
         "start_month": 11,
         "end_month": 2,
         "breakdown_display_type": "partner",
-        "created_at": "2026-04-03T14:07:55+09:00",
+        "created_at": "2026-04-07T15:42:42+09:00",
         "balances": [
           {
             "account_item_id": 386413677,
@@ -32546,7 +32850,7 @@
         "fiscal_year": 2024,
         "start_month": 3,
         "end_month": 3,
-        "created_at": "2026-04-03T14:07:55+09:00",
+        "created_at": "2026-04-07T15:42:43+09:00",
         "balances": [
           {
             "account_item_id": 401773187,
@@ -33063,7 +33367,7 @@
         "fiscal_year": 2024,
         "start_month": 11,
         "end_month": 3,
-        "created_at": "2026-04-03T14:07:55+09:00",
+        "created_at": "2026-04-07T15:42:43+09:00",
         "balances": [
           {
             "account_item_id": 386413677,
@@ -33561,7 +33865,7 @@
         "start_month": 3,
         "end_month": 3,
         "breakdown_display_type": "partner",
-        "created_at": "2026-04-03T14:07:56+09:00",
+        "created_at": "2026-04-07T15:42:43+09:00",
         "balances": [
           {
             "account_item_id": 401773187,
@@ -36469,7 +36773,7 @@
             "partners": [
               {
                 "id": 41128524,
-                "name": "クリエート合同会社",
+                "name": "クリエート��同会社",
                 "opening_balance": 30000,
                 "debit_amount": 0,
                 "credit_amount": 0,
@@ -36721,7 +37025,7 @@
         "start_month": 11,
         "end_month": 3,
         "breakdown_display_type": "partner",
-        "created_at": "2026-04-03T14:07:55+09:00",
+        "created_at": "2026-04-07T15:42:43+09:00",
         "balances": [
           {
             "account_item_id": 386413677,
@@ -38007,5 +38311,6 @@
   "targetMonth": "2026-03",
   "fiscalYear": 2025,
   "startMonth": 11,
-  "fetchedAt": "2026-04-03T05:07:59.700Z"
+  "fiscalYearId": 10456857,
+  "fetchedAt": "2026-04-07T06:42:45.474Z"
 }

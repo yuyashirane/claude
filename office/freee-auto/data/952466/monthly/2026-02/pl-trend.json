@@ -1,0 +1,1269 @@
+{
+  "months": [
+    "2025-03",
+    "2025-04",
+    "2025-05",
+    "2025-06",
+    "2025-07",
+    "2025-08",
+    "2025-09",
+    "2025-10",
+    "2025-11",
+    "2025-12",
+    "2026-01",
+    "2026-02"
+  ],
+  "accounts": {
+    "売上高": {
+      "id": 150809904,
+      "category": "売上高",
+      "monthlyAmounts": [
+        9280332,
+        10017332,
+        7047332,
+        7047332,
+        7047332,
+        7047332,
+        7047332,
+        7047332,
+        7047332,
+        7047332,
+        6798000,
+        6798000
+      ],
+      "total": 89272320,
+      "isSummary": false
+    },
+    "__summary__売上高": {
+      "id": null,
+      "category": "売上高",
+      "monthlyAmounts": [
+        9280332,
+        10017332,
+        7047332,
+        7047332,
+        7047332,
+        7047332,
+        7047332,
+        7047332,
+        7047332,
+        7047332,
+        6798000,
+        6798000
+      ],
+      "total": 89272320,
+      "isSummary": true
+    },
+    "__summary__売上原価": {
+      "id": null,
+      "category": "売上原価",
+      "monthlyAmounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "isSummary": true
+    },
+    "__summary__期首商品棚卸": {
+      "id": null,
+      "category": "期首商品棚卸",
+      "monthlyAmounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "isSummary": true
+    },
+    "__summary__当期商品仕入": {
+      "id": null,
+      "category": "当期商品仕入",
+      "monthlyAmounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "isSummary": true
+    },
+    "__summary__他勘定振替高(商)": {
+      "id": null,
+      "category": "他勘定振替高(商)",
+      "monthlyAmounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "isSummary": true
+    },
+    "__summary__期末商品棚卸": {
+      "id": null,
+      "category": "期末商品棚卸",
+      "monthlyAmounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "isSummary": true
+    },
+    "__summary__商品売上原価": {
+      "id": null,
+      "category": "商品売上原価",
+      "monthlyAmounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "isSummary": true
+    },
+    "__summary__売上総損益金額": {
+      "id": null,
+      "category": "売上総損益金額",
+      "monthlyAmounts": [
+        9280332,
+        10017332,
+        7047332,
+        7047332,
+        7047332,
+        7047332,
+        7047332,
+        7047332,
+        7047332,
+        7047332,
+        6798000,
+        6798000
+      ],
+      "total": 89272320,
+      "isSummary": true
+    },
+    "役員報酬": {
+      "id": 150809915,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        1050000,
+        1050000,
+        1050000,
+        1050000,
+        1050000,
+        1050000,
+        1050000,
+        1050000,
+        1050000,
+        1050000,
+        1050000,
+        1050000
+      ],
+      "total": 12600000,
+      "isSummary": false
+    },
+    "給料手当": {
+      "id": 150809917,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        289000,
+        289000,
+        289000,
+        289000,
+        289000,
+        309000,
+        309000,
+        309000,
+        309000,
+        309000,
+        309000,
+        309000
+      ],
+      "total": 3608000,
+      "isSummary": false
+    },
+    "賞与": {
+      "id": 150809919,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        400000,
+        0,
+        0,
+        0,
+        0,
+        0,
+        400000
+      ],
+      "total": 800000,
+      "isSummary": false
+    },
+    "法定福利費": {
+      "id": 150809921,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        161232,
+        160716,
+        160716,
+        160716,
+        160716,
+        221756,
+        160716,
+        167218,
+        167218,
+        167218,
+        167218,
+        228258
+      ],
+      "total": 2083698,
+      "isSummary": false
+    },
+    "福利厚生費": {
+      "id": 150809922,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        15000,
+        2077,
+        0,
+        0,
+        0,
+        0,
+        0,
+        17600,
+        3930,
+        0,
+        0,
+        0
+      ],
+      "total": 38607,
+      "isSummary": false
+    },
+    "外注費": {
+      "id": 150809925,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        0,
+        5876330,
+        3872580,
+        3896580,
+        7157330,
+        3883080,
+        3897830,
+        3869330,
+        3890080,
+        3887080,
+        3901830,
+        7778160
+      ],
+      "total": 51910210,
+      "isSummary": false
+    },
+    "広告宣伝費": {
+      "id": 150809927,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        50000,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 50000,
+      "isSummary": false
+    },
+    "交際費": {
+      "id": 150809928,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        141825,
+        68840,
+        58322,
+        36003,
+        11631,
+        47898,
+        96148,
+        26960,
+        25113,
+        106128,
+        41854,
+        142805
+      ],
+      "total": 803527,
+      "isSummary": false
+    },
+    "会議費": {
+      "id": 150809929,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        3750,
+        20932,
+        13259,
+        14360,
+        14550,
+        27520,
+        0,
+        6948,
+        10374,
+        4741,
+        9787,
+        0
+      ],
+      "total": 126221,
+      "isSummary": false
+    },
+    "旅費交通費": {
+      "id": 150809930,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        37858,
+        24270,
+        36540,
+        20300,
+        21920,
+        105270,
+        97932,
+        35548,
+        35040,
+        24140,
+        246734,
+        22011
+      ],
+      "total": 707563,
+      "isSummary": false
+    },
+    "通信費": {
+      "id": 150809931,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        18870,
+        16158,
+        22961,
+        16117,
+        71203,
+        135951,
+        23221,
+        17698,
+        11703,
+        12285,
+        20343,
+        140029
+      ],
+      "total": 506539,
+      "isSummary": false
+    },
+    "消耗品費": {
+      "id": 150809934,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        85824,
+        36045,
+        0,
+        6695,
+        4577,
+        5717,
+        0,
+        17736,
+        11845,
+        173264,
+        1100,
+        50409
+      ],
+      "total": 393212,
+      "isSummary": false
+    },
+    "修繕費": {
+      "id": 150809936,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        229159,
+        0
+      ],
+      "total": 229159,
+      "isSummary": false
+    },
+    "新聞図書費": {
+      "id": 150809938,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        4400,
+        0,
+        0,
+        3465,
+        0,
+        1870,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 9735,
+      "isSummary": false
+    },
+    "諸会費": {
+      "id": 150809939,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        0,
+        0,
+        4400,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 4400,
+      "isSummary": false
+    },
+    "支払手数料": {
+      "id": 150809940,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        44850,
+        52712,
+        261845,
+        52853,
+        53812,
+        52764,
+        54814,
+        65011,
+        81596,
+        54112,
+        57311,
+        104056
+      ],
+      "total": 935736,
+      "isSummary": false
+    },
+    "車両費": {
+      "id": 150809941,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        0,
+        8706,
+        23731,
+        0,
+        14621,
+        0,
+        9352,
+        7425,
+        6208,
+        7520,
+        0,
+        6600
+      ],
+      "total": 84163,
+      "isSummary": false
+    },
+    "地代家賃": {
+      "id": 150809942,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        287770,
+        287770,
+        287770,
+        287770,
+        287770,
+        287770,
+        287770,
+        287770,
+        326943,
+        15070,
+        54388,
+        285070
+      ],
+      "total": 2983631,
+      "isSummary": false
+    },
+    "保険料": {
+      "id": 150809945,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        1564,
+        1564,
+        1564,
+        1564,
+        1564,
+        1564,
+        1564,
+        1564,
+        1564,
+        188254,
+        -1436,
+        1571
+      ],
+      "total": 202465,
+      "isSummary": false
+    },
+    "租税公課": {
+      "id": 150809946,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        0,
+        0,
+        0,
+        0,
+        2561000,
+        1200,
+        0,
+        2560800,
+        0,
+        0,
+        2560800,
+        0
+      ],
+      "total": 7683800,
+      "isSummary": false
+    },
+    "研修費": {
+      "id": 150809989,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        0,
+        0,
+        3300,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 3300,
+      "isSummary": false
+    },
+    "研究開発費": {
+      "id": 150809949,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        14410,
+        9928,
+        12803,
+        18129,
+        16815,
+        12888,
+        10240,
+        34550,
+        8263,
+        8297,
+        4750,
+        4750
+      ],
+      "total": 155823,
+      "isSummary": false
+    },
+    "減価償却費": {
+      "id": 150809950,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        182015,
+        182015,
+        182015,
+        182015,
+        182015,
+        182015,
+        182015,
+        182015,
+        210715,
+        210715,
+        210715,
+        210724
+      ],
+      "total": 2298989,
+      "isSummary": false
+    },
+    "__summary__販売管理費": {
+      "id": null,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        2338368,
+        8087063,
+        6280806,
+        6035567,
+        11898524,
+        6726263,
+        6180602,
+        8707173,
+        6149592,
+        6217824,
+        8863553,
+        10733443
+      ],
+      "total": 88218778,
+      "isSummary": true
+    },
+    "__summary__営業損益金額": {
+      "id": null,
+      "category": "営業損益金額",
+      "monthlyAmounts": [
+        6941964,
+        1930269,
+        766526,
+        1011765,
+        -4851192,
+        321069,
+        866730,
+        -1659841,
+        897740,
+        829508,
+        -2065553,
+        -3935443
+      ],
+      "total": 1053542,
+      "isSummary": true
+    },
+    "__summary__営業外収益": {
+      "id": null,
+      "category": "営業外収益",
+      "monthlyAmounts": [
+        46529,
+        25620,
+        25622,
+        36255,
+        26898,
+        25363,
+        49074,
+        26987,
+        24830,
+        25212,
+        3871,
+        2186
+      ],
+      "total": 318447,
+      "isSummary": true
+    },
+    "受取利息": {
+      "id": 150809957,
+      "category": "営業外収益",
+      "monthlyAmounts": [
+        21340,
+        873,
+        2906,
+        4550,
+        3137,
+        2647,
+        25011,
+        3986,
+        2114,
+        2496,
+        3871,
+        2186
+      ],
+      "total": 75117,
+      "isSummary": false
+    },
+    "受取配当金": {
+      "id": 150809958,
+      "category": "営業外収益",
+      "monthlyAmounts": [
+        0,
+        0,
+        0,
+        250,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 250,
+      "isSummary": false
+    },
+    "雑収入": {
+      "id": 150809961,
+      "category": "営業外収益",
+      "monthlyAmounts": [
+        25189,
+        24747,
+        22716,
+        31455,
+        23761,
+        22716,
+        24063,
+        23001,
+        22716,
+        22716,
+        0,
+        0
+      ],
+      "total": 243080,
+      "isSummary": false
+    },
+    "__summary__営業外費用": {
+      "id": null,
+      "category": "営業外費用",
+      "monthlyAmounts": [
+        41945,
+        44649,
+        41478,
+        41071,
+        38014,
+        37585,
+        35683,
+        33057,
+        32633,
+        30106,
+        29586,
+        28061
+      ],
+      "total": 433868,
+      "isSummary": true
+    },
+    "支払利息": {
+      "id": 150809962,
+      "category": "営業外費用",
+      "monthlyAmounts": [
+        41945,
+        44649,
+        41478,
+        41071,
+        38014,
+        37585,
+        35683,
+        33057,
+        32633,
+        30106,
+        29586,
+        28061
+      ],
+      "total": 433868,
+      "isSummary": false
+    },
+    "__summary__経常損益金額": {
+      "id": null,
+      "category": "経常損益金額",
+      "monthlyAmounts": [
+        6946548,
+        1911240,
+        750670,
+        1006949,
+        -4862308,
+        308847,
+        880121,
+        -1665911,
+        889937,
+        824614,
+        -2091268,
+        -3961318
+      ],
+      "total": 938121,
+      "isSummary": true
+    },
+    "__summary__特別利益": {
+      "id": null,
+      "category": "特別利益",
+      "monthlyAmounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "isSummary": true
+    },
+    "__summary__特別損失": {
+      "id": null,
+      "category": "特別損失",
+      "monthlyAmounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "isSummary": true
+    },
+    "__summary__税引前当期純損益金額": {
+      "id": null,
+      "category": "税引前当期純損益金額",
+      "monthlyAmounts": [
+        6946548,
+        1911240,
+        750670,
+        1006949,
+        -4862308,
+        308847,
+        880121,
+        -1665911,
+        889937,
+        824614,
+        -2091268,
+        -3961318
+      ],
+      "total": 938121,
+      "isSummary": true
+    },
+    "__summary__法人税等": {
+      "id": null,
+      "category": "法人税等",
+      "monthlyAmounts": [
+        3267,
+        133,
+        445,
+        745,
+        477,
+        405,
+        3830,
+        809210,
+        323,
+        382,
+        592,
+        334
+      ],
+      "total": 820143,
+      "isSummary": true
+    },
+    "法人税・住民税及び事業税": {
+      "id": 150809979,
+      "category": "法人税等",
+      "monthlyAmounts": [
+        3267,
+        133,
+        445,
+        745,
+        477,
+        405,
+        3830,
+        809210,
+        323,
+        382,
+        592,
+        334
+      ],
+      "total": 820143,
+      "isSummary": false
+    },
+    "__summary__法人税等調整額": {
+      "id": null,
+      "category": "法人税等調整額",
+      "monthlyAmounts": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "total": 0,
+      "isSummary": true
+    },
+    "__summary__当期純損益金額": {
+      "id": null,
+      "category": "当期純損益金額",
+      "monthlyAmounts": [
+        6943281,
+        1911107,
+        750225,
+        1006204,
+        -4862785,
+        308442,
+        876291,
+        -2475121,
+        889614,
+        824232,
+        -2091860,
+        -3961652
+      ],
+      "total": 117978,
+      "isSummary": true
+    }
+  },
+  "accountList": [
+    {
+      "id": 150809904,
+      "name": "売上高",
+      "category": "売上高",
+      "isSummary": false
+    },
+    {
+      "id": null,
+      "name": "売上高",
+      "category": "売上高",
+      "isSummary": true
+    },
+    {
+      "id": null,
+      "name": "売上原価",
+      "category": "売上原価",
+      "isSummary": true
+    },
+    {
+      "id": null,
+      "name": "期首商品棚卸",
+      "category": "期首商品棚卸",
+      "isSummary": true
+    },
+    {
+      "id": null,
+      "name": "当期商品仕入",
+      "category": "当期商品仕入",
+      "isSummary": true
+    },
+    {
+      "id": null,
+      "name": "他勘定振替高(商)",
+      "category": "他勘定振替高(商)",
+      "isSummary": true
+    },
+    {
+      "id": null,
+      "name": "期末商品棚卸",
+      "category": "期末商品棚卸",
+      "isSummary": true
+    },
+    {
+      "id": null,
+      "name": "商品売上原価",
+      "category": "商品売上原価",
+      "isSummary": true
+    },
+    {
+      "id": null,
+      "name": "売上総損益金額",
+      "category": "売上総損益金額",
+      "isSummary": true
+    },
+    {
+      "id": 150809915,
+      "name": "役員報酬",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809917,
+      "name": "給料手当",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809919,
+      "name": "賞与",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809921,
+      "name": "法定福利費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809922,
+      "name": "福利厚生費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809925,
+      "name": "外注費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809927,
+      "name": "広告宣伝費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809928,
+      "name": "交際費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809929,
+      "name": "会議費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809930,
+      "name": "旅費交通費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809931,
+      "name": "通信費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809934,
+      "name": "消耗品費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809936,
+      "name": "修繕費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809938,
+      "name": "新聞図書費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809939,
+      "name": "諸会費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809940,
+      "name": "支払手数料",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809941,
+      "name": "車両費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809942,
+      "name": "地代家賃",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809945,
+      "name": "保険料",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809946,
+      "name": "租税公課",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809989,
+      "name": "研修費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809949,
+      "name": "研究開発費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 150809950,
+      "name": "減価償却費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": null,
+      "name": "販売管理費",
+      "category": "販売管理費",
+      "isSummary": true
+    },
+    {
+      "id": null,
+      "name": "営業損益金額",
+      "category": "営業損益金額",
+      "isSummary": true
+    },
+    {
+      "id": null,
+      "name": "営業外収益",
+      "category": "営業外収益",
+      "isSummary": true
+    },
+    {
+      "id": 150809957,
+      "name": "受取利息",
+      "category": "営業外収益",
+      "isSummary": false
+    },
+    {
+      "id": 150809958,
+      "name": "受取配当金",
+      "category": "営業外収益",
+      "isSummary": false
+    },
+    {
+      "id": 150809961,
+      "name": "雑収入",
+      "category": "営業外収益",
+      "isSummary": false
+    },
+    {
+      "id": null,
+      "name": "営業外費用",
+      "category": "営業外費用",
+      "isSummary": true
+    },
+    {
+      "id": 150809962,
+      "name": "支払利息",
+      "category": "営業外費用",
+      "isSummary": false
+    },
+    {
+      "id": null,
+      "name": "経常損益金額",
+      "category": "経常損益金額",
+      "isSummary": true
+    },
+    {
+      "id": null,
+      "name": "特別利益",
+      "category": "特別利益",
+      "isSummary": true
+    },
+    {
+      "id": null,
+      "name": "特別損失",
+      "category": "特別損失",
+      "isSummary": true
+    },
+    {
+      "id": null,
+      "name": "税引前当期純損益金額",
+      "category": "税引前当期純損益金額",
+      "isSummary": true
+    },
+    {
+      "id": null,
+      "name": "法人税等",
+      "category": "法人税等",
+      "isSummary": true
+    },
+    {
+      "id": 150809979,
+      "name": "法人税・住民税及び事業税",
+      "category": "法人税等",
+      "isSummary": false
+    },
+    {
+      "id": null,
+      "name": "法人税等調整額",
+      "category": "法人税等調整額",
+      "isSummary": true
+    },
+    {
+      "id": null,
+      "name": "当期純損益金額",
+      "category": "当期純損益金額",
+      "isSummary": true
+    }
+  ],
+  "fetchedAt": "2026-04-07T07:19:58.400Z"
+}

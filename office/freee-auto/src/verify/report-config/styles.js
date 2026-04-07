@@ -31,6 +31,7 @@ const COLORS = {
   tabBlue:        'FF2980B9',
   tabGray:        'FF95A5A6',
   tabGreen:       'FF27AE60',
+  subtotalBg:     'FFE2EFDA', // 小計行背景（薄緑）
 };
 
 // ============================================================

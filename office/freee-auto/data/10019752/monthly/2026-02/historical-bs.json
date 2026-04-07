@@ -1,0 +1,259 @@
+{
+  "fetchedAt": "2026-04-07T06:55:19.099Z",
+  "data": {
+    "2022": {
+      "現金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "三菱ＵＦＪ（法人）（API）": {
+        "opening": 7833077,
+        "closing": 7773619
+      },
+      "売掛金": {
+        "opening": 1300311,
+        "closing": 932861
+      },
+      "役員貸付金": {
+        "opening": 2289,
+        "closing": 0
+      },
+      "工具器具備品": {
+        "opening": 255000,
+        "closing": 0
+      },
+      "営業権": {
+        "opening": 4858461,
+        "closing": 4766786
+      },
+      "創立費": {
+        "opening": 21837,
+        "closing": 0
+      },
+      "開業費": {
+        "opening": 952,
+        "closing": 0
+      },
+      "立替経費（塙）": {
+        "opening": 2101974,
+        "closing": 2139052
+      },
+      "未払金": {
+        "opening": 652782,
+        "closing": 553115
+      },
+      "セゾンカード": {
+        "opening": 449305,
+        "closing": 557605
+      },
+      "VIEWカード": {
+        "opening": 10524,
+        "closing": 25524
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 176800
+      },
+      "預り金": {
+        "opening": 61468,
+        "closing": 73281
+      },
+      "長期借入金": {
+        "opening": 3800000,
+        "closing": 3750000
+      },
+      "長期未払金": {
+        "opening": 4959748,
+        "closing": 4869477
+      },
+      "資本金": {
+        "opening": 1000000,
+        "closing": 1000000
+      },
+      "繰越利益剰余金": {
+        "opening": 0,
+        "closing": 328412
+      }
+    },
+    "2023": {
+      "三菱ＵＦＪ（法人）（API）": {
+        "opening": 10187530,
+        "closing": 9801402
+      },
+      "売掛金": {
+        "opening": 1103721,
+        "closing": 1141177
+      },
+      "前払費用": {
+        "opening": 0,
+        "closing": 76847
+      },
+      "未収入金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "車両運搬具": {
+        "opening": 3706010,
+        "closing": 3396942
+      },
+      "営業権": {
+        "opening": 3758438,
+        "closing": 3666759
+      },
+      "長期前払費用": {
+        "opening": 386143,
+        "closing": 378988
+      },
+      "預託金": {
+        "opening": 17640,
+        "closing": 17640
+      },
+      "役員借入金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "立替経費（塙）": {
+        "opening": 6361566,
+        "closing": 6401928
+      },
+      "未払金": {
+        "opening": 553590,
+        "closing": 707347
+      },
+      "セゾンカード": {
+        "opening": 256523,
+        "closing": 310248
+      },
+      "VIEWカード": {
+        "opening": 15524,
+        "closing": 15524
+      },
+      "未払費用": {
+        "opening": 0,
+        "closing": 11000
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 70000
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 75600
+      },
+      "預り金": {
+        "opening": 51295,
+        "closing": 70765
+      },
+      "長期借入金": {
+        "opening": 10365000,
+        "closing": 10200400
+      },
+      "長期未払金": {
+        "opening": 3872608,
+        "closing": 3781629
+      },
+      "資本金": {
+        "opening": 1000000,
+        "closing": 1000000
+      },
+      "繰越利益剰余金": {
+        "opening": 328412,
+        "closing": -4164686
+      }
+    },
+    "2024": {
+      "三菱ＵＦＪ（法人）（API）": {
+        "opening": 9976771,
+        "closing": 10542672
+      },
+      "売掛金": {
+        "opening": 2079000,
+        "closing": 2172500
+      },
+      "前払費用": {
+        "opening": 0,
+        "closing": 91835
+      },
+      "役員貸付金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "車両運搬具": {
+        "opening": 1319999,
+        "closing": 1131182
+      },
+      "営業権": {
+        "opening": 2658411,
+        "closing": 2566732
+      },
+      "ソフトウェア": {
+        "opening": 0,
+        "closing": 0
+      },
+      "長期前払費用": {
+        "opening": 300338,
+        "closing": 293180
+      },
+      "預託金": {
+        "opening": 17640,
+        "closing": 17640
+      },
+      "役員借入金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "立替経費（塙）": {
+        "opening": 7284219,
+        "closing": 7367278
+      },
+      "未払金": {
+        "opening": 950117,
+        "closing": 623540
+      },
+      "セゾンカード": {
+        "opening": 333613,
+        "closing": 238827
+      },
+      "VIEWカード": {
+        "opening": 5524,
+        "closing": 10000
+      },
+      "未払費用": {
+        "opening": 11000,
+        "closing": 0
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 70000
+      },
+      "未払消費税等": {
+        "opening": 708100,
+        "closing": 819100
+      },
+      "預り金": {
+        "opening": 43637,
+        "closing": 64027
+      },
+      "仮受金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "長期借入金": {
+        "opening": 8389800,
+        "closing": 8225200
+      },
+      "長期未払金": {
+        "opening": 2776938,
+        "closing": 2685245
+      },
+      "資本金": {
+        "opening": 1000000,
+        "closing": 1000000
+      },
+      "繰越利益剰余金": {
+        "opening": -4164686,
+        "closing": -4287476
+      }
+    }
+  }
+}

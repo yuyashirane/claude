@@ -1,0 +1,75 @@
+{
+  "fetchedAt": "2026-04-07T07:21:29.338Z",
+  "data": {
+    "2024": {
+      "GMOあおぞらネット（法人）（API）": {
+        "opening": 3851908,
+        "closing": 4135992
+      },
+      "売掛金": {
+        "opening": 2003368,
+        "closing": 2207053
+      },
+      "前払費用": {
+        "opening": 0,
+        "closing": 620510
+      },
+      "役員貸付金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未収入金": {
+        "opening": 8490,
+        "closing": 8490
+      },
+      "工具器具備品": {
+        "opening": 13534,
+        "closing": 0
+      },
+      "敷金": {
+        "opening": 120000,
+        "closing": 120000
+      },
+      "長期前払費用": {
+        "opening": 51105,
+        "closing": 48413
+      },
+      "創立費": {
+        "opening": 5704,
+        "closing": 0
+      },
+      "役員借入金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "立替経費（廣田）": {
+        "opening": 3893537,
+        "closing": 4179712
+      },
+      "未払金": {
+        "opening": 123483,
+        "closing": 123483
+      },
+      "未払費用": {
+        "opening": 1126311,
+        "closing": 1233188
+      },
+      "セゾンカード（個人）": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 198700
+      },
+      "資本金": {
+        "opening": 1000000,
+        "closing": 1000000
+      },
+      "繰越利益剰余金": {
+        "opening": 0,
+        "closing": 405375
+      }
+    }
+  }
+}

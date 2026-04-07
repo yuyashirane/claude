@@ -26,7 +26,6 @@ const {
 } = require('./monthly-checks/trial-helpers');
 
 const {
-  journalsByAccountLink,
   generalLedgerLink,
   determineLinkStartDate,
   buildBalanceLink,
@@ -512,12 +511,44 @@ function createPlSheet(wb, { monthlyData, plTrend, companyId }) {
 }
 
 /**
+ * PL月次推移で表示するセクション定義。
+ * type: 'summary' = 集計行（カテゴリ合計）, 'details' = そのカテゴリの明細科目を展開
+ * isSubtotal: true の行は小計行として太字＋背景色で強調
+ */
+const PL_SECTIONS = [
+  { type: 'summary',  category: '売上高',               label: '売上高' },
+  { type: 'details',  category: '売上原価' },
+  { type: 'summary',  category: '売上原価',             label: '売上原価 計' },
+  { type: 'summary',  category: '売上総損益金額',       label: '売上総利益',           isSubtotal: true },
+  { type: 'details',  category: '販売管理費' },
+  { type: 'summary',  category: '販売管理費',           label: '販売管理費 計',        isSubtotal: true },
+  { type: 'summary',  category: '営業損益金額',         label: '営業利益',             isSubtotal: true },
+  { type: 'details',  category: '営業外収益' },
+  { type: 'summary',  category: '営業外収益',           label: '営業外収益 計' },
+  { type: 'details',  category: '営業外費用' },
+  { type: 'summary',  category: '営業外費用',           label: '営業外費用 計' },
+  { type: 'summary',  category: '経常損益金額',         label: '経常利益',             isSubtotal: true },
+  { type: 'details',  category: '特別利益' },
+  { type: 'summary',  category: '特別利益',             label: '特別利益 計' },
+  { type: 'details',  category: '特別損失' },
+  { type: 'summary',  category: '特別損失',             label: '特別損失 計' },
+  { type: 'summary',  category: '税引前当期純損益金額', label: '税引前当期純利益',     isSubtotal: true },
+  { type: 'details',  category: '法人税等' },
+  { type: 'summary',  category: '法人税等',             label: '法人税等 計' },
+  { type: 'summary',  category: '当期純損益金額',       label: '当期純利益',           isSubtotal: true },
+];
+
+/**
  * PL月次推移: 新レイアウト（期首〜対象月の月別単月金額 + 累計 + 元帳リンク）
+ *
+ * 集計科目（小計・利益行）を中心に表示し、明細科目は残高のある科目のみ展開。
+ * 集計行は太字＋背景色、小計行はさらに強調表示。
  */
 function createPlTrendSheet(ws, { plTrend, monthlyData, companyId }) {
   const months      = plTrend.months;       // ['2025-10', '2025-11', ...]
-  const accounts    = plTrend.accounts;     // { name: { id, category, monthlyAmounts, total } }
-  const accountList = plTrend.accountList;  // [{ id, name, category }]
+  const accounts    = plTrend.accounts;     // { name|__summary__cat: { id, category, monthlyAmounts, total, isSummary } }
+  const accountList = plTrend.accountList;  // [{ id, name, category, isSummary }]
+  const fiscalYearId = monthlyData.fiscalYearId || null;
 
   const numMonths     = months.length;
   const monthStartCol = 2;                           // B列
@@ -555,16 +586,80 @@ function createPlTrendSheet(ws, { plTrend, monthlyData, companyId }) {
   ws.getColumn(cumulativeCol).width = 16;
   ws.getColumn(linkCol).width       = 14;
 
-  // ── 行4〜: データ行 ──
-  let rowNum = 4;
+  // ── PL構造に従って行を構築 ──
+  // accountList から明細科目を category ごとにグループ化
+  const detailsByCategory = {};
   for (const acc of accountList) {
+    if (acc.isSummary) continue;
+    if (!detailsByCategory[acc.category]) detailsByCategory[acc.category] = [];
+    detailsByCategory[acc.category].push(acc);
+  }
+
+  // 表示する行リストを構築
+  const displayRows = [];
+  for (const section of PL_SECTIONS) {
+    if (section.type === 'summary') {
+      const key = `__summary__${section.category}`;
+      const accData = accounts[key];
+      if (!accData) continue;
+      displayRows.push({
+        name: section.label,
+        accData,
+        id: null,
+        isSummary: true,
+        isSubtotal: section.isSubtotal || false,
+      });
+    } else if (section.type === 'details') {
+      const details = detailsByCategory[section.category] || [];
+      for (const acc of details) {
+        const key = acc.name;
+        const accData = accounts[key];
+        if (!accData) continue;
+        // 全月ゼロの明細はスキップ
+        const hasAmount = (accData.monthlyAmounts || []).some((v) => v !== 0);
+        if (!hasAmount) continue;
+        displayRows.push({
+          name: acc.name,
+          accData,
+          id: acc.id,
+          isSummary: false,
+          isSubtotal: false,
+        });
+      }
+    }
+  }
+
+  // フォールバック: PL_SECTIONSに該当しなかった明細科目を末尾に追加
+  // （旧フォーマットのデータや想定外のカテゴリへの対応）
+  const renderedNames = new Set(displayRows.map((r) => r.name));
+  for (const acc of accountList) {
+    if (acc.isSummary) continue;
+    if (renderedNames.has(acc.name)) continue;
     const accData = accounts[acc.name];
     if (!accData) continue;
+    const hasAmount = (accData.monthlyAmounts || []).some((v) => v !== 0);
+    if (!hasAmount) continue;
+    displayRows.push({
+      name: acc.name,
+      accData,
+      id: acc.id,
+      isSummary: false,
+      isSubtotal: false,
+    });
+  }
 
+  // ── 行4〜: データ行 ──
+  let rowNum = 4;
+  for (const item of displayRows) {
+    const { name, accData, id, isSummary, isSubtotal } = item;
     const row = ws.getRow(rowNum);
-    row.getCell(1).value  = acc.name;
-    row.getCell(1).font   = FONTS.body;
-    row.getCell(1).border = BORDER_THIN;
+
+    // 科目名セル
+    const nameCell = row.getCell(1);
+    nameCell.value  = isSummary ? name : `  ${name}`;
+    nameCell.font   = isSubtotal ? FONTS.bodyBold : FONTS.body;
+    nameCell.border = BORDER_THIN;
+    if (isSubtotal) fillCell(nameCell, COLORS.subtotalBg);
 
     const monthlyAmounts = accData.monthlyAmounts || [];
 
@@ -572,13 +667,13 @@ function createPlTrendSheet(ws, { plTrend, monthlyData, companyId }) {
       const cell   = row.getCell(monthStartCol + i);
       const amount = monthlyAmounts[i] || 0;
 
-      // 月の日付範囲（元帳リンク用）
+      // 月の日付範囲（総勘定元帳リンク用）— 明細科目のみリンク
       const { start: mStart, end: mEnd } = getMonthRange(months[i]);
-      const url = acc.id
-        ? journalsByAccountLink(companyId, acc.id, mStart, mEnd, acc.name)
+      const url = (id && name)
+        ? generalLedgerLink(companyId, name, mStart, mEnd, { fiscalYearId })
         : null;
 
-      // HYPERLINK数式で金額＋リンク（ゼロ以外）
+      // HYPERLINK数式で金額＋リンク（ゼロ以外、明細科目のみ）
       if (amount !== 0 && url) {
         cell.value = { formula: `HYPERLINK("${url}",${amount})`, result: amount };
       } else {
@@ -589,20 +684,27 @@ function createPlTrendSheet(ws, { plTrend, monthlyData, companyId }) {
       cell.border    = BORDER_THIN;
       cell.alignment = { horizontal: 'right' };
 
-      // ゼロ値はグレー文字
-      if (amount === 0) {
+      // フォント: 小計行は太字、ゼロ値はグレー
+      if (isSubtotal) {
+        cell.font = amount === 0
+          ? { ...FONTS.bodyBold, color: { argb: COLORS.zeroText } }
+          : FONTS.bodyBold;
+      } else if (amount === 0) {
         cell.font = { ...FONTS.body, color: { argb: COLORS.zeroText } };
       } else {
         cell.font = FONTS.body;
       }
 
-      // 対象月ハイライト（最終月列）
-      if (i === numMonths - 1) {
+      // 小計行の背景色
+      if (isSubtotal) fillCell(cell, COLORS.subtotalBg);
+
+      // 対象月ハイライト（最終月列、小計行以外）
+      if (i === numMonths - 1 && !isSubtotal) {
         fillCell(cell, COLORS.targetMonthBg);
       }
 
-      // 前月比50%超変動
-      if (i > 0) {
+      // 前月比50%超変動（明細科目のみ）
+      if (!isSummary && i > 0) {
         const prevAmt = monthlyAmounts[i - 1] || 0;
         if (prevAmt !== 0 && Math.abs(amount - prevAmt) > Math.abs(prevAmt) * 0.5) {
           fillCell(cell, COLORS.warning);
@@ -619,14 +721,16 @@ function createPlTrendSheet(ws, { plTrend, monthlyData, companyId }) {
     cumCell.font      = FONTS.bodyBold;
     cumCell.border    = BORDER_THIN;
     cumCell.alignment = { horizontal: 'right' };
+    if (isSubtotal) fillCell(cumCell, COLORS.subtotalBg);
 
-    // 元帳リンク（全期間）
+    // 元帳リンク（全期間、明細科目のみ）
     const linkCell = row.getCell(linkCol);
     linkCell.border = BORDER_THIN;
-    if (acc.id) {
+    if (isSubtotal) fillCell(linkCell, COLORS.subtotalBg);
+    if (id && name) {
       const { start: fStart } = getMonthRange(months[0]);
       const { end: fEnd }     = getMonthRange(months[numMonths - 1]);
-      const fullUrl = journalsByAccountLink(companyId, acc.id, fStart, fEnd, acc.name);
+      const fullUrl = generalLedgerLink(companyId, name, fStart, fEnd, { fiscalYearId });
       linkCell.value = { text: '元帳', hyperlink: fullUrl };
       linkCell.font  = LINK_FONT;
     }
@@ -668,6 +772,7 @@ function createPlLegacySheet(ws, { monthlyData, companyId }) {
   const [tYear, tMonth] = (monthlyData.targetMonth || '2026-03').split('-').map(Number);
   const startMonth      = monthlyData.startMonth || 10;
   const fiscalYear      = monthlyData.fiscalYear || tYear;
+  const fiscalYearId    = monthlyData.fiscalYearId || null;
   const fiscalStartDate = `${fiscalYear}-${String(startMonth).padStart(2, '0')}-01`;
   const lastDay         = new Date(tYear, tMonth, 0).getDate();
   const endDate         = `${tYear}-${String(tMonth).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
@@ -694,10 +799,10 @@ function createPlLegacySheet(ws, { monthlyData, companyId }) {
       row.getCell('prev').alignment = { horizontal: 'right' };
     }
 
-    // 元帳リンク
-    if (b.account_item_id) {
-      const url = journalsByAccountLink(
-        companyId, b.account_item_id, fiscalStartDate, endDate, b.account_item_name
+    // 元帳リンク（総勘定元帳）
+    if (b.account_item_id && b.account_item_name) {
+      const url = generalLedgerLink(
+        companyId, b.account_item_name, fiscalStartDate, endDate, { fiscalYearId }
       );
       const linkCell = row.getCell('link');
       linkCell.value = { text: '元帳', hyperlink: url };

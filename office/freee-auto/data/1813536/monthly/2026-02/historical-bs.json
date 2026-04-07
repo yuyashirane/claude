@@ -1,0 +1,511 @@
+{
+  "fetchedAt": "2026-04-07T07:10:15.361Z",
+  "data": {
+    "2020": {
+      "現金": {
+        "opening": 72715,
+        "closing": 59608
+      },
+      "瀧野川信金": {
+        "opening": 13922942,
+        "closing": 19726634
+      },
+      "小口現金（営業）": {
+        "opening": 563,
+        "closing": 0
+      },
+      "小口現金（社長仮払金）": {
+        "opening": 0,
+        "closing": 0
+      },
+      "売掛金": {
+        "opening": 19376364,
+        "closing": 5304435
+      },
+      "前払費用": {
+        "opening": 187690,
+        "closing": 53307
+      },
+      "未収還付法人税等": {
+        "opening": 0,
+        "closing": 1261500
+      },
+      "未収入金": {
+        "opening": 0,
+        "closing": 28247
+      },
+      "工具器具備品": {
+        "opening": 157487,
+        "closing": 145365
+      },
+      "出資金": {
+        "opening": 20000,
+        "closing": 20000
+      },
+      "積立保証金": {
+        "opening": 314914,
+        "closing": 332944
+      },
+      "敷金": {
+        "opening": 160000,
+        "closing": 160000
+      },
+      "長期前払費用": {
+        "opening": 18860,
+        "closing": 9430
+      },
+      "買掛金": {
+        "opening": 143343,
+        "closing": 7315
+      },
+      "未払金": {
+        "opening": 9963427,
+        "closing": 3501853
+      },
+      "freeeVISAカード": {
+        "opening": 132413,
+        "closing": 133225
+      },
+      "ガソリンカード": {
+        "opening": 176844,
+        "closing": 153425
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 37600
+      },
+      "預り金": {
+        "opening": -196504,
+        "closing": 0
+      },
+      "仮受金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "長期借入金": {
+        "opening": 3965000,
+        "closing": 3900000
+      },
+      "資本金": {
+        "opening": 3000000,
+        "closing": 3000000
+      },
+      "繰越利益剰余金": {
+        "opening": 11074289,
+        "closing": 16368052
+      }
+    },
+    "2021": {
+      "現金": {
+        "opening": 84235,
+        "closing": 76644
+      },
+      "瀧野川信金": {
+        "opening": 38416670,
+        "closing": 30702015
+      },
+      "小口現金（営業）": {
+        "opening": 20000,
+        "closing": 0
+      },
+      "売掛金": {
+        "opening": 13017436,
+        "closing": 10942382
+      },
+      "立替金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "前払費用": {
+        "opening": 53307,
+        "closing": 102000
+      },
+      "未収還付法人税等": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未収入金": {
+        "opening": 0,
+        "closing": 165341
+      },
+      "仮払金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "工具器具備品": {
+        "opening": 78749,
+        "closing": 72683
+      },
+      "出資金": {
+        "opening": 20000,
+        "closing": 20000
+      },
+      "積立保証金": {
+        "opening": 591872,
+        "closing": 613731
+      },
+      "敷金": {
+        "opening": 160000,
+        "closing": 160000
+      },
+      "長期前払費用": {
+        "opening": 9430,
+        "closing": 0
+      },
+      "買掛金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未払金": {
+        "opening": 16603452,
+        "closing": 11899045
+      },
+      "freeeVISAカード": {
+        "opening": 230796,
+        "closing": 759401
+      },
+      "ガソリンカード": {
+        "opening": 119199,
+        "closing": 112521
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 545200
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 3176600
+      },
+      "預り金": {
+        "opening": -336809,
+        "closing": 0
+      },
+      "仮受金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "長期借入金": {
+        "opening": 3185000,
+        "closing": 3120000
+      },
+      "資本金": {
+        "opening": 3000000,
+        "closing": 3000000
+      },
+      "繰越利益剰余金": {
+        "opening": 16368052,
+        "closing": 20242029
+      }
+    },
+    "2022": {
+      "現金": {
+        "opening": 26583,
+        "closing": 50121
+      },
+      "瀧野川信金": {
+        "opening": 43027897,
+        "closing": 34930225
+      },
+      "小口現金（営業）": {
+        "opening": 0,
+        "closing": 0
+      },
+      "小口現金（社長仮払金）": {
+        "opening": 0,
+        "closing": 0
+      },
+      "売掛金": {
+        "opening": 5092071,
+        "closing": 4442476
+      },
+      "前払費用": {
+        "opening": 102000,
+        "closing": 230000
+      },
+      "未収収益": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未収入金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "附属設備": {
+        "opening": 207020,
+        "closing": 0
+      },
+      "工具器具備品": {
+        "opening": 6067,
+        "closing": 1
+      },
+      "出資金": {
+        "opening": 20000,
+        "closing": 20000
+      },
+      "積立保証金": {
+        "opening": 873258,
+        "closing": 892668
+      },
+      "敷金": {
+        "opening": 390000,
+        "closing": 230000
+      },
+      "長期前払費用": {
+        "opening": 240657,
+        "closing": 230194
+      },
+      "買掛金": {
+        "opening": 0,
+        "closing": 59784
+      },
+      "未払金": {
+        "opening": 10917926,
+        "closing": 8451094
+      },
+      "freeeVISAカード": {
+        "opening": 240395,
+        "closing": 139219
+      },
+      "ガソリンカード": {
+        "opening": 56096,
+        "closing": 99954
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 701300
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 1745500
+      },
+      "預り金": {
+        "opening": -90698,
+        "closing": 52001
+      },
+      "長期借入金": {
+        "opening": 2405000,
+        "closing": 2340000
+      },
+      "資本金": {
+        "opening": 3000000,
+        "closing": 3000000
+      },
+      "繰越利益剰余金": {
+        "opening": 20242029,
+        "closing": 24436833
+      }
+    },
+    "2023": {
+      "現金": {
+        "opening": 60471,
+        "closing": 79679
+      },
+      "瀧野川信金": {
+        "opening": 40336853,
+        "closing": 24442303
+      },
+      "小口現金（営業）": {
+        "opening": 20000,
+        "closing": 0
+      },
+      "小口現金（社長仮払金）": {
+        "opening": 0,
+        "closing": 0
+      },
+      "売掛金": {
+        "opening": 4990911,
+        "closing": 6170689
+      },
+      "前払費用": {
+        "opening": 230000,
+        "closing": 230000
+      },
+      "未収還付法人税等": {
+        "opening": 0,
+        "closing": 359400
+      },
+      "未収入金": {
+        "opening": 0,
+        "closing": 2000000
+      },
+      "構築物": {
+        "opening": 26000,
+        "closing": 0
+      },
+      "機械装置": {
+        "opening": 2346300,
+        "closing": 2259400
+      },
+      "工具器具備品": {
+        "opening": 1287984,
+        "closing": 1189762
+      },
+      "出資金": {
+        "opening": 20000,
+        "closing": 20000
+      },
+      "積立保証金": {
+        "opening": 1158255,
+        "closing": 1178726
+      },
+      "敷金": {
+        "opening": 230000,
+        "closing": 230000
+      },
+      "長期前払費用": {
+        "opening": 1024251,
+        "closing": 997834
+      },
+      "買掛金": {
+        "opening": 241422,
+        "closing": 293150
+      },
+      "未払金": {
+        "opening": 17498380,
+        "closing": 7584872
+      },
+      "freeeVISAカード": {
+        "opening": 242924,
+        "closing": 383073
+      },
+      "ガソリンカード": {
+        "opening": 104189,
+        "closing": 106345
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 35000
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 713100
+      },
+      "預り金": {
+        "opening": -102959,
+        "closing": 51439
+      },
+      "長期借入金": {
+        "opening": 1625000,
+        "closing": 1560000
+      },
+      "資本金": {
+        "opening": 3000000,
+        "closing": 3000000
+      },
+      "繰越利益剰余金": {
+        "opening": 24436833,
+        "closing": 25430814
+      }
+    },
+    "2024": {
+      "現金": {
+        "opening": 12888,
+        "closing": 119525
+      },
+      "瀧野川信金": {
+        "opening": 31247587,
+        "closing": 29107611
+      },
+      "小口現金（営業）": {
+        "opening": 20000,
+        "closing": 0
+      },
+      "売掛金": {
+        "opening": 9998965,
+        "closing": 13312844
+      },
+      "商品": {
+        "opening": 0,
+        "closing": 241650
+      },
+      "立替金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "前払費用": {
+        "opening": 230000,
+        "closing": 230000
+      },
+      "未収還付法人税等": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未収入金": {
+        "opening": 140948,
+        "closing": 0
+      },
+      "機械装置": {
+        "opening": 1430957,
+        "closing": 1355640
+      },
+      "車両運搬具": {
+        "opening": 2615000,
+        "closing": 2337500
+      },
+      "工具器具備品": {
+        "opening": 753524,
+        "closing": 713859
+      },
+      "出資金": {
+        "opening": 20000,
+        "closing": 20000
+      },
+      "積立保証金": {
+        "opening": 1413069,
+        "closing": 1429250
+      },
+      "敷金": {
+        "opening": 230000,
+        "closing": 230000
+      },
+      "長期前払費用": {
+        "opening": 726475,
+        "closing": 701800
+      },
+      "預託金": {
+        "opening": 18920,
+        "closing": 18920
+      },
+      "買掛金": {
+        "opening": 218900,
+        "closing": 123310
+      },
+      "未払金": {
+        "opening": 9179618,
+        "closing": 12948740
+      },
+      "freeeVISAカード": {
+        "opening": 208583,
+        "closing": 233306
+      },
+      "ガソリンカード": {
+        "opening": 98595,
+        "closing": 78617
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 768600
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 1923300
+      },
+      "預り金": {
+        "opening": 39280,
+        "closing": 59474
+      },
+      "長期借入金": {
+        "opening": 3000000,
+        "closing": 2985000
+      },
+      "資本金": {
+        "opening": 3000000,
+        "closing": 3000000
+      },
+      "繰越利益剰余金": {
+        "opening": 25430814,
+        "closing": 27698252
+      }
+    }
+  }
+}

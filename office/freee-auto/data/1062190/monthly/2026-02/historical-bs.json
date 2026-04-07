@@ -1,0 +1,371 @@
+{
+  "fetchedAt": "2026-04-07T07:15:09.312Z",
+  "data": {
+    "2020": {
+      "現金": {
+        "opening": 18771,
+        "closing": 0
+      },
+      "山梨中央（法人）": {
+        "opening": 2050137,
+        "closing": 2006065
+      },
+      "楽天（法人）": {
+        "opening": 55739,
+        "closing": 55754
+      },
+      "売掛金": {
+        "opening": 0,
+        "closing": 77517
+      },
+      "未収入金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "工具器具備品": {
+        "opening": 154525,
+        "closing": 77263
+      },
+      "土地": {
+        "opening": 4312380,
+        "closing": 4312380
+      },
+      "創立費": {
+        "opening": 150000,
+        "closing": 150000
+      },
+      "役員借入金": {
+        "opening": 9883966,
+        "closing": 9903575
+      },
+      "freeeカード　ライト（Master）": {
+        "opening": 96035,
+        "closing": 171612
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 71000
+      },
+      "預り金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "資本金": {
+        "opening": 3000000,
+        "closing": 3000000
+      },
+      "繰越利益剰余金": {
+        "opening": -5397129,
+        "closing": -6467208
+      }
+    },
+    "2021": {
+      "山梨中央（法人）": {
+        "opening": 660821,
+        "closing": 660825
+      },
+      "楽天（法人）": {
+        "opening": 3038422,
+        "closing": 3325069
+      },
+      "売掛金": {
+        "opening": 1082599,
+        "closing": 2421973
+      },
+      "工具器具備品": {
+        "opening": 815403,
+        "closing": 349834
+      },
+      "土地": {
+        "opening": 4312380,
+        "closing": 4312380
+      },
+      "長期前払費用": {
+        "opening": 42800,
+        "closing": 38045
+      },
+      "創立費": {
+        "opening": 150000,
+        "closing": 150000
+      },
+      "役員借入金": {
+        "opening": 9736701,
+        "closing": 9875593
+      },
+      "未払金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "freeeカード　ライト（Master）": {
+        "opening": 104346,
+        "closing": 86290
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 71000
+      },
+      "預り金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "資本金": {
+        "opening": 3000000,
+        "closing": 3000000
+      },
+      "繰越利益剰余金": {
+        "opening": -6467208,
+        "closing": -1774757
+      }
+    },
+    "2022": {
+      "現金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "山梨中央（法人）": {
+        "opening": 660829,
+        "closing": 660832
+      },
+      "楽天（法人）": {
+        "opening": 2203396,
+        "closing": 3519376
+      },
+      "売掛金": {
+        "opening": 0,
+        "closing": 2935452
+      },
+      "前渡金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "前払費用": {
+        "opening": 0,
+        "closing": 60500
+      },
+      "未収入金": {
+        "opening": 1021,
+        "closing": 1021
+      },
+      "車両運搬具": {
+        "opening": 6101140,
+        "closing": 2414450
+      },
+      "工具器具備品": {
+        "opening": 913834,
+        "closing": 174917
+      },
+      "土地": {
+        "opening": 4312380,
+        "closing": 4312380
+      },
+      "差入保証金": {
+        "opening": 82500,
+        "closing": 82500
+      },
+      "長期前払費用": {
+        "opening": 38045,
+        "closing": 23779
+      },
+      "預託金": {
+        "opening": 17820,
+        "closing": 17820
+      },
+      "創立費": {
+        "opening": 150000,
+        "closing": 0
+      },
+      "役員借入金": {
+        "opening": 6143989,
+        "closing": 6726397
+      },
+      "未払金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "freeeカード　ライト（Master）": {
+        "opening": 234945,
+        "closing": 202673
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 1119600
+      },
+      "預り金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "資本金": {
+        "opening": 3000000,
+        "closing": 3000000
+      },
+      "繰越利益剰余金": {
+        "opening": -1774757,
+        "closing": 3154357
+      }
+    },
+    "2023": {
+      "山梨中央（法人）": {
+        "opening": 672648,
+        "closing": 650624
+      },
+      "楽天（法人）": {
+        "opening": 7994354,
+        "closing": 9337510
+      },
+      "売掛金": {
+        "opening": 85741,
+        "closing": 3354832
+      },
+      "前払費用": {
+        "opening": 60500,
+        "closing": 82500
+      },
+      "役員貸付金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未収還付法人税等": {
+        "opening": 0,
+        "closing": 502800
+      },
+      "未収入金": {
+        "opening": 1021,
+        "closing": 0
+      },
+      "車両運搬具": {
+        "opening": 201206,
+        "closing": 1
+      },
+      "工具器具備品": {
+        "opening": 115368,
+        "closing": 87459
+      },
+      "土地": {
+        "opening": 4312380,
+        "closing": 4312380
+      },
+      "差入保証金": {
+        "opening": 82500,
+        "closing": 82500
+      },
+      "長期前払費用": {
+        "opening": 10711,
+        "closing": 9513
+      },
+      "預託金": {
+        "opening": 17820,
+        "closing": 17820
+      },
+      "役員借入金": {
+        "opening": 11335006,
+        "closing": 11682812
+      },
+      "未払金": {
+        "opening": 61172,
+        "closing": 61172
+      },
+      "freeeカード　ライト（Master）": {
+        "opening": 204950,
+        "closing": 161975
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 35500
+      },
+      "預り金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "資本金": {
+        "opening": 3000000,
+        "closing": 3000000
+      },
+      "繰越利益剰余金": {
+        "opening": 3154357,
+        "closing": 3496480
+      }
+    },
+    "2024": {
+      "山梨中央（法人）": {
+        "opening": 977658,
+        "closing": 955853
+      },
+      "楽天（法人）": {
+        "opening": 1165651,
+        "closing": 505126
+      },
+      "売掛金": {
+        "opening": 3354832,
+        "closing": 3408235
+      },
+      "前払費用": {
+        "opening": 82500,
+        "closing": 82500
+      },
+      "未収還付法人税等": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未収入金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "車両運搬具": {
+        "opening": 1,
+        "closing": 1
+      },
+      "工具器具備品": {
+        "opening": 94476,
+        "closing": 1
+      },
+      "土地": {
+        "opening": 4312380,
+        "closing": 4312380
+      },
+      "差入保証金": {
+        "opening": 82500,
+        "closing": 82500
+      },
+      "長期前払費用": {
+        "opening": 27301,
+        "closing": 25175
+      },
+      "預託金": {
+        "opening": 17820,
+        "closing": 17820
+      },
+      "役員借入金": {
+        "opening": 1341445,
+        "closing": 1161683
+      },
+      "未払金": {
+        "opening": 132169,
+        "closing": 61250
+      },
+      "freeeカード　ライト（Master）": {
+        "opening": 147686,
+        "closing": 209587
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 201300
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 1001500
+      },
+      "預り金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "資本金": {
+        "opening": 3000000,
+        "closing": 3000000
+      },
+      "繰越利益剰余金": {
+        "opening": 3496480,
+        "closing": 3754271
+      }
+    }
+  }
+}

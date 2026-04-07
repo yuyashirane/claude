@@ -1,0 +1,447 @@
+{
+  "fetchedAt": "2026-04-07T07:09:22.172Z",
+  "data": {
+    "2020": {
+      "PayPay銀行（API）": {
+        "opening": 4717660,
+        "closing": 2272170
+      },
+      "千葉銀行(柏の葉キャンパス支店)": {
+        "opening": 8181290,
+        "closing": 7936761
+      },
+      "売掛金": {
+        "opening": 957000,
+        "closing": 1787500
+      },
+      "商品": {
+        "opening": 0,
+        "closing": 698606
+      },
+      "前渡金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "前払費用": {
+        "opening": 571800,
+        "closing": 166170
+      },
+      "未収還付法人税等": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未収入金": {
+        "opening": 120130,
+        "closing": 177330
+      },
+      "工具器具備品": {
+        "opening": 56486,
+        "closing": 0
+      },
+      "ソフトウェア": {
+        "opening": 2643300,
+        "closing": 2594350
+      },
+      "敷金": {
+        "opening": 100000,
+        "closing": 100000
+      },
+      "長期前払費用": {
+        "opening": 523810,
+        "closing": 366668
+      },
+      "保険積立金": {
+        "opening": 2405000,
+        "closing": 2405000
+      },
+      "未払金": {
+        "opening": 289895,
+        "closing": 690142
+      },
+      "freeeカード　ライト（Master）": {
+        "opening": 55562,
+        "closing": 174626
+      },
+      "立替経費(大森)": {
+        "opening": 170850,
+        "closing": 105279
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 70000
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 1006600
+      },
+      "預り金": {
+        "opening": 53355,
+        "closing": 254308
+      },
+      "長期借入金": {
+        "opening": 8441000,
+        "closing": 8441000
+      },
+      "資本金": {
+        "opening": 2500000,
+        "closing": 2500000
+      },
+      "繰越利益剰余金": {
+        "opening": 6269069,
+        "closing": 5262600
+      }
+    },
+    "2021": {
+      "PayPay銀行（API）": {
+        "opening": 6362586,
+        "closing": 3963763
+      },
+      "千葉銀行(柏の葉キャンパス支店)": {
+        "opening": 4264778,
+        "closing": 1983954
+      },
+      "売掛金": {
+        "opening": 4371400,
+        "closing": 8143300
+      },
+      "商品": {
+        "opening": 0,
+        "closing": 387467
+      },
+      "前払費用": {
+        "opening": 166170,
+        "closing": 160670
+      },
+      "未収入金": {
+        "opening": 122333,
+        "closing": 122333
+      },
+      "工具器具備品": {
+        "opening": 232400,
+        "closing": 0
+      },
+      "ソフトウェア": {
+        "opening": 2055900,
+        "closing": 2006950
+      },
+      "敷金": {
+        "opening": 100000,
+        "closing": 100000
+      },
+      "長期前払費用": {
+        "opening": 366668,
+        "closing": 209526
+      },
+      "保険積立金": {
+        "opening": 2465000,
+        "closing": 4505000
+      },
+      "未払金": {
+        "opening": 268317,
+        "closing": 753700
+      },
+      "freeeカード　ライト（Master）": {
+        "opening": 789451,
+        "closing": 85271
+      },
+      "立替経費(大森)": {
+        "opening": 18840,
+        "closing": 13252
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 387500
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 1152000
+      },
+      "預り金": {
+        "opening": 80176,
+        "closing": 342990
+      },
+      "長期借入金": {
+        "opening": 6941000,
+        "closing": 6816000
+      },
+      "資本金": {
+        "opening": 2500000,
+        "closing": 2500000
+      },
+      "繰越利益剰余金": {
+        "opening": 5262600,
+        "closing": 9532250
+      }
+    },
+    "2022": {
+      "PayPay銀行（API）": {
+        "opening": 8852801,
+        "closing": 5569511
+      },
+      "千葉銀行(柏の葉キャンパス支店)": {
+        "opening": 4108462,
+        "closing": 3142130
+      },
+      "売掛金": {
+        "opening": 661100,
+        "closing": 3109700
+      },
+      "商品": {
+        "opening": 0,
+        "closing": 261371
+      },
+      "前払費用": {
+        "opening": 160670,
+        "closing": 160670
+      },
+      "未収還付法人税等": {
+        "opening": 0,
+        "closing": 158400
+      },
+      "未収入金": {
+        "opening": 23856,
+        "closing": 23856
+      },
+      "工具器具備品": {
+        "opening": 185831,
+        "closing": 0
+      },
+      "ソフトウェア": {
+        "opening": 1468500,
+        "closing": 1419550
+      },
+      "敷金": {
+        "opening": 100000,
+        "closing": 100000
+      },
+      "長期前払費用": {
+        "opening": 473722,
+        "closing": 308324
+      },
+      "保険積立金": {
+        "opening": 4505000,
+        "closing": 5225000
+      },
+      "未払金": {
+        "opening": 159919,
+        "closing": 667819
+      },
+      "freeeカード　ライト（Master）": {
+        "opening": 325694,
+        "closing": 190818
+      },
+      "立替経費(大森)": {
+        "opening": 126889,
+        "closing": 19049
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 35000
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 365300
+      },
+      "預り金": {
+        "opening": 72335,
+        "closing": 400182
+      },
+      "長期借入金": {
+        "opening": 5441000,
+        "closing": 5316000
+      },
+      "資本金": {
+        "opening": 2500000,
+        "closing": 2500000
+      },
+      "繰越利益剰余金": {
+        "opening": 9532250,
+        "closing": 9984344
+      }
+    },
+    "2023": {
+      "PayPay銀行（API）": {
+        "opening": 7953043,
+        "closing": 8776680
+      },
+      "千葉銀行(柏の葉キャンパス支店)": {
+        "opening": 2296781,
+        "closing": 1381457
+      },
+      "売掛金": {
+        "opening": 1975050,
+        "closing": 1722050
+      },
+      "商品": {
+        "opening": 0,
+        "closing": 143181
+      },
+      "前払費用": {
+        "opening": 160670,
+        "closing": 146920
+      },
+      "未収還付法人税等": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未収入金": {
+        "opening": 51717,
+        "closing": 51717
+      },
+      "工具器具備品": {
+        "opening": 43560,
+        "closing": 0
+      },
+      "ソフトウェア": {
+        "opening": 2334969,
+        "closing": 2261377
+      },
+      "敷金": {
+        "opening": 100000,
+        "closing": 100000
+      },
+      "長期前払費用": {
+        "opening": 165124,
+        "closing": 156867
+      },
+      "保険積立金": {
+        "opening": 5225000,
+        "closing": 5945000
+      },
+      "未払金": {
+        "opening": 107742,
+        "closing": 695800
+      },
+      "freeeカード　ライト（Master）": {
+        "opening": 42993,
+        "closing": 120069
+      },
+      "立替経費(大森)": {
+        "opening": 64155,
+        "closing": 6888
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 450700
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 483100
+      },
+      "預り金": {
+        "opening": 49775,
+        "closing": 378410
+      },
+      "長期借入金": {
+        "opening": 3941000,
+        "closing": 3816000
+      },
+      "資本金": {
+        "opening": 2500000,
+        "closing": 2500000
+      },
+      "繰越利益剰余金": {
+        "opening": 9984344,
+        "closing": 12234282
+      }
+    },
+    "2024": {
+      "PayPay銀行（API）": {
+        "opening": 12227140,
+        "closing": 9385427
+      },
+      "千葉銀行(柏の葉キャンパス支店)": {
+        "opening": 11139469,
+        "closing": 10007768
+      },
+      "千葉銀行(柏支店)": {
+        "opening": 2894158,
+        "closing": 2841290
+      },
+      "売掛金": {
+        "opening": 1394800,
+        "closing": 1426700
+      },
+      "商品": {
+        "opening": 143181,
+        "closing": 111899
+      },
+      "前渡金": {
+        "opening": 0,
+        "closing": 18422
+      },
+      "前払費用": {
+        "opening": 146920,
+        "closing": 175470
+      },
+      "未収還付法人税等": {
+        "opening": 0,
+        "closing": 189900
+      },
+      "未収入金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "工具器具備品": {
+        "opening": 206984,
+        "closing": 0
+      },
+      "ソフトウェア": {
+        "opening": 1451876,
+        "closing": 1133525
+      },
+      "敷金": {
+        "opening": 100000,
+        "closing": 100000
+      },
+      "長期前払費用": {
+        "opening": 110670,
+        "closing": 101657
+      },
+      "保険積立金": {
+        "opening": 5945000,
+        "closing": 6665000
+      },
+      "買掛金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未払金": {
+        "opening": 638631,
+        "closing": 686176
+      },
+      "freeeカード　ライト（Master）": {
+        "opening": 129740,
+        "closing": 71494
+      },
+      "立替経費(大森)": {
+        "opening": 11629,
+        "closing": 117484
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 35000
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 825500
+      },
+      "預り金": {
+        "opening": 141547,
+        "closing": 471370
+      },
+      "長期借入金": {
+        "opening": 15391000,
+        "closing": 15091000
+      },
+      "資本金": {
+        "opening": 2500000,
+        "closing": 2500000
+      },
+      "繰越利益剰余金": {
+        "opening": 12234282,
+        "closing": 12359034
+      }
+    }
+  }
+}

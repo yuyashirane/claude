@@ -407,14 +407,14 @@ BS残高の異常検知 + ドリルダウン。Finding型に `details` 配列を
 | 指摘の種類 | リンク先 | URL |
 |-----------|---------|-----|
 | 仕訳（取引）単位 | 仕訳帳（特定取引） | `/reports/journals?deal_id=XXXXXXXX` |
-| 残高（科目）単位・当期内 | 総勘定元帳 | `/reports/general_ledgers/show?name=科目名&fiscal_year_id=XXX&start_date=...&end_date=...&adjustment=all` |
+| 残高（科目）単位・当期内 | 総勘定元帳 | `/reports/general_ledgers/show?name=科目名&start_date=...&end_date=...&fiscal_year_id=XXX` |
 | 残高（科目）単位・年度またぎ | 仕訳帳（科目×期間） | `/reports/journals?account_item_id=XXX&start_date=...&end_date=...` |
 
 **freee総勘定元帳の制約:**
 - 1会計年度内の日付しか指定できない（年度をまたぐとエラー）
 - 科目指定は `account_item_id`（数値ID）ではなく `name`（科目名のURLエンコード）
 - `fiscal_year` ではなく `fiscal_year_id`（freee内部ID）が必要
-- `adjustment=all` パラメータ必須
+- `adjustment` パラメータは不要（freeeデフォルトで十分、URL長節約のため省略）
 
 ### 5.2 動的 start_date 判定（determineLinkStartDate）
 

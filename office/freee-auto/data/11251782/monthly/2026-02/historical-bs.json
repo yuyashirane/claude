@@ -1,0 +1,87 @@
+{
+  "fetchedAt": "2026-04-07T07:09:43.301Z",
+  "data": {
+    "2024": {
+      "現金": {
+        "opening": 1000000,
+        "closing": 0
+      },
+      "GMOあおぞらネット（法人）（API） 102 法人第二営業部 普通預金（有利息） ***1814": {
+        "opening": 152826,
+        "closing": 187613
+      },
+      "売掛金": {
+        "opening": 0,
+        "closing": 663342
+      },
+      "前払費用": {
+        "opening": 0,
+        "closing": 152600
+      },
+      "役員貸付金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "工具器具備品": {
+        "opening": 312042,
+        "closing": 266500
+      },
+      "敷金": {
+        "opening": 195000,
+        "closing": 195000
+      },
+      "長期前払費用": {
+        "opening": 143336,
+        "closing": 134375
+      },
+      "預託金": {
+        "opening": 2000,
+        "closing": 2000
+      },
+      "創立費": {
+        "opening": 200000,
+        "closing": 200000
+      },
+      "開業費": {
+        "opening": 14050,
+        "closing": 14050
+      },
+      "立替経費（伊藤）": {
+        "opening": 1047457,
+        "closing": 374482
+      },
+      "役員借入金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未払金": {
+        "opening": 456860,
+        "closing": 456860
+      },
+      "freeeカード Unlimited": {
+        "opening": 143710,
+        "closing": 80752
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 64100
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 212300
+      },
+      "預り金": {
+        "opening": 25180,
+        "closing": 37770
+      },
+      "資本金": {
+        "opening": 1000000,
+        "closing": 1000000
+      },
+      "繰越利益剰余金": {
+        "opening": 0,
+        "closing": -410784
+      }
+    }
+  }
+}

@@ -733,17 +733,25 @@ async function fetchMonthlyPlTrend(companyId, fiscalYear, startMonth, targetMont
   const accounts = {};
 
   // 全勘定科目を走査して月次金額を計算
+  // balances には明細科目（account_item_id あり）と集計行（account_item_id なし）が混在
   for (const item of balances) {
     const id = item.account_item_id;
     const name = item.account_item_name;
     const category = item.account_category_name || '';
+    const isSummary = !id;
 
-    accountList.push({ id, name, category });
+    // 集計行はカテゴリ名をキーとして格納（明細科目と区別）
+    const displayName = isSummary ? category : name;
+    const accountKey = isSummary ? `__summary__${category}` : name;
 
-    // 各月のYTD累計からその勘定科目の closing_balance を抽出
+    accountList.push({ id: id || null, name: displayName, category, isSummary });
+
+    // 各月のYTD累計から closing_balance を抽出
     const ytdAmounts = ytdResults.map((r) => {
       const bs = r?.trial_pl?.balances || [];
-      const found = bs.find((b) => b.account_item_id === id);
+      const found = isSummary
+        ? bs.find((b) => !b.account_item_id && b.account_category_name === category)
+        : bs.find((b) => b.account_item_id === id);
       return found ? (found.closing_balance || 0) : 0;
     });
 
@@ -754,11 +762,12 @@ async function fetchMonthlyPlTrend(companyId, fiscalYear, startMonth, targetMont
 
     const totalAmount = ytdAmounts[ytdAmounts.length - 1];
 
-    accounts[name] = {
-      id,
+    accounts[accountKey] = {
+      id: id || null,
       category,
       monthlyAmounts,
       total: totalAmount,
+      isSummary,
     };
   }
 

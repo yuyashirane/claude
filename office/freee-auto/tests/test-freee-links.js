@@ -98,14 +98,15 @@ test('trialBsDetailLink: accountItemIdがnullでもクラッシュしない', ()
 // ── journalsByAccountLink ──
 console.log('\n--- journalsByAccountLink ---');
 
-test('journalsByAccountLink: 正常系（全パラメータ）', () => {
+test('journalsByAccountLink: 正常系（accountNameなし → account_item_idフォールバック）', () => {
   const url = journalsByAccountLink(474381, 12345, '2026-03-01', '2026-03-31');
-  assert.ok(url.includes('account_item_id=12345'));
+  assert.ok(url.includes('account_item_id=12345'), 'accountNameなしではaccount_item_idが必要');
   assert.ok(url.includes('start_date=2026-03-01'));
   assert.ok(url.includes('end_date=2026-03-31'));
-  assert.ok(url.includes('page=1'));
-  assert.ok(url.includes('per_page=50'));
-  assert.ok(url.includes('order_by=txn_date'));
+  // URL短縮: デフォルト値パラメータは省略
+  assert.ok(!url.includes('page='), 'pageパラメータは省略されるべき');
+  assert.ok(!url.includes('per_page='), 'per_pageパラメータは省略されるべき');
+  assert.ok(!url.includes('order_by='), 'order_byパラメータは省略されるべき');
   assert.ok(url.startsWith('https://secure.freee.co.jp/reports/journals?'));
 });
 
@@ -117,19 +118,20 @@ test('journalsByAccountLink: 日付形式がYYYY-MM-DDで出力される', () =>
 
 test('journalsByAccountLink: accountItemIdが文字列でも動作する', () => {
   const url = journalsByAccountLink(474381, '99', '2026-03-01', '2026-03-31');
-  assert.ok(url.includes('account_item_id=99'));
+  assert.ok(url.includes('account_item_id=99'), 'accountNameなしではaccount_item_idが必要');
 });
 
-test('journalsByAccountLink: accountName指定時にnameパラメータが付与される', () => {
+test('journalsByAccountLink: accountName指定時にnameパラメータが付与されaccount_item_idは省略', () => {
   const url = journalsByAccountLink(474381, 12345, '2025-10-01', '2026-03-31', '前払費用');
   assert.ok(url.includes('name='));
   assert.ok(url.includes('%E5%89%8D%E6%89%95%E8%B2%BB%E7%94%A8')); // 「前払費用」のURLエンコード
+  assert.ok(!url.includes('account_item_id='), 'nameがあればaccount_item_idは不要');
 });
 
 test('journalsByAccountLink: partnerId指定時にpartner_idパラメータが付与される', () => {
   const url = journalsByAccountLink(474381, 12345, '2020-10-01', '2026-03-31', '長期借入金', { partnerId: 98765 });
   assert.ok(url.includes('partner_id=98765'));
-  assert.ok(url.includes('account_item_id=12345'));
+  assert.ok(url.includes('name='), 'accountNameがあるのでnameパラメータが必要');
 });
 
 test('journalsByAccountLink: partnerId未指定ではpartner_idパラメータなし', () => {
@@ -153,9 +155,9 @@ test('generalLedgerLink: 科目名がURLエンコードされてnameパラメー
   assert.ok(url.includes('end_date=2026-03-31'));
 });
 
-test('generalLedgerLink: adjustment=all が含まれること', () => {
+test('generalLedgerLink: adjustment パラメータが含まれないこと', () => {
   const url = generalLedgerLink(474381, '売掛金', '2025-10-01', '2026-03-31');
-  assert.ok(url.includes('adjustment=all'));
+  assert.ok(!url.includes('adjustment'), 'adjustment パラメータは不要');
 });
 
 test('generalLedgerLink: fiscalYearId が設定されること', () => {
@@ -274,7 +276,7 @@ test('buildBalanceLink: 当期不変 + historicalBsで前期変動 → journalsB
     historicalBs: mockHistoricalBs,
   });
   assert.ok(url.includes('/reports/journals'));
-  assert.ok(url.includes('account_item_id=12345'));
+  assert.ok(url.includes('name='), '科目名でフィルタされる');
   assert.ok(url.includes('start_date=2024-10-01'));
 });
 

@@ -1,0 +1,575 @@
+{
+  "fetchedAt": "2026-04-07T07:15:54.111Z",
+  "data": {
+    "2020": {
+      "現金": {
+        "opening": 0,
+        "closing": 33970
+      },
+      "小口現金": {
+        "opening": -117949,
+        "closing": 0
+      },
+      "千葉（メイン）": {
+        "opening": 2741075,
+        "closing": 3246674
+      },
+      "千葉（サブ）": {
+        "opening": 252120,
+        "closing": 293051
+      },
+      "売掛金": {
+        "opening": 701860,
+        "closing": 794345
+      },
+      "商品": {
+        "opening": 0,
+        "closing": 175221
+      },
+      "前払費用": {
+        "opening": 75000,
+        "closing": 145000
+      },
+      "役員貸付金": {
+        "opening": 1328889,
+        "closing": 1469839
+      },
+      "未収還付法人税等": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未収入金": {
+        "opening": 0,
+        "closing": 62330
+      },
+      "仮払金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "車両運搬具": {
+        "opening": 2710717,
+        "closing": 2631074
+      },
+      "工具器具備品": {
+        "opening": 70296,
+        "closing": 0
+      },
+      "長期前払費用": {
+        "opening": 198189,
+        "closing": 194587
+      },
+      "買掛金": {
+        "opening": 146880,
+        "closing": 262207
+      },
+      "未払金": {
+        "opening": 621846,
+        "closing": 1332680
+      },
+      "立替経費": {
+        "opening": -57127,
+        "closing": 0
+      },
+      "JCBカード（API）": {
+        "opening": 330608,
+        "closing": 299722
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 124100
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 1079200
+      },
+      "預り金": {
+        "opening": 91971,
+        "closing": 111214
+      },
+      "長期借入金": {
+        "opening": 12842000,
+        "closing": 12723000
+      },
+      "資本金": {
+        "opening": 1200000,
+        "closing": 1200000
+      },
+      "繰越利益剰余金": {
+        "opening": -1295430,
+        "closing": -8086032
+      }
+    },
+    "2021": {
+      "現金": {
+        "opening": 0,
+        "closing": 45000
+      },
+      "小口現金": {
+        "opening": 42740,
+        "closing": 0
+      },
+      "千葉（メイン）": {
+        "opening": 6621764,
+        "closing": 4527968
+      },
+      "千葉（サブ）": {
+        "opening": 182839,
+        "closing": 422167
+      },
+      "売掛金": {
+        "opening": 1233390,
+        "closing": 2280225
+      },
+      "商品": {
+        "opening": 0,
+        "closing": 74939
+      },
+      "前払費用": {
+        "opening": 145000,
+        "closing": 270400
+      },
+      "短期貸付金": {
+        "opening": 1000000,
+        "closing": 1000000
+      },
+      "役員貸付金": {
+        "opening": 2463800,
+        "closing": 1528862
+      },
+      "未収入金": {
+        "opening": 31200,
+        "closing": 173820
+      },
+      "仮払金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "仮払消費税": {
+        "opening": 539600,
+        "closing": 0
+      },
+      "車両運搬具": {
+        "opening": 3577014,
+        "closing": 3254131
+      },
+      "工具器具備品": {
+        "opening": 108255,
+        "closing": 0
+      },
+      "ソフトウェア": {
+        "opening": 0,
+        "closing": 757167
+      },
+      "敷金": {
+        "opening": 107700,
+        "closing": 107700
+      },
+      "長期前払費用": {
+        "opening": 160476,
+        "closing": 157369
+      },
+      "買掛金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未払金": {
+        "opening": 738400,
+        "closing": 1136739
+      },
+      "立替経費": {
+        "opening": 1026502,
+        "closing": 0
+      },
+      "JCBカード（API）": {
+        "opening": 89801,
+        "closing": 73054
+      },
+      "AirCARD　JCBカード": {
+        "opening": 430181,
+        "closing": 542222
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 124100
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 806900
+      },
+      "預り金": {
+        "opening": 122140,
+        "closing": 164410
+      },
+      "前受収益": {
+        "opening": 0,
+        "closing": 10000
+      },
+      "長期借入金": {
+        "opening": 11161000,
+        "closing": 10995000
+      },
+      "資本金": {
+        "opening": 1200000,
+        "closing": 1200000
+      },
+      "繰越利益剰余金": {
+        "opening": -8086032,
+        "closing": -452677
+      }
+    },
+    "2022": {
+      "現金": {
+        "opening": 45000,
+        "closing": 55000
+      },
+      "小口現金": {
+        "opening": -215355,
+        "closing": 0
+      },
+      "千葉（メイン）": {
+        "opening": 1260438,
+        "closing": 791184
+      },
+      "千葉（サブ）": {
+        "opening": 120482,
+        "closing": 62572
+      },
+      "千葉信金（法人）（API）": {
+        "opening": 1053187,
+        "closing": 309885
+      },
+      "売掛金": {
+        "opening": 2050850,
+        "closing": 2242900
+      },
+      "商品": {
+        "opening": 0,
+        "closing": 12675
+      },
+      "前払費用": {
+        "opening": 270400,
+        "closing": 180000
+      },
+      "短期貸付金": {
+        "opening": 1000000,
+        "closing": 1000000
+      },
+      "役員貸付金": {
+        "opening": 1498146,
+        "closing": 1390369
+      },
+      "未収入金": {
+        "opening": 179340,
+        "closing": 166620
+      },
+      "仮払金": {
+        "opening": 20000,
+        "closing": 0
+      },
+      "仮払消費税": {
+        "opening": 673200,
+        "closing": 0
+      },
+      "車両運搬具": {
+        "opening": 45396,
+        "closing": 0
+      },
+      "工具器具備品": {
+        "opening": 20000,
+        "closing": 0
+      },
+      "ソフトウェア": {
+        "opening": 616004,
+        "closing": 603167
+      },
+      "出資金": {
+        "opening": 30000,
+        "closing": 30000
+      },
+      "敷金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "長期前払費用": {
+        "opening": 123258,
+        "closing": 120151
+      },
+      "預託金": {
+        "opening": 7340,
+        "closing": 7340
+      },
+      "買掛金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "未払金": {
+        "opening": 1023617,
+        "closing": 1079292
+      },
+      "立替経費": {
+        "opening": 1000,
+        "closing": 0
+      },
+      "JCBカード（API）": {
+        "opening": 40575,
+        "closing": 23017
+      },
+      "AirCARD　JCBカード": {
+        "opening": 526359,
+        "closing": 315773
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 120000
+      },
+      "未払消費税等": {
+        "opening": 0,
+        "closing": 1027400
+      },
+      "預り金": {
+        "opening": 164640,
+        "closing": 207930
+      },
+      "前受収益": {
+        "opening": 10000,
+        "closing": 0
+      },
+      "長期借入金": {
+        "opening": 11919000,
+        "closing": 11703000
+      },
+      "資本金": {
+        "opening": 1200000,
+        "closing": 1200000
+      },
+      "繰越利益剰余金": {
+        "opening": -452677,
+        "closing": -8704549
+      }
+    },
+    "2023": {
+      "現金": {
+        "opening": 55000,
+        "closing": 135900
+      },
+      "小口現金": {
+        "opening": 2592,
+        "closing": 0
+      },
+      "千葉（メイン）": {
+        "opening": 133663,
+        "closing": 69742
+      },
+      "千葉（サブ）": {
+        "opening": 111736,
+        "closing": 72336
+      },
+      "千葉信金（法人）（API）": {
+        "opening": 42962,
+        "closing": 40364
+      },
+      "売掛金": {
+        "opening": 2747183,
+        "closing": 3202663
+      },
+      "商品": {
+        "opening": 0,
+        "closing": 79561
+      },
+      "前渡金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "前払費用": {
+        "opening": 180000,
+        "closing": 5000
+      },
+      "短期貸付金": {
+        "opening": 1000000,
+        "closing": 1000000
+      },
+      "役員貸付金": {
+        "opening": 1393689,
+        "closing": 0
+      },
+      "未収入金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "ソフトウェア": {
+        "opening": 2328672,
+        "closing": 2282501
+      },
+      "出資金": {
+        "opening": 30000,
+        "closing": 30000
+      },
+      "長期前払費用": {
+        "opening": 367288,
+        "closing": 355389
+      },
+      "預託金": {
+        "opening": 7340,
+        "closing": 7340
+      },
+      "買掛金": {
+        "opening": 0,
+        "closing": 607945
+      },
+      "役員借入金": {
+        "opening": 4806320,
+        "closing": 3403482
+      },
+      "未払金": {
+        "opening": 1086354,
+        "closing": 2023097
+      },
+      "JCBカード（API）": {
+        "opening": 24152,
+        "closing": 0
+      },
+      "AirCARD　JCBカード": {
+        "opening": 456346,
+        "closing": 0
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 120000
+      },
+      "未払消費税等": {
+        "opening": 427398,
+        "closing": 1931298
+      },
+      "預り金": {
+        "opening": 140857,
+        "closing": 162276
+      },
+      "長期借入金": {
+        "opening": 11055000,
+        "closing": 11055000
+      },
+      "長期未払金": {
+        "opening": 2057600,
+        "closing": 1993300
+      },
+      "資本金": {
+        "opening": 1200000,
+        "closing": 1200000
+      },
+      "繰越利益剰余金": {
+        "opening": -8704549,
+        "closing": -15215602
+      }
+    },
+    "2024": {
+      "現金": {
+        "opening": 135900,
+        "closing": 0
+      },
+      "小口現金": {
+        "opening": 126276,
+        "closing": 0
+      },
+      "千葉（メイン）": {
+        "opening": 1205527,
+        "closing": 1022059
+      },
+      "千葉（サブ）": {
+        "opening": 438935,
+        "closing": 116541
+      },
+      "千葉信金（法人）（API）": {
+        "opening": 1354,
+        "closing": 756
+      },
+      "売掛金": {
+        "opening": 2944354,
+        "closing": 2630791
+      },
+      "商品": {
+        "opening": 0,
+        "closing": 0
+      },
+      "前払費用": {
+        "opening": 5000,
+        "closing": 5000
+      },
+      "短期貸付金": {
+        "opening": 1000000,
+        "closing": 1000000
+      },
+      "仮払金": {
+        "opening": 0,
+        "closing": 0
+      },
+      "仮払消費税": {
+        "opening": 570000,
+        "closing": 0
+      },
+      "ソフトウェア": {
+        "opening": 3667592,
+        "closing": 3589335
+      },
+      "出資金": {
+        "opening": 30000,
+        "closing": 30000
+      },
+      "長期前払費用": {
+        "opening": 224610,
+        "closing": 212705
+      },
+      "預託金": {
+        "opening": 7340,
+        "closing": 7340
+      },
+      "買掛金": {
+        "opening": 607945,
+        "closing": 0
+      },
+      "役員借入金": {
+        "opening": 12859982,
+        "closing": 12599992
+      },
+      "未払金": {
+        "opening": 1900872,
+        "closing": 1922797
+      },
+      "JCBカード（API）": {
+        "opening": 24933,
+        "closing": 24933
+      },
+      "AirCARD　JCBカード": {
+        "opening": 242063,
+        "closing": 261380
+      },
+      "未払法人税等": {
+        "opening": 0,
+        "closing": 120000
+      },
+      "未払消費税等": {
+        "opening": 694838,
+        "closing": 1673038
+      },
+      "預り金": {
+        "opening": 133350,
+        "closing": 145940
+      },
+      "長期借入金": {
+        "opening": 11008000,
+        "closing": 11008000
+      },
+      "長期未払金": {
+        "opening": 1286000,
+        "closing": 1221700
+      },
+      "資本金": {
+        "opening": 1200000,
+        "closing": 1200000
+      },
+      "繰越利益剰余金": {
+        "opening": -15215602,
+        "closing": -21563253
+      }
+    }
+  }
+}
