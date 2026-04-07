@@ -255,7 +255,7 @@ async function monthlyCheck(companyId, targetMonth, options = {}) {
 // ============================================================
 
 if (require.main === module) {
-  const { resolveCompanyId } = require('../shared/company-resolver');
+  const { resolveCompanyIdAsync } = require('../shared/company-resolver');
 
   const args = process.argv.slice(2);
   let companyId, companyNameArg, targetMonthArg;
@@ -269,20 +269,7 @@ if (require.main === module) {
     if (args[i] === '--dry-run')     dryRun = true;
   }
 
-  // --company-name が指定された場合、company-map.json から company ID を解決
-  if (!companyId && companyNameArg) {
-    const resolved = resolveCompanyId(companyNameArg);
-    if (resolved) {
-      companyId = resolved.companyId;
-      console.log(`顧問先名「${companyNameArg}」→ ${resolved.companyName} (ID: ${resolved.companyId})`);
-    } else {
-      console.error(`エラー: 「${companyNameArg}」に一致する顧問先が見つかりません。`);
-      console.error('data/company-map.json にエントリを追加してください。');
-      process.exit(1);
-    }
-  }
-
-  if (!companyId || !targetMonthArg) {
+  if (!companyId && !companyNameArg || !targetMonthArg) {
     console.error('使用方法:');
     console.error('  node src/verify/monthly-checker.js --company {id} --month YYYY-MM|auto [--no-dry-run]');
     console.error('  node src/verify/monthly-checker.js --company-name {名前} --month YYYY-MM|auto [--no-dry-run]');
@@ -294,6 +281,28 @@ if (require.main === module) {
   }
 
   (async () => {
+    // --company-name が指定された場合、ローカル→Kintoneの順で company ID を解決
+    if (!companyId && companyNameArg) {
+      const resolved = await resolveCompanyIdAsync(companyNameArg);
+      if (resolved && resolved.companyId) {
+        companyId = resolved.companyId;
+        const sourceLabel = resolved.source === 'local' ? 'company-map.json'
+          : resolved.source === 'kintone' ? 'Kintone顧客カルテ' : resolved.source;
+        console.log(`顧問先名「${companyNameArg}」→ ${resolved.companyName} (ID: ${resolved.companyId}、ソース: ${sourceLabel})`);
+        if (resolved.source === 'kintone') {
+          console.log(`  → data/company-map.json に自動追加しました（次回以降はローカルで即解決）`);
+        }
+      } else if (resolved && resolved.source === 'kintone-no-id') {
+        console.error(`エラー: 「${resolved.companyName}」のfreee事業所IDがKintone顧客カルテに未登録です（レコードID: ${resolved.recordId}）`);
+        console.error('先に company-resolver で解決してください:');
+        console.error(`  node src/shared/company-resolver.js --search "${companyNameArg}"`);
+        process.exit(1);
+      } else {
+        console.error(`エラー: 「${companyNameArg}」に一致する顧問先が見つかりません。`);
+        console.error('data/company-map.json にエントリを追加するか、Kintone顧客カルテを確認してください。');
+        process.exit(1);
+      }
+    }
     let targetMonth = targetMonthArg;
 
     // --month auto: walletTxns から対象月を自動判定

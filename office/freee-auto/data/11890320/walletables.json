@@ -1,0 +1,76 @@
+{
+  "walletables": [
+    {
+      "id": 4304472,
+      "name": "横浜（法人）（API）*1434",
+      "bank_id": 4467,
+      "type": "bank_account"
+    },
+    {
+      "id": 4304474,
+      "name": "かながわ信金（法人）（API）",
+      "bank_id": 3939,
+      "type": "bank_account"
+    },
+    {
+      "id": 4317436,
+      "name": "横浜（法人） 秦野支店 当座 ***3179",
+      "bank_id": 4467,
+      "type": "bank_account"
+    },
+    {
+      "id": 4317437,
+      "name": "横浜（法人）*3681",
+      "bank_id": 4467,
+      "type": "bank_account"
+    },
+    {
+      "id": 4371017,
+      "name": "横浜（法人）*7253",
+      "bank_id": 4467,
+      "type": "bank_account"
+    },
+    {
+      "id": 4371029,
+      "name": "横浜（法人）藤沢中央",
+      "bank_id": 4467,
+      "type": "bank_account"
+    },
+    {
+      "id": 2385034,
+      "name": "アメリカン・エキスプレス - ビジネス・カード（API）",
+      "bank_id": 6034,
+      "type": "credit_card"
+    },
+    {
+      "id": 6748694,
+      "name": "現金",
+      "bank_id": null,
+      "type": "wallet"
+    },
+    {
+      "id": 7039819,
+      "name": "立替経費（純一様）",
+      "bank_id": null,
+      "type": "wallet"
+    },
+    {
+      "id": 7154182,
+      "name": "立替経費（知章様）",
+      "bank_id": null,
+      "type": "wallet"
+    },
+    {
+      "id": 7154183,
+      "name": "立替経費（宣史様）",
+      "bank_id": null,
+      "type": "wallet"
+    },
+    {
+      "id": 7154188,
+      "name": "立替経費（治美様）",
+      "bank_id": null,
+      "type": "wallet"
+    }
+  ]
+}
