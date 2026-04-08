@@ -240,7 +240,10 @@
       "Bash(node src/verify/monthly-checker.js --company 474381 --month 2026-02 --no-dry-run)",
       "Bash(for d:*)",
       "Bash(do echo:*)",
-      "Read(//c/Users/yuya_/claude/$d/**)"
+      "Read(//c/Users/yuya_/claude/$d/**)",
+      "Read(//g/共有ドライブ/06_見込み客/20260408_漢宇商運/**)",
+      "Read(//g/共有ドライブ/06_見込み客/20260408_漢宇商運//**)",
+      "Bash(node src/create-proposal.js references/pricing/config_kanuu.json \"G:/共有ドライブ/06_見込み客/20260408_漢宇商運/提案書_漢宇商運_v1.docx\")"
     ]
   }
 }
