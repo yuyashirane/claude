@@ -236,7 +236,11 @@
       "Bash(node src/verify/monthly-checker.js --company 11461332 --month 2026-02 --no-dry-run)",
       "Bash(node src/verify/monthly-checker.js --company 10938380 --month 2025-07 --no-dry-run)",
       "Bash(node src/verify/monthly-checker.js --company 12243357 --month 2025-07 --no-dry-run)",
-      "Bash(node src/shared/company-resolver.js --write-kintone 1328 12243357)"
+      "Bash(node src/shared/company-resolver.js --write-kintone 1328 12243357)",
+      "Bash(node src/verify/monthly-checker.js --company 474381 --month 2026-02 --no-dry-run)",
+      "Bash(for d:*)",
+      "Bash(do echo:*)",
+      "Read(//c/Users/yuya_/claude/$d/**)"
     ]
   }
 }

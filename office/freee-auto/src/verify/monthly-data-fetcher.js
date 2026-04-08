@@ -459,7 +459,6 @@ async function fetchMonthlyData(companyId, targetMonth, options = {}) {
     bsByPartnerResult,
     plResult,
     plByPartnerResult,
-    walletTxnsResult,
   ] = await Promise.allSettled([
     freeeGet('/api/1/reports/trial_bs', {
       company_id: companyId,
@@ -496,10 +495,6 @@ async function fetchMonthlyData(companyId, targetMonth, options = {}) {
       end_month: month,
       breakdown_display_type: 'partner',
     }, token),
-    freeeGet('/api/1/wallet_txns', {
-      company_id: companyId,
-      limit: 100,
-    }, token),
   ]);
 
   // 取引一覧はページネーションがあるため個別取得
@@ -514,14 +509,32 @@ async function fetchMonthlyData(companyId, targetMonth, options = {}) {
     console.warn(`  [警告] deals 取得失敗: ${e.message}`);
   }
 
+  // 未処理明細の存在チェック（あり/なしのみ判定するため limit:1 で十分）
+  console.log('  [API] 未処理明細の存在チェック中...');
+  let walletTxns = null;
+  let walletTxnsError = null;
+  try {
+    const mm = String(month).padStart(2, '0');
+    const endDate = `${year}-${mm}-${getLastDay(year, month)}`;
+    const result = await freeeGet('/api/1/wallet_txns', {
+      company_id: companyId,
+      status: 'unsettled',
+      end_date: endDate,
+      limit: 1,
+    }, token);
+    walletTxns = result?.wallet_txns || [];
+    console.log(`  [API] 未処理明細: ${walletTxns.length > 0 ? 'あり' : 'なし'}`);
+  } catch (e) {
+    walletTxnsError = e.message;
+    console.warn(`  [警告] wallet_txns 取得失敗: ${e.message}`);
+  }
+
   // 結果を整理（失敗は null として記録）
   const trialBs = bsResult.status === 'fulfilled' ? bsResult.value : null;
   const trialBsByItem = bsByItemResult.status === 'fulfilled' ? bsByItemResult.value : null;
   const trialBsByPartner = bsByPartnerResult.status === 'fulfilled' ? bsByPartnerResult.value : null;
   const trialPl = plResult.status === 'fulfilled' ? plResult.value : null;
   const trialPlByPartner = plByPartnerResult.status === 'fulfilled' ? plByPartnerResult.value : null;
-  const walletTxnsRaw = walletTxnsResult.status === 'fulfilled' ? walletTxnsResult.value : null;
-  const walletTxns = walletTxnsRaw?.wallet_txns ?? null;
 
   // 失敗ログ
   const fetchErrors = [];
@@ -531,7 +544,6 @@ async function fetchMonthlyData(companyId, targetMonth, options = {}) {
     ['trialBsByPartner', bsByPartnerResult],
     ['trialPl', plResult],
     ['trialPlByPartner', plByPartnerResult],
-    ['walletTxns', walletTxnsResult],
   ];
   for (const [name, result] of checks) {
     if (result.status === 'rejected') {
@@ -541,6 +553,7 @@ async function fetchMonthlyData(companyId, targetMonth, options = {}) {
     }
   }
   if (dealsError) fetchErrors.push(`deals: ${dealsError}`);
+  if (walletTxnsError) fetchErrors.push(`wallet_txns: ${walletTxnsError}`);
 
   // ────────────────────────────────────────
   // 3. マスタデータ（ローカルキャッシュ優先）
@@ -634,16 +647,30 @@ async function resolveAutoMonth(companyId) {
   const token = await getValidToken();
 
   console.log(`  [Auto] 未処理明細を取得中 (company_id: ${companyId})...`);
-  let walletTxns = null;
+  let walletTxns = [];
   try {
-    const raw = await freeeGet('/api/1/wallet_txns', {
-      company_id: companyId,
-      limit: 100,
-    }, token);
-    walletTxns = raw?.wallet_txns ?? null;
-    console.log(`  [Auto] 未処理明細: ${walletTxns ? walletTxns.length : 0}件`);
+    // ページネーション対応で全件取得（最古日付を正確に取るため）
+    const MAX_AUTO_TXNS = 1000;
+    const limit = 100;
+    let offset = 0;
+    for (;;) {
+      const raw = await freeeGet('/api/1/wallet_txns', {
+        company_id: companyId,
+        status: 'unsettled',
+        limit,
+        offset,
+      }, token);
+      const page = raw?.wallet_txns || [];
+      walletTxns.push(...page);
+      offset += limit;
+      if (page.length < limit || walletTxns.length >= MAX_AUTO_TXNS) {
+        break;
+      }
+    }
+    console.log(`  [Auto] 未処理明細: ${walletTxns.length}件`);
   } catch (e) {
     console.warn(`  [Auto] wallet_txns 取得失敗: ${e.message} → 先月を採用`);
+    walletTxns = [];
   }
 
   return determineCutoffDate(walletTxns);

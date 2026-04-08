@@ -1,115 +1,76 @@
 {
   "months": [
+    "2025-10",
     "2025-11",
     "2025-12",
     "2026-01",
-    "2026-02",
-    "2026-03"
+    "2026-02"
   ],
   "accounts": {
     "売上高": {
-      "id": 386413677,
+      "id": 74633321,
       "category": "売上高",
       "monthlyAmounts": [
-        3323100,
-        4996450,
-        3992130,
-        3698030,
-        1795133
+        6688314,
+        7553184,
+        7894139,
+        13950459,
+        8050804
       ],
-      "total": 17804843,
-      "isSummary": false
-    },
-    "売上戻り高": {
-      "id": 386413679,
-      "category": "売上高",
-      "monthlyAmounts": [
-        0,
-        0,
-        -900,
-        -12800,
-        -19333
-      ],
-      "total": -33033,
+      "total": 44136900,
       "isSummary": false
     },
     "__summary__売上高": {
       "id": null,
       "category": "売上高",
       "monthlyAmounts": [
-        3323100,
-        4996450,
-        3991230,
-        3685230,
-        1775800
+        6688314,
+        7553184,
+        7894139,
+        13950459,
+        8050804
       ],
-      "total": 17771810,
+      "total": 44136900,
       "isSummary": true
     },
     "__summary__売上原価": {
       "id": null,
       "category": "売上原価",
       "monthlyAmounts": [
-        599213,
-        1563603,
-        1545574,
-        267168,
-        196911
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "total": 4172469,
+      "total": 0,
       "isSummary": true
     },
     "__summary__期首商品棚卸": {
       "id": null,
       "category": "期首商品棚卸",
       "monthlyAmounts": [
-        117755,
+        0,
         0,
         0,
         0,
         0
       ],
-      "total": 117755,
+      "total": 0,
       "isSummary": true
-    },
-    "期首商品棚卸高": {
-      "id": 386413682,
-      "category": "期首商品棚卸",
-      "monthlyAmounts": [
-        117755,
-        0,
-        0,
-        0,
-        0
-      ],
-      "total": 117755,
-      "isSummary": false
     },
     "__summary__当期商品仕入": {
       "id": null,
       "category": "当期商品仕入",
       "monthlyAmounts": [
-        599213,
-        1563603,
-        1427819,
-        267168,
-        196911
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "total": 4054714,
+      "total": 0,
       "isSummary": true
-    },
-    "仕入高": {
-      "id": 386413683,
-      "category": "当期商品仕入",
-      "monthlyAmounts": [
-        599213,
-        1563603,
-        1427819,
-        267168,
-        196911
-      ],
-      "total": 4054714,
-      "isSummary": false
     },
     "__summary__他勘定振替高(商)": {
       "id": null,
@@ -128,481 +89,442 @@
       "id": null,
       "category": "期末商品棚卸",
       "monthlyAmounts": [
-        117755,
         0,
-        -117755,
+        0,
+        0,
         0,
         0
       ],
       "total": 0,
       "isSummary": true
     },
-    "期末商品棚卸高": {
-      "id": 386413688,
-      "category": "期末商品棚卸",
-      "monthlyAmounts": [
-        117755,
-        0,
-        -117755,
-        0,
-        0
-      ],
-      "total": 0,
-      "isSummary": false
-    },
     "__summary__商品売上原価": {
       "id": null,
       "category": "商品売上原価",
       "monthlyAmounts": [
-        599213,
-        1563603,
-        1545574,
-        267168,
-        196911
+        0,
+        0,
+        0,
+        0,
+        0
       ],
-      "total": 4172469,
+      "total": 0,
       "isSummary": true
     },
     "__summary__売上総損益金額": {
       "id": null,
       "category": "売上総損益金額",
       "monthlyAmounts": [
-        2723887,
-        3432847,
-        2445656,
-        3418062,
-        1578889
+        6688314,
+        7553184,
+        7894139,
+        13950459,
+        8050804
       ],
-      "total": 13599341,
+      "total": 44136900,
       "isSummary": true
     },
     "役員報酬": {
-      "id": 386413689,
+      "id": 74633332,
       "category": "販売管理費",
       "monthlyAmounts": [
-        800000,
-        800000,
-        800000,
-        800000,
-        0
+        2790000,
+        2780000,
+        2780000,
+        2780000,
+        2780000
       ],
-      "total": 3200000,
+      "total": 13910000,
       "isSummary": false
     },
     "給料手当": {
-      "id": 386413691,
+      "id": 74633334,
       "category": "販売管理費",
       "monthlyAmounts": [
-        829083,
-        1160835,
-        1118273,
-        1709425,
+        1981476,
+        2105118,
+        1983776,
+        1712708,
+        2010686
+      ],
+      "total": 9793764,
+      "isSummary": false
+    },
+    "賞与": {
+      "id": 74633336,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        0,
+        0,
+        1265650,
+        0,
         0
       ],
-      "total": 4817616,
+      "total": 1265650,
+      "isSummary": false
+    },
+    "退職給付費用": {
+      "id": 679174994,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        110000,
+        110000,
+        110000,
+        110000,
+        -28500
+      ],
+      "total": 411500,
       "isSummary": false
     },
     "法定福利費": {
-      "id": 386413695,
+      "id": 74633338,
       "category": "販売管理費",
       "monthlyAmounts": [
-        185086,
-        162027,
-        162027,
-        247859,
-        -46118
+        498775,
+        663322,
+        442688,
+        444861,
+        442560
       ],
-      "total": 710881,
+      "total": 2492206,
       "isSummary": false
     },
     "福利厚生費": {
-      "id": 386413696,
+      "id": 74633339,
       "category": "販売管理費",
       "monthlyAmounts": [
-        0,
-        10000,
-        10530,
-        5000,
-        5000
+        48254,
+        48582,
+        4320,
+        2376,
+        0
       ],
-      "total": 30530,
+      "total": 103532,
       "isSummary": false
     },
     "採用教育費": {
-      "id": 386413698,
+      "id": 74633341,
       "category": "販売管理費",
       "monthlyAmounts": [
-        0,
-        332076,
-        337748,
-        18618,
-        17595
+        82165,
+        39643,
+        1353000,
+        33000,
+        33000
       ],
-      "total": 706037,
+      "total": 1540808,
       "isSummary": false
     },
     "外注費": {
-      "id": 386413699,
+      "id": 74633342,
       "category": "販売管理費",
       "monthlyAmounts": [
-        638000,
-        638000,
-        12000,
-        155715,
-        0
+        13800,
+        27280,
+        55850,
+        111127,
+        133554
       ],
-      "total": 1443715,
+      "total": 341611,
       "isSummary": false
     },
     "広告宣伝費": {
-      "id": 386413701,
+      "id": 74633344,
       "category": "販売管理費",
       "monthlyAmounts": [
-        22000,
-        276289,
-        120019,
-        321935,
-        395648
+        0,
+        6000,
+        5000,
+        4000,
+        0
       ],
-      "total": 1135891,
+      "total": 15000,
       "isSummary": false
     },
     "交際費": {
-      "id": 386413702,
+      "id": 74633345,
       "category": "販売管理費",
       "monthlyAmounts": [
+        13500,
         0,
-        28001,
-        5000,
-        15631,
+        40350,
+        0,
         0
       ],
-      "total": 48632,
+      "total": 53850,
       "isSummary": false
     },
     "会議費": {
-      "id": 386413703,
+      "id": 74633346,
       "category": "販売管理費",
       "monthlyAmounts": [
-        0,
-        4304,
-        8072,
-        13084,
-        0
+        13604,
+        2376,
+        4820,
+        720,
+        790
       ],
-      "total": 25460,
+      "total": 22310,
       "isSummary": false
     },
     "旅費交通費": {
-      "id": 386413704,
+      "id": 74633347,
       "category": "販売管理費",
       "monthlyAmounts": [
-        15100,
-        62660,
-        108640,
-        163830,
-        29300
+        83392,
+        136960,
+        38788,
+        70086,
+        34588
       ],
-      "total": 379530,
+      "total": 363814,
       "isSummary": false
     },
     "通信費": {
-      "id": 386413705,
+      "id": 74633348,
       "category": "販売管理費",
       "monthlyAmounts": [
-        89912,
-        71136,
-        72663,
-        86952,
-        59378
+        212846,
+        83918,
+        135951,
+        121223,
+        98867
       ],
-      "total": 380041,
-      "isSummary": false
-    },
-    "販売手数料": {
-      "id": 386413706,
-      "category": "販売管理費",
-      "monthlyAmounts": [
-        0,
-        0,
-        9511,
-        19046,
-        0
-      ],
-      "total": 28557,
+      "total": 652805,
       "isSummary": false
     },
     "消耗品費": {
-      "id": 386413708,
+      "id": 74633351,
       "category": "販売管理費",
       "monthlyAmounts": [
-        687389,
-        625219,
-        1049803,
-        522184,
-        232926
+        101307,
+        70288,
+        43638,
+        14975,
+        16943
       ],
-      "total": 3117521,
-      "isSummary": false
-    },
-    "修繕費": {
-      "id": 386413710,
-      "category": "販売管理費",
-      "monthlyAmounts": [
-        0,
-        21780,
-        0,
-        0,
-        0
-      ],
-      "total": 21780,
+      "total": 247151,
       "isSummary": false
     },
     "水道光熱費": {
-      "id": 386413711,
+      "id": 74633354,
       "category": "販売管理費",
       "monthlyAmounts": [
-        2918,
-        17035,
-        19964,
-        16670,
+        43946,
+        33663,
+        45561,
+        60794,
+        56722
+      ],
+      "total": 240686,
+      "isSummary": false
+    },
+    "新聞図書費": {
+      "id": 74633355,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        10720,
+        11990,
+        19360,
+        15745,
+        9872
+      ],
+      "total": 67687,
+      "isSummary": false
+    },
+    "諸会費": {
+      "id": 74633356,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        99000,
+        57000,
+        0,
+        81000,
         0
       ],
-      "total": 56587,
+      "total": 237000,
       "isSummary": false
     },
     "支払手数料": {
-      "id": 386413714,
+      "id": 74633357,
       "category": "販売管理費",
       "monthlyAmounts": [
-        226238,
-        387603,
-        444758,
-        1045982,
-        250185
+        370658,
+        427960,
+        935158,
+        526854,
+        485365
       ],
-      "total": 2354766,
-      "isSummary": false
-    },
-    "車両費": {
-      "id": 386413715,
-      "category": "販売管理費",
-      "monthlyAmounts": [
-        4808,
-        7900,
-        9009,
-        11652,
-        9513
-      ],
-      "total": 42882,
-      "isSummary": false
-    },
-    "管理諸費": {
-      "id": 386413773,
-      "category": "販売管理費",
-      "monthlyAmounts": [
-        32500,
-        32500,
-        16200,
-        75679,
-        48800
-      ],
-      "total": 205679,
-      "isSummary": false
-    },
-    "衛��費": {
-      "id": 999291339,
-      "category": "販売管理費",
-      "monthlyAmounts": [
-        57800,
-        0,
-        0,
-        0,
-        0
-      ],
-      "total": 57800,
+      "total": 2745995,
       "isSummary": false
     },
     "地代家賃": {
-      "id": 386413716,
+      "id": 74633359,
       "category": "販売管理費",
       "monthlyAmounts": [
-        93500,
-        254694,
-        211600,
-        147300,
-        83000
+        141573,
+        141573,
+        141573,
+        141573,
+        280073
       ],
-      "total": 790094,
+      "total": 846365,
       "isSummary": false
     },
     "保険料": {
-      "id": 386413719,
+      "id": 74633362,
       "category": "販売管理費",
       "monthlyAmounts": [
-        50288,
-        26008,
-        7858,
-        13098,
-        1008
+        100410,
+        100410,
+        100410,
+        100410,
+        100410
       ],
-      "total": 98260,
-      "isSummary": false
-    },
-    "租税公課": {
-      "id": 386413720,
-      "category": "販売管理費",
-      "monthlyAmounts": [
-        0,
-        0,
-        44900,
-        46150,
-        0
-      ],
-      "total": 91050,
-      "isSummary": false
-    },
-    "研修費": {
-      "id": 386413763,
-      "category": "販売管理費",
-      "monthlyAmounts": [
-        0,
-        0,
-        10000,
-        375765,
-        0
-      ],
-      "total": 385765,
+      "total": 502050,
       "isSummary": false
     },
     "減価償却費": {
-      "id": 386413724,
+      "id": 74633367,
       "category": "販売管理費",
       "monthlyAmounts": [
-        181238,
-        181238,
-        310304,
-        310306,
-        300673
+        95688,
+        95688,
+        101288,
+        101288,
+        101288
       ],
-      "total": 1283759,
+      "total": 495240,
+      "isSummary": false
+    },
+    "長期前払費用償却": {
+      "id": 74633369,
+      "category": "販売管理費",
+      "monthlyAmounts": [
+        12611,
+        12611,
+        12611,
+        12611,
+        12611
+      ],
+      "total": 63055,
       "isSummary": false
     },
     "雑費": {
-      "id": 386413729,
+      "id": 74633373,
       "category": "販売管理費",
       "monthlyAmounts": [
+        6195,
         0,
         0,
         0,
-        300,
         0
       ],
-      "total": 300,
+      "total": 6195,
       "isSummary": false
     },
     "__summary__販売管理費": {
       "id": null,
       "category": "販売管理費",
       "monthlyAmounts": [
-        3915860,
-        5099305,
-        4888879,
-        6122181,
-        1386908
+        6829920,
+        6954382,
+        9619792,
+        6445351,
+        6568829
       ],
-      "total": 21413133,
+      "total": 36418274,
       "isSummary": true
     },
     "__summary__営業損益金額": {
       "id": null,
       "category": "営業損益金額",
       "monthlyAmounts": [
-        -1191973,
-        -1666458,
-        -2443223,
-        -2704119,
-        191981
+        -141606,
+        598802,
+        -1725653,
+        7505108,
+        1481975
       ],
-      "total": -7813792,
+      "total": 7718626,
       "isSummary": true
     },
     "__summary__営業外収益": {
       "id": null,
       "category": "営業外収益",
       "monthlyAmounts": [
-        48858,
-        49959,
-        54267,
-        65682,
-        144224
+        5742,
+        5472,
+        5557,
+        404277,
+        4290
       ],
-      "total": 362990,
+      "total": 425338,
       "isSummary": true
     },
     "受取利息": {
-      "id": 386413730,
+      "id": 74633374,
       "category": "営業外収益",
       "monthlyAmounts": [
-        856,
-        1064,
-        1269,
-        1079,
-        11615
+        5742,
+        5472,
+        5557,
+        4277,
+        4290
       ],
-      "total": 15883,
+      "total": 25338,
       "isSummary": false
     },
     "雑収入": {
-      "id": 386413734,
+      "id": 74633378,
       "category": "営業外収益",
       "monthlyAmounts": [
-        48002,
-        48895,
-        52998,
-        64603,
-        132609
+        0,
+        0,
+        0,
+        400000,
+        0
       ],
-      "total": 347107,
+      "total": 400000,
       "isSummary": false
     },
     "__summary__営業外費用": {
       "id": null,
       "category": "営業外費用",
       "monthlyAmounts": [
-        85375,
-        80922,
-        81868,
-        80113,
-        70778
+        11903,
+        0,
+        0,
+        0,
+        0
       ],
-      "total": 399056,
+      "total": 11903,
       "isSummary": true
     },
     "支払利息": {
-      "id": 386413735,
+      "id": 74633379,
       "category": "営業外費用",
       "monthlyAmounts": [
-        85375,
-        80922,
-        81868,
-        80113,
-        70778
+        11903,
+        0,
+        0,
+        0,
+        0
       ],
-      "total": 399056,
+      "total": 11903,
       "isSummary": false
     },
     "__summary__経常損益金額": {
       "id": null,
       "category": "経常損益金額",
       "monthlyAmounts": [
-        -1228490,
-        -1697421,
-        -2470824,
-        -2718550,
-        265427
+        -147767,
+        604274,
+        -1720096,
+        7909385,
+        1486265
       ],
-      "total": -7849858,
+      "total": 8132061,
       "isSummary": true
     },
     "__summary__特別利益": {
@@ -612,24 +534,11 @@
         0,
         0,
         0,
-        278281,
+        0,
         0
       ],
-      "total": 278281,
+      "total": 0,
       "isSummary": true
-    },
-    "固定資産売却益": {
-      "id": 386413746,
-      "category": "特別利益",
-      "monthlyAmounts": [
-        0,
-        0,
-        0,
-        278281,
-        0
-      ],
-      "total": 278281,
-      "isSummary": false
     },
     "__summary__特別損失": {
       "id": null,
@@ -638,62 +547,49 @@
         0,
         0,
         0,
-        165655,
+        0,
         0
       ],
-      "total": 165655,
+      "total": 0,
       "isSummary": true
-    },
-    "固定資産売却損": {
-      "id": 386413750,
-      "category": "特別損失",
-      "monthlyAmounts": [
-        0,
-        0,
-        0,
-        165655,
-        0
-      ],
-      "total": 165655,
-      "isSummary": false
     },
     "__summary__税引前当期純損益金額": {
       "id": null,
       "category": "税引前当期純損益金額",
       "monthlyAmounts": [
-        -1228490,
-        -1697421,
-        -2470824,
-        -2605924,
-        265427
+        -147767,
+        604274,
+        -1720096,
+        7909385,
+        1486265
       ],
-      "total": -7737232,
+      "total": 8132061,
       "isSummary": true
     },
     "__summary__法人税等": {
       "id": null,
       "category": "法人税等",
       "monthlyAmounts": [
-        130,
-        162,
-        193,
-        164,
-        1776
+        879,
+        838,
+        851,
+        655,
+        657
       ],
-      "total": 2425,
+      "total": 3880,
       "isSummary": true
     },
     "法人税・住民税及び事業税": {
-      "id": 386413753,
+      "id": 74633396,
       "category": "法人税等",
       "monthlyAmounts": [
-        130,
-        162,
-        193,
-        164,
-        1776
+        879,
+        838,
+        851,
+        655,
+        657
       ],
-      "total": 2425,
+      "total": 3880,
       "isSummary": false
     },
     "__summary__法人税等調整額": {
@@ -713,26 +609,20 @@
       "id": null,
       "category": "当期純損益金額",
       "monthlyAmounts": [
-        -1228620,
-        -1697583,
-        -2471017,
-        -2606088,
-        263651
+        -148646,
+        603436,
+        -1720947,
+        7908730,
+        1485608
       ],
-      "total": -7739657,
+      "total": 8128181,
       "isSummary": true
     }
   },
   "accountList": [
     {
-      "id": 386413677,
+      "id": 74633321,
       "name": "売上高",
-      "category": "売上高",
-      "isSummary": false
-    },
-    {
-      "id": 386413679,
-      "name": "売上戻り高",
       "category": "売上高",
       "isSummary": false
     },
@@ -755,22 +645,10 @@
       "isSummary": true
     },
     {
-      "id": 386413682,
-      "name": "期首商品棚卸高",
-      "category": "期首商品棚卸",
-      "isSummary": false
-    },
-    {
       "id": null,
       "name": "当期商品仕入",
       "category": "当期商品仕入",
       "isSummary": true
-    },
-    {
-      "id": 386413683,
-      "name": "仕入高",
-      "category": "当期商品仕入",
-      "isSummary": false
     },
     {
       "id": null,
@@ -785,12 +663,6 @@
       "isSummary": true
     },
     {
-      "id": 386413688,
-      "name": "期末商品棚卸高",
-      "category": "期末商品棚卸",
-      "isSummary": false
-    },
-    {
       "id": null,
       "name": "商品売上原価",
       "category": "商品売上原価",
@@ -803,151 +675,139 @@
       "isSummary": true
     },
     {
-      "id": 386413689,
+      "id": 74633332,
       "name": "役員報酬",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413691,
+      "id": 74633334,
       "name": "給料手当",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413695,
+      "id": 74633336,
+      "name": "賞与",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 679174994,
+      "name": "退職給付費用",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 74633338,
       "name": "法定福利費",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413696,
+      "id": 74633339,
       "name": "福利厚生費",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413698,
+      "id": 74633341,
       "name": "採用教育費",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413699,
+      "id": 74633342,
       "name": "外注費",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413701,
+      "id": 74633344,
       "name": "広告宣伝費",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413702,
+      "id": 74633345,
       "name": "交際費",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413703,
+      "id": 74633346,
       "name": "会議費",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413704,
+      "id": 74633347,
       "name": "旅費交通費",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413705,
+      "id": 74633348,
       "name": "通信費",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413706,
-      "name": "販売手数料",
-      "category": "販売管理費",
-      "isSummary": false
-    },
-    {
-      "id": 386413708,
+      "id": 74633351,
       "name": "消耗品費",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413710,
-      "name": "修繕費",
-      "category": "販売管理費",
-      "isSummary": false
-    },
-    {
-      "id": 386413711,
+      "id": 74633354,
       "name": "水道光熱費",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413714,
+      "id": 74633355,
+      "name": "新聞図書費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 74633356,
+      "name": "諸会費",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 74633357,
       "name": "支払手数料",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413715,
-      "name": "車両費",
-      "category": "販売管理費",
-      "isSummary": false
-    },
-    {
-      "id": 386413773,
-      "name": "管理諸費",
-      "category": "販売管理費",
-      "isSummary": false
-    },
-    {
-      "id": 999291339,
-      "name": "衛��費",
-      "category": "販売管理費",
-      "isSummary": false
-    },
-    {
-      "id": 386413716,
+      "id": 74633359,
       "name": "地代家賃",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413719,
+      "id": 74633362,
       "name": "保険料",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413720,
-      "name": "租税公課",
-      "category": "販売管理費",
-      "isSummary": false
-    },
-    {
-      "id": 386413763,
-      "name": "研修費",
-      "category": "販売管理費",
-      "isSummary": false
-    },
-    {
-      "id": 386413724,
+      "id": 74633367,
       "name": "減価償却費",
       "category": "販売管理費",
       "isSummary": false
     },
     {
-      "id": 386413729,
+      "id": 74633369,
+      "name": "長期前払費用償却",
+      "category": "販売管理費",
+      "isSummary": false
+    },
+    {
+      "id": 74633373,
       "name": "雑費",
       "category": "販売管理費",
       "isSummary": false
@@ -971,13 +831,13 @@
       "isSummary": true
     },
     {
-      "id": 386413730,
+      "id": 74633374,
       "name": "受取利息",
       "category": "営業外収益",
       "isSummary": false
     },
     {
-      "id": 386413734,
+      "id": 74633378,
       "name": "雑収入",
       "category": "営業外収益",
       "isSummary": false
@@ -989,7 +849,7 @@
       "isSummary": true
     },
     {
-      "id": 386413735,
+      "id": 74633379,
       "name": "支払利息",
       "category": "営業外費用",
       "isSummary": false
@@ -1007,22 +867,10 @@
       "isSummary": true
     },
     {
-      "id": 386413746,
-      "name": "固定資産売却益",
-      "category": "特別利益",
-      "isSummary": false
-    },
-    {
       "id": null,
       "name": "特別損失",
       "category": "特別損失",
       "isSummary": true
-    },
-    {
-      "id": 386413750,
-      "name": "固定資産売却損",
-      "category": "特別損失",
-      "isSummary": false
     },
     {
       "id": null,
@@ -1037,7 +885,7 @@
       "isSummary": true
     },
     {
-      "id": 386413753,
+      "id": 74633396,
       "name": "法人税・住民税及び事業税",
       "category": "法人税等",
       "isSummary": false
@@ -1055,5 +903,5 @@
       "isSummary": true
     }
   ],
-  "fetchedAt": "2026-04-07T06:42:48.737Z"
+  "fetchedAt": "2026-04-07T10:37:10.905Z"
 }

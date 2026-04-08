@@ -4,12 +4,13 @@
  * data-quality.js — F-1〜F-4: データ品質チェック
  *
  * チェック一覧:
- *   DQ-01 🔴 未登録取引が残っている（walletTxns）
+ *   DQ-01 🟡 未登録取引が残っている（walletTxns）
  *   DQ-02 🟡 重複計上の疑い（deals: 同日・同額・同科目が2件以上）
  *   DQ-03 🟡 当期PL全ゼロ（仕訳未登録の可能性）
  */
 
 const { isPLAllZero } = require('./trial-helpers');
+const { walletTxnsStreamLink } = require('../../shared/freee-links');
 
 // ============================================================
 // DQ-01: 未登録取引チェック
@@ -19,15 +20,19 @@ function checkUnregisteredTxns(data, findings) {
   const txns = data.walletTxns;
   if (!txns || txns.length === 0) return;
 
+  const targetMonth = data.targetMonth
+    || `${data.year}-${String(data.month).padStart(2, '0')}`;
+
   findings.push({
-    severity: '🔴',
+    severity: '🟡',
     category: 'data_quality',
     checkCode: 'DQ-01',
-    description: `未処理の明細が ${txns.length} 件残っています。「自動で経理」に未登録の取引がある状態です。`,
-    currentValue: `${txns.length}件`,
+    description: `対象月（${targetMonth}）末時点で、未登録の明細があります。freeeの「自動で経理」画面で確認してください。`,
+    currentValue: 'あり',
     suggestedValue: '「取引＞自動で経理」で全件登録してください',
     confidence: 95,
     targetMonth: data.targetMonth,
+    freeeLink: walletTxnsStreamLink(targetMonth),
   });
 }
 

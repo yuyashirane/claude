@@ -219,12 +219,12 @@ test('getMonthlyAmount: YTD差分を正しく算出', () => {
 
 console.log('\n[data-quality]');
 
-test('DQ-01: walletTxns ありで 🔴 を発行', () => {
+test('DQ-01: walletTxns ありで 🟡 を発行', () => {
   const data = mkData({ walletTxns: [{ id: 1, date: '2026-03-01', amount: -5000 }] });
   const findings = dataQualityCheck(data);
   const dq01 = findings.filter((f) => f.checkCode === 'DQ-01');
   assert.strictEqual(dq01.length, 1);
-  assert.strictEqual(dq01[0].severity, '🔴');
+  assert.strictEqual(dq01[0].severity, '🟡');
 });
 
 test('DQ-01: walletTxns 空配列は指摘なし', () => {

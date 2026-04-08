@@ -57,8 +57,30 @@ const {
 // ヘルパー
 // ============================================================
 
+/**
+ * フォルダ名として安全な文字列に変換する。
+ * Windows のフォルダ名で使えない文字（\ / : * ? " < > |）を _ に置換し、
+ * 末尾の空白とピリオドを削除する。
+ *
+ * @param {string} name - 変換対象の文字列
+ * @returns {string} サニタイズ済みの文字列
+ */
+function sanitizeFolderName(name) {
+  if (!name) return '';
+  return String(name)
+    .replace(/[\\/:*?"<>|]/g, '_')
+    .replace(/[\s.]+$/, '');
+}
+
 function getOutputPath(companyId, targetMonth, outputDir, companyName) {
-  const dir = outputDir || path.join(process.cwd(), 'reports', String(companyId));
+  let dir;
+  if (outputDir) {
+    dir = outputDir;
+  } else {
+    const safeName = sanitizeFolderName(companyName);
+    const folderName = safeName ? `${companyId}_${safeName}` : String(companyId);
+    dir = path.join(process.cwd(), 'reports', folderName);
+  }
   fs.mkdirSync(dir, { recursive: true });
   const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
   // 事業所名をファイル名に含める（取得できない場合はcompanyIdでフォールバック）

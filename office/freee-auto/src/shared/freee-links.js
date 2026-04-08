@@ -276,6 +276,37 @@ function formatFiscalStartDate(fiscalYear, startMonth) {
   return `${fiscalYear}-${String(startMonth).padStart(2, '0')}-01`;
 }
 
+/**
+ * freee「自動で経理」画面（未処理明細一覧）のURL を生成する。
+ * DQ-01（未登録明細あり）の指摘から、対象月末時点の未処理明細画面に遷移するために使う。
+ *
+ * 注意: freee の wallet_txns/stream URL には company_id を付けない。
+ *       freee画面はセッションで会社を判定するため、付けると逆に動作が不安定になる可能性がある。
+ *
+ * @param {string} targetMonth - 対象月（"YYYY-MM"形式）
+ * @returns {string} freeeリンクURL
+ */
+function walletTxnsStreamLink(targetMonth) {
+  const [year, month] = targetMonth.split('-').map(Number);
+  const lastDay = new Date(year, month, 0).getDate();
+  const endDate = `${year}-${String(month).padStart(2, '0')}-${String(lastDay).padStart(2, '0')}`;
+
+  const params = new URLSearchParams({
+    end_date: endDate,
+    ignore_unsettle: 'true',
+    limit: '100',
+    offset: '0',
+    order: 'asc',
+    registration_auto_action: 'false',
+    registration_manual_action: 'false',
+    registration_no_action: 'false',
+    registration_status: 'unreconciled',
+    suggestion_type: 'all',
+  });
+
+  return `${FREEE_BASE}/wallet_txns/stream?${params.toString()}`;
+}
+
 module.exports = {
   FREEE_BASE,
   walletTxnLink,
@@ -290,4 +321,5 @@ module.exports = {
   determineLinkStartDate,
   buildBalanceLink,
   formatFiscalStartDate,
+  walletTxnsStreamLink,
 };
