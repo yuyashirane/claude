@@ -243,7 +243,13 @@
       "Read(//c/Users/yuya_/claude/$d/**)",
       "Read(//g/共有ドライブ/06_見込み客/20260408_漢宇商運/**)",
       "Read(//g/共有ドライブ/06_見込み客/20260408_漢宇商運//**)",
-      "Bash(node src/create-proposal.js references/pricing/config_kanuu.json \"G:/共有ドライブ/06_見込み客/20260408_漢宇商運/提案書_漢宇商運_v1.docx\")"
+      "Bash(node src/create-proposal.js references/pricing/config_kanuu.json \"G:/共有ドライブ/06_見込み客/20260408_漢宇商運/提案書_漢宇商運_v1.docx\")",
+      "Bash(node src/v2/test-pricing-calculator.js)",
+      "Bash(node src/v2/test-recreation.js)",
+      "Bash(node src/v2/test-config-samples.js)",
+      "Bash(node src/v2/test-styles.js)",
+      "Bash(node src/v2/create-proposal.js .claude/skills/proposal-generator-v2/samples/config-v2-megasolar.json src/v2/test-output/proposal-megasolar-blue.docx)",
+      "Bash(node src/v2/test-themes.js)"
     ]
   }
 }

@@ -1,0 +1,150 @@
+{
+  "meta": {
+    "version": "2.0",
+    "outputMode": "proposal_single",
+    "outputModeReason": "顧客が記帳代行を明確に希望、事業構成は複雑だがサービス選定は確定済み",
+    "outputPath": "G:\\共有ドライブ\\06_見込み客\\20260325_BANGKOK_SOLAR\\税務顧問サービスのご提案_あしたの会計事務所_バンコクソーラーパワージャパン株式会社.docx",
+    "generatedAt": "2026-03-27T10:00:00+09:00"
+  },
+
+  "client": {
+    "name": "バンコクソーラーパワージャパン株式会社",
+    "honorific": "御中",
+    "industry": "太陽光発電事業",
+    "businessDescription": "2013年設立。太陽光発電所の所有・運営・売電事業。年間2〜3件の発電所の取得・売却。タイ本社への報告あり。",
+    "established": "2013-01-01",
+    "employees": 1,
+    "annualRevenue": 140000000,
+    "annualRevenueNote": "年商1億4,000万円",
+    "monthlyTransactions": 100,
+    "salesClass": "OVER",
+    "requiresManualPricing": true,
+    "manualPricingReason": "売上1億円超のため料金表対象外、他事務所参考に個別見積り"
+  },
+
+  "proposal": {
+    "date": "2026-03-27",
+    "introduction": {
+      "useDefault": false,
+      "customParagraphs": [
+        "先日は顧問契約に関するご相談を賜り、誠にありがとうございました。お打ち合わせの内容を踏まえ、貴社の事業内容・規模に最適化した税務顧問サービスをご提案いたします。",
+        "貴社は2013年の設立以来、太陽光発電所の所有・運営・売電事業を着実に展開され、年商1億4,000万円規模の事業基盤を築かれております。また、年間2〜3件の発電所の取得・売却を通じた事業拡大にも積極的に取り組まれていらっしゃいます。",
+        "税理士変更に伴う円滑な引継ぎはもちろん、日々の記帳代行から決算申告、消費税の適正処理まで、貴社のバックオフィス業務を全面的にサポートし、本業に集中いただける環境を整備いたします。"
+      ]
+    }
+  },
+
+  "challenges": [
+    {
+      "id": "ch01",
+      "title": "税理士変更に伴う引継ぎ対応",
+      "detail": "前任税理士からの帳簿・税務データの引継ぎ、e-Tax等のID移管を円滑に進める必要があります。2026年1月分からの記帳を速やかに開始できるよう対応いたします。",
+      "linkedServiceIds": ["sv01", "sv07"]
+    },
+    {
+      "id": "ch02",
+      "title": "監査法人対応の引継ぎ",
+      "detail": "UOB銀行のローン契約コベナンツとして監査報告書の提出が必要であり、監査法人とのやりとり（資料提供・質問対応等）を税理士側でサポートする体制の構築が求められます。",
+      "linkedServiceIds": ["sv02"]
+    },
+    {
+      "id": "ch03",
+      "title": "英文試算表の作成",
+      "detail": "タイ本社への報告として、3ヶ月ごとに英文試算表の作成・提出が必要です。既存フォーマットに基づき対応いたします。",
+      "linkedServiceIds": ["sv01"]
+    },
+    {
+      "id": "ch04",
+      "title": "大型設備投資の会計・税務処理",
+      "detail": "2026年4月に約4億円の発電所購入を予定されており、固定資産の取得・減価償却の計上について適正な処理が必要です。",
+      "linkedServiceIds": ["sv01", "sv02"]
+    },
+    {
+      "id": "ch05",
+      "title": "減価償却方法の検討",
+      "detail": "現在定率法を採用されていますが、償却負担の平準化のため定額法への変更を検討されています。発電所ごとの採算性を踏まえた最適な償却方法の選択をサポートいたします。",
+      "linkedServiceIds": ["sv02"]
+    },
+    {
+      "id": "ch06",
+      "title": "発電所売買に伴う税務戦略",
+      "detail": "3〜4年サイクルでの発電所の取得・売却において、会社ごとの売却と事業譲渡のどちらが有利かなど、税務上の最適な選択をサポートいたします。",
+      "linkedServiceIds": ["sv02"]
+    }
+  ],
+
+  "services": [
+    { "id": "sv01", "name": "記帳代行・月次レビュー", "detail": "freeeを活用した記帳代行。3ヶ月ごとに試算表を作成・納品し、異常値をチェック。" },
+    { "id": "sv02", "name": "決算申告", "detail": "法人税・消費税・地方税の確定申告書作成・提出まで一貫対応。決算報告書の作成。" },
+    { "id": "sv03", "name": "消費税対応", "detail": "原則課税に基づく消費税申告、インボイス対応。" },
+    { "id": "sv04", "name": "年末調整・法定調書", "detail": "役員報酬に係る年末調整、法定調書・給与支払報告書の作成・提出。" },
+    { "id": "sv05", "name": "償却資産申告", "detail": "各自治体への償却資産申告書の作成・提出代行。" },
+    { "id": "sv06", "name": "freee導入支援", "detail": "アカウント設定・口座連携・勘定科目マッピングの初期設定。" },
+    { "id": "sv07", "name": "税務届出・手続代行", "detail": "税理士変更届、納税関連の各種手続き等を代行。納税額のお知らせも含みます。" }
+  ],
+
+  "pricing": {
+    "selectedModules": {
+      "bookkeeping": true,
+      "selfBookkeeping": false,
+      "consultation": false
+    },
+    "manualPricing": {
+      "enabled": true,
+      "reason": "売上1億円超のため料金表対象外、他事務所参考に個別見積り",
+      "monthly": {
+        "base": 70000,
+        "baseLabel": "経理サポート（記帳代行） 売上3億円未満レート"
+      },
+      "annual": {
+        "corporateTax": 250000,
+        "consumptionTax": 80000
+      }
+    },
+    "deliveryFrequency": "every3months",
+    "automaticDiscounts": {
+      "bankSync": false,
+      "creditCardSync": false,
+      "freeeHRUse": false,
+      "cashBookManual": false
+    },
+    "manualDiscounts": {
+      "introduction": { "monthly": 0, "annual": 0 },
+      "volume": {
+        "monthly": -15000,
+        "monthlyReason": "取引先数・仕訳数が少量のため",
+        "annual": -80000,
+        "annualReason": "取引先数・仕訳数が少量のため"
+      }
+    },
+    "annualOptions": {
+      "yearEndAdjustment": { "enabled": true, "people": 1 },
+      "statutoryReports": { "enabled": true, "sheets": 5 },
+      "salaryReport": { "enabled": true, "municipalities": 1 },
+      "fixedAssetReport": { "enabled": true },
+      "englishFS": { "enabled": true },
+      "auditSupport": { "enabled": true }
+    },
+    "consumptionTaxMethod": "principle",
+    "notes": [
+      "監査法人対応（資料提供・質問対応等）および英文試算表の作成については、上記料金には含まれておりません。作業工数に応じて別途お見積りいたします。",
+      "消費税の計算方法が簡易課税の場合、消費税等申告報酬は30,000円（税別）となります。",
+      "償却資産申告の報酬は経理サポートに含まれております。",
+      "売上規模は3億円未満を基準としておりますが、取引先数・仕訳数が少量であることを考慮し、出精値引きを適用しております。"
+    ]
+  },
+
+  "contractFlow": {
+    "useDefault": false,
+    "customSteps": [
+      { "step": 1, "content": "本提案書のご確認・ご契約", "note": "内容にご同意いただければ契約へ。" },
+      { "step": 2, "content": "履歴事項全部証明書PDFのご提供", "note": "貴社にてご手配をお願いいたします。" },
+      { "step": 3, "content": "顧問契約書の締結", "note": "当事務所よりドラフトをお送りします。" },
+      { "step": 4, "content": "前任税理士からのデータ引継ぎ", "note": "帳簿・税務データ・e-Tax ID等の移管を進めます。" },
+      { "step": 5, "content": "freeeアカウント設定・連携", "note": "口座連携・勘定科目マッピングを設定。" },
+      { "step": 6, "content": "2026年1月〜3月分の記帳開始", "note": "資料をご提出いただき、記帳を開始します。" },
+      { "step": 7, "content": "監査法人対応の体制構築", "note": "監査法人との連絡窓口・資料提供フローを整備。" },
+      { "step": 8, "content": "継続的な記帳・3ヶ月ごとの試算表納品", "note": "以降、定期的な記帳・レビューを継続します。" }
+    ]
+  }
+}

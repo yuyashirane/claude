@@ -1,0 +1,512 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "proposal-config-v2.0",
+  "title": "提案書 config.json v2.0",
+  "description": "税務顧問サービス提案書生成用の顧客設定ファイル（v2.0スキーマ）",
+  "type": "object",
+  "required": ["meta", "client", "proposal", "challenges", "services", "pricing", "contractFlow"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["version", "outputMode", "outputModeReason"],
+      "properties": {
+        "version": { "type": "string", "const": "2.0" },
+        "outputMode": {
+          "type": "string",
+          "enum": ["proposal_single", "proposal_multi"],
+          "description": "出力モード: proposal_single（お任せ型）/ proposal_multi（4択型）"
+        },
+        "theme": {
+          "type": "string",
+          "enum": ["blue", "orange", "gray"],
+          "default": "blue",
+          "description": "提案書のカラーテーマ。未指定時は blue。"
+        },
+        "outputModeReason": {
+          "type": "string",
+          "description": "outputMode を選択した理由"
+        },
+        "outputPath": {
+          "type": "string",
+          "description": "出力先パス（省略時はデフォルトパス）"
+        },
+        "generatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "config生成日時（ISO 8601）"
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "client": {
+      "type": "object",
+      "required": ["name", "annualRevenue", "monthlyTransactions", "salesClass", "requiresManualPricing"],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "法人格込みの正式名称（例: 漢宇商運株式会社）"
+        },
+        "nameEn": {
+          "type": "string",
+          "description": "英語名（任意）"
+        },
+        "honorific": {
+          "type": "string",
+          "default": "御中",
+          "description": "敬称（デフォルト: 御中）"
+        },
+        "industry": {
+          "type": "string",
+          "description": "業種"
+        },
+        "businessDescription": {
+          "type": "string",
+          "description": "事業内容の説明"
+        },
+        "established": {
+          "type": "string",
+          "format": "date",
+          "description": "設立日（YYYY-MM-DD）"
+        },
+        "fiscalMonth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 12,
+          "description": "決算月（1-12）"
+        },
+        "capital": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "資本金（円）"
+        },
+        "employees": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "従業員数"
+        },
+        "address": {
+          "type": "string",
+          "description": "所在地"
+        },
+        "representative": {
+          "type": "string",
+          "description": "代表者名"
+        },
+        "annualRevenue": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "年商（円）"
+        },
+        "annualRevenueNote": {
+          "type": "string",
+          "description": "年商の補足（例: 1年目見込み2億円）"
+        },
+        "monthlyTransactions": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "月間仕訳数の見込み"
+        },
+        "salesClass": {
+          "type": "string",
+          "enum": ["A", "B", "C", "D", "OVER"],
+          "description": "売上クラス（pricing-table.jsonのsalesClasses準拠）"
+        },
+        "requiresManualPricing": {
+          "type": "boolean",
+          "description": "個別見積り対象か（OVERクラスの場合 true）"
+        },
+        "manualPricingReason": {
+          "type": "string",
+          "description": "個別見積りの理由（requiresManualPricing=true の場合は必須）"
+        }
+      },
+      "if": {
+        "properties": { "requiresManualPricing": { "const": true } }
+      },
+      "then": {
+        "required": ["name", "annualRevenue", "monthlyTransactions", "salesClass", "requiresManualPricing", "manualPricingReason"]
+      },
+      "additionalProperties": false
+    },
+
+    "proposal": {
+      "type": "object",
+      "required": ["date"],
+      "properties": {
+        "date": {
+          "type": "string",
+          "format": "date",
+          "description": "提案書の日付（YYYY-MM-DD）"
+        },
+        "introduction": {
+          "type": "object",
+          "properties": {
+            "useDefault": {
+              "type": "boolean",
+              "description": "true の場合デフォルト挨拶文を使用"
+            },
+            "customParagraphs": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "カスタム挨拶文の段落（useDefault=false の場合に使用）"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "challenges": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "detail"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^ch\\d{2}$",
+            "description": "課題ID（ch01形式）"
+          },
+          "title": {
+            "type": "string",
+            "description": "課題タイトル"
+          },
+          "detail": {
+            "type": "string",
+            "description": "課題の詳細説明"
+          },
+          "linkedServiceIds": {
+            "type": "array",
+            "items": { "type": "string", "pattern": "^sv\\d{2}$" },
+            "description": "対応するサービスのID（sv01形式）"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "services": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "name", "detail"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^sv\\d{2}$",
+            "description": "サービスID（sv01形式）"
+          },
+          "name": {
+            "type": "string",
+            "description": "サービス名"
+          },
+          "detail": {
+            "type": "string",
+            "description": "サービス内容の説明"
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+
+    "pricing": {
+      "type": "object",
+      "description": "料金プラン。outputModeにより構造が分岐する",
+      "properties": {
+        "selectedModules": {
+          "$ref": "#/definitions/selectedModules"
+        },
+        "manualPricing": {
+          "$ref": "#/definitions/manualPricing"
+        },
+        "deliveryFrequency": {
+          "$ref": "#/definitions/deliveryFrequency"
+        },
+        "automaticDiscounts": {
+          "$ref": "#/definitions/automaticDiscounts"
+        },
+        "manualDiscounts": {
+          "$ref": "#/definitions/manualDiscounts"
+        },
+        "annualOptions": {
+          "$ref": "#/definitions/annualOptions"
+        },
+        "consumptionTaxMethod": {
+          "$ref": "#/definitions/consumptionTaxMethod"
+        },
+        "notes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "料金に関する注記"
+        },
+        "outputMode": {
+          "type": "string",
+          "const": "proposal_multi",
+          "description": "proposal_multi モードの場合にpricing内にも記述"
+        },
+        "plans": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 4,
+          "items": {
+            "type": "object",
+            "required": ["id", "label", "selectedModules"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "enum": ["A1", "A2", "B1", "B2"],
+                "description": "プランID"
+              },
+              "label": {
+                "type": "string",
+                "description": "プラン表示名"
+              },
+              "selectedModules": {
+                "$ref": "#/definitions/selectedModules"
+              },
+              "manualDiscounts": {
+                "$ref": "#/definitions/manualDiscounts"
+              }
+            },
+            "additionalProperties": false
+          },
+          "description": "proposal_multi モードのプラン定義（2-4プラン）"
+        },
+        "commonAnnual": {
+          "type": "object",
+          "description": "proposal_multi モードの全プラン共通年次料金",
+          "properties": {
+            "corporateTax": {
+              "type": "object",
+              "properties": {
+                "amount": { "type": "integer" },
+                "manualOverride": { "type": "boolean" }
+              }
+            },
+            "consumptionTax": {
+              "type": "object",
+              "properties": {
+                "method": { "$ref": "#/definitions/consumptionTaxMethod" },
+                "amount": { "type": "integer" }
+              }
+            },
+            "yearEndAdjustment": {
+              "type": "object",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "people": { "type": "integer", "minimum": 0 }
+              }
+            },
+            "statutoryReports": {
+              "type": "object",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "sheets": { "type": "integer", "minimum": 0 }
+              }
+            },
+            "salaryReport": {
+              "type": "object",
+              "properties": {
+                "enabled": { "type": "boolean" },
+                "municipalities": { "type": "integer", "minimum": 0 }
+              }
+            },
+            "fixedAssetReport": {
+              "type": "object",
+              "properties": { "enabled": { "type": "boolean" } }
+            },
+            "englishFS": {
+              "type": "object",
+              "properties": { "enabled": { "type": "boolean" } }
+            },
+            "auditSupport": {
+              "type": "object",
+              "properties": { "enabled": { "type": "boolean" } }
+            },
+            "manualDiscounts": {
+              "$ref": "#/definitions/manualDiscounts"
+            }
+          },
+          "additionalProperties": false
+        },
+        "selfBookkeepingFirstYearOnly": {
+          "type": "object",
+          "description": "自計化プランの初年度のみ料金（proposal_multi）",
+          "properties": {
+            "initialGuidance": {
+              "type": "integer",
+              "description": "初期指導報酬（円）"
+            },
+            "manualDiscounts": {
+              "$ref": "#/definitions/manualDiscounts"
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+
+    "contractFlow": {
+      "type": "object",
+      "required": ["useDefault"],
+      "properties": {
+        "useDefault": {
+          "type": "boolean",
+          "description": "true の場合デフォルトの契約フローを使用"
+        },
+        "customSteps": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["step", "content", "note"],
+            "properties": {
+              "step": { "type": "integer", "minimum": 1 },
+              "content": { "type": "string" },
+              "note": { "type": "string" }
+            },
+            "additionalProperties": false
+          },
+          "description": "カスタムステップ（useDefault=false の場合に使用）"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "additionalProperties": false,
+
+  "definitions": {
+    "selectedModules": {
+      "type": "object",
+      "required": ["bookkeeping", "selfBookkeeping", "consultation"],
+      "properties": {
+        "bookkeeping": { "type": "boolean", "description": "記帳代行" },
+        "selfBookkeeping": { "type": "boolean", "description": "自計化" },
+        "consultation": { "type": "boolean", "description": "相談サポート" }
+      },
+      "additionalProperties": false
+    },
+    "manualPricing": {
+      "type": "object",
+      "required": ["enabled"],
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "reason": { "type": "string" },
+        "monthly": {
+          "type": "object",
+          "properties": {
+            "base": { "type": "integer", "description": "月次基本額（円）" },
+            "baseLabel": { "type": "string", "description": "月次基本額の説明" }
+          },
+          "additionalProperties": false
+        },
+        "annual": {
+          "type": "object",
+          "properties": {
+            "corporateTax": { "type": "integer" },
+            "consumptionTax": { "type": "integer" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "deliveryFrequency": {
+      "type": "string",
+      "enum": ["monthly", "every2months", "every3months", "every4months", "every6months"],
+      "description": "納品頻度（記帳代行の場合のみ有効）"
+    },
+    "automaticDiscounts": {
+      "type": "object",
+      "properties": {
+        "bankSync": { "type": "boolean", "description": "銀行同期値引き" },
+        "creditCardSync": { "type": "boolean", "description": "クレジットカード同期値引き" },
+        "freeeHRUse": { "type": "boolean", "description": "人事労務freee利用値引き" },
+        "cashBookManual": { "type": "boolean", "description": "現金出納帳作成値引き" }
+      },
+      "additionalProperties": false
+    },
+    "manualDiscounts": {
+      "type": "object",
+      "properties": {
+        "introduction": {
+          "type": "object",
+          "description": "ご紹介値引き",
+          "properties": {
+            "monthly": { "type": "integer", "description": "月次値引き額（負の数）" },
+            "monthlyReason": { "type": "string" },
+            "annual": { "type": "integer", "description": "年次値引き額（負の数）" },
+            "annualReason": { "type": "string" }
+          },
+          "additionalProperties": false
+        },
+        "volume": {
+          "type": "object",
+          "description": "出精値引き",
+          "properties": {
+            "monthly": { "type": "integer", "description": "月次値引き額（負の数）" },
+            "monthlyReason": { "type": "string" },
+            "annual": { "type": "integer", "description": "年次値引き額（負の数）" },
+            "annualReason": { "type": "string" }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "annualOptions": {
+      "type": "object",
+      "properties": {
+        "yearEndAdjustment": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "people": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "statutoryReports": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "sheets": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "salaryReport": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "municipalities": { "type": "integer", "minimum": 0 }
+          },
+          "additionalProperties": false
+        },
+        "fixedAssetReport": {
+          "type": "object",
+          "properties": { "enabled": { "type": "boolean" } },
+          "additionalProperties": false
+        },
+        "englishFS": {
+          "type": "object",
+          "properties": { "enabled": { "type": "boolean" } },
+          "additionalProperties": false
+        },
+        "auditSupport": {
+          "type": "object",
+          "properties": { "enabled": { "type": "boolean" } },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "consumptionTaxMethod": {
+      "type": "string",
+      "enum": ["principle", "simplified", "exempt"],
+      "description": "消費税計算方法: 原則課税 / 簡易課税 / 免税"
+    }
+  }
+}

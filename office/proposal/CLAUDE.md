@@ -14,13 +14,13 @@
 1. **クライアント情報**: 会社名、業種、設立時期
 2. **課題・ニーズ**: 議事録から読み取れる顧客の課題を整理
 3. **サービス内容**: 顧客に適したサービスを選定
-4. **料金プラン**: 売上規模・仕訳数に基づき `references/pricing/pricing-table.json` を参照して算出
+4. **料金プラン**: 売上規模・仕訳数に基づき `references/pricing/pricing-table-v1.json` を参照して算出
 5. **今後の流れ**: 顧客状況に合わせたステップ
 6. **はじめに**: 議事録の内容を踏まえたカスタム挨拶文
 
 ### Step 3: 提案書の生成
 ```bash
-node src/create-proposal.js <config.json> [output.docx]
+node src/v1/create-proposal.js <config.json> [output.docx]
 ```
 
 ### Step 4: 保存先
@@ -106,7 +106,7 @@ node src/create-proposal.js <config.json> [output.docx]
 
 ## 料金の算定ルール
 
-`references/pricing/pricing-table.json` を参照して、以下の情報から料金を算出する：
+`references/pricing/pricing-table-v1.json` を参照して、以下の情報から料金を算出する：
 
 | 項目 | 判定基準 |
 |------|----------|
@@ -132,10 +132,14 @@ node src/create-proposal.js <config.json> [output.docx]
 
 ```
 office/proposal/
-├── .claude/skills/proposal-generator/  ← 提案書生成スキル定義
+├── .claude/skills/
+│   ├── proposal-generator-v1/          ← v1スキル（フォールバック用）
+│   └── proposal-generator-v2/          ← v2スキル（メイン）
 ├── references/pricing/                 ← 料金表・顧客設定（config_*.json）
 ├── templates/proposals/                ← 提案書テンプレート
-├── src/                                ← 実装コード
+├── src/
+│   ├── v1/                             ← v1実装コード
+│   └── v2/                             ← v2実装コード
 ├── docs/                               ← 設計ドキュメント
 ├── tmp/                                ← 一時ファイル
 └── logs/                               ← ログ
@@ -143,6 +147,6 @@ office/proposal/
 
 ## テンプレートファイル
 - 元テンプレート: `G:\共有ドライブ\06_見込み客\_見積書改善\税務顧問サービスのご提案_あしたの会計事務所_テンプレート.docx`
-- 料金表: `references/pricing/pricing-table.json`
+- 料金表（v1）: `references/pricing/pricing-table-v1.json`
 - 顧客設定: `references/pricing/config_*.json`
-- 生成スクリプト: `src/create-proposal.js`
+- 生成スクリプト（v1）: `src/v1/create-proposal.js`

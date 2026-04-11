@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "version": "2.0",
+    "outputMode": "proposal_multi",
+    "outputModeReason": "紹介経由案件で顧客が記帳代行と自計化を比較検討中のため、4プラン併記で提案",
+    "outputPath": "G:\\共有ドライブ\\06_見込み客\\20260401_BackUP\\税務顧問サービスのご提案_あしたの会計事務所_合同会社BackUP.docx",
+    "generatedAt": "2026-04-01T10:00:00+09:00"
+  },
+
+  "client": {
+    "name": "合同会社Back UP",
+    "honorific": "御中",
+    "industry": "飲食業・不動産賃貸業",
+    "businessDescription": "飲食店経営（複数店舗）と不動産賃貸業の複合事業。個人事業からの法人成り。",
+    "employees": 5,
+    "annualRevenue": 200000000,
+    "annualRevenueNote": "年商約2億円。個人事業の実績ベース。",
+    "monthlyTransactions": 500,
+    "salesClass": "OVER",
+    "requiresManualPricing": true,
+    "manualPricingReason": "売上1億円超のため料金表対象外、個別見積り"
+  },
+
+  "proposal": {
+    "date": "2026-04-01",
+    "introduction": {
+      "useDefault": false,
+      "customParagraphs": [
+        "先日は顧問契約に関するご相談を賜り、誠にありがとうございました。ご紹介者様を通じてご縁をいただき、心より感謝申し上げます。",
+        "貴社は飲食店の複数店舗経営と不動産賃貸業を展開され、年商約2億円規模の事業を運営されておられます。個人事業からの法人成りに伴い、適正な経理体制の構築が求められる重要な時期です。",
+        "記帳代行プランと自計化プランの2軸で、それぞれ相談サポートの有無を含めた4つのプランをご提案いたします。貴社の体制やご要望に最適なプランをお選びください。"
+      ]
+    }
+  },
+
+  "challenges": [
+    {
+      "id": "ch01",
+      "title": "個人事業からの法人成りに伴う経理体制構築",
+      "detail": "個人事業時代の経理体制を法人として再構築する必要があります。勘定科目の整理、開業仕訳の処理、初年度の決算体制を整備いたします。",
+      "linkedServiceIds": ["sv01", "sv05"]
+    },
+    {
+      "id": "ch02",
+      "title": "手書き領収書の大量記帳",
+      "detail": "飲食店の仕入・経費で手書き領収書が多数発生します。効率的な記帳フローの構築が必要です。",
+      "linkedServiceIds": ["sv01"]
+    },
+    {
+      "id": "ch03",
+      "title": "消費税の適正処理（軽減税率対応）",
+      "detail": "飲食業では食材仕入（軽減税率8%）と店内飲食売上（標準税率10%）の区分が必要です。インボイス制度への対応も含め、消費税の適正処理が求められます。",
+      "linkedServiceIds": ["sv03"]
+    },
+    {
+      "id": "ch04",
+      "title": "現金管理の強化",
+      "detail": "飲食店は現金取引が多く、日々の売上管理・現金出納帳の整備が重要です。",
+      "linkedServiceIds": ["sv01"]
+    },
+    {
+      "id": "ch05",
+      "title": "複合事業の収益管理",
+      "detail": "飲食業と不動産賃貸業で事業セグメントが異なるため、部門別の収益管理体制の構築が求められます。",
+      "linkedServiceIds": ["sv01", "sv02"]
+    }
+  ],
+
+  "services": [
+    { "id": "sv01", "name": "経理サポート", "detail": "記帳代行または自計化サポート。月次での試算表レビュー、異常値チェック。" },
+    { "id": "sv02", "name": "決算申告", "detail": "法人税・消費税・地方税の確定申告書作成・提出まで一貫対応。" },
+    { "id": "sv03", "name": "消費税対応", "detail": "軽減税率を含む消費税区分の整理、原則課税に基づく申告、インボイス対応。" },
+    { "id": "sv04", "name": "年末調整・法定調書", "detail": "従業員の年末調整、法定調書・給与支払報告書の作成・提出。" },
+    { "id": "sv05", "name": "freee導入支援", "detail": "アカウント設定・口座連携・勘定科目マッピング・部門設定の初期設定。" },
+    { "id": "sv06", "name": "税務届出・手続代行", "detail": "税務署への各種届出、納税関連の手続き等を代行。" }
+  ],
+
+  "pricing": {
+    "outputMode": "proposal_multi",
+    "plans": [
+      {
+        "id": "A1",
+        "label": "プランA1｜経理サポート（記帳代行）プラン",
+        "selectedModules": { "bookkeeping": true, "selfBookkeeping": false, "consultation": false },
+        "manualDiscounts": {
+          "introduction": { "monthly": -10000, "monthlyReason": "ご紹介値引き" }
+        }
+      },
+      {
+        "id": "A2",
+        "label": "プランA2｜経理サポート（記帳代行）+ 相談サポートプラン",
+        "selectedModules": { "bookkeeping": true, "selfBookkeeping": false, "consultation": true },
+        "manualDiscounts": {
+          "introduction": { "monthly": -12000, "monthlyReason": "ご紹介値引き" }
+        }
+      },
+      {
+        "id": "B1",
+        "label": "プランB1｜経理サポート（自計化）プラン",
+        "selectedModules": { "bookkeeping": false, "selfBookkeeping": true, "consultation": false },
+        "manualDiscounts": {
+          "introduction": { "monthly": -3000, "monthlyReason": "ご紹介値引き" }
+        }
+      },
+      {
+        "id": "B2",
+        "label": "プランB2｜経理サポート（自計化）+ 相談サポートプラン",
+        "selectedModules": { "bookkeeping": false, "selfBookkeeping": true, "consultation": true },
+        "manualDiscounts": {
+          "introduction": { "monthly": -5000, "monthlyReason": "ご紹介値引き" }
+        }
+      }
+    ],
+    "manualPricing": {
+      "enabled": true,
+      "reason": "売上2億円のため料金表対象外、個別見積り",
+      "monthly": {
+        "base": 65000,
+        "baseLabel": "経理サポート（記帳代行） 売上規模・仕訳数を考慮した個別見積り"
+      },
+      "annual": {
+        "corporateTax": 220000,
+        "consumptionTax": 70000
+      }
+    },
+    "deliveryFrequency": "monthly",
+    "automaticDiscounts": {
+      "bankSync": false,
+      "creditCardSync": false,
+      "freeeHRUse": false,
+      "cashBookManual": false
+    },
+    "commonAnnual": {
+      "corporateTax": { "amount": 220000, "manualOverride": true },
+      "consumptionTax": { "method": "principle", "amount": 70000 },
+      "yearEndAdjustment": { "enabled": true, "people": 5 },
+      "statutoryReports": { "enabled": true, "sheets": 5 },
+      "salaryReport": { "enabled": true, "municipalities": 1 },
+      "fixedAssetReport": { "enabled": false },
+      "englishFS": { "enabled": false },
+      "auditSupport": { "enabled": false },
+      "manualDiscounts": {
+        "introduction": {
+          "annual": -30000,
+          "annualReason": "ご紹介値引き"
+        }
+      }
+    },
+    "selfBookkeepingFirstYearOnly": {
+      "initialGuidance": 100000,
+      "manualDiscounts": {
+        "volume": {
+          "annual": -50000,
+          "annualReason": "出精値引き"
+        }
+      }
+    },
+    "consumptionTaxMethod": "principle",
+    "notes": [
+      "上記金額に別途消費税がかかります。",
+      "消費税の計算方法が簡易課税の場合、消費税等申告報酬は40,000円~（税別）となります。",
+      "売上規模は1億円超のため、取引先数・仕訳数を考慮した個別見積りとなっております。",
+      "初期指導報酬（100,000円）は自計化プラン（B1・B2）の初年度のみの費用です。"
+    ]
+  },
+
+  "contractFlow": {
+    "useDefault": true
+  }
+}

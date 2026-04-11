@@ -1,0 +1,148 @@
+{
+  "meta": {
+    "version": "2.0",
+    "outputMode": "proposal_single",
+    "outputModeReason": "顧客が自計化を明確に希望、サービス構成は確定済みのため単一プラン提案",
+    "outputPath": "G:\\共有ドライブ\\06_見込み客\\20260408_漢宇商運\\税務顧問サービスのご提案_あしたの会計事務所_漢宇商運株式会社.docx",
+    "generatedAt": "2026-04-08T10:00:00+09:00"
+  },
+
+  "client": {
+    "name": "漢宇商運株式会社",
+    "honorific": "御中",
+    "industry": "海運代理業",
+    "businessDescription": "2026年3月設立。用船事業・船舶運航代理・船舶売買を主力事業とし、大手商社を取引先にバルク貨物の国際輸送を手掛ける。ドル建て取引が99%以上。",
+    "established": "2026-03-18",
+    "employees": 4,
+    "annualRevenue": 200000000,
+    "annualRevenueNote": "1年目売上2億円見込み（粗利1千万円）",
+    "monthlyTransactions": 50,
+    "salesClass": "OVER",
+    "requiresManualPricing": true,
+    "manualPricingReason": "売上2億円見込みのため料金表対象外、ただし粗利ベースでは3,000万円未満のため実質Aクラス水準で個別見積り"
+  },
+
+  "proposal": {
+    "date": "2026-04-08",
+    "introduction": {
+      "useDefault": false,
+      "customParagraphs": [
+        "先日は顧問契約に関するご相談を賜り、誠にありがとうございました。お打ち合わせの内容を踏まえ、貴社の事業フェーズ・ビジネスモデルに最適化した税務顧問サービスをご提案いたします。",
+        "貴社は2026年3月に設立された海運代理業の新会社であり、用船事業・船舶運航代理・船舶売買を主力事業として、業界経験豊富な4名のメンバーで事業を開始されています。大手商社（伊藤忠商事、日鉄物産等）を取引先とし、バルク貨物の国際輸送を手掛けるビジネスモデルは、取引金額が大きい一方で仕訳数は比較的少量という特徴がございます。",
+        "ドル建て取引が99%以上を占める貴社の事業特性を踏まえ、外貨建取引の適正な会計処理、消費税の還付対応、設立初年度の各種届出まで、ワンストップでサポートいたします。"
+      ]
+    }
+  },
+
+  "challenges": [
+    {
+      "id": "ch01",
+      "title": "設立届出・青色申告の提出",
+      "detail": "設立後速やかに税務署への各種届出書（法人設立届出書、青色申告承認申請書、給与支払事務所等の開設届出書等）を提出する必要があります。現時点で税務署への届出がまだ完了していないため、早急な対応が必要です。",
+      "linkedServiceIds": ["sv03"]
+    },
+    {
+      "id": "ch02",
+      "title": "外貨建取引の会計処理",
+      "detail": "売上・仕入の99%以上がドル建てであり、円口座とドル口座の2口座を運用予定です。為替換算の方法（期中レート・決算時レート）の選定、為替差損益の処理を適切に行う必要があります。",
+      "linkedServiceIds": ["sv01", "sv02"]
+    },
+    {
+      "id": "ch03",
+      "title": "消費税の還付対応",
+      "detail": "海運代理業の運賃は免税取引に該当し、国内で発生する経費の消費税について還付を受ける形となります。課税事業者届出・インボイス登録申請を行い、原則課税による消費税還付の体制を整備する必要があります。",
+      "linkedServiceIds": ["sv04"]
+    },
+    {
+      "id": "ch04",
+      "title": "役員報酬の決定",
+      "detail": "設立3ヶ月以内（2026年6月18日まで）に役員報酬額を決定する必要があります。1年目は売上2億円・粗利1千万円の見込みであり、事業計画を踏まえた慎重な設定が求められます。",
+      "linkedServiceIds": ["sv06"]
+    },
+    {
+      "id": "ch05",
+      "title": "freee導入・運用体制の構築",
+      "detail": "freeeを導入済みで経費精算にfreeeカードを活用予定ですが、外貨建取引の入力方法、勘定科目の設定、海運特有の取引パターンの登録等、初期セットアップが必要です。",
+      "linkedServiceIds": ["sv05"]
+    }
+  ],
+
+  "services": [
+    { "id": "sv01", "name": "記帳チェック・月次レビュー", "detail": "freeeでの自計化をサポート。月次で試算表をレビューし、外貨建取引の換算・消費税区分の正確性をチェック。" },
+    { "id": "sv02", "name": "決算申告", "detail": "法人税・消費税・地方税の確定申告書作成・提出まで一貫対応。消費税還付申告を含む。" },
+    { "id": "sv03", "name": "各種届出対応", "detail": "税務署への設立届出書・青色申告承認申請書・給与支払事務所等の開設届出書・インボイス登録申請書等の作成・提出。" },
+    { "id": "sv04", "name": "消費税還付対応", "detail": "免税取引（外航海運）に係る消費税の還付申告。課税売上割合の管理、証憑の整備支援。" },
+    { "id": "sv05", "name": "freee導入支援", "detail": "口座連携（円口座・ドル口座）、勘定科目マッピング、外貨建取引の入力ルール設定。初期セットアップ2〜3回の打ち合わせを実施。" },
+    { "id": "sv06", "name": "税務相談", "detail": "役員報酬設定・消費税還付戦略・外貨建取引処理・年末調整等について随時相談対応。" }
+  ],
+
+  "pricing": {
+    "selectedModules": {
+      "bookkeeping": false,
+      "selfBookkeeping": true,
+      "consultation": false
+    },
+    "manualPricing": {
+      "enabled": true,
+      "reason": "売上2億円見込みのため料金表対象外、粗利ベースでは3,000万円未満のためAクラス水準で個別見積り",
+      "monthly": {
+        "base": 35000,
+        "baseLabel": "経理サポート（自計化＋相談サポート込み） 粗利ベースAクラス水準で個別見積り"
+      },
+      "annual": {
+        "corporateTax": 140000,
+        "consumptionTax": 50000
+      }
+    },
+    "deliveryFrequency": "every3months",
+    "automaticDiscounts": {
+      "bankSync": false,
+      "creditCardSync": false,
+      "freeeHRUse": false,
+      "cashBookManual": false
+    },
+    "manualDiscounts": {
+      "introduction": { "monthly": 0, "annual": 0 },
+      "volume": {
+        "monthly": -10000,
+        "monthlyReason": "設立初年度・仕訳数少量のため",
+        "annual": -50000,
+        "annualReason": "設立初年度・仕訳数少量のため"
+      }
+    },
+    "annualOptions": {
+      "yearEndAdjustment": { "enabled": true, "people": 4 },
+      "statutoryReports": { "enabled": true, "sheets": 5 },
+      "salaryReport": { "enabled": true, "municipalities": 1 },
+      "fixedAssetReport": { "enabled": false },
+      "englishFS": { "enabled": false },
+      "auditSupport": { "enabled": false }
+    },
+    "selfBookkeepingFirstYearOnly": {
+      "initialGuidance": 100000,
+      "manualDiscounts": {}
+    },
+    "consumptionTaxMethod": "principle",
+    "notes": [
+      "上記金額に別途消費税がかかります。",
+      "経理サポートの料金は粗利ベース3,000万円未満・月間100仕訳未満を基準に個別見積りしております。売上規模の拡大に伴い料金が改定となる場合がございます。",
+      "消費税は原則課税（還付申告）を前提にお見積りしております。",
+      "初期指導報酬（100,000円）は初年度のみの費用です。",
+      "2年目以降は事業規模・業務量に応じて料金を見直しさせていただく場合がございます。"
+    ]
+  },
+
+  "contractFlow": {
+    "useDefault": false,
+    "customSteps": [
+      { "step": 1, "content": "本提案書のご確認・ご契約", "note": "内容にご同意いただければ契約へ。" },
+      { "step": 2, "content": "履歴事項全部証明書PDFのご提供", "note": "貴社にてご手配をお願いいたします。" },
+      { "step": 3, "content": "顧問契約書の締結", "note": "当事務所よりドラフトをお送りします。" },
+      { "step": 4, "content": "設立届出・青色申告承認申請書提出", "note": "当事務所にて速やかに対応いたします。" },
+      { "step": 5, "content": "インボイス登録申請", "note": "課税事業者届出と併せて対応。" },
+      { "step": 6, "content": "freee初期セットアップ", "note": "口座連携（円・ドル口座）・勘定科目・外貨取引の入力ルール設定。" },
+      { "step": 7, "content": "役員報酬額の決定", "note": "設立3ヶ月以内（6月18日まで）に決定。" },
+      { "step": 8, "content": "月次記帳チェック開始", "note": "継続的な記帳チェック・月次レビューを開始。" }
+    ]
+  }
+}
