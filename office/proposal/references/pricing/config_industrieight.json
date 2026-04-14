@@ -1,0 +1,155 @@
+{
+  "meta": {
+    "version": "2.0",
+    "outputMode": "proposal_multi",
+    "outputModeReason": "顧客が4パターンの見積もりを明確に要望（記帳代行/自計化 × 経理のみ/相談サポート付き）",
+    "theme": "blue",
+    "outputPath": "G:\\共有ドライブ\\06_見込み客\\20260413_板野さま\\税務顧問サービスのご提案_あしたの会計事務所_インダストリエイト株式会社.docx",
+    "generatedAt": "2026-04-13T14:00:00+09:00"
+  },
+
+  "client": {
+    "name": "インダストリエイト株式会社",
+    "honorific": "御中",
+    "industry": "情報通信業（AIソリューション）",
+    "businessDescription": "製造業向けAIソリューションの提供。法人1期目。",
+    "established": "2025-11-01",
+    "fiscalMonth": 10,
+    "capital": 2000000,
+    "employees": 0,
+    "representative": "板野光司",
+    "annualRevenue": 20000000,
+    "annualRevenueNote": "半期で約1,000万円。年商2,000〜4,000万円の見込み。現状ベースでBクラス適用。",
+    "monthlyTransactions": 30,
+    "salesClass": "B",
+    "requiresManualPricing": false
+  },
+
+  "proposal": {
+    "date": "2026-04-13",
+    "introduction": {
+      "useDefault": false,
+      "customParagraphs": [
+        "先日は顧問契約に関するご相談を賜り、誠にありがとうございました。お打ち合わせの内容を踏まえ、貴社の事業内容・規模に最適化した税務顧問サービスをご提案いたします。",
+        "貴社は製造業向けAIソリューション事業を展開され、法人設立1期目の重要な時期にあります。事業に集中いただける環境を整えるため、バックオフィス業務を全面的にサポートいたします。",
+        "記帳代行プランと自計化プランの2軸で、それぞれ相談サポートの有無を含めた4つのプランをご用意いたしました。貴社のご要望やお手間に応じて、最適なプランをお選びください。"
+      ]
+    }
+  },
+
+  "challenges": [
+    {
+      "id": "ch01",
+      "title": "法人1期目の経理体制構築",
+      "detail": "freeeに1〜2か月分の入力後、経理作業が停止している状態です。設立時からの取引データを正確に整備し、初年度決算に向けた経理体制を構築いたします。",
+      "linkedServiceIds": ["sv01", "sv05"]
+    },
+    {
+      "id": "ch02",
+      "title": "外注エンジニアへの源泉徴収対応",
+      "detail": "外注先エンジニアへの報酬について、現在源泉徴収が行われていない状態です。エンジニア報酬は原則として源泉徴収の対象外ですが、契約内容によっては対象となる場合があり、契約書の確認と適正な処理が必要です。",
+      "linkedServiceIds": ["sv03", "sv06"]
+    },
+    {
+      "id": "ch03",
+      "title": "社宅の経費処理",
+      "detail": "代表者様が会社契約の住居を社宅として利用されています。社宅家賃の算定（固定資産税課税明細書に基づく計算）および適正な経費処理を行います。",
+      "linkedServiceIds": ["sv01", "sv03"]
+    },
+    {
+      "id": "ch04",
+      "title": "プロジェクト別損益管理の実現",
+      "detail": "案件（プロジェクト）ごとの収益・費用を把握し、プロジェクト別の損益管理を行いたいとのご要望です。freeeの品目・部門機能を活用した管理体制を構築いたします。",
+      "linkedServiceIds": ["sv01", "sv05"]
+    },
+    {
+      "id": "ch05",
+      "title": "消費税の課税方法選択と届出確認",
+      "detail": "インボイス登録済みの課税事業者として、1期目に利用可能な2割特例の適用可否や、簡易課税届出の検討が必要です。最も有利な課税方法を選択いたします。",
+      "linkedServiceIds": ["sv03", "sv06"]
+    }
+  ],
+
+  "services": [
+    { "id": "sv01", "name": "経理サポート", "detail": "記帳代行または自計化サポート。freeeを活用した日常仕訳の処理、月次試算表のレビュー・納品。" },
+    { "id": "sv02", "name": "決算申告", "detail": "法人税・消費税・地方税の確定申告書作成・電子申告。決算報告書の作成。" },
+    { "id": "sv03", "name": "税務相談・消費税対応", "detail": "消費税の課税方法選択（2割特例・簡易課税）、インボイス対応、源泉徴収の確認、社宅家賃の算定。" },
+    { "id": "sv04", "name": "年末調整・法定調書", "detail": "役員の年末調整、法定調書・給与支払報告書の作成・提出。" },
+    { "id": "sv05", "name": "freee導入支援・プロジェクト管理設定", "detail": "既存freeeデータの整備、口座・カード連携の確認、品目・部門を活用したプロジェクト別管理の設定。" },
+    { "id": "sv06", "name": "税務届出・手続代行", "detail": "設立1期目の各種届出状況の確認、消費税関連届出の提出代行、納税額のお知らせ。" }
+  ],
+
+  "pricing": {
+    "outputMode": "proposal_multi",
+    "plans": [
+      {
+        "id": "A1",
+        "label": "プランA1｜経理サポート（記帳代行）プラン",
+        "selectedModules": { "bookkeeping": true, "selfBookkeeping": false, "consultation": false },
+        "manualDiscounts": {}
+      },
+      {
+        "id": "A2",
+        "label": "プランA2｜経理サポート（記帳代行）+ 相談サポートプラン",
+        "selectedModules": { "bookkeeping": true, "selfBookkeeping": false, "consultation": true },
+        "manualDiscounts": {}
+      },
+      {
+        "id": "B1",
+        "label": "プランB1｜経理サポート（自計化）プラン",
+        "selectedModules": { "bookkeeping": false, "selfBookkeeping": true, "consultation": false },
+        "manualDiscounts": {}
+      },
+      {
+        "id": "B2",
+        "label": "プランB2｜経理サポート（自計化）+ 相談サポートプラン",
+        "selectedModules": { "bookkeeping": false, "selfBookkeeping": true, "consultation": true },
+        "manualDiscounts": {}
+      }
+    ],
+    "manualPricing": { "enabled": false },
+    "deliveryFrequency": "monthly",
+    "automaticDiscounts": {
+      "bankSync": true,
+      "creditCardSync": true,
+      "freeeHRUse": false,
+      "cashBookManual": false
+    },
+    "commonAnnual": {
+      "corporateTax": { "amount": 140000, "manualOverride": false },
+      "consumptionTax": { "method": "simplified", "amount": 30000 },
+      "yearEndAdjustment": { "enabled": true, "people": 1 },
+      "statutoryReports": { "enabled": true, "sheets": 5 },
+      "salaryReport": { "enabled": true, "municipalities": 1 },
+      "fixedAssetReport": { "enabled": false },
+      "englishFS": { "enabled": false },
+      "auditSupport": { "enabled": false },
+      "manualDiscounts": {}
+    },
+    "selfBookkeepingFirstYearOnly": {
+      "initialGuidance": 100000,
+      "manualDiscounts": {}
+    },
+    "consumptionTaxMethod": "simplified",
+    "notes": [
+      "消費税の計算方法は簡易課税を前提としておりますが、2割特例の適用可否を含め、最も有利な方法をご契約後に検討いたします。",
+      "売上規模は現状（年商約2,000万円）を基準としております。売上増加に伴い料金改定が必要となる場合は、事前にお打ち合わせの上で調整いたします。",
+      "初期指導報酬（100,000円）は自計化プラン（B1・B2）の初年度のみの費用です。",
+      "銀行口座・クレジットカードのfreee連携を前提とした値引きを適用しております。"
+    ]
+  },
+
+  "contractFlow": {
+    "useDefault": false,
+    "customSteps": [
+      { "step": 1, "content": "本提案書のご確認・ご契約", "note": "内容にご同意いただければ契約へ。" },
+      { "step": 2, "content": "履歴事項全部証明書PDFのご提供", "note": "貴社にてご手配をお願いいたします。" },
+      { "step": 3, "content": "顧問契約書の締結", "note": "当事務所よりドラフトをお送りします。" },
+      { "step": 4, "content": "freee既存データの確認・整備", "note": "入力済みデータの確認、口座・カード連携の設定。" },
+      { "step": 5, "content": "設立届出・消費税届出の確認", "note": "未提出の届出がないか確認し、必要に応じて提出。" },
+      { "step": 6, "content": "2025年11月〜直近分の記帳開始", "note": "設立時からの取引データを整備します。" },
+      { "step": 7, "content": "プロジェクト別管理の設定", "note": "品目・部門機能を活用した管理体制を構築。" },
+      { "step": 8, "content": "継続的な記帳・月次レビュー", "note": "以降、定期的な記帳・レビューを継続します。" }
+    ]
+  }
+}

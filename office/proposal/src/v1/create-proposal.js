@@ -393,41 +393,194 @@ contentChildren.push(
 
 const pricingColWidths = [3000, 3026, 3000];
 
-// プランA
-if (config.pricing.planA) {
-  const pA = config.pricing.planA;
+// 4プラン形式の判定（planA1 が存在すれば4プラン）
+const isFourPlan = !!config.pricing.planA1;
+
+if (isFourPlan) {
+  // ── 4プラン形式 ──
+
+  // プランA1
+  if (config.pricing.planA1) {
+    const p = config.pricing.planA1;
+    contentChildren.push(
+      subHeading(`プランA1 ｜ ${p.planName || "経理サポート（記帳代行）プラン"}`),
+      bodyText("■ 月次料金"),
+      pricingTable(p.monthly, pricingColWidths),
+      spacer(200),
+    );
+  }
+
+  // プランA2
+  if (config.pricing.planA2) {
+    const p = config.pricing.planA2;
+    contentChildren.push(
+      subHeading(`プランA2 ｜ ${p.planName || "経理サポート（記帳代行）＋ 相談サポートプラン"}`),
+      bodyText("■ 月次料金"),
+      pricingTable(p.monthly, pricingColWidths),
+      spacer(200),
+    );
+  }
+
+  // A共通年次料金
+  if (config.pricing.commonAnnualA) {
+    contentChildren.push(
+      bodyText("■ 年次料金（プランA1・A2 共通）"),
+      pricingTable(config.pricing.commonAnnualA, pricingColWidths),
+      spacer(300),
+    );
+  }
+
+  contentChildren.push(new Paragraph({ children: [new PageBreak()] }));
+
+  // プランB1
+  if (config.pricing.planB1) {
+    const p = config.pricing.planB1;
+    contentChildren.push(
+      subHeading(`プランB1 ｜ ${p.planName || "経理サポート（自計化）プラン"}`),
+      bodyText("■ 月次料金"),
+      pricingTable(p.monthly, pricingColWidths),
+      spacer(200),
+    );
+  }
+
+  // プランB2
+  if (config.pricing.planB2) {
+    const p = config.pricing.planB2;
+    contentChildren.push(
+      subHeading(`プランB2 ｜ ${p.planName || "経理サポート（自計化）＋ 相談サポートプラン"}`),
+      bodyText("■ 月次料金"),
+      pricingTable(p.monthly, pricingColWidths),
+      spacer(200),
+    );
+  }
+
+  // B共通年次料金
+  if (config.pricing.commonAnnualB) {
+    contentChildren.push(
+      bodyText("■ 年次料金（プランB1・B2 共通）"),
+      pricingTable(config.pricing.commonAnnualB, pricingColWidths),
+      spacer(200),
+    );
+  }
+
+  // B初年度のみ
+  if (config.pricing.firstYearOnlyB) {
+    contentChildren.push(
+      bodyText("■ 初年度のみの年次料金（プランB1・B2）"),
+      pricingTable(config.pricing.firstYearOnlyB, pricingColWidths),
+      spacer(300),
+    );
+  }
+
+  // サマリーA（A1/A2）
+  if (config.pricing.summaryA) {
+    contentChildren.push(
+      bodyText("■ 年間費用サマリー：プランA1・A2（税別）"),
+      annualSummaryTable(config.pricing.summaryA),
+      spacer(200),
+    );
+  }
+
+  // サマリーB（B1/B2）
+  if (config.pricing.summaryB) {
+    const sumB = config.pricing.summaryB;
+    const hasFirstYear = sumB.planA && sumB.planA.firstYearOnlyTotal;
+    const colWidths = [3000, 3000, 3000];
+    const bRows = [
+      new TableRow({
+        children: [
+          headerCell("", 3000),
+          headerCell(sumB.planA.label, 3000),
+          headerCell(sumB.planB.label, 3000),
+        ],
+      }),
+      new TableRow({
+        children: [
+          dataCell("月次料金 × 12ヶ月", 3000, { bold: true, fill: LIGHT_BG }),
+          dataCell(sumB.planA.monthlyTotal, 3000, { align: AlignmentType.RIGHT, fill: LIGHT_BG }),
+          dataCell(sumB.planB.monthlyTotal, 3000, { align: AlignmentType.RIGHT, fill: LIGHT_BG }),
+        ],
+      }),
+      new TableRow({
+        children: [
+          dataCell("年次料金（毎年）", 3000, { bold: true }),
+          dataCell(sumB.planA.annualTotal, 3000, { align: AlignmentType.RIGHT }),
+          dataCell(sumB.planB.annualTotal, 3000, { align: AlignmentType.RIGHT }),
+        ],
+      }),
+    ];
+    // 初年度のみの行
+    if (sumB.planA.firstYearOnlyTotal) {
+      bRows.push(new TableRow({
+        children: [
+          dataCell("年次料金（初年度のみ）", 3000, { bold: true, fill: LIGHT_BG }),
+          dataCell(sumB.planA.firstYearOnlyTotal, 3000, { align: AlignmentType.RIGHT, fill: LIGHT_BG }),
+          dataCell(sumB.planB.firstYearOnlyTotal, 3000, { align: AlignmentType.RIGHT, fill: LIGHT_BG }),
+        ],
+      }));
+    }
+    bRows.push(new TableRow({
+      children: [
+        highlightCell("年間合計（税別）", 3000),
+        highlightCell(sumB.planA.grandTotal, 3000, { align: AlignmentType.RIGHT }),
+        highlightCell(sumB.planB.grandTotal, 3000, { align: AlignmentType.RIGHT }),
+      ],
+    }));
+
+    contentChildren.push(
+      bodyText("■ 年間費用サマリー：プランB1・B2（税別）"),
+      new Table({
+        width: { size: 9000, type: WidthType.DXA },
+        columnWidths: colWidths,
+        rows: bRows,
+      }),
+      spacer(100),
+    );
+  }
+
   contentChildren.push(
-    subHeading(`プランA ｜ ${pA.planName || "経理サポート（記帳代行）プラン"}`),
-    bodyText("■ 月次料金"),
-    pricingTable(pA.monthly, pricingColWidths),
-    spacer(200),
-    bodyText("■ 年次料金"),
-    pricingTable(pA.annual, pricingColWidths),
-    spacer(300),
+    bodyText("※ 上記金額に別途消費税がかかります。"),
+  );
+
+} else {
+  // ── 2プラン形式（従来） ──
+
+  // プランA
+  if (config.pricing.planA) {
+    const pA = config.pricing.planA;
+    contentChildren.push(
+      subHeading(`プランA ｜ ${pA.planName || "経理サポート（記帳代行）プラン"}`),
+      bodyText("■ 月次料金"),
+      pricingTable(pA.monthly, pricingColWidths),
+      spacer(200),
+      bodyText("■ 年次料金"),
+      pricingTable(pA.annual, pricingColWidths),
+      spacer(300),
+    );
+  }
+
+  // プランB
+  if (config.pricing.planB) {
+    const pB = config.pricing.planB;
+    contentChildren.push(
+      subHeading(`プランB ｜ ${pB.planName || "経理サポート（自計化）＋ 相談サポートプラン"}`),
+      bodyText("■ 月次料金"),
+      pricingTable(pB.monthly, pricingColWidths),
+      spacer(200),
+      bodyText("■ 年次料金"),
+      pricingTable(pB.annual, pricingColWidths),
+      spacer(300),
+    );
+  }
+
+  // 年間サマリー
+  contentChildren.push(
+    bodyText("■ 年間費用サマリー（税別）"),
+    annualSummaryTable(config.pricing.summary),
+    spacer(100),
+    bodyText("※ 上記金額に別途消費税がかかります。"),
   );
 }
-
-// プランB
-if (config.pricing.planB) {
-  const pB = config.pricing.planB;
-  contentChildren.push(
-    subHeading(`プランB ｜ ${pB.planName || "経理サポート（自計化）＋ 相談サポートプラン"}`),
-    bodyText("■ 月次料金"),
-    pricingTable(pB.monthly, pricingColWidths),
-    spacer(200),
-    bodyText("■ 年次料金"),
-    pricingTable(pB.annual, pricingColWidths),
-    spacer(300),
-  );
-}
-
-// 年間サマリー
-contentChildren.push(
-  bodyText("■ 年間費用サマリー（税別）"),
-  annualSummaryTable(config.pricing.summary),
-  spacer(100),
-  bodyText("※ 上記金額に別途消費税がかかります。"),
-);
 
 // 追加注記
 if (config.pricing.notes && config.pricing.notes.length > 0) {

@@ -264,7 +264,7 @@ config.json の `meta.theme` でカラーテーマを指定可能:
 
 #### proposal_multi 固有の構造
 
-4プラン（A1, A2, B1, B2）を `pricing.plans` 配列に格納する:
+4プラン（A1, A2, B1, B2）の組み合わせ:
 
 | プラン | 記帳代行 | 自計化 | 相談サポート |
 |--------|---------|--------|------------|
@@ -273,8 +273,9 @@ config.json の `meta.theme` でカラーテーマを指定可能:
 | B1 | - | ✓ | - |
 | B2 | - | ✓ | ✓ |
 
-年次料金は `pricing.commonAnnual` に全プラン共通で格納。
-自計化プランの初年度費用は `pricing.selfBookkeepingFirstYearOnly` に格納。
+**v2 config（Step 7）**: `pricing.plans` 配列に格納。年次料金は `pricing.commonAnnual`、初年度費用は `pricing.selfBookkeepingFirstYearOnly` に格納。
+
+**v1 config（Step 8で使用）**: `pricing.planA1` / `planA2` / `planB1` / `planB2` に個別格納。年次料金は `commonAnnualA` / `commonAnnualB`、初年度費用は `firstYearOnlyB`、サマリーは `summaryA` / `summaryB` に格納。詳細はStep 8を参照。
 
 #### config 生成後の報告フォーマット
 
@@ -297,16 +298,106 @@ config.json の `meta.theme` でカラーテーマを指定可能:
 - （不明だった項目や要確認事項があればここに記載）
 ```
 
-### Step 8: 提案書生成（フェーズ3で実装予定）
+### Step 8: 提案書生成
 
 config.json をもとに提案書（.docx）を生成する。
 
+#### proposal_single の場合
+
+v2スクリプトで生成:
 ```bash
-node src/v2/create-proposal.js <config.json> [output.docx]
+node src/v2/create-proposal.js <config_v2.json> [output.docx]
 ```
 
-※ フェーズ3で `src/v2/create-proposal.js` を実装後に有効化。
-現時点ではStep 7（config.json生成）までが本スキルの範囲。
+#### proposal_multi の場合
+
+v2の`proposal_multi`は未実装のため、**v1スクリプト（4プラン拡張）で生成する**。
+v2形式のconfig（Step 7で生成）とは別に、v1形式の4プランconfigを作成して使う。
+
+```bash
+node src/v1/create-proposal.js <config_v1.json> [output.docx]
+```
+
+**v1 4プランconfigの構造:**
+
+v1スクリプトは `pricing.planA1` の存在を検出すると4プランモードに切り替わる。
+
+```json
+{
+  "pricing": {
+    "planA1": {
+      "planName": "経理サポート（記帳代行）プラン",
+      "monthly": [
+        { "name": "経理サポート（記帳代行）", "detail": "〜100仕訳まで（売上3,000万円未満）", "amount": "30,000円" },
+        { "name": "銀行同期値引き", "detail": "...", "amount": "-1,000円" },
+        { "name": "", "detail": "月次料金 合計", "amount": "28,000円", "isTotal": true }
+      ]
+    },
+    "planA2": {
+      "planName": "経理サポート（記帳代行）＋ 相談サポートプラン",
+      "monthly": [
+        { "name": "経理サポート（記帳代行）", "detail": "...", "amount": "30,000円" },
+        { "name": "相談サポート", "detail": "...", "amount": "8,000円" },
+        { "name": "", "detail": "月次料金 合計", "amount": "36,000円", "isTotal": true }
+      ]
+    },
+    "commonAnnualA": [
+      { "name": "法人税・事業税等申告報酬", "detail": "...", "amount": "140,000円" },
+      { "name": "", "detail": "年次料金 合計", "amount": "202,000円", "isTotal": true }
+    ],
+    "planB1": {
+      "planName": "経理サポート（自計化）プラン",
+      "monthly": [...]
+    },
+    "planB2": {
+      "planName": "経理サポート（自計化）＋ 相談サポートプラン",
+      "monthly": [...]
+    },
+    "commonAnnualB": [
+      "... B1・B2 共通の年次料金（commonAnnualAと同一の場合が多い）"
+    ],
+    "firstYearOnlyB": [
+      { "name": "クラウド会計導入支援", "detail": "約5時間・3か月間の導入サポート", "amount": "100,000円" },
+      { "name": "", "detail": "年次料金 合計", "amount": "100,000円", "isTotal": true }
+    ],
+    "summaryA": {
+      "planA": { "label": "プランA1（記帳代行）", "monthlyTotal": "336,000円", "annualTotal": "202,000円", "grandTotal": "538,000円" },
+      "planB": { "label": "プランA2（記帳代行+相談）", "monthlyTotal": "432,000円", "annualTotal": "202,000円", "grandTotal": "634,000円" }
+    },
+    "summaryB": {
+      "planA": { "label": "プランB1（自計化）", "monthlyTotal": "108,000円", "annualTotal": "202,000円", "firstYearOnlyTotal": "100,000円", "grandTotal": "410,000円" },
+      "planB": { "label": "プランB2（自計化+相談）", "monthlyTotal": "204,000円", "annualTotal": "202,000円", "firstYearOnlyTotal": "100,000円", "grandTotal": "506,000円" }
+    },
+    "notes": [...]
+  }
+}
+```
+
+**提案書のテーブル構成（4プラン）:**
+
+| テーブル | 内容 |
+|---------|------|
+| T1 | 課題認識 |
+| T2 | サービス内容 |
+| T3 | プランA1 月次料金 |
+| T4 | プランA2 月次料金 |
+| T5 | A1・A2 共通年次料金 |
+| — | ページブレイク |
+| T6 | プランB1 月次料金 |
+| T7 | プランB2 月次料金 |
+| T8 | B1・B2 共通年次料金 |
+| T9 | 初年度のみの年次料金（B1・B2） |
+| T10 | サマリー A1/A2 |
+| T11 | サマリー B1/B2（初年度行あり） |
+| T12 | ご契約後の流れ |
+| T13 | 事務所概要 |
+
+**summaryA**: A1/A2の2列比較。`annualSummaryTable()` で生成（v1既存関数を再利用）。
+**summaryB**: B1/B2の2列比較。`firstYearOnlyTotal` があれば「年次料金（初年度のみ）」行を自動追加。
+
+**サンプル参照:**
+- 4プラン実例: `references/pricing/config_industrieight_v1.json`（インダストリエイト株式会社）
+- BackUP参考: `G:\共有ドライブ\06_見込み客\20260224_武市さん（buckup？）\顧問サービスのご提案_あしたの会計事務所_合同会社BackUP_20260331.docx`
 
 ## 重要な原則
 
@@ -368,8 +459,10 @@ node src/v2/create-proposal.js <config.json> [output.docx]
 |---------|------|
 | `references/pricing/pricing-table.json` | v2.0 料金表（2次元マトリクス） |
 | `src/v2/pricing-calculator.js` | 料金計算モジュール（8関数） |
+| `src/v1/create-proposal.js` | v1提案書生成スクリプト（2プラン・4プラン両対応） |
 | `.claude/skills/proposal-generator-v2/config-schema.json` | config.json v2.0 の JSON Schema |
-| `.claude/skills/proposal-generator-v2/samples/` | 6社分のサンプル config |
+| `.claude/skills/proposal-generator-v2/samples/` | 6社分のサンプル config（v2形式） |
+| `references/pricing/config_industrieight_v1.json` | 4プランconfig実例（v1形式） |
 | `docs/proposal-design-v1.md` | 設計書（料金体系・スキーマ・テンプレート構造） |
 | `templates/proposals/` | 提案書 .docx テンプレート |
 

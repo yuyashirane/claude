@@ -48,41 +48,34 @@ node src/v1/create-proposal.js <config.json> [output.docx]
   ],
 
   "pricing": {
+    // ── 2プラン形式（planA / planB）──
     "planA": {
       "planName": "経理サポート（記帳代行）プラン",
       "monthly": [
-        { "name": "経理サポート（記帳代行）", "detail": "〜100仕訳まで（売上3,000万円未満）", "amount": "32,000円" },
-        { "name": "ご紹介値引き", "detail": "", "amount": "-3,000円" },
-        { "name": "出精値引き", "detail": "", "amount": "-2,000円" },
+        { "name": "経理サポート（記帳代行）", "detail": "〜100仕訳まで", "amount": "32,000円" },
         { "name": "", "detail": "月次料金 合計", "amount": "27,000円", "isTotal": true }
       ],
       "annual": [
-        { "name": "法人税・事業税等申告報酬", "detail": "売上3,000万円未満", "amount": "140,000円" },
+        { "name": "法人税・事業税等申告報酬", "detail": "...", "amount": "140,000円" },
         { "name": "", "detail": "年次料金 合計", "amount": "162,000円", "isTotal": true }
       ]
     },
-    "planB": {
-      "planName": "経理サポート（自計化）＋ 相談サポートプラン",
-      "monthly": [...],
-      "annual": [...]
-    },
+    "planB": { "planName": "...", "monthly": [...], "annual": [...] },
     "summary": {
-      "planA": {
-        "label": "プランA（記帳代行）",
-        "monthlyTotal": "324,000円",
-        "annualTotal": "162,000円",
-        "grandTotal": "486,000円"
-      },
-      "planB": {
-        "label": "プランB（自計化+相談）",
-        "monthlyTotal": "204,000円",
-        "annualTotal": "192,000円",
-        "grandTotal": "396,000円"
-      }
+      "planA": { "label": "プランA（記帳代行）", "monthlyTotal": "...", "annualTotal": "...", "grandTotal": "..." },
+      "planB": { "label": "プランB（自計化+相談）", "monthlyTotal": "...", "annualTotal": "...", "grandTotal": "..." }
     },
-    "notes": [
-      "追加の注記があればここに"
-    ]
+
+    // ── 4プラン形式（planA1が存在すると自動判定）──
+    // planA1, planA2: 記帳代行系（monthlyのみ）
+    // planB1, planB2: 自計化系（monthlyのみ）
+    // commonAnnualA: A1・A2 共通年次料金（配列）
+    // commonAnnualB: B1・B2 共通年次料金（配列）
+    // firstYearOnlyB: B1・B2 初年度のみの年次料金（配列、クラウド会計導入支援等）
+    // summaryA: A1/A2 サマリー（planA, planB キーで2列比較）
+    // summaryB: B1/B2 サマリー（planA, planB キーで2列比較、firstYearOnlyTotal で初年度行追加）
+
+    "notes": ["追加の注記があればここに"]
   },
 
   "notes": [

@@ -249,7 +249,13 @@
       "Bash(node src/v2/test-config-samples.js)",
       "Bash(node src/v2/test-styles.js)",
       "Bash(node src/v2/create-proposal.js .claude/skills/proposal-generator-v2/samples/config-v2-megasolar.json src/v2/test-output/proposal-megasolar-blue.docx)",
-      "Bash(node src/v2/test-themes.js)"
+      "Bash(node src/v2/test-themes.js)",
+      "Bash(node src/shared/company-resolver.js --search \"ハクセン\")",
+      "Bash(node src/shared/company-resolver.js --write-kintone 589 976838)",
+      "Bash(node src/verify/monthly-checker.js --company 976838 --month 2026-02 --no-dry-run)",
+      "Bash(node src/v2/create-proposal.js references/pricing/config_industrieight.json)",
+      "Bash(node src/v1/create-proposal.js references/pricing/config_industrieight_v1.json)",
+      "Bash(node src/v1/create-proposal.js references/pricing/config_industrieight_v1.json \"G:/共有ドライブ/06_見込み客/20260413_板野さま/税務顧問サービスのご提案_あしたの会計事務所_インダストリエイト株式会社_20260413.docx\")"
     ]
   }
 }
