@@ -259,7 +259,11 @@
       "Bash(.venv/Scripts/python --version)",
       "Bash(.venv/Scripts/python scripts/verify_part1_json.py)",
       "Bash(.venv/Scripts/python scripts/verify_part1_schema.py)",
-      "Bash(cmd //c \"tree /F skills\")"
+      "Bash(cmd //c \"tree /F skills\")",
+      "Bash(.venv/Scripts/python scripts/verify_part2_lib.py)",
+      "Bash(ls .venv/Scripts/python*)",
+      "Bash(.venv/Scripts/python.exe scripts/verify_part3_tests.py)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/verify_part3_tests.py)"
     ]
   }
 }
