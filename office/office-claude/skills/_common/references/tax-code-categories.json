@@ -1,0 +1,56 @@
+{
+  "_comment": "v0.2 細分化版。税区分コード → 判定カテゴリのマスタ。",
+  "_version": "1.0",
+  "_last_updated": "2026-04-14",
+  "_source": "Step 4-C 横断テーマ v0.2 §6",
+
+  "taxable_purchase": {
+    "description": "課税仕入系(標準・旧税率含む)",
+    "codes": [34, 108, 136, 183, 184, 185, 186, 187, 188, 189, 190]
+  },
+
+  "reduced_purchase": {
+    "description": "軽減税率仕入系",
+    "codes": [163, 187, 188]
+  },
+
+  "standard_purchase_10": {
+    "description": "標準税率仕入10%",
+    "codes": [136, 189, 190]
+  },
+
+  "non_taxable_purchase": {
+    "description": "非課税仕入",
+    "codes": [37]
+  },
+
+  "taxable_sales": {
+    "description": "課税売上系(全体)",
+    "codes": [21, 101, 129, 156]
+  },
+
+  "standard_taxable_sales": {
+    "description": "課税売上10%(標準)",
+    "codes": [21, 129]
+  },
+
+  "reduced_taxable_sales": {
+    "description": "課税売上8%(軽減)",
+    "codes": [101, 156]
+  },
+
+  "export_sales": {
+    "description": "輸出免税売上",
+    "codes": [22]
+  },
+
+  "non_taxable_sales": {
+    "description": "非課税売上",
+    "codes": [23]
+  },
+
+  "non_subject": {
+    "description": "対象外(不課税)",
+    "codes": [2]
+  }
+}

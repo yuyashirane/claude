@@ -1,0 +1,122 @@
+{
+  "_comment": "エリアタグ定義マスタ。office-claude 全体の共通仕様(v1.2.2 第3章準拠)。",
+  "_version": "2.0",
+  "_last_updated": "2026-04-14",
+  "_source": "仕様書 v1.2.2 第3章",
+  "_changes_from_v1": "A1/A2/A3/A6/A7/A9/A13 のエリア名を v1.2.2 第3章に準拠して全面置換。subarea の順序も v1.2.2 §3.2 に準拠。",
+
+  "areas": {
+    "A1": {
+      "name": "現預金",
+      "description": "現金・預金・小口現金など"
+    },
+    "A2": {
+      "name": "借入金",
+      "description": "短期借入金・長期借入金・社債"
+    },
+    "A3": {
+      "name": "固定資産",
+      "description": "建物・機械・車両・工具器具備品"
+    },
+    "A4": {
+      "name": "家賃・地代",
+      "description": "受取家賃・支払家賃・地代家賃・土地関連",
+      "used_by_tc": ["TC-02"]
+    },
+    "A5": {
+      "name": "人件費",
+      "description": "給与・賞与・退職金・法定福利費",
+      "used_by_tc": ["TC-03"]
+    },
+    "A6": {
+      "name": "士業・外注",
+      "description": "税理士・弁護士・司法書士等の士業報酬、外注費"
+    },
+    "A7": {
+      "name": "役員・株主",
+      "description": "役員報酬・役員借入・配当金等の役員・株主関連"
+    },
+    "A8": {
+      "name": "売上",
+      "description": "売上高・売上返品・売上値引",
+      "used_by_tc": ["TC-01"]
+    },
+    "A9": {
+      "name": "仕入・棚卸",
+      "description": "仕入高・仕入返品・商品・製品・原材料・仕掛品"
+    },
+    "A10": {
+      "name": "その他経費",
+      "description": "福利厚生費・保険料・支払手数料・租税公課以外の経費",
+      "used_by_tc": ["TC-05b", "TC-05d", "TC-05e", "TC-07"]
+    },
+    "A11": {
+      "name": "営業外・特別損益",
+      "description": "受取利息・支払利息・配当金・保険金・補助金",
+      "used_by_tc": ["TC-04", "TC-05a", "TC-05c"]
+    },
+    "A12": {
+      "name": "税金",
+      "description": "租税公課・法人税等",
+      "used_by_tc": ["TC-06"]
+    },
+    "A13": {
+      "name": "その他",
+      "description": "外貨・有価証券・税効果・その他の上記に該当しない論点"
+    }
+  },
+
+  "subareas": {
+    "_comment": "V1-3-10 で使用する subarea 定義(v1.2.2 §3.2 準拠)。parent_area は実装上の逆引き用に追加。",
+
+    "rent": {
+      "parent_area": "A4",
+      "description": "家賃(住宅・事業用)",
+      "used_by_sub_code": ["TC-02b", "TC-02c", "TC-02e", "TC-02f"]
+    },
+    "land": {
+      "parent_area": "A4",
+      "description": "土地",
+      "used_by_sub_code": ["TC-02a"]
+    },
+    "parking": {
+      "parent_area": "A4",
+      "description": "駐車場",
+      "used_by_sub_code": ["TC-02d"]
+    },
+    "payroll": {
+      "parent_area": "A5",
+      "description": "人件費",
+      "used_by_sub_code": ["TC-03a", "TC-03b", "TC-03c"]
+    },
+    "welfare": {
+      "parent_area": "A10",
+      "description": "福利厚生費",
+      "used_by_sub_code": ["TC-07a", "TC-07b", "TC-07c", "TC-07d", "TC-07e", "TC-07f"]
+    },
+    "tax_public_charges": {
+      "parent_area": "A12",
+      "description": "租税公課",
+      "used_by_sub_code": ["TC-06a", "TC-06b", "TC-06c", "TC-06d", "TC-06e"]
+    },
+    "non_operating_revenue": {
+      "parent_area": "A11",
+      "description": "営業外収益",
+      "used_by_sub_code": ["TC-04a", "TC-04b", "TC-04c", "TC-04d", "TC-04e", "TC-04f"]
+    },
+    "non_operating_expense": {
+      "parent_area": "A11",
+      "description": "営業外費用",
+      "used_by_sub_code": ["TC-05a", "TC-05c"]
+    }
+  },
+
+  "dynamic_area_assignment": {
+    "_comment": "仕様書 v1.2.2 §3.3 area の動的付与",
+    "TC-05": {
+      "支払利息": "A11",
+      "保険料": "A10",
+      "保証料": "A10"
+    }
+  }
+}

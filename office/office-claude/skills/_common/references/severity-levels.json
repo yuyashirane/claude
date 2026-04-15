@@ -1,0 +1,97 @@
+{
+  "_comment": "3軸独立(severity / review_level / error_type)の定義マスタ。office-claude 共通仕様。",
+  "_version": "1.0",
+  "_last_updated": "2026-04-14",
+  "_source": "仕様書 v1.2.2 第2.5節 + 4-D-1 v1.0 + Step 4-C v0.2 §7",
+  "_usage": "実装時は v1.2.2 第13章と整合して使用する。第13章が上書き優先事項。",
+
+  "severity": {
+    "🔴": {
+      "label": "High",
+      "meaning": "誤りの重さ・税務インパクトが大きい",
+      "typical_confidence_range": [85, 100]
+    },
+    "🟡": {
+      "label": "Medium",
+      "meaning": "誤りだが税務インパクトは中程度、または判断を要する",
+      "typical_confidence_range": [50, 85]
+    },
+    "🟠": {
+      "label": "Warning",
+      "meaning": "誤検知の可能性が高い系統(reverse_suspect 系の表示用)",
+      "typical_confidence_range": [40, 70],
+      "note": "4-D-1 v1.0 で独立カテゴリ化。実装では reverse_suspect が 🟡 として出ることが多いが、将来 🟠 表示の選択肢を残す"
+    },
+    "🟢": {
+      "label": "Low",
+      "meaning": "参考レベル、税額影響軽微",
+      "typical_confidence_range": [50, 70]
+    }
+  },
+
+  "review_level": {
+    "必修": {
+      "description": "必ず人が確認すべき論点",
+      "corresponds_to_error_type": ["direct_error"],
+      "default_show_by_default": true
+    },
+    "判断": {
+      "description": "グレー論点、人の判断が必要",
+      "corresponds_to_error_type": ["gray_review"],
+      "default_show_by_default": true
+    },
+    "警戒": {
+      "description": "誤検知の可能性が高いが確認の価値あり",
+      "corresponds_to_error_type": ["reverse_suspect"],
+      "default_show_by_default": true
+    },
+    "参考": {
+      "description": "税額影響軽微、帳簿整合性の観点",
+      "corresponds_to_error_type": ["mild_warning"],
+      "default_show_by_default": false
+    }
+  },
+
+  "error_type": {
+    "direct_error": {
+      "description": "明確な誤り(法的根拠あり)",
+      "default_review_level": "必修",
+      "typical_severity": ["🔴", "🟡"]
+    },
+    "gray_review": {
+      "description": "グレー論点、人の判断が必要",
+      "default_review_level": "判断",
+      "typical_severity": ["🟡"]
+    },
+    "reverse_suspect": {
+      "description": "逆方向検出(反証があれば誤検知)",
+      "default_review_level": "警戒",
+      "typical_severity": ["🟡", "🟠"]
+    },
+    "mild_warning": {
+      "description": "税額影響軽微、帳簿整合性の観点での推奨",
+      "default_review_level": "参考",
+      "typical_severity": ["🟢"]
+    }
+  },
+
+  "sort_priority_ranges": {
+    "_comment": "仕様書 v1.2.2 第2.10節 + 第11.5節",
+    "critical": {
+      "range": [1, 10],
+      "description": "最優先レビュー"
+    },
+    "normal": {
+      "range": [11, 30],
+      "description": "通常レビュー"
+    },
+    "minor": {
+      "range": [31, 50],
+      "description": "軽微・参考"
+    },
+    "hidden_by_default": {
+      "range": [90, 99],
+      "description": "初期非表示(show_by_default=false)"
+    }
+  }
+}

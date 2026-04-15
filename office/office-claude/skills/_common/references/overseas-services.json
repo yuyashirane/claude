@@ -1,0 +1,9 @@
+{
+  "_comment": "V1-3-40(海外サービス消費税 Skill)用の予約席。V1-3-10 では使用しない。",
+  "_version": "DRAFT-0.1",
+  "_last_updated": "2026-04-14",
+  "_source": "仕様書 v1.2.2 §13.4.5 ディレクトリ構成 v0.2",
+  "_status": "placeholder - V1-3-40 着手時に既存 Node.js 実装から移植予定",
+
+  "services": {}
+}
