@@ -1,0 +1,20 @@
+{
+  "_comment": "TC-07用 福利厚生費判定キーワード。Pattern D = KW優先順位ディスパッチ型。",
+  "_priority_order": ["condolence", "gift_certificate", "food_takeout", "food_dine_in", "taxable_welfare"],
+  "_design_axis": "目的 > 手段 の原則に基づく優先順位。condolence(目的) > gift_certificate(手段) > food系 > taxable_welfare(最後の砦)",
+  "condolence": [
+    "慶弔", "見舞金", "弔慰金", "香典", "結婚祝金", "出産祝金", "祝金", "祝儀", "葬儀", "葬祭", "お見舞い"
+  ],
+  "gift_certificate": [
+    "商品券", "ギフト券", "ギフトカード", "クオカード", "QUOカード", "QUO", "ビール券", "図書カード", "図書券", "プリペイドカード", "プリペイド", "Amazonギフト券", "Amazonギフトカード"
+  ],
+  "food_takeout": [
+    "弁当", "お弁当", "テイクアウト", "持ち帰り", "宅配", "デリバリー"
+  ],
+  "food_dine_in": [
+    "店内", "店内飲食", "レストラン", "居酒屋", "宴会", "懇親会", "忘年会", "新年会", "ケータリング"
+  ],
+  "taxable_welfare": [
+    "制服", "作業着", "ユニフォーム", "健康診断", "人間ドック", "社員旅行", "慰安旅行"
+  ]
+}

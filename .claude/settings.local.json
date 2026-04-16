@@ -275,7 +275,23 @@
       "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/verify_phase4_tc02.py)",
       "Bash(node src/v1/create-proposal.js references/pricing/config_lplanning_v1.json)",
       "Bash(python -c ':*)",
-      "Bash(py -c ':*)"
+      "Bash(py -c ':*)",
+      "Bash(python -m pytest tests/unit/ --tb=no -q)",
+      "Bash(py --version)",
+      "Bash(py -3 --version)",
+      "Bash(py -m pytest tests/unit/ --tb=no -q)",
+      "Bash(py -m pip install pytest)",
+      "Bash(py -m pytest tests/unit/test_tc07.py -v --tb=short)",
+      "Bash(py -m pytest tests/unit/test_tc07.py --tb=short -q)",
+      "Bash(py -m pytest tests/unit/ --tb=short -q)",
+      "Bash(py scripts/verify_phase5_tc07.py)",
+      "Bash(.venv/Scripts/python -m pytest --co -q)",
+      "Bash(.venv/Scripts/python -c \"import openpyxl; print\\(openpyxl.__version__\\)\")",
+      "Bash(mkdir -p /c/Users/yuya_/claude/office/office-claude/skills/export/excel_report/references)",
+      "Bash(mkdir -p /c/Users/yuya_/claude/office/office-claude/scripts)",
+      "Bash(.venv/Scripts/python -m pytest tests/unit/test_excel_export.py -q --tb=short)",
+      "Bash(.venv/Scripts/python -m pytest tests/ -q --tb=short)",
+      "Bash(.venv/Scripts/python scripts/verify_phase6_excel.py)"
     ]
   }
 }

@@ -1,0 +1,5 @@
+{
+  "_comment": "TC-07用 福利厚生費科目辞書",
+  "welfare": ["福利厚生費", "福利費"],
+  "_excluded_from_initial_scope": ["共済会費", "社員親睦会費"]
+}

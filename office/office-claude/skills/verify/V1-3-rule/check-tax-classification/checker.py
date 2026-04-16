@@ -46,7 +46,10 @@ def run(ctx) -> list:
     # TC-06: 租税公課の課税誤り
     from checks.tc06_tax_public_charges import run as run_tc06
     findings.extend(run_tc06(ctx))
-    # ... (TC-01, TC-02, TC-07)
+
+    # TC-07: 福利厚生費の不課税・非課税判定誤り(Pattern D: KW優先順位ディスパッチ型)
+    from checks.tc07_welfare import run as run_tc07
+    findings.extend(run_tc07(ctx))
 
     return findings
 
