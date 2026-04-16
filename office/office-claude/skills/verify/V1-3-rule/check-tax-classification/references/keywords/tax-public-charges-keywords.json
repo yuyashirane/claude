@@ -1,0 +1,6 @@
+{
+  "_comment": "TC-06用 租税公課判定キーワード",
+  "diesel": ["軽油", "軽油引取税"],
+  "usage_tax": ["ゴルフ場利用税", "入湯税"],
+  "taxable_exception": []
+}

@@ -263,7 +263,19 @@
       "Bash(.venv/Scripts/python scripts/verify_part2_lib.py)",
       "Bash(ls .venv/Scripts/python*)",
       "Bash(.venv/Scripts/python.exe scripts/verify_part3_tests.py)",
-      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/verify_part3_tests.py)"
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/verify_part3_tests.py)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/verify_phase2_tc03.py)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/verify_phase3_tc04.py)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/verify_phase3_tc05.py)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/verify_phase3_tc06.py)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe -m pytest tests/unit/ --tb=short -q)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/verify_phase3r_refactor.py)",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/verify_phase4_tc01.py)",
+      "Bash(.venv/Scripts/python.exe -c \"from skills._common.lib.finding_factory import is_debit_side, is_credit_side, resolve_tax_code, load_reference_json; print\\('imports OK'\\)\")",
+      "Bash(PYTHONIOENCODING=utf-8 .venv/Scripts/python.exe scripts/verify_phase4_tc02.py)",
+      "Bash(node src/v1/create-proposal.js references/pricing/config_lplanning_v1.json)",
+      "Bash(python -c ':*)",
+      "Bash(py -c ':*)"
     ]
   }
 }

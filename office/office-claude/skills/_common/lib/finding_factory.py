@@ -33,29 +33,43 @@ from typing import Optional
 _SKILLS_ROOT = Path(__file__).parent.parent.parent  # skills/
 
 
-def load_reference_json(skill_path: str, filename: str) -> dict:
+def load_reference_json(
+    skill_path: str,
+    filename: str,
+    *,
+    filter_meta: bool = False,
+) -> dict:
     """Skill 固有の references/JSON を読み込む。
 
     Args:
         skill_path: Skill の相対パス（例: "verify/V1-3-rule/check-tax-classification"）
         filename: ファイル名（拡張子なし、例: "payroll-accounts"）
+        filter_meta: True の場合、トップレベルの "_" プレフィックスキー
+            (_comment / _version / _last_updated / _source 等)を自動除外。
+            categorize_account 等に直接渡せるようボイラープレート削減。
+            **デフォルト False(既存互換維持)**。TC 側から明示的に True を渡す。
 
     Returns:
-        読み込まれた dict
+        読み込まれた dict（filter_meta=True 指定時のみ _ プレフィックスキー除外済み）
 
     Raises:
         FileNotFoundError: ファイルが存在しない
         json.JSONDecodeError: JSON が不正
     """
     path = _SKILLS_ROOT / skill_path / "references" / f"{filename}.json"
-    return json.loads(path.read_text(encoding="utf-8"))
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if filter_meta and isinstance(data, dict):
+        data = {k: v for k, v in data.items() if not k.startswith("_")}
+    return data
 
 
-def load_common_definitions(name: str) -> dict:
+def load_common_definitions(name: str, *, filter_meta: bool = False) -> dict:
     """_common/references/ の共通辞書を読み込む。
 
     Args:
         name: ファイル名（拡張子なし、例: "area-definitions"）
+        filter_meta: True なら _ プレフィックスキーを自動除外。
+            **デフォルト False(既存互換維持)**。
 
     Returns:
         読み込まれた dict
@@ -64,7 +78,10 @@ def load_common_definitions(name: str) -> dict:
         FileNotFoundError: ファイルが存在しない
     """
     path = _SKILLS_ROOT / "_common" / "references" / f"{name}.json"
-    return json.loads(path.read_text(encoding="utf-8"))
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if filter_meta and isinstance(data, dict):
+        data = {k: v for k, v in data.items() if not k.startswith("_")}
+    return data
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -127,6 +144,33 @@ def get_amount(row) -> Decimal:
     if d == 0 and c == 0:
         return Decimal("0")
     return max(d, c)  # 異常データの救済
+
+
+# ── tax_code 解決ヘルパー(Phase 3-R で共通化) ──
+
+def resolve_tax_code(row, ctx) -> Optional[int]:
+    """tax_label から税区分コードを解決する。
+
+    CheckContext.tax_code_master (名称 → コード文字列) を使って解決する。
+    マスタが空 / 該当なし / 整数変換失敗の場合は None を返す。
+
+    Phase 3-R で TC-03/04/05/06 から共通化抽出。
+
+    Args:
+        row: TransactionRow(tax_label を参照)
+        ctx: CheckContext(tax_code_master を参照)
+
+    Returns:
+        税区分コード(int) または None
+    """
+    tax_code_master = getattr(ctx, "tax_code_master", {})
+    code_str = tax_code_master.get(row.tax_label)
+    if code_str is not None:
+        try:
+            return int(code_str)
+        except (ValueError, TypeError):
+            return None
+    return None
 
 
 # ═══════════════════════════════════════════════════════════════

@@ -19,22 +19,36 @@ if TYPE_CHECKING:
 def run(ctx) -> list:
     """メインエントリポイント。CheckContext を受け取り、Finding のリストを返す。
 
-    Phase 1 では NotImplementedError を投げる骨格のみ。
-    Phase 2 以降で TC ごとの checks モジュールを呼び出す dispatch を実装する。
-
-    Args:
-        ctx: CheckContext インスタンス
-
-    Returns:
-        Finding のリスト
-
-    Raises:
-        NotImplementedError: Phase 1 時点では未実装
+    Phase 2: TC-03 のみ実装済み。他の TC は Phase 3 以降で追加。
     """
-    raise NotImplementedError(
-        "checker.run() is a skeleton in Phase 1. "
-        "TC implementations will be added in Phase 2 onwards."
-    )
+    findings = []
+
+    # TC-01: 売上の税区分検証
+    from checks.tc01_sales import run as run_tc01
+    findings.extend(run_tc01(ctx))
+
+    # TC-02: 土地・住宅家賃の課税誤り
+    from checks.tc02_land_rent import run as run_tc02
+    findings.extend(run_tc02(ctx))
+
+    # TC-03: 給与・法定福利費の課税誤り
+    from checks.tc03_payroll import run as run_tc03
+    findings.extend(run_tc03(ctx))
+
+    # TC-04: 受取利息・配当・保険金・補助金の課税誤り
+    from checks.tc04_non_taxable_revenue import run as run_tc04
+    findings.extend(run_tc04(ctx))
+
+    # TC-05: 支払利息・保険料の非課税漏れ
+    from checks.tc05_non_taxable_expense import run as run_tc05
+    findings.extend(run_tc05(ctx))
+
+    # TC-06: 租税公課の課税誤り
+    from checks.tc06_tax_public_charges import run as run_tc06
+    findings.extend(run_tc06(ctx))
+    # ... (TC-01, TC-02, TC-07)
+
+    return findings
 
 
 def _dispatch_tc(tc_code: str, ctx) -> list:
