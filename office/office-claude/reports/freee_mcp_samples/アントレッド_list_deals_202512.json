@@ -1,0 +1,76 @@
+{
+  "_meta": {
+    "api": "GET /api/1/deals",
+    "company_id": 3525430,
+    "query": "start_issue_date=2025-12-01&end_issue_date=2025-12-31&limit=1",
+    "total_count": 207,
+    "note": "金額・摘要は伏せ字。構造は実レスポンスそのまま。"
+  },
+  "deals": [
+    {
+      "id": 3287963184,
+      "company_id": 3525430,
+      "issue_date": "2025-12-31",
+      "due_date": "2026-01-31",
+      "amount": "XXXXX",
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 108913954,
+      "partner_code": null,
+      "ref_number": "XXXXXXXX",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 8958398833,
+          "account_item_id": 564840709,
+          "tax_code": 129,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": "XXXXX",
+          "vat": "XXXX",
+          "description": "【売上報酬】〇〇〇〇 12月分",
+          "entry_side": "credit"
+        },
+        {
+          "id": 8958398842,
+          "account_item_id": 564840709,
+          "tax_code": 129,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": "XXXXX",
+          "vat": "XXXX",
+          "description": "【売上報酬】〇〇〇〇 12月分",
+          "entry_side": "credit"
+        },
+        {
+          "id": 8958398850,
+          "account_item_id": 564840709,
+          "tax_code": 129,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": "XXXXX",
+          "vat": "XXXX",
+          "description": "【営業報酬】〇〇〇〇 12月分",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [
+        {
+          "id": 8958413477,
+          "date": "2026-01-15",
+          "from_walletable_type": "bank_account",
+          "from_walletable_id": 3234334,
+          "amount": "XXXXX"
+        }
+      ],
+      "receipts": []
+    }
+  ],
+  "meta": {
+    "total_count": 207
+  }
+}

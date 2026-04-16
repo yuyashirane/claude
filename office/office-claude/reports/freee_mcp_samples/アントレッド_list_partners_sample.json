@@ -1,0 +1,50 @@
+{
+  "_meta": {
+    "api": "GET /api/1/partners",
+    "company_id": 3525430,
+    "query": "limit=3",
+    "total_partners": 255,
+    "pagination": "100件/ページ × 3ページ（total_countフィールドなし）",
+    "note": "構造サンプル。取引先名は実データ。"
+  },
+  "partners": [
+    {
+      "id": 47359564,
+      "code": null,
+      "company_id": 3525430,
+      "name": "株式会社〇〇（サンプル）",
+      "update_date": "2022-05-17",
+      "available": true,
+      "shortcut1": "",
+      "shortcut2": "",
+      "org_code": null,
+      "country_code": "JP",
+      "long_name": "株式会社〇〇（サンプル）",
+      "name_kana": "",
+      "default_title": "御中",
+      "phone": "",
+      "contact_name": "",
+      "email": "",
+      "invoice_registration_number": null,
+      "qualified_invoice_issuer": false,
+      "address_attributes": {
+        "zipcode": "",
+        "prefecture_code": -1,
+        "street_name1": "",
+        "street_name2": ""
+      },
+      "partner_bank_account_attributes": {
+        "bank_name": "",
+        "bank_name_kana": "",
+        "bank_code": "",
+        "branch_name": "",
+        "branch_kana": "",
+        "branch_code": "",
+        "account_type": "ordinary",
+        "account_number": "",
+        "account_name": "",
+        "long_account_name": ""
+      }
+    }
+  ]
+}

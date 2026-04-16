@@ -1,0 +1,58 @@
+{
+  "_meta": {
+    "api": "GET /api/1/manual_journals",
+    "company_id": 3525430,
+    "query": "start_issue_date=2025-12-01&end_issue_date=2025-12-31",
+    "note": "2025年12月は0件。年度内（2025-04〜2026-03）では4件のみ。構造は年度内サンプルから確認。",
+    "important_difference_from_deals": "details[] に partner_name が直接含まれる（dealsはpartner_idのみ）"
+  },
+  "manual_journals_december_2025": [],
+  "manual_journals_sample_from_fiscal_year": {
+    "id": 3469492299,
+    "company_id": 3525430,
+    "issue_date": "2026-03-31",
+    "adjustment": true,
+    "txn_number": null,
+    "details": [
+      {
+        "id": 9416917118,
+        "entry_side": "credit",
+        "account_item_id": 564840662,
+        "tax_code": 2,
+        "amount": "XXXXX",
+        "vat": 0,
+        "partner_id": 111325415,
+        "partner_name": "㈱〇〇〇（サンプル）",
+        "partner_code": null,
+        "partner_long_name": "",
+        "item_id": null,
+        "item_name": null,
+        "section_id": null,
+        "section_name": null,
+        "tag_ids": [],
+        "tag_names": [],
+        "description": ""
+      },
+      {
+        "id": 9416917123,
+        "entry_side": "debit",
+        "account_item_id": 564840662,
+        "tax_code": 2,
+        "amount": "XXXXX",
+        "vat": 0,
+        "partner_id": null,
+        "partner_name": null,
+        "partner_code": null,
+        "partner_long_name": null,
+        "item_id": null,
+        "item_name": null,
+        "section_id": null,
+        "section_name": null,
+        "tag_ids": [],
+        "tag_names": [],
+        "description": ""
+      }
+    ],
+    "receipt_ids": []
+  }
+}

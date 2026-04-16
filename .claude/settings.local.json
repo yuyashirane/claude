@@ -293,7 +293,30 @@
       "Bash(.venv/Scripts/python -m pytest tests/ -q --tb=short)",
       "Bash(.venv/Scripts/python scripts/verify_phase6_excel.py)",
       "Bash(grep -n \"create_finding\" skills/verify/V1-3-rule/check-tax-classification/checks/tc0*.py)",
-      "Bash(.venv/Scripts/python -m pytest tests/ -q)"
+      "Bash(.venv/Scripts/python -m pytest tests/ -q)",
+      "mcp__freee-mcp__freee_auth_status",
+      "mcp__freee-mcp__freee_list_companies",
+      "mcp__freee-mcp__freee_api_get",
+      "Bash(py -3 -c ':*)",
+      "mcp__freee-mcp__freee_set_current_company",
+      "Bash(py -3 -m pytest tests/ --co -q)",
+      "Bash(py -3 -m pytest tests/unit/ --ignore=tests/unit/test_excel_export.py -q)",
+      "Bash(py -3 -m pytest scripts/e2e/tests/test_freee_to_context.py -v)",
+      "Bash(py -3 -m pytest tests/unit/ -v --tb=no -q)",
+      "Bash(py -3 -m pytest tests/unit/test_excel_export.py -v --tb=short -q)",
+      "Bash(py -3 -m pytest tests/unit/ --ignore=tests/unit/test_excel_export.py -v --tb=no -q)",
+      "Bash(py -3 -m pytest tests/unit/ --ignore=tests/unit/test_excel_export.py -v --tb=no)",
+      "Bash(py -3 -m pytest tests/unit/ --ignore=tests/unit/test_excel_export.py --co -q)",
+      "Bash(py -3 -m pytest scripts/e2e/tests/ -v --tb=no -q)",
+      "Bash(py -3 -m pytest tests/unit/test_excel_export.py --co -q)",
+      "Bash(py -3)",
+      "Bash(py -3 -m pytest scripts/e2e/tests/test_freee_fetch.py -v --tb=short)",
+      "Bash(py -3 -m pytest tests/unit/ scripts/e2e/tests/ -v --tb=no -q --ignore=tests/unit/test_excel_export.py)",
+      "Bash(py -3 -m pytest scripts/e2e/tests/test_freee_to_context.py -v --tb=short)",
+      "Bash(py -3 -m pytest tests/unit/ scripts/e2e/tests/ -v --tb=no -q)",
+      "Bash(py -3 -c \"import openpyxl; print\\(openpyxl.__version__\\)\")",
+      "Bash(py -3 -m pytest tests/unit/ scripts/e2e/tests/ --ignore=tests/unit/test_excel_export.py -v --tb=no -q)",
+      "Bash(py -3 -m pytest tests/unit/ scripts/e2e/tests/ --ignore=tests/unit/test_excel_export.py -q --tb=no)"
     ]
   }
 }

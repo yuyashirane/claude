@@ -1,0 +1,24 @@
+{
+  "deals": [
+    {
+      "id": 1004,
+      "company_id": 3525430,
+      "issue_date": "2025-12-05",
+      "due_date": null,
+      "amount": 0,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 201,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [],
+      "payments": [],
+      "receipts": []
+    }
+  ],
+  "meta": {
+    "total_count": 1
+  }
+}

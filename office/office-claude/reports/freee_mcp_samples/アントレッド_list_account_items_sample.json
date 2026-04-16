@@ -1,0 +1,47 @@
+{
+  "_meta": {
+    "api": "GET /api/1/account_items",
+    "company_id": 3525430,
+    "total_items": 201,
+    "note": "全件を1リクエストで取得可能。サンプル1件（実レスポンス確認済み）。"
+  },
+  "account_items": [
+    {
+      "id": 564840709,
+      "name": "売上高",
+      "company_id": 3525430,
+      "tax_code": 21,
+      "account_category_id": 81,
+      "shortcut": "URIAGE",
+      "shortcut_num": "700",
+      "searchable": 2,
+      "corresponding_income_name": "売掛金",
+      "corresponding_expense_name": "未払費用",
+      "corresponding_income_id": 564840617,
+      "corresponding_expense_id": 564840676,
+      "group_name": "売上高",
+      "group_id": 782714846,
+      "accumulated_dep_account_item_name": "",
+      "accumulated_dep_account_item_id": null,
+      "partners": [],
+      "items": [],
+      "default_tax_code": 129,
+      "account_category": "売上高",
+      "categories": [
+        "負債及び純資産",
+        "純資産",
+        "株主資本",
+        "利益剰余金",
+        "その他利益剰余金",
+        "当期純損益金額",
+        "税引前当期純損益金額",
+        "経常損益金額",
+        "営業損益金額",
+        "売上総損益金額",
+        "売上高"
+      ],
+      "available": true,
+      "walletable_id": null
+    }
+  ]
+}

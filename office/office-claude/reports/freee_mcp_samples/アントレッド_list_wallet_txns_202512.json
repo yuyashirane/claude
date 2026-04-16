@@ -1,0 +1,26 @@
+{
+  "_meta": {
+    "api": "GET /api/1/wallet_txns",
+    "company_id": 3525430,
+    "query": "start_date=2025-12-01&end_date=2025-12-31&limit=100",
+    "note": "ページネーションなし、最大100件。total_countフィールドなし。仕訳チェックに必要なaccount_name/tax_code/partner情報が欠落。",
+    "items_returned": 100,
+    "pagination": "なし（max 100件固定）"
+  },
+  "wallet_txns": [
+    {
+      "id": 2063345124,
+      "company_id": 3525430,
+      "amount": "XXXX",
+      "balance": null,
+      "description": "〇〇〇〇（サービス名）",
+      "due_amount": 0,
+      "date": "2025-12-31",
+      "entry_side": "expense",
+      "walletable_type": "credit_card",
+      "walletable_id": 1784714,
+      "status": 2,
+      "rule_matched": true
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "deals": [
+    {
+      "id": 1001,
+      "company_id": 3525430,
+      "issue_date": "2025-12-15",
+      "due_date": "2026-01-15",
+      "amount": 50000,
+      "due_amount": 0,
+      "type": "income",
+      "partner_id": 201,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "freee請求書",
+      "details": [
+        {
+          "id": 9001,
+          "account_item_id": 101,
+          "tax_code": 129,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 50000,
+          "vat": 4545,
+          "description": "12月売上",
+          "entry_side": "credit"
+        }
+      ],
+      "payments": [],
+      "receipts": []
+    }
+  ],
+  "meta": {
+    "total_count": 1
+  }
+}

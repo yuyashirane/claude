@@ -1,0 +1,49 @@
+{
+  "deals": [
+    {
+      "id": 1002,
+      "company_id": 3525430,
+      "issue_date": "2025-12-20",
+      "due_date": null,
+      "amount": 30000,
+      "due_amount": 0,
+      "type": "expense",
+      "partner_id": 202,
+      "partner_code": null,
+      "ref_number": "",
+      "status": "settled",
+      "deal_origin_name": "自動で経理",
+      "details": [
+        {
+          "id": 9002,
+          "account_item_id": 102,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 20000,
+          "vat": 1818,
+          "description": "交通費",
+          "entry_side": "debit"
+        },
+        {
+          "id": 9003,
+          "account_item_id": 103,
+          "tax_code": 136,
+          "item_id": null,
+          "section_id": null,
+          "tag_ids": [],
+          "amount": 10000,
+          "vat": 909,
+          "description": "消耗品費",
+          "entry_side": "debit"
+        }
+      ],
+      "payments": [],
+      "receipts": []
+    }
+  ],
+  "meta": {
+    "total_count": 1
+  }
+}

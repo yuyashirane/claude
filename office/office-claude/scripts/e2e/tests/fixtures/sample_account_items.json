@@ -1,0 +1,32 @@
+[
+  {
+    "id": 101,
+    "name": "売上高",
+    "company_id": 3525430,
+    "tax_code": 21,
+    "default_tax_code": 129,
+    "account_category": "売上高",
+    "available": true,
+    "walletable_id": null
+  },
+  {
+    "id": 102,
+    "name": "旅費交通費",
+    "company_id": 3525430,
+    "tax_code": 34,
+    "default_tax_code": 136,
+    "account_category": "販売費及び一般管理費",
+    "available": true,
+    "walletable_id": null
+  },
+  {
+    "id": 103,
+    "name": "消耗品費",
+    "company_id": 3525430,
+    "tax_code": 34,
+    "default_tax_code": 136,
+    "account_category": "販売費及び一般管理費",
+    "available": true,
+    "walletable_id": null
+  }
+]

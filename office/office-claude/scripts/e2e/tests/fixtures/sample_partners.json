@@ -1,0 +1,44 @@
+[
+  {
+    "id": 201,
+    "code": null,
+    "company_id": 3525430,
+    "name": "株式会社テスト商事",
+    "update_date": "2025-04-01",
+    "available": true,
+    "shortcut1": "",
+    "shortcut2": "",
+    "org_code": null,
+    "country_code": "JP",
+    "long_name": "株式会社テスト商事",
+    "name_kana": ""
+  },
+  {
+    "id": 202,
+    "code": null,
+    "company_id": 3525430,
+    "name": "合同会社サンプル",
+    "update_date": "2025-04-01",
+    "available": true,
+    "shortcut1": "",
+    "shortcut2": "",
+    "org_code": null,
+    "country_code": "JP",
+    "long_name": "合同会社サンプル",
+    "name_kana": ""
+  },
+  {
+    "id": 203,
+    "code": null,
+    "company_id": 3525430,
+    "name": "個人事業主テスト",
+    "update_date": "2025-04-01",
+    "available": true,
+    "shortcut1": "",
+    "shortcut2": "",
+    "org_code": null,
+    "country_code": "JP",
+    "long_name": "",
+    "name_kana": ""
+  }
+]
