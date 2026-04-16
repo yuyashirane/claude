@@ -291,7 +291,9 @@
       "Bash(mkdir -p /c/Users/yuya_/claude/office/office-claude/scripts)",
       "Bash(.venv/Scripts/python -m pytest tests/unit/test_excel_export.py -q --tb=short)",
       "Bash(.venv/Scripts/python -m pytest tests/ -q --tb=short)",
-      "Bash(.venv/Scripts/python scripts/verify_phase6_excel.py)"
+      "Bash(.venv/Scripts/python scripts/verify_phase6_excel.py)",
+      "Bash(grep -n \"create_finding\" skills/verify/V1-3-rule/check-tax-classification/checks/tc0*.py)",
+      "Bash(.venv/Scripts/python -m pytest tests/ -q)"
     ]
   }
 }
