@@ -6,7 +6,7 @@
 
 このモジュールから freee REST API を直接叩かない。
 Claude Code が MCP 経由で取得した dict/list を受け取り、
-adapter(freee_to_context.py)が読める 4 ファイルを保存する。
+adapter(freee_to_context.py)が読める 5 ファイルを保存する。
 
 出力ファイル構成:
     data/e2e/<company_id>/YYYYMM/
@@ -14,6 +14,7 @@ adapter(freee_to_context.py)が読める 4 ファイルを保存する。
         partners_all.json        ← normalize_partners() の出力
         account_items_all.json   ← account_items 配列をそのまま
         company_info.json        ← 6 キーを含む単一 dict
+        taxes_codes.json         ← normalize_taxes_codes() の出力(Phase 6.10 追加)
 """
 from __future__ import annotations
 
@@ -104,6 +105,34 @@ def save_json(data: dict | list, path: Path) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     with open(path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
+
+
+def normalize_taxes_codes(raw_response: dict) -> list[dict]:
+    """freee `/api/1/taxes/codes` のレスポンスを配列として整形する。
+
+    Args:
+        raw_response: API のレスポンス dict。
+                      期待形: {"taxes": [{"code": int, "name": str, "name_ja": str}, ...]}
+
+    Returns:
+        taxes dict のリスト(ラップ無しの配列、§1.1 準拠)。
+        各要素は code / name / name_ja の 3 フィールドを含む。
+
+    Raises:
+        ValueError: "taxes" キーが存在しない、または配列でない場合。
+    """
+    if "taxes" not in raw_response:
+        raise ValueError(
+            "'taxes' キーが存在しません。"
+            f"レスポンスキー: {list(raw_response.keys())}"
+        )
+    taxes = raw_response["taxes"]
+    if not isinstance(taxes, list):
+        raise ValueError(
+            f"'taxes' が配列ではありません。"
+            f"実際の型: {type(taxes).__name__}"
+        )
+    return taxes
 
 
 def validate_completeness(

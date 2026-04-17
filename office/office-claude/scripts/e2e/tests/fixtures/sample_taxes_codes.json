@@ -1,0 +1,9 @@
+[
+  {"code": 2,   "name": "non_taxable",          "name_ja": "対象外"},
+  {"code": 23,  "name": "sales_with_no_tax",    "name_ja": "非課売上"},
+  {"code": 37,  "name": "purchase_no_tax",      "name_ja": "非課仕入"},
+  {"code": 129, "name": "sales_with_tax_10",    "name_ja": "課税売上10%"},
+  {"code": 136, "name": "purchase_with_tax_10", "name_ja": "課対仕入10%"},
+  {"code": 163, "name": "purchase_with_tax_reduced_8", "name_ja": "課対仕入8%（軽）"},
+  {"code": 189, "name": "purchase_with_tax_10_exempt_80", "name_ja": "課対仕入（控80）10%"}
+]

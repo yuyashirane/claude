@@ -1,7 +1,7 @@
 # RUNBOOK: freee データ取得手順
 
 **対象**: Claude Code セッション内で実行  
-**目的**: 指定会社・指定月のデータを freee-MCP から取得し、adapter が読める 4 ファイルを保存する  
+**目的**: 指定会社・指定月のデータを freee-MCP から取得し、adapter が読める 5 ファイルを保存する  
 **出力先**: `data/e2e/<company_id>/YYYYMM/`（自動作成される）
 
 ---
@@ -14,7 +14,7 @@
 | 取得対象月 | `202512`（2025年12月） |
 | 出力先 | `data/e2e/3525430/202512/` |
 
-**出力ファイル 4 点**:
+**出力ファイル 5 点**:
 
 | ファイル名 | 形式 | 備考 |
 |---|---|---|
@@ -22,6 +22,7 @@
 | `account_items_all.json` | 配列（ラップなし） | Step 2 で保存 |
 | `partners_all.json` | 配列（ラップなし） | Step 3 で保存 |
 | `deals_202512.json` | `{"deals": [...], "meta": {...}}` | Step 4 で保存 |
+| `taxes_codes.json` | 配列（ラップなし） | Step 5 で保存（Phase 6.10 追加） |
 
 ---
 
@@ -187,16 +188,55 @@ save_json(merged, Path("data/e2e/3525430/202512/deals_202512.json"))
 
 ---
 
+## Step 5 — 税区分マスタ取得 → `taxes_codes.json`（Phase 6.10 追加）
+
+**MCP 呼び出し（1回のみ）:**
+
+```python
+mcp__freee-mcp__freee_api_get(
+    service="accounting",
+    path="/api/1/taxes/codes",
+)
+```
+
+> ℹ️ 税区分マスタは会社横断の共通データのため `company_id` パラメータは不要。
+
+**保存:**
+
+```python
+from scripts.e2e.freee_fetch import normalize_taxes_codes, save_json
+from pathlib import Path
+
+# response は {"taxes": [...]} 形式
+taxes_list = normalize_taxes_codes(response)
+save_json(taxes_list, Path("data/e2e/3525430/202512/taxes_codes.json"))
+```
+
+**完了基準**:
+- `taxes_list` が配列形式（`len(taxes_list) > 0`）
+- 各要素に `code` / `name` / `name_ja` が含まれる
+- `taxes_codes.json` が保存されている（配列形式、`{"taxes": [...]}` ラップなし）
+
+**期待される件数**: 20 件前後（freee の税区分コード全件）
+
+---
+
 ## 最終検証
 
-**4 ファイルの確認:**
+**5 ファイルの確認:**
 
 ```python
 from pathlib import Path
 import json
 
 base = Path("data/e2e/3525430/202512")
-for fname in ["company_info.json", "account_items_all.json", "partners_all.json", "deals_202512.json"]:
+for fname in [
+    "company_info.json",
+    "account_items_all.json",
+    "partners_all.json",
+    "deals_202512.json",
+    "taxes_codes.json",
+]:
     path = base / fname
     with open(path, encoding="utf-8") as f:
         data = json.load(f)
@@ -204,9 +244,33 @@ for fname in ["company_info.json", "account_items_all.json", "partners_all.json"
 ```
 
 **チェック項目**:
-- `data/e2e/3525430/202512/` に 4 ファイルが存在する
+- `data/e2e/3525430/202512/` に 5 ファイルが存在する
 - 各ファイルが UTF-8 で読み戻せる（漢字が正しく表示される）
 - `validate_completeness` の `warnings` があれば報告書に記載する
+- `taxes_codes.json` の件数が 10 件以上であること（少なすぎる場合は取得エラーの可能性）
+
+---
+
+## Step 6（オプション）— アダプタ実行: `build_check_context`
+
+5 ファイルの取得完了後、以下のコードで帳簿チェック用コンテキストを構築する。
+
+```python
+from scripts.e2e.freee_to_context import build_check_context
+from pathlib import Path
+
+ctx = build_check_context(
+    deals_path="data/e2e/<company_id>/YYYYMM/deals_YYYYMM.json",
+    partners_path="data/e2e/<company_id>/YYYYMM/partners_all.json",
+    account_items_path="data/e2e/<company_id>/YYYYMM/account_items_all.json",
+    company_info_path="data/e2e/<company_id>/YYYYMM/company_info.json",
+    taxes_codes_path="data/e2e/<company_id>/YYYYMM/taxes_codes.json",
+)
+```
+
+**完了基準**:
+- `ctx` オブジェクトが正常に返る
+- `ctx.taxes_codes` に税区分マスタが含まれる
 
 ---
 

@@ -1,10 +1,11 @@
-"""Phase 6.5: freee JSON → CheckContext Adapter（最小版）。
+"""Phase 6.5/6.10: freee JSON → CheckContext Adapter（最小版）。
 
-入力: Claude Code が事前保存した4つの JSON ファイル
+入力: Claude Code が事前保存した5つの JSON ファイル
     - deals_YYYYMM.json       月次取引（ページネーション済み統合版）
     - partners_all.json       全取引先マスタ
     - account_items_all.json  全勘定科目マスタ
     - company_info.json       会社基本情報
+    - taxes_codes.json        freee 税区分マスタ（Phase 6.10 追加）
 
 出力: CheckContext（deals の行レベルに展開済み）
 
@@ -16,6 +17,8 @@
     - details が空/null/欠落の deal は例外なしでスキップ
     - amount は常に Decimal（float は使わない）
     - tax_code は details[].tax_code を正とし、account_items の tax_code は使わない
+    - tax_label は name_ja（例: "課対仕入10%"）、未知コードは str(code) にフォールバック
+    - tax_label は空文字にしない（name_ja or str(code) を必ず格納）
 """
 from __future__ import annotations
 
@@ -140,6 +143,7 @@ def transform_deal_to_rows(
     deal: dict,
     partners_cache: dict[int, str],
     account_items_cache: dict[int, str],
+    code_to_name_ja: dict[int, str] | None = None,
 ) -> list:
     """1 deal を details[] を展開して TransactionRow リストに変換する。
 
@@ -149,11 +153,15 @@ def transform_deal_to_rows(
     - debit_amount / credit_amount は entry_side から算出
     - date は deal.issue_date を全 details 行に付与
     - details が空配列 / null / キー欠落の場合は空リスト [] を返す（例外禁止）
+    - tax_label: code_to_name_ja が与えられた場合は name_ja に変換
+                 マスタに無い未知コードは str(tax_code) にフォールバック（空文字禁止）
 
     Args:
         deal: freee deals API の1取引レスポンス dict。
         partners_cache: {partner_id: partner_name}。
         account_items_cache: {account_item_id: account_name}。
+        code_to_name_ja: {tax_code(int): name_ja(str)} の逆引き dict（Phase 6.10 追加）。
+                         None の場合は従来どおり str(tax_code) を使用。
 
     Returns:
         TransactionRow のリスト。details が空/欠落の場合は空リスト []。
@@ -174,6 +182,9 @@ def transform_deal_to_rows(
     partner_id = deal.get("partner_id")  # deal レベル（details[] には存在しない）
     partner_name = resolve_partner_name(partner_id, partners_cache)
 
+    # ── 逆引き dict が無い場合は空 dict（str フォールバックのみで動作）
+    _code_to_name = code_to_name_ja if code_to_name_ja is not None else {}
+
     # ── 各 detail 行を TransactionRow に変換
     rows = []
     for detail in details:
@@ -190,12 +201,15 @@ def transform_deal_to_rows(
 
         debit_amount, credit_amount = split_entry_side(entry_side, amount)
 
+        # tax_label: name_ja に変換。未知コードは str フォールバック（空文字禁止）
+        tax_label = _code_to_name.get(tax_code, str(tax_code))
+
         row = TransactionRow(
             wallet_txn_id=wallet_txn_id,
             deal_id=deal_id,
             transaction_date=transaction_date,
             account=account_name,           # account_name → account フィールド
-            tax_label=str(tax_code),        # tax_code → tax_label フィールド（文字列化）
+            tax_label=tax_label,            # name_ja または str(tax_code) フォールバック
             partner=partner_name,           # partner_name → partner フィールド
             description=description,
             debit_amount=debit_amount,
@@ -225,15 +239,16 @@ def build_check_context(
     partners_path: Path,
     account_items_path: Path,
     company_info_path: Path,
+    taxes_codes_path: Path,
 ) -> object:
-    """4 つの JSON ファイルから CheckContext を組み立てる。
+    """5 つの JSON ファイルから CheckContext を組み立てる。
 
     処理フロー:
     1. 全 JSON ファイルを読み込み（欠落は FileNotFoundError）
-    2. partners / account_items を dict 化してキャッシュ生成
+    2. partners / account_items / taxes_codes を dict 化してキャッシュ生成
     3. deals を展開して TransactionRow リストを構築（details 空/欠落はスキップ）
     4. company_info から company_id / fiscal_year_id 等を取得
-    5. CheckContext を組み立てて返す
+    5. CheckContext を組み立てて返す（tax_code_master も含む）
     6. 観測用ログを stdout に print（E2E デバッグ用）
 
     Args:
@@ -241,16 +256,17 @@ def build_check_context(
         partners_path: partners JSON のパス。
         account_items_path: account_items JSON のパス。
         company_info_path: company_info JSON のパス。
+        taxes_codes_path: taxes_codes JSON のパス（Phase 6.10 追加）。
 
     Returns:
-        組み立て済みの CheckContext。
+        組み立て済みの CheckContext（tax_code_master 含む）。
 
     Raises:
         FileNotFoundError: 必須ファイルが存在しない場合。
         ValueError: JSON 構造が期待と異なる場合。
     """
     # ── 1. JSON ファイル読み込み
-    def _load_json(path: Path, role: str) -> dict:
+    def _load_json(path: Path, role: str):
         if not path.exists():
             raise FileNotFoundError(
                 f"{role} JSON が見つかりません: {path}\n"
@@ -263,6 +279,7 @@ def build_check_context(
     partners_data = _load_json(partners_path, "partners")
     account_items_data = _load_json(account_items_path, "account_items")
     company_data = _load_json(company_info_path, "company_info")
+    taxes_codes_data = _load_json(taxes_codes_path, "taxes_codes")
 
     # ── 2. キャッシュ生成
     # partners_data は §1.1 に従い配列直下形式 [...] で受け取る
@@ -287,16 +304,47 @@ def build_check_context(
         for a in account_items_data
     }
 
+    # taxes_codes_data は §1.1 に従い配列直下形式 [...] で受け取る（Phase 6.10）
+    if not isinstance(taxes_codes_data, list):
+        raise ValueError(
+            "taxes_codes.json must be a JSON array per spec §1.1 "
+            f"(actual type: {type(taxes_codes_data).__name__})"
+        )
+
+    # tax_code_master: {name_ja: str(code)}（schema.py の dict[str, str] に準拠）
+    # name_ja が欠落している要素は silently skip
+    tax_code_master: dict[str, str] = {
+        t["name_ja"]: str(t["code"])
+        for t in taxes_codes_data
+        if "name_ja" in t and "code" in t
+    }
+    _taxes_skipped = len(taxes_codes_data) - len(tax_code_master)
+
+    # code_to_name_ja: {int(code): name_ja} の逆引き（transform_deal_to_rows 用）
+    code_to_name_ja: dict[int, str] = {
+        int(v): k
+        for k, v in tax_code_master.items()
+    }
+
     # ── 3. deals を展開して TransactionRow リスト構築
     deals = deals_data.get("deals", [])
     all_rows = []
     skipped = 0
+    fallback_count = 0
 
     for deal in deals:
-        rows = transform_deal_to_rows(deal, partners_cache, account_items_cache)
+        rows = transform_deal_to_rows(
+            deal, partners_cache, account_items_cache, code_to_name_ja
+        )
         if not rows:
             skipped += 1
         else:
+            # フォールバック件数を計算（tax_label が数値文字列のもの）
+            for row in rows:
+                raw_tc = row.raw.get("tax_code", 0)
+                if row.tax_label == str(raw_tc):
+                    # name_ja に変換できなかった（フォールバック）
+                    fallback_count += 1
             all_rows.extend(rows)
 
     # ── 4. company_info から会社・会計期情報を取得
@@ -331,13 +379,14 @@ def build_check_context(
             f"company_info.json の fiscal_year_start / fiscal_year_end が不正です: {company_data}"
         ) from e
 
-    # ── 5. CheckContext 組み立て
+    # ── 5. CheckContext 組み立て（tax_code_master を含む）
     ctx = CheckContext(
         company_id=company_id,
         fiscal_year_id=fiscal_year_id,
         period_start=period_start,
         period_end=period_end,
         transactions=all_rows,
+        tax_code_master=tax_code_master,
     )
 
     # ── 6. 観測用ログ（E2E デバッグ用）
@@ -346,5 +395,10 @@ def build_check_context(
     print(f"rows: {len(all_rows)}")
     print(f"partners cached: {len(partners_cache)}")
     print(f"account_items cached: {len(account_items_cache)}")
+    print(f"tax_codes cached: {len(tax_code_master)}")
+    if _taxes_skipped > 0:
+        print(f"tax_codes skipped (no name_ja): {_taxes_skipped}")
+    if fallback_count > 0:
+        print(f"tax_label fallback (unknown codes): {fallback_count}")
 
     return ctx

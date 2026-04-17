@@ -1,0 +1,521 @@
+"""テンプレート駆動 Excel エンジン。
+
+TC_template.xlsx を読み込み、Finding データを流し込む。
+スタイル（色・フォント・罫線・列幅）はテンプレートから継承する。
+Python 側は severity 表示変換と動的データ生成のみ担当する。
+"""
+from __future__ import annotations
+
+import re
+from copy import copy
+from datetime import date as _date_cls
+from pathlib import Path
+
+from openpyxl import load_workbook
+from openpyxl.styles import PatternFill
+from openpyxl.worksheet.datavalidation import DataValidation
+
+from skills.export.excel_report.styles import SEVERITY_DISPLAY
+from skills.export.excel_report.sort_priority_map import get_sort_priority
+
+# ─────────────────────────────────────────────────────────────────────
+# パス・マスタ定数
+# ─────────────────────────────────────────────────────────────────────
+
+DEFAULT_TEMPLATE_PATH = Path("data/reports/template/TC_template.xlsx")
+
+AREA_ORDER: list[str] = ["A4", "A5", "A8", "A10", "A11", "A12"]
+
+_TC_NAMES: list[tuple[str, str]] = [
+    ("TC-01", "売上の税区分"),
+    ("TC-02", "土地/住宅の非課税"),
+    ("TC-03", "給与/人件費"),
+    ("TC-04", "非課税/対象外の収益"),
+    ("TC-05", "非課税/対象外の費用"),
+    ("TC-06", "税金/租税公課"),
+    ("TC-07", "福利厚生"),
+]
+_TC_DISPLAY: dict[str, str] = {code: name for code, name in _TC_NAMES}
+
+# ─────────────────────────────────────────────────────────────────────
+# テンプレート内の固定位置（サマリーシート）
+# ─────────────────────────────────────────────────────────────────────
+
+_SUM_TITLE_ROW    = 1   # A1: レポートタイトル
+_SUM_COMPANY_CELL = (3, 2)   # B3: 対象会社名
+_SUM_PERIOD_CELL  = (4, 2)   # B4: 対象月
+_SUM_DATE_CELL    = (5, 2)   # B5: チェック実行日
+_SUM_TC_START_ROW = 10   # TC-01 データ行
+_SUM_TC_TOTAL_ROW = 17   # 合計行
+_SUM_TC_COL_CODE  = 1    # A: TC コード
+_SUM_TC_COL_HIGH  = 4    # D: 重大件数
+_SUM_TC_COL_MED   = 5    # E: 要注意件数
+_SUM_TC_COL_LOW   = 6    # F: 要確認件数
+_SUM_TC_COL_TOTAL = 7    # G: 合計
+_SUM_LOWER_HEADER = 20   # Row 20: 下部テーブルヘッダー
+_SUM_LOWER_DATA   = 21   # Row 21+: 下部テーブルデータ
+
+# 下部テーブル列
+_LT_AREA     = 1
+_LT_AREANAME = 2
+_LT_TC       = 4
+_LT_TCNAME   = 5
+_LT_SUBCNT   = 7
+_LT_HIGH     = 8
+_LT_MED      = 9
+_LT_LOW      = 10
+_LT_TOTAL    = 11
+_LT_AMOUNT   = 12
+_LT_PROGRESS = 13
+
+# ─────────────────────────────────────────────────────────────────────
+# テンプレート内の固定位置（詳細シート・23列）
+# ─────────────────────────────────────────────────────────────────────
+
+_DET_TITLE_ROW  = 1
+_DET_HEADER_ROW = 3
+_DET_DATA_START = 4
+
+_D_PRIORITY   = 1    # A: 優先度
+_D_SUBCODE    = 2    # B: 項目
+_D_TCNAME     = 3    # C: 項目名
+_D_VIEWPOINT  = 4    # D: 観点
+_D_RESULT     = 5    # E: チェック結果
+_D_CURRENT    = 6    # F: 現在の税区分
+_D_SUGGESTED  = 7    # G: 推奨税区分
+_D_DATE       = 8    # H: 取引日
+_D_ACCOUNT    = 9    # I: 勘定科目
+_D_PARTNER    = 10   # J: 取引先
+_D_ITEM       = 11   # K: 品目
+_D_DEPT       = 12   # L: 部門
+_D_MEMO       = 13   # M: メモ
+_D_DESC       = 14   # N: 摘要
+_D_DEBIT      = 15   # O: 借方金額
+_D_CREDIT     = 16   # P: 貸方金額
+_D_LINK_GL    = 17   # Q: 🔗総勘定元帳
+_D_LINK_JNL   = 18   # R: 🔗仕訳帳
+_D_CONFIDENCE = 19   # S: 確信度
+_D_ERRTYPE    = 20   # T: エラー型
+_D_CONFIRM    = 21   # U: 確認状況
+_D_STAFFMEMO  = 22   # V: 担当者メモ
+_D_WALLETTXN  = 23   # W: walletTxnId
+
+_DET_TOTAL_COLS = 23
+
+# severity 抽出に失敗した場合の最小限フォールバック
+_FALLBACK_FILLS: dict[str, PatternFill] = {
+    "重大":   PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid"),
+    "要注意": PatternFill(start_color="FFEB9C", end_color="FFEB9C", fill_type="solid"),
+    "要確認": PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid"),
+}
+
+
+# ─────────────────────────────────────────────────────────────────────
+# Finding アクセスヘルパー
+# ─────────────────────────────────────────────────────────────────────
+
+def _severity_label(severity: str) -> str:
+    for prefix, label in SEVERITY_DISPLAY.items():
+        if severity.startswith(prefix):
+            return label
+    return severity
+
+
+def _is_medium_or_orange(severity: str) -> bool:
+    return "🟡" in severity or "🟠" in severity
+
+
+def _sort_key(f) -> tuple:
+    sp = getattr(f, "sort_priority", 0)
+    if not sp or sp <= 0:
+        sp = get_sort_priority(getattr(f, "sub_code", ""))
+    return (getattr(f, "tc_code", ""), sp)
+
+
+def _sort_findings(findings: list) -> list:
+    return sorted(findings, key=_sort_key)
+
+
+def _txn_date(finding) -> str:
+    lh = getattr(finding, "link_hints", None)
+    if lh is None:
+        return ""
+    ps = getattr(lh, "period_start", None)
+    if ps is None:
+        return ""
+    return ps.strftime("%Y/%m/%d") if hasattr(ps, "strftime") else str(ps)
+
+
+def _account_name(finding) -> str:
+    lh = getattr(finding, "link_hints", None)
+    if lh is None:
+        return ""
+    return getattr(lh, "account_name", None) or ""
+
+
+# ─────────────────────────────────────────────────────────────────────
+# スタイル抽出・適用
+# ─────────────────────────────────────────────────────────────────────
+
+def _copy_fill(cell) -> PatternFill | None:
+    """セルの fill を copy して返す。RGB 以外（theme / indexed カラー）は None。"""
+    try:
+        f = copy(cell.fill)
+        if f.fill_type not in ("solid",):
+            return None
+        # type が "rgb" 以外（"theme", "indexed" 等）はフォールバックに任せる
+        if getattr(f.fgColor, "type", None) != "rgb":
+            return None
+        return f
+    except Exception:
+        return None
+
+
+def _extract_severity_fills(wb) -> dict[str, PatternFill]:
+    """テンプレートの詳細シート Row 4+ から severity ラベル → fill を抽出する。
+
+    抽出に失敗したラベルはフォールバック値を使用。
+    """
+    fills: dict[str, PatternFill] = {}
+    labels_needed = {"重大", "要注意", "要確認"}
+
+    for sheet_name in wb.sheetnames:
+        if sheet_name in ("サマリー", "参考"):
+            continue
+        ws = wb[sheet_name]
+        for row_idx in range(_DET_DATA_START, ws.max_row + 1):
+            cell = ws.cell(row_idx, _D_PRIORITY)
+            label = cell.value if isinstance(cell.value, str) else ""
+            if label in labels_needed and label not in fills:
+                f = _copy_fill(cell)
+                fills[label] = f if f is not None else _FALLBACK_FILLS[label]
+        if fills.keys() >= labels_needed:
+            break
+
+    for label in labels_needed:
+        if label not in fills:
+            fills[label] = _FALLBACK_FILLS[label]
+    return fills
+
+
+def _extract_row_styles(ws, row_idx: int, col_count: int) -> list[dict]:
+    """指定行のスタイルを col_count 列分抽出する。"""
+    styles = []
+    for col in range(1, col_count + 1):
+        cell = ws.cell(row_idx, col)
+        d: dict = {}
+        for attr in ("font", "fill", "border", "alignment"):
+            try:
+                d[attr] = copy(getattr(cell, attr))
+            except Exception:
+                pass
+        try:
+            d["number_format"] = cell.number_format
+        except Exception:
+            pass
+        styles.append(d)
+    return styles
+
+
+def _apply_row_style(cell, style: dict) -> None:
+    for attr in ("font", "fill", "border", "alignment"):
+        v = style.get(attr)
+        if v is not None:
+            try:
+                setattr(cell, attr, copy(v))
+            except Exception:
+                pass
+    nf = style.get("number_format")
+    if nf:
+        try:
+            cell.number_format = nf
+        except Exception:
+            pass
+
+
+# ─────────────────────────────────────────────────────────────────────
+# テンプレート情報抽出
+# ─────────────────────────────────────────────────────────────────────
+
+def _build_area_sheet_map(wb) -> dict[str, str]:
+    """テンプレートのシート名から {area_code: sheet_name} を構築する。"""
+    mapping: dict[str, str] = {}
+    for name in wb.sheetnames:
+        m = re.match(r"^(A\d+)\s+", name)
+        if m:
+            mapping[m.group(1)] = name
+    return mapping
+
+
+# ─────────────────────────────────────────────────────────────────────
+# サマリーシート更新
+# ─────────────────────────────────────────────────────────────────────
+
+def _fill_summary(
+    ws,
+    findings: list,
+    company_name: str,
+    period: str,
+    area_sheet_map: dict[str, str],
+    lower_row_styles: list[dict],
+) -> None:
+    """サマリーシートの動的セルを更新する。固定スタイルはテンプレートから継承。"""
+
+    # Row 1: タイトル（値のみ上書き）
+    title = (
+        f"{company_name} 消費税区分チェックレポート"
+        if company_name
+        else "消費税区分チェックレポート"
+    )
+    ws.cell(_SUM_TITLE_ROW, 1).value = title
+
+    # Row 3-5: メタ情報（値のみ上書き）
+    ws.cell(_SUM_COMPANY_CELL[0], _SUM_COMPANY_CELL[1]).value = company_name
+    ws.cell(_SUM_PERIOD_CELL[0],  _SUM_PERIOD_CELL[1]).value  = period if period else ""
+    ws.cell(_SUM_DATE_CELL[0],    _SUM_DATE_CELL[1]).value    = _date_cls.today().strftime("%Y/%m/%d")
+
+    # Row 10-16: TC 別件数（D/E/F/G 列を上書き）
+    total_r = total_y = total_g = total_all = 0
+    for tc_idx, (tc_code, _) in enumerate(_TC_NAMES):
+        row = _SUM_TC_START_ROW + tc_idx
+        tc_f = [f for f in findings if getattr(f, "tc_code", "") == tc_code]
+        r = sum(1 for f in tc_f if "🔴" in getattr(f, "severity", ""))
+        y = sum(1 for f in tc_f if _is_medium_or_orange(getattr(f, "severity", "")))
+        g = sum(1 for f in tc_f if "🟢" in getattr(f, "severity", ""))
+        t = len(tc_f)
+        ws.cell(row, _SUM_TC_COL_CODE).value  = tc_code   # 末尾スペース除去
+        ws.cell(row, _SUM_TC_COL_HIGH).value  = r
+        ws.cell(row, _SUM_TC_COL_MED).value   = y
+        ws.cell(row, _SUM_TC_COL_LOW).value   = g
+        ws.cell(row, _SUM_TC_COL_TOTAL).value = t
+        total_r += r; total_y += y; total_g += g; total_all += t
+
+    # Row 17: 合計（値のみ上書き）
+    ws.cell(_SUM_TC_TOTAL_ROW, _SUM_TC_COL_HIGH).value  = total_r
+    ws.cell(_SUM_TC_TOTAL_ROW, _SUM_TC_COL_MED).value   = total_y
+    ws.cell(_SUM_TC_TOTAL_ROW, _SUM_TC_COL_LOW).value   = total_g
+    ws.cell(_SUM_TC_TOTAL_ROW, _SUM_TC_COL_TOTAL).value = total_all
+
+    # Row 21+: 既存データ行を削除して再生成
+    last_row = ws.max_row
+    if last_row >= _SUM_LOWER_DATA:
+        ws.delete_rows(_SUM_LOWER_DATA, last_row - _SUM_LOWER_DATA + 1)
+
+    _fill_lower_table(ws, findings, area_sheet_map, lower_row_styles)
+
+
+def _fill_lower_table(
+    ws,
+    findings: list,
+    area_sheet_map: dict[str, str],
+    row_styles: list[dict],
+) -> None:
+    """サマリー下部テーブル（Row 21+）にエリア別集計行を生成する。"""
+    groups: dict[tuple[str, str], list] = {}
+    for f in findings:
+        key = (getattr(f, "area", ""), getattr(f, "tc_code", ""))
+        groups.setdefault(key, []).append(f)
+
+    row = _SUM_LOWER_DATA
+    for area in AREA_ORDER:
+        area_tcs = sorted({k[1] for k in groups if k[0] == area})
+        for tc in area_tcs:
+            tc_f = groups.get((area, tc), [])
+            sheet_name = area_sheet_map.get(area, area)
+            area_disp  = re.sub(r"^A\d+\s+", "", sheet_name)
+            tc_name    = _TC_DISPLAY.get(tc, tc)
+            sub_count  = len({getattr(f, "sub_code", "") for f in tc_f})
+            r_cnt = sum(1 for f in tc_f if "🔴" in getattr(f, "severity", ""))
+            y_cnt = sum(1 for f in tc_f if _is_medium_or_orange(getattr(f, "severity", "")))
+            g_cnt = sum(1 for f in tc_f if "🟢" in getattr(f, "severity", ""))
+            total = len(tc_f)
+
+            row_data = {
+                _LT_AREA:     area,
+                _LT_AREANAME: area_disp,
+                _LT_TC:       tc,
+                _LT_TCNAME:   tc_name,
+                _LT_SUBCNT:   sub_count,
+                _LT_HIGH:     r_cnt,
+                _LT_MED:      y_cnt,
+                _LT_LOW:      g_cnt,
+                _LT_TOTAL:    total,
+                _LT_AMOUNT:   "-",
+                _LT_PROGRESS: "",
+            }
+
+            for col in range(1, _LT_PROGRESS + 1):
+                cell = ws.cell(row, col)
+                if col in row_data:
+                    cell.value = row_data[col]
+                if row_styles and col <= len(row_styles):
+                    _apply_row_style(cell, row_styles[col - 1])
+
+            row += 1
+
+
+# ─────────────────────────────────────────────────────────────────────
+# 詳細シート更新
+# ─────────────────────────────────────────────────────────────────────
+
+def _fill_detail_sheet(
+    ws,
+    findings: list,
+    severity_fills: dict[str, PatternFill],
+) -> None:
+    """詳細シートのサンプル行を削除し、Finding データを書き込む。
+
+    Row 1(タイトル)・Row 2(空行)・Row 3(ヘッダー) はテンプレートから継承。
+    Row 4+ をデータ行として上書きする。
+    """
+    # Row 4+ のサンプルデータを削除
+    last_row = ws.max_row
+    if last_row >= _DET_DATA_START:
+        ws.delete_rows(_DET_DATA_START, last_row - _DET_DATA_START + 1)
+
+    # Finding を書き込む
+    prev_sub_code = ""
+    for offset, finding in enumerate(findings):
+        _write_finding_row(ws, _DET_DATA_START + offset, finding,
+                           prev_sub_code, severity_fills)
+        prev_sub_code = getattr(finding, "sub_code", "")
+
+    # 確認状況列（U=21）にプルダウン
+    if findings:
+        last_data_row = len(findings) + _DET_DATA_START - 1
+        dv = DataValidation(
+            type="list",
+            formula1='"〇,×,保留"',
+            allow_blank=True,
+            showDropDown=False,
+        )
+        dv.sqref = f"U{_DET_DATA_START}:U{last_data_row}"
+        ws.add_data_validation(dv)
+
+
+def _write_finding_row(
+    ws,
+    row: int,
+    finding,
+    prev_sub_code: str,
+    severity_fills: dict[str, PatternFill],
+) -> None:
+    """Finding 1件を詳細シートの指定行に書き込む。"""
+    severity  = getattr(finding, "severity", "")
+    sub_code  = getattr(finding, "sub_code", "")
+    tc_code   = getattr(finding, "tc_code",
+                        sub_code[:5] if len(sub_code) >= 5 else "")
+    message   = getattr(finding, "message", "")
+    same_prev = bool(prev_sub_code) and sub_code == prev_sub_code
+
+    sev_label = _severity_label(severity)
+    row_fill  = severity_fills.get(sev_label)
+
+    values: dict[int, object] = {
+        _D_PRIORITY:   sev_label,
+        _D_SUBCODE:    sub_code,
+        _D_TCNAME:     _TC_DISPLAY.get(tc_code, ""),
+        _D_VIEWPOINT:  "同上" if same_prev else (message[:40] if message else ""),
+        _D_RESULT:     "同上" if same_prev else message,
+        _D_CURRENT:    getattr(finding, "current_value", ""),
+        _D_SUGGESTED:  getattr(finding, "suggested_value", ""),
+        _D_DATE:       _txn_date(finding),
+        _D_ACCOUNT:    _account_name(finding),
+        _D_PARTNER:    "",
+        _D_ITEM:       "",
+        _D_DEPT:       "",
+        _D_MEMO:       "",
+        _D_DESC:       "",
+        _D_DEBIT:      "",
+        _D_CREDIT:     "",
+        _D_LINK_GL:    "",
+        _D_LINK_JNL:   "",
+        _D_CONFIDENCE: getattr(finding, "confidence", 0),
+        _D_ERRTYPE:    getattr(finding, "error_type", ""),
+        _D_CONFIRM:    "",
+        _D_STAFFMEMO:  "",
+        _D_WALLETTXN:  getattr(finding, "wallet_txn_id", ""),
+    }
+
+    for col in range(1, _DET_TOTAL_COLS + 1):
+        cell = ws.cell(row, col, values.get(col, ""))
+        if row_fill is not None:
+            try:
+                cell.fill = copy(row_fill)
+            except Exception:
+                pass
+
+
+# ─────────────────────────────────────────────────────────────────────
+# メインエントリポイント
+# ─────────────────────────────────────────────────────────────────────
+
+def build_output(
+    findings: list,
+    output_path: Path,
+    company_name: str = "",
+    period: str = "",
+    template_path: Path | None = None,
+) -> Path:
+    """テンプレートを読み込み、Finding データを流し込んで Excel を生成する。
+
+    Args:
+        findings:      Finding オブジェクトのリスト（空リストも許容）
+        output_path:   出力先 .xlsx のパス
+        company_name:  会社名（タイトル・メタ情報に反映）
+        period:        対象期間文字列（例: "2026/02"）
+        template_path: テンプレートファイルのパス。None の場合はデフォルト使用
+
+    Returns:
+        output_path: 保存されたファイルのパス
+
+    Raises:
+        FileNotFoundError: テンプレートファイルが存在しない場合
+        ValueError:        output_path の親ディレクトリが存在しない場合
+    """
+    tpl = Path(template_path) if template_path else DEFAULT_TEMPLATE_PATH
+    if not tpl.exists():
+        raise FileNotFoundError(f"テンプレートが見つかりません: {tpl}")
+
+    output_path = Path(output_path)
+    if not output_path.parent.exists():
+        raise ValueError(f"出力先ディレクトリが存在しません: {output_path.parent}")
+
+    # ── テンプレート読み込み ──
+    wb = load_workbook(tpl)
+    area_sheet_map = _build_area_sheet_map(wb)
+
+    # ── severity fill を抽出（詳細シートの Row 4+ から） ──
+    severity_fills = _extract_severity_fills(wb)
+
+    # ── area 別 Finding を分類 ──
+    area_findings: dict[str, list] = {}
+    for f in findings:
+        area = getattr(f, "area", "")
+        if area:
+            area_findings.setdefault(area, []).append(f)
+
+    # ── サマリーシート更新 ──
+    ws_sum = wb["サマリー"]
+    lower_styles = _extract_row_styles(ws_sum, _SUM_LOWER_DATA,
+                                       _LT_PROGRESS)
+    _fill_summary(ws_sum, findings, company_name, period,
+                  area_sheet_map, lower_styles)
+
+    # ── 詳細シート処理 ──
+    for area in AREA_ORDER:
+        sheet_name = area_sheet_map.get(area)
+        if not sheet_name or sheet_name not in wb.sheetnames:
+            continue
+
+        ws = wb[sheet_name]
+        if area not in area_findings:
+            wb.remove(ws)
+        else:
+            sorted_f = _sort_findings(area_findings[area])
+            _fill_detail_sheet(ws, sorted_f, severity_fills)
+
+    # ── 参考シートはそのまま（何もしない） ──
+
+    wb.save(output_path)
+    return output_path

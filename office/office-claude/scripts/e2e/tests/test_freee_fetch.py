@@ -1,6 +1,6 @@
-"""Phase 6.7 freee_fetch.py のユニットテスト。
+"""Phase 6.7/6.10 freee_fetch.py のユニットテスト。
 
-対象: scripts/e2e/freee_fetch.py の4つのヘルパー関数
+対象: scripts/e2e/freee_fetch.py の5つのヘルパー関数
 """
 from __future__ import annotations
 
@@ -17,6 +17,7 @@ sys.path.insert(0, str(_E2E_DIR.parent.parent))  # PROJECT_ROOT を sys.path に
 from scripts.e2e.freee_fetch import (
     merge_deals_pages,
     normalize_partners,
+    normalize_taxes_codes,
     save_json,
     validate_completeness,
 )
@@ -268,3 +269,43 @@ class TestValidateCompleteness:
         assert result["total"] == 2
         assert len(result["warnings"]) >= 1
         assert any("件数不一致" in w for w in result["warnings"])
+
+
+# ─────────────────────────────────────────────────────────────
+# テスト: normalize_taxes_codes (Phase 6.10 追加)
+# ─────────────────────────────────────────────────────────────
+
+class TestNormalizeTaxesCodes:
+    """normalize_taxes_codes の3テスト。"""
+
+    def test_normal_case_returns_list(self):
+        """正常ケース(複数 taxes) → taxes 配列がそのまま返る。"""
+        raw = {
+            "taxes": [
+                {"code": 129, "name": "sales_with_tax_10", "name_ja": "課税売上10%"},
+                {"code": 136, "name": "purchase_with_tax_10", "name_ja": "課対仕入10%"},
+                {"code": 2, "name": "non_taxable", "name_ja": "対象外"},
+            ]
+        }
+        result = normalize_taxes_codes(raw)
+
+        assert isinstance(result, list)
+        assert len(result) == 3
+        assert result[0]["code"] == 129
+        assert result[0]["name_ja"] == "課税売上10%"
+        assert result[1]["code"] == 136
+        assert result[1]["name_ja"] == "課対仕入10%"
+
+    def test_empty_taxes_returns_empty_list(self):
+        """空配列 {"taxes": []} → 空リストが返る。"""
+        raw = {"taxes": []}
+        result = normalize_taxes_codes(raw)
+
+        assert result == []
+
+    def test_missing_taxes_key_raises_value_error(self):
+        """'taxes' キー欠落 → ValueError が出る。"""
+        raw = {"items": [{"code": 129}]}  # 'taxes' キーが存在しない
+
+        with pytest.raises(ValueError, match="taxes"):
+            normalize_taxes_codes(raw)

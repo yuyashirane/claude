@@ -316,7 +316,31 @@
       "Bash(py -3 -m pytest tests/unit/ scripts/e2e/tests/ -v --tb=no -q)",
       "Bash(py -3 -c \"import openpyxl; print\\(openpyxl.__version__\\)\")",
       "Bash(py -3 -m pytest tests/unit/ scripts/e2e/tests/ --ignore=tests/unit/test_excel_export.py -v --tb=no -q)",
-      "Bash(py -3 -m pytest tests/unit/ scripts/e2e/tests/ --ignore=tests/unit/test_excel_export.py -q --tb=no)"
+      "Bash(py -3 -m pytest tests/unit/ scripts/e2e/tests/ --ignore=tests/unit/test_excel_export.py -q --tb=no)",
+      "Bash(py -3 -c \"import openpyxl; print\\('openpyxl OK:', openpyxl.__version__\\)\")",
+      "Bash(py -3 tmp_merge_deals.py)",
+      "Bash(py -3 -u -c ':*)",
+      "Bash(python -m pytest scripts/e2e/tests/test_freee_to_context.py -v)",
+      "Bash(py -m pytest scripts/e2e/tests/test_freee_to_context.py -v)",
+      "Bash(py -m pytest tests/unit/ scripts/e2e/tests/ -v)",
+      "Bash(dir \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\office-claude\" /b)",
+      "Bash(py -m pytest tests/unit/ scripts/e2e/tests/ --tb=short -q)",
+      "Bash(python office/office-claude/scripts/e2e/_save_taxes_codes.py)",
+      "Bash(py office/office-claude/scripts/e2e/_save_taxes_codes.py)",
+      "Bash(py scripts/e2e/_save_taxes_codes.py)",
+      "Bash(py -c ' *)",
+      "Bash(py scripts/e2e/_e2e_rerun.py)",
+      "Bash(py -X utf8 scripts/e2e/_e2e_rerun.py)",
+      "Bash(py -X utf8 -m pytest tests/unit/ scripts/e2e/tests/ -q --tb=short)",
+      "Bash(py -X utf8 -c ' *)",
+      "Bash(python scripts/e2e/generate_template_data.py)",
+      "Bash(py -3 scripts/e2e/generate_template_data.py)",
+      "Bash(py -3 -c ' *)",
+      "Bash(py -3 -m pytest tests/unit/ -q)",
+      "Bash(py -3 -m pytest tests/unit/ scripts/e2e/tests/ -q)",
+      "Bash(py -3 -m pytest tests/unit/test_excel_export.py -v --tb=short)",
+      "Bash(py -3 -m pytest tests/unit/test_excel_export.py scripts/e2e/tests/ -v --tb=short)",
+      "Bash(py -3 -m pytest tests/unit/test_excel_export.py scripts/e2e/tests/ -q)"
     ]
   }
 }
