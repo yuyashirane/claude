@@ -368,7 +368,8 @@ def _fill_detail_sheet(
     Row 1(タイトル)・Row 2(空行)・Row 3(ヘッダー) はテンプレートから継承。
     Row 4+ をデータ行として上書きする。
     """
-    # Row 4+ のサンプルデータを削除
+    # Row 4+ のサンプルデータを削除（スタイルを先に保存してから削除）
+    row_styles = _extract_row_styles(ws, _DET_DATA_START, _DET_TOTAL_COLS)
     last_row = ws.max_row
     if last_row >= _DET_DATA_START:
         ws.delete_rows(_DET_DATA_START, last_row - _DET_DATA_START + 1)
@@ -377,7 +378,7 @@ def _fill_detail_sheet(
     prev_sub_code = ""
     for offset, finding in enumerate(findings):
         _write_finding_row(ws, _DET_DATA_START + offset, finding,
-                           prev_sub_code, severity_fills)
+                           prev_sub_code, severity_fills, row_styles)
         prev_sub_code = getattr(finding, "sub_code", "")
 
     # 確認状況列（U=21）にプルダウン
@@ -399,6 +400,7 @@ def _write_finding_row(
     finding,
     prev_sub_code: str,
     severity_fills: dict[str, PatternFill],
+    row_styles: list[dict] | None = None,
 ) -> None:
     """Finding 1件を詳細シートの指定行に書き込む。"""
     severity  = getattr(finding, "severity", "")
@@ -439,6 +441,8 @@ def _write_finding_row(
 
     for col in range(1, _DET_TOTAL_COLS + 1):
         cell = ws.cell(row, col, values.get(col, ""))
+        if row_styles and col <= len(row_styles):
+            _apply_row_style(cell, row_styles[col - 1])
         if row_fill is not None:
             try:
                 cell.fill = copy(row_fill)

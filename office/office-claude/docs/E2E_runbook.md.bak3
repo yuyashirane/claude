@@ -1,0 +1,465 @@
+# E2E 実施ランブック: アントレッド株式会社 2025年12月単月
+
+**対象**: Claude Code(Sonnet)+ 悠皓さん(各 Step 確認担当)
+**目的**: office-claude の初回 E2E を実施し、4 ファイル取得 → adapter → checker → Excel まで通す
+**所要目安**: 30〜60 分(Step ごと確認を含む)
+**対象データ**: アントレッド株式会社(company_id: 3525430)、2025年12月単月
+
+---
+
+## 0. このランブックの位置づけ
+
+Phase 1〜6.9 が完了し、4 ファイル §1.1 準拠が確定した。
+ここから**実データでの初回 E2E**を実施する。
+
+### 進行モデル(重要)
+
+- **Claude Code**: 各 Step を実行
+- **悠皓さん**: Step 完了ごとに観測値を確認、進行可否を判断
+- **戦略Claude**: エラー時の相談相手(Step 中断時のみ)
+
+各 Step は**実行 → 観測 → 確認 → 進行判断**の 4 段階で進む。**Step を勝手に飛ばさない**。各 Step の完了確認後に次 Step へ進む。
+
+### スコープ
+
+- ✅ アントレッド株式会社 2025年12月単月の E2E 実施
+- ✅ Step 1(取得) → Step 2(adapter) → Step 3(checker) → Step 4(Excel) → Step 5(レビュー)
+- ✅ 異常時は §6 リカバリ方針に従う
+- ❌ 他社・他月の E2E はやらない(初回はアントレッド 12 月のみ)
+- ❌ コード修正をしない(E2E 中に問題が見つかっても、修正は別タスクで)
+- ❌ 既存テスト(251 件)を変更しない
+
+---
+
+## 1. 前提チェック(実施前必須)
+
+E2E 開始前に以下を確認する。1 つでも未充足なら E2E に進まない。
+
+### 1.1 環境チェック
+
+| 項目 | 期待 | 確認方法 |
+|---|---|---|
+| Python | インストール済み | `py -3 --version` |
+| openpyxl | インストール済み | `py -3 -c "import openpyxl"` |
+| pytest 全件 green | 251 件 all green | `py -3 -m pytest tests/unit/ scripts/e2e/tests/ -v` の末尾 |
+| freee-MCP 接続 | 利用可能 | `mcp__freee-mcp__freee_api_get` がエラーなく呼べる |
+
+### 1.2 ファイルチェック
+
+| ファイル | 期待 |
+|---|---|
+| `scripts/e2e/freee_to_context.py` | 存在 |
+| `scripts/e2e/freee_fetch.py` | 存在 |
+| `scripts/e2e/RUNBOOK_fetch.md` | 存在 |
+| `skills/export/excel_report/exporter.py` | 存在 |
+
+### 1.3 ディレクトリチェック
+
+- `data/e2e/3525430/202512/` が存在しない場合は問題なし(`save_json` が自動作成)
+- 既存ファイルがある場合は上書きされる(再実行ケース)
+
+### 1.4 確認完了
+
+すべて充足したら Step 1 へ。
+
+---
+
+## 2. Step 1: データ取得(freee-MCP → 4 JSON)
+
+### 実行内容
+
+`scripts/e2e/RUNBOOK_fetch.md` の Step 1〜4 + 最終検証に従って、以下 4 ファイルを取得・保存する。
+
+- `data/e2e/3525430/202512/company_info.json`
+- `data/e2e/3525430/202512/account_items_all.json`
+- `data/e2e/3525430/202512/partners_all.json`
+- `data/e2e/3525430/202512/deals_202512.json`
+
+**取得対象期間**: 2025-12-01 〜 2025-12-31
+
+### 観測ポイント
+
+各取得後に以下を Claude Code が報告する:
+
+| ファイル | 観測値 |
+|---|---|
+| company_info.json | 6 キーの存在(company_id / company_name / fiscal_year_id / fiscal_year_start / fiscal_year_end / target_yyyymm) |
+| account_items_all.json | 配列件数(目安: 200 件前後) |
+| partners_all.json | 配列件数(目安: 250 件前後) |
+| deals_202512.json | `meta.total_count` と実際の `len(deals)` が一致、件数(目安: 207 件) |
+
+### 期待値の目安
+
+- 4 ファイルとも UTF-8 で保存され、Python から `json.load` で読み戻せる
+- partners / account_items は配列直下形式 `[...]`
+- company_info は §1.1 のフラット 6 キー dict
+- deals は `{"deals": [...], "meta": {...}}` 形式
+- `validate_completeness(merged)` の warnings はゼロ または記録に値する内容のみ
+
+### 進行判断
+
+| 状況 | 判断 |
+|---|---|
+| 4 ファイル全て期待通り、warnings なし | Step 2 へ進行 |
+| warnings あり、データは取れている | 内容を悠皓さんに報告して判断を仰ぐ(続行 or 中断) |
+| エラー(認証 / レート制限 / 構造異常) | §6 リカバリ方針に従う |
+| 件数が想定外(例:deals が 0 件) | 悠皓さんに報告、原因切り分け |
+
+---
+
+## 3. Step 2: adapter 実行(JSON → CheckContext)
+
+### 実行内容
+
+```python
+from pathlib import Path
+from scripts.e2e.freee_to_context import build_check_context
+
+base_dir = Path("data/e2e/3525430/202512")
+ctx = build_check_context(
+    deals_path=base_dir / "deals_202512.json",
+    partners_path=base_dir / "partners_all.json",
+    account_items_path=base_dir / "account_items_all.json",
+    company_info_path=base_dir / "company_info.json",
+)
+print(f"Context built. Transactions: {len(ctx.transactions)}")
+```
+
+### 観測ポイント
+
+`build_check_context` は実行末尾に以下を print する(Phase 6.5 で実装済み)。これらが Step 2 完了の主要シグナル。
+
+```
+deals: <件数>
+skipped: <件数>
+rows: <件数>
+partners cached: <件数>
+account_items cached: <件数>
+```
+
+### 期待値の目安
+
+| 項目 | 期待 |
+|---|---|
+| deals | Step 1 で取得した件数と一致(例: 207) |
+| skipped | 通常 0(details 空の deal が混ざる場合のみ非ゼロ) |
+| rows | deals × 平均明細数(目安: 400〜600) |
+| partners cached | Step 1 の partners 件数と一致(例: 255) |
+| account_items cached | Step 1 の account_items 件数と一致(例: 201) |
+| len(ctx.transactions) | rows と一致 |
+
+### 進行判断
+
+| 状況 | 判断 |
+|---|---|
+| 全観測値が期待通り | Step 3 へ進行 |
+| skipped が想定より多い(例:全 deals の 10% 以上) | 悠皓さんに報告、データ品質確認 |
+| rows == 0 | 即中断、Step 1 のデータを再確認 |
+| ValueError 発生(型チェック / 必須キーチェック) | 即中断、JSON 形式を確認 |
+| その他例外 | §6 リカバリ方針 |
+
+---
+
+## 4. Step 3: checker 実行(CheckContext → Findings)
+
+### 実行内容
+
+```python
+from skills.verify.V1_3_rule.check_tax_classification.checker import run as run_checker
+
+findings = run_checker(ctx)
+print(f"Findings generated: {len(findings)}")
+
+# TC ごとの内訳を表示
+from collections import Counter
+tc_counts = Counter(f.sub_code[:5] for f in findings)
+for tc, count in sorted(tc_counts.items()):
+    print(f"  {tc}: {count}")
+```
+
+### 観測ポイント
+
+- `len(findings)` の総数
+- TC ごとの内訳(TC-01 / TC-02 / TC-03 / TC-04 / TC-05 / TC-06 / TC-07 別件数)
+
+### 期待値の目安
+
+| 項目 | 期待 |
+|---|---|
+| 総 Findings | 0 件超(0 件は警告レベル、データ品質か実装の問題の可能性) |
+| TC-01(売上) | 売上系取引があれば発火 |
+| TC-03(給与) | 12 月は賞与月の可能性、件数増の可能性 |
+| TC-06(税金公課) | 12 月は税金支払いがあれば発火 |
+| TC-07(福利厚生) | 12 月は忘年会等で増える可能性 |
+
+### 進行判断
+
+| 状況 | 判断 |
+|---|---|
+| Findings が一定数生成され、TC 内訳が妥当 | Step 4 へ進行 |
+| Findings が 0 件 | 悠皓さんに報告(データ問題か実装問題かを判断) |
+| 特定 TC だけ異常に多い(例:TC-07 だけ 100 件) | 記録、Step 4 後にレビュー時に確認 |
+| 例外発生 | 即中断、§6 リカバリ方針 |
+
+---
+
+## 5. Step 4: Excel 出力(Findings → .xlsx)
+
+### 前提：Phase 6.12 テンプレート駆動方式
+
+Step 4 の Excel 出力は **テンプレート駆動方式** で動作する。Python はスタイル・レイアウトを一切生成せず、`data/reports/template/TC_template.xlsx` を読み込んでデータだけを流し込む。
+
+そのため本 Step では、以下 2 種類のチェックを行う：
+
+- **機能チェック**：ファイル生成の成否、サイズ、openpyxl での読み戻し
+- **構造整合性チェック**：テンプレート構造が Python 側で破壊されていないか
+
+どちらか片方が失敗した場合は進行しない。特に構造整合性は「ファイルは出るが中身が壊れている」という事故を防ぐための必須チェックである。
+
+### 実行内容
+
+```python
+from skills.export.excel_report.exporter import export_to_excel
+from pathlib import Path
+from datetime import datetime
+
+output_path = Path(f"data/e2e/3525430/202512/e2e_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx")
+export_to_excel(findings, output_path)
+print(f"Excel report saved: {output_path}")
+print(f"File size: {output_path.stat().st_size:,} bytes")
+```
+
+### 構造整合性チェック（Phase 6.12 必須）
+
+Excel 出力後、以下の検証コードを実行し、観測値を報告する。
+
+```python
+from openpyxl import load_workbook
+
+wb = load_workbook(output_path)
+
+# ① 使用テンプレートパス（ログから確認）
+print(f"[1] Template path used: data/reports/template/TC_template.xlsx")
+
+# ② シート一覧と「参考」シート保持
+sheet_names = wb.sheetnames
+print(f"[2] Sheet names: {sheet_names}")
+print(f"[2] '参考' sheet present: {'参考' in sheet_names}")
+
+# ③ 詳細シートの列構成（緩和版：列数 + 最終列名 + 主要列名の存在確認）
+REQUIRED_COLUMNS = {
+    "優先度", "項目", "項目名", "観点",
+    "チェック結果", "現在の税区分", "推奨税区分",
+    "摘要", "エラー型", "walletTxnId",
+}
+EXPECTED_LAST_COL = "walletTxnId"
+EXPECTED_COL_COUNT = 23
+area_sheets = [s for s in sheet_names if s not in ("サマリー", "参考")]
+for sheet_name in area_sheets:
+    ws = wb[sheet_name]
+    headers = [ws.cell(row=1, column=c).value for c in range(1, ws.max_column + 1)]
+    col_count = ws.max_column
+    last_col = headers[-1] if headers else None
+    missing = REQUIRED_COLUMNS - set(h for h in headers if h)
+    print(
+        f"[3] Sheet '{sheet_name}': "
+        f"col_count={col_count} (expected={EXPECTED_COL_COUNT}), "
+        f"last_col={last_col} (expected={EXPECTED_LAST_COL}), "
+        f"missing_required={sorted(missing) if missing else 'none'}"
+    )
+
+# ④ severity 表示値の検証（E 列に内部値が混入していないか）
+FORBIDDEN_SEVERITY_VALUES = {"High", "Medium", "Low", "high", "medium", "low"}
+ALLOWED_SEVERITY_VALUES = {"重大", "要注意", "要確認"}
+severity_violations = []
+for sheet_name in area_sheets:
+    ws = wb[sheet_name]
+    for row in range(2, ws.max_row + 1):
+        val = ws.cell(row=row, column=5).value  # E 列
+        if val in FORBIDDEN_SEVERITY_VALUES:
+            severity_violations.append(f"{sheet_name}!E{row}={val}")
+print(f"[4] Severity violations (High/Medium/Low leak to E col): {len(severity_violations)}")
+if severity_violations:
+    for v in severity_violations[:5]:
+        print(f"    - {v}")
+
+# ⑤ 3 軸非混線：T 列（エラー型）に severity 値が混入していないか
+error_type_violations = []
+for sheet_name in area_sheets:
+    ws = wb[sheet_name]
+    for row in range(2, ws.max_row + 1):
+        val = ws.cell(row=row, column=20).value  # T 列
+        if val in ALLOWED_SEVERITY_VALUES:
+            error_type_violations.append(f"{sheet_name}!T{row}={val}")
+print(f"[5] Error_type violations (severity leak to T col): {len(error_type_violations)}")
+if error_type_violations:
+    for v in error_type_violations[:5]:
+        print(f"    - {v}")
+```
+
+### 構造整合性の観測ポイント
+
+| # | 観測項目 | 合格条件 |
+|---|---|---|
+| [1] | テンプレートパス | `FileNotFoundError` が発生していないこと |
+| [2] | シート一覧 | `サマリー` / area 別シート / `参考` が含まれること |
+| [2] | `参考` シート保持 | `'参考' in sheet_names` が `True` |
+| [3] | 詳細シート列数 | 全 area シートで `col_count=23` |
+| [3] | 詳細シート最終列名 | 全 area シートで `last_col=walletTxnId` |
+| [3] | 主要列名の存在 | 全 area シートで `missing_required=none` |
+| [4] | severity 表示 | `High` / `Medium` / `Low` の内部値が 1 件も出ていないこと（0 件） |
+| [5] | 3 軸非混線（T列） | T 列に `重大` / `要注意` / `要確認` が混入していないこと（0 件） |
+
+### 観測ポイント
+
+- 出力ファイルパス
+- ファイルサイズ(目安: 数十 KB 〜 数百 KB、Findings 数による)
+- 例外なく完了したか
+
+### 期待値の目安
+
+| 項目 | 期待 |
+|---|---|
+| ファイル生成 | `.xlsx` ファイルが作成されている |
+| ファイルサイズ | 0 バイトでない |
+| openpyxl で開ける | エラーなく `load_workbook` できる |
+| シート構成 | サマリーシート + area 別詳細シート(A4/A5/A8/A10/A11/A12) |
+
+### 期待値の目安（テンプレート駆動版・追加）
+
+| 項目 | 期待 |
+|---|---|
+| テンプレート読込 | FileNotFoundError が発生しないこと |
+| シート構成 | `サマリー` + area 別詳細シート + `参考` |
+| `参考` シート保持 | 必須 |
+| 詳細シート列数 | 全シートで 23 列 |
+| 詳細シート最終列名 | 全シートで `walletTxnId` |
+| 主要列名の存在 | 全シートで欠落なし |
+| severity 表示 | E 列は `重大` / `要注意` / `要確認` のみ |
+| 3 軸非混線 | E 列に error_type 値 / T 列に severity 値が混入していないこと |
+
+### 進行判断
+
+| 状況 | 判断 |
+|---|---|
+| .xlsx 生成 + 読み戻し成功 | Step 5(悠皓さんレビュー)へ |
+| .xlsx 生成失敗(例外) | 即中断、§6 リカバリ方針 |
+| 0 バイトファイル | 即中断、export 処理の異常 |
+| テンプレート読込失敗（FileNotFoundError） | 即中断、`data/reports/template/TC_template.xlsx` の配置を確認 |
+| `参考` シート欠落 | 即中断、template_engine.py の実装確認 |
+| 列数が 23 でない、または最終列名が walletTxnId でない | 即中断、Python 側の列書き込みロジック確認 |
+| 主要列名が欠落している | 即中断、テンプレートまたは列書き込みロジック確認 |
+| severity に内部値（High/Medium/Low）が混入 | 即中断、severity 変換ロジック確認 |
+| 3 軸非混線違反（T 列に severity 値 等） | 即中断、列マッピング確認 |
+
+---
+
+## 6. Step 5: 悠皓さんレビュー
+
+### 実行内容
+
+1. Step 4 で生成された `.xlsx` を Excel で開く
+2. 添付ファイル `E2E_feedback_template.md` をテキストエディタで開く
+3. **A: 8 観点チェックリスト**を埋める(各観点に OK / 要改善 / 致命的問題)
+4. **B: 自由記述欄**に実務感としての気づきを書く
+5. 記入完了したら次セッションで戦略Claude にフィードバックを共有
+
+### 期待値の目安
+
+- 8 観点全てが「OK」または「要改善」レベル(致命的問題ゼロ)
+- 自由記述欄に最低 3〜5 個の気づきが記録される
+- 「次フェーズで対応すべき優先論点」が 1〜3 個特定される
+
+### 進行判断
+
+| 状況 | 判断 |
+|---|---|
+| 致命的問題ゼロ、要改善複数 | E2E 成功、Phase 7 計画へ |
+| 致命的問題あり | 該当箇所の修正タスクを次タスクとして起こす |
+| 致命的問題が複数 | E2E 結果を再評価、設計レベルで戻る判断もあり |
+
+---
+
+## 7. リカバリ方針(案 I:異常の種類で分岐)
+
+異常事態のカタログと対応方針:
+
+| 異常 | 種別 | 対応 |
+|---|---|---|
+| FileNotFoundError(JSON 欠落) | エラー | 即中断、Step 1 やり直し |
+| ValueError(JSON 構造不正) | エラー | 即中断、戦略Claude 相談 |
+| 認証エラー(freee-MCP) | エラー | 即中断、認証情報を悠皓さんに確認 |
+| レート制限(429 等) | エラー | 一時中断、時間を置いて Step 1 から再開 |
+| `validate_completeness` の warnings | 警告 | 記録、続行(悠皓さんに報告) |
+| Finding 件数 0 件 | 想定外 | 悠皓さん判断(データ問題 or 実装問題) |
+| 件数が桁違いに少ない/多い | 想定外 | 記録、悠皓さんに報告 |
+| Excel 生成成功だが開けない | エラー | 即中断、openpyxl 関連調査 |
+| timeout(MCP 応答遅延) | エラー | 即中断、再試行 1 回 → ダメなら戦略Claude 相談 |
+| 想定外の例外 | エラー | 即中断、例外メッセージとスタックトレースを戦略Claude へ報告 |
+| テンプレートファイル欠落 | エラー | 即中断、`data/reports/template/TC_template.xlsx` の配置を確認 |
+| 構造整合性チェック失敗 | エラー | 即中断、どのチェック（[1]〜[5]）が失敗したかを明示して報告 |
+
+### 中断時の報告フォーマット
+
+中断時には以下を整理して悠皓さん(必要に応じて戦略Claude)に報告:
+
+- 中断したStep 番号
+- 異常の種別(エラー / 警告 / 想定外)
+- 発生した観測値 / エラーメッセージ
+- 中断時点で生成済みのファイル一覧
+- リカバリ案(次にやるべきこと)
+
+---
+
+## 8. 完了報告フォーマット
+
+E2E 完了後、以下を報告する。
+
+### 8.1 結論(冒頭 1 行、必須)
+
+- `結論: E2E 成功(全 Step 完了、Excel 生成、レビュー予約)`
+- `結論: E2E 部分成功(Step N まで完了、後段は中断、詳細は §8.5)`
+- `結論: E2E 中断(Step N で異常、詳細は §8.5)`
+
+### 8.2 各 Step の観測値
+
+各 Step の観測値を表形式で報告:
+
+| Step | 観測項目 | 実測値 |
+|---|---|---|
+| Step 1 | deals 件数 | ? |
+| Step 1 | partners 件数 | ? |
+| Step 1 | account_items 件数 | ? |
+| Step 1 | warnings | ? |
+| Step 2 | deals / skipped / rows / partners cached / account_items cached | ?,?,?,?,? |
+| Step 3 | Findings 総数 | ? |
+| Step 3 | TC 別内訳 | ? |
+| Step 4 | 出力ファイルパス | ? |
+| Step 4 | ファイルサイズ | ? |
+| Step 4 | シート一覧 | ? |
+| Step 4 | `参考` シート保持 | True / False |
+| Step 4 | 詳細シート列数（全シート 23） | True / False |
+| Step 4 | 詳細シート最終列名（全シート walletTxnId） | True / False |
+| Step 4 | 主要列名欠落（全シート none） | True / False |
+| Step 4 | severity 違反件数 | ? |
+| Step 4 | 3 軸非混線違反件数 | ? |
+
+### 8.3 警告ログ
+
+`validate_completeness` その他で発生した warnings を全て列挙。
+
+### 8.4 想定外の事象
+
+期待値と乖離した観測値があれば、その原因仮説とともに記載。
+
+### 8.5 中断箇所(中断時のみ)
+
+§7 の中断時報告フォーマットに従う。
+
+### 8.6 次ステップへの申し送り
+
+E2E を通じて見えた、次に対応すべき論点(レビューフィードバックは別ファイル `E2E_feedback_template.md` で扱う)。
+
+---
+
+**ランブック 終わり**

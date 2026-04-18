@@ -340,7 +340,15 @@
       "Bash(py -3 -m pytest tests/unit/ scripts/e2e/tests/ -q)",
       "Bash(py -3 -m pytest tests/unit/test_excel_export.py -v --tb=short)",
       "Bash(py -3 -m pytest tests/unit/test_excel_export.py scripts/e2e/tests/ -v --tb=short)",
-      "Bash(py -3 -m pytest tests/unit/test_excel_export.py scripts/e2e/tests/ -q)"
+      "Bash(py -3 -m pytest tests/unit/test_excel_export.py scripts/e2e/tests/ -q)",
+      "Bash(grep -i \"\\\\.md$\")",
+      "Bash(cp \"/c/Users/yuya_/claude/office/office-claude/docs/E2E_runbook.md\" \"/c/Users/yuya_/claude/office/office-claude/docs/E2E_runbook.md.bak\")",
+      "Bash(cp \"/c/Users/yuya_/claude/office/office-claude/docs/E2E_prompt.md\" \"/c/Users/yuya_/claude/office/office-claude/docs/E2E_prompt.md.bak\")",
+      "Bash(awk '{print $5, $9}')",
+      "Bash(py -3 tmp/run_e2e_step1.py)",
+      "Bash(py -3 -)",
+      "Bash(py -3 -m pytest tests/unit/ scripts/e2e/tests/ -v --tb=short)",
+      "Bash([ -f \"office/office-claude/$f\" ])"
     ]
   }
 }

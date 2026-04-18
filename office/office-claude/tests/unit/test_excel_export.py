@@ -13,7 +13,8 @@
     G. Phase 6.11a 追加テスト  5件
     H. Phase 6.11a v2 追加テスト  6件
     I. Phase 6.12 テンプレート駆動テスト  3件
-合計: 40件
+    J. Phase 6.12a スタイル保持テスト  2件
+合計: 42件
 
 詳細シートレイアウト（テンプレート準拠、23列）:
     Row 1: シートタイトル
@@ -645,3 +646,52 @@ def test_tc_code_no_trailing_spaces(tmp_path):
         val = ws.cell(row, 1).value
         if val:
             assert val == val.strip(), f"Row {row}: '{val}' に末尾スペースあり"
+
+
+# ─────────────────────────────────────────────────────────────────────
+# J. Phase 6.12a スタイル保持テスト（2件）
+# ─────────────────────────────────────────────────────────────────────
+
+def test_area_sheet_preserves_template_font(tmp_path):
+    """エリア別シートのデータ行がテンプレートのフォント（Meiryo UI/10pt）を保持する。"""
+    from skills.export.excel_report.exporter import export_to_excel
+    findings = [
+        _make_finding(sub_code="TC-07a", area="A10", sort_priority=12),
+        _make_finding(sub_code="TC-07b", area="A10", sort_priority=14),
+        _make_finding(sub_code="TC-07c", area="A10", sort_priority=16),
+    ]
+    output = tmp_path / "out.xlsx"
+    export_to_excel(findings, output)
+    wb = load_workbook(output)
+    ws = wb["A10 その他経費"]
+    for data_row in range(4, 7):   # rows 4-6（3件分）
+        for col in (1, 5, 14, 23):   # 代表列：優先度/チェック結果/摘要/walletTxnId
+            cell = ws.cell(data_row, col)
+            assert cell.font.name == "Meiryo UI", \
+                f"row {data_row} col {col}: font={cell.font.name!r} (expected 'Meiryo UI')"
+            assert cell.font.size == 10.0, \
+                f"row {data_row} col {col}: size={cell.font.size} (expected 10.0)"
+            assert cell.alignment.vertical == "center", \
+                f"row {data_row} col {col}: v_align={cell.alignment.vertical!r} (expected 'center')"
+
+
+def test_summary_sheet_unaffected_by_area_fix(tmp_path):
+    """エリアシート修正後もサマリーシートが正常動作する（回帰確認）。"""
+    from skills.export.excel_report.exporter import export_to_excel
+    findings = [
+        _make_finding(sub_code="TC-07a", area="A10", severity="🔴 High"),
+        _make_finding(sub_code="TC-03c", area="A5", severity="🟢 Low"),
+    ]
+    output = tmp_path / "out.xlsx"
+    export_to_excel(findings, output, company_name="回帰テスト株式会社", period="202512")
+    wb = load_workbook(output)
+    ws = wb["サマリー"]
+    # タイトルに会社名が含まれる
+    assert "回帰テスト株式会社" in ws.cell(1, 1).value
+    # TC-07 行（Row 16）: 重大=1
+    assert ws.cell(16, 4).value == 1
+    # TC-03 行（Row 12）: 要確認=1
+    assert ws.cell(12, 6).value == 1
+    # 両エリアシートが存在する
+    assert "A5 人件費" in wb.sheetnames
+    assert "A10 その他経費" in wb.sheetnames
