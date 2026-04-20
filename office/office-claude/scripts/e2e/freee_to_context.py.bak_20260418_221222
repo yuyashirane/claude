@@ -387,7 +387,6 @@ def build_check_context(
         period_end=period_end,
         transactions=all_rows,
         tax_code_master=tax_code_master,
-        company_name=company_data["company_name"],   # Phase 6.11b: レポート表示用
     )
 
     # ── 6. 観測用ログ（E2E デバッグ用）

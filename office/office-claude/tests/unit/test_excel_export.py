@@ -14,7 +14,10 @@
     H. Phase 6.11a v2 追加テスト  6件
     I. Phase 6.12 テンプレート駆動テスト  3件
     J. Phase 6.12a スタイル保持テスト  2件
-合計: 42件
+    K. Phase 6.11b 金額列O/Pテスト  3件
+    L. 対象月フォーマットテスト  2件
+    M. Phase 7 Q/R 列ハイパーリンクテスト  5件
+合計: 52件
 
 詳細シートレイアウト（テンプレート準拠、23列）:
     Row 1: シートタイトル
@@ -54,6 +57,9 @@ def _make_finding(
     message: str = "テストメッセージ:慶弔見舞金が課税仕入になっています。",
     wallet_txn_id: str = "test-txn-001",
     link_hints=None,
+    debit_amount=None,
+    credit_amount=None,
+    deal_id=None,
 ):
     """テスト用 Finding ビルダー（実際の schema.py の Finding 定義に完全準拠）。
 
@@ -89,6 +95,9 @@ def _make_finding(
         message=message,
         show_by_default=show_by_default,
         link_hints=link_hints,
+        debit_amount=debit_amount,
+        credit_amount=credit_amount,
+        deal_id=deal_id,
     )
 
 
@@ -695,3 +704,221 @@ def test_summary_sheet_unaffected_by_area_fix(tmp_path):
     # 両エリアシートが存在する
     assert "A5 人件費" in wb.sheetnames
     assert "A10 その他経費" in wb.sheetnames
+
+
+# ─────────────────────────────────────────────────────────────────────
+# K. Phase 6.11b 金額列O/Pテスト（3件）
+# ─────────────────────────────────────────────────────────────────────
+
+def test_debit_amount_written_to_col_O(tmp_path):
+    """借方金額が O 列（col=15）に書き込まれ、P 列は空になる。"""
+    from skills.export.excel_report.exporter import export_to_excel
+    finding = _make_finding(sub_code="TC-03a", area="A5", debit_amount=150000)
+    output = tmp_path / "out.xlsx"
+    export_to_excel([finding], output)
+    wb = load_workbook(output)
+    ws = wb["A5 人件費"]
+    cell_o = ws.cell(4, 15)
+    cell_p = ws.cell(4, 16)
+    assert cell_o.value == 150000, f"O4: expected 150000, got {cell_o.value!r}"
+    assert cell_p.value in (None, ""), f"P4: expected empty, got {cell_p.value!r}"
+    # 桁区切り書式が設定されていること
+    assert cell_o.number_format == "#,##0", \
+        f"O4 number_format: expected '#,##0', got {cell_o.number_format!r}"
+
+
+def test_credit_amount_written_to_col_P(tmp_path):
+    """貸方金額が P 列（col=16）に書き込まれ、O 列は空になる。"""
+    from skills.export.excel_report.exporter import export_to_excel
+    finding = _make_finding(sub_code="TC-05a", area="A11", credit_amount=50000)
+    output = tmp_path / "out.xlsx"
+    export_to_excel([finding], output)
+    wb = load_workbook(output)
+    # A11 シートのシート名を取得
+    sheet_name = next(n for n in wb.sheetnames if n.startswith("A11"))
+    ws = wb[sheet_name]
+    cell_o = ws.cell(4, 15)
+    cell_p = ws.cell(4, 16)
+    assert cell_o.value in (None, ""), f"O4: expected empty, got {cell_o.value!r}"
+    assert cell_p.value == 50000, f"P4: expected 50000, got {cell_p.value!r}"
+    # 貸方列に桁区切り書式が設定されていること
+    assert cell_p.number_format == "#,##0", \
+        f"P4 number_format: expected '#,##0', got {cell_p.number_format!r}"
+
+
+def test_amount_none_writes_empty_cells(tmp_path):
+    """debit_amount / credit_amount が None のとき O/P 列は空（既存挙動維持）。"""
+    from skills.export.excel_report.exporter import export_to_excel
+    finding = _make_finding(sub_code="TC-07a", area="A10")  # debit/credit=None
+    output = tmp_path / "out.xlsx"
+    export_to_excel([finding], output)
+    wb = load_workbook(output)
+    ws = wb["A10 その他経費"]
+    assert ws.cell(4, 15).value in (None, ""), "O4 should be empty when debit_amount=None"
+    assert ws.cell(4, 16).value in (None, ""), "P4 should be empty when credit_amount=None"
+
+
+# ─────────────────────────────────────────────────────────────────────
+# L. 対象月フォーマットテスト（2件）
+# ─────────────────────────────────────────────────────────────────────
+
+def test_format_target_month_standard():
+    """'YYYYMM' 文字列を '年月' 表記に正しく変換する。"""
+    from skills.export.excel_report.template_engine import format_target_month
+    assert format_target_month("202512") == "2025年12月"
+    assert format_target_month("202504") == "2025年4月"   # 月の先頭ゼロは除く
+    assert format_target_month("202601") == "2026年1月"
+
+
+def test_format_target_month_fallback():
+    """不正な入力はそのまま返す（防御的実装の確認）。"""
+    from skills.export.excel_report.template_engine import format_target_month
+    assert format_target_month("invalid") == "invalid"
+    assert format_target_month("2025-12") == "2025-12"   # ハイフン区切りは変換しない
+    assert format_target_month("") == ""
+
+
+# ─────────────────────────────────────────────────────────────────────
+# M. Phase 7 Q/R 列ハイパーリンクテスト（4件）
+# ─────────────────────────────────────────────────────────────────────
+
+def _make_link_hints_for_test(
+    target="general_ledger",
+    account_name="支払手数料",
+    period_start=date(2025, 12, 1),
+    period_end=date(2025, 12, 31),
+    fiscal_year_id="9842248",
+    company_id="3525430",
+    deal_id=None,
+):
+    """Section M 用 LinkHints ファクトリ。"""
+    import importlib.util
+    if "schema" not in sys.modules:
+        _root = Path(__file__).parent.parent.parent
+        _schema_path = (
+            _root / "skills" / "verify" / "V1-3-rule"
+            / "check-tax-classification" / "schema.py"
+        )
+        spec = importlib.util.spec_from_file_location("schema", _schema_path)
+        mod = importlib.util.module_from_spec(spec)
+        sys.modules["schema"] = mod
+        spec.loader.exec_module(mod)
+    schema = sys.modules["schema"]
+    return schema.LinkHints(
+        target=target,
+        account_name=account_name,
+        period_start=period_start,
+        period_end=period_end,
+        fiscal_year_id=fiscal_year_id,
+        company_id=company_id,
+        deal_id=deal_id,
+    )
+
+
+def test_q_column_has_gl_hyperlink(tmp_path):
+    """Q 列（col=17）に総勘定元帳のハイパーリンクが設定される。"""
+    import urllib.parse
+    from skills.export.excel_report.exporter import export_to_excel
+
+    lh = _make_link_hints_for_test()
+    finding = _make_finding(sub_code="TC-03a", area="A5", link_hints=lh)
+    output = tmp_path / "out.xlsx"
+    export_to_excel([finding], output)
+    wb = load_workbook(output)
+    ws = wb["A5 人件費"]
+    cell = ws.cell(4, 17)
+    assert cell.value == "🔗", f"Q4 value: expected '🔗', got {cell.value!r}"
+    assert cell.hyperlink is not None, "Q4 should have a hyperlink"
+    url = cell.hyperlink.target
+    assert "general_ledgers/show" in url, f"Q4 URL should contain 'general_ledgers/show': {url}"
+    parsed = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
+    assert parsed["name"] == ["支払手数料"]
+    assert parsed["start_date"] == ["2025-12-01"]
+    assert parsed["company_id"] == ["3525430"]
+
+
+def test_r_column_has_jnl_hyperlink_with_deal_id(tmp_path):
+    """R 列（col=18）に deal_id ピンポイント仕訳帳 URL が設定される。"""
+    import urllib.parse
+    from skills.export.excel_report.exporter import export_to_excel
+
+    lh = _make_link_hints_for_test(deal_id="2730330344")
+    finding = _make_finding(sub_code="TC-03a", area="A5", link_hints=lh)
+    output = tmp_path / "out.xlsx"
+    export_to_excel([finding], output)
+    wb = load_workbook(output)
+    ws = wb["A5 人件費"]
+    cell = ws.cell(4, 18)
+    assert cell.value == "🔗", f"R4 value: expected '🔗', got {cell.value!r}"
+    assert cell.hyperlink is not None, "R4 should have a hyperlink"
+    url = cell.hyperlink.target
+    assert "/reports/journals" in url, f"R4 URL should contain '/reports/journals': {url}"
+    parsed = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
+    assert parsed["deal_id"] == ["2730330344"], f"deal_id missing from R4 URL: {url}"
+    assert "start_date" not in parsed, "ピンポイント URL に start_date は不要"
+    assert "name" not in parsed, "journal URL に name（科目名）は不要"
+
+
+def test_q_r_no_hyperlink_when_link_hints_none(tmp_path):
+    """link_hints が None の Finding では Q/R 列にハイパーリンクが設定されない。"""
+    from skills.export.excel_report.exporter import export_to_excel
+
+    finding = _make_finding(sub_code="TC-07a", area="A10", link_hints=None)
+    output = tmp_path / "out.xlsx"
+    export_to_excel([finding], output)
+    wb = load_workbook(output)
+    ws = wb["A10 その他経費"]
+    assert ws.cell(4, 17).hyperlink is None, "Q4: link_hints=None のとき hyperlink なし"
+    assert ws.cell(4, 18).hyperlink is None, "R4: link_hints=None のとき hyperlink なし"
+
+
+def test_r_column_fallback_url_when_no_deal_id(tmp_path):
+    """deal_id なしの場合、R 列が期間ベース URL にフォールバックする。"""
+    import urllib.parse
+    from skills.export.excel_report.exporter import export_to_excel
+
+    lh = _make_link_hints_for_test(deal_id=None)
+    finding = _make_finding(sub_code="TC-03a", area="A5", link_hints=lh)
+    output = tmp_path / "out.xlsx"
+    export_to_excel([finding], output)
+    wb = load_workbook(output)
+    ws = wb["A5 人件費"]
+    cell = ws.cell(4, 18)
+    assert cell.hyperlink is not None, "R4: deal_id なしでも期間ベース URL でリンクが設定される"
+    url = cell.hyperlink.target
+    parsed = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
+    assert "deal_id" not in parsed
+    assert parsed["start_date"] == ["2025-12-01"]
+    assert parsed["end_date"] == ["2025-12-31"]
+
+
+def test_r_column_uses_finding_deal_id_for_pinpoint(tmp_path):
+    """finding.deal_id が設定されていれば、R 列にピンポイント URL が生成される。
+
+    背景: build_link_hints("general_ledger") は link_hints.deal_id を設定しないため、
+    Finding.deal_id を template_engine が直接参照してピンポイント URL を生成する必要がある。
+    これが Phase 7 の主要 UX 目的「ワンクリックで該当取引を開ける」の実現に不可欠。
+    """
+    import urllib.parse
+    from skills.export.excel_report.exporter import export_to_excel
+
+    # link_hints.deal_id は None（general_ledger target の通常状態）
+    # finding.deal_id のみ設定
+    lh = _make_link_hints_for_test(deal_id=None)
+    finding = _make_finding(
+        sub_code="TC-03a", area="A5",
+        link_hints=lh,
+        deal_id="3237332503",  # Finding 側に直接設定
+    )
+    output = tmp_path / "out.xlsx"
+    export_to_excel([finding], output)
+    wb = load_workbook(output)
+    ws = wb["A5 人件費"]
+    cell = ws.cell(4, 18)
+    assert cell.value == "🔗", f"R4 value: expected '🔗', got {cell.value!r}"
+    assert cell.hyperlink is not None, "R4 should have a hyperlink"
+    url = cell.hyperlink.target
+    parsed = urllib.parse.parse_qs(urllib.parse.urlparse(url).query)
+    assert parsed.get("deal_id") == ["3237332503"], \
+        f"finding.deal_id should produce pinpoint URL, got: {url}"
+    assert "start_date" not in parsed, "ピンポイント URL に start_date は不要"

@@ -348,7 +348,31 @@
       "Bash(py -3 tmp/run_e2e_step1.py)",
       "Bash(py -3 -)",
       "Bash(py -3 -m pytest tests/unit/ scripts/e2e/tests/ -v --tb=short)",
-      "Bash([ -f \"office/office-claude/$f\" ])"
+      "Bash([ -f \"office/office-claude/$f\" ])",
+      "Bash(dir \"C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\office-claude\\\\skills\\\\verify\\\\V1-3-rule\\\\check-tax-classification\\\\checks\")",
+      "Bash(py -3 -m pytest tests/ -q --tb=short)",
+      "Bash(py -3 -m pytest tests/ scripts/e2e/tests/ -q --tb=short)",
+      "Bash(py -3 -m pytest tests/ scripts/e2e/tests/ -v --tb=short)",
+      "Bash(py -3 -m pytest tests/unit/ scripts/e2e/tests/ -q --tb=short)",
+      "Bash(py -3 -O -)",
+      "Bash(py -3 -m pytest tests/unit/ scripts/e2e/tests/ --co -q)",
+      "Bash(py -3 -m pytest \"C:/Users/yuya_/claude/office/office-claude/tests/unit/\" \"C:/Users/yuya_/claude/office/office-claude/scripts/e2e/tests/\" --co -q)",
+      "Bash(py -3 -m pytest \"C:/Users/yuya_/claude/office/office-claude/tests/unit/\" \"C:/Users/yuya_/claude/office/office-claude/scripts/e2e/tests/\" -v)",
+      "Bash(py -3 -m pytest \"C:/Users/yuya_/claude/office/office-claude/tests/unit/\" \"C:/Users/yuya_/claude/office/office-claude/scripts/e2e/tests/\" -v --rootdir=\"C:/Users/yuya_/claude/office/office-claude\")",
+      "Bash(py -3 -m pytest \"C:/Users/yuya_/claude/office/office-claude/tests/unit/test_excel_export.py::test_debit_amount_written_to_col_O\" -v)",
+      "Bash(cmd /c \"pushd C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\office-claude && py -3 -m pytest tests/unit/ scripts/e2e/tests/ -v 2>&1 | tail -25\")",
+      "Bash(cmd /c \"cd /d C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\office-claude & py -3 -m pytest tests/unit/ scripts/e2e/tests/ --tb=short -q 2>&1 | tail -20\")",
+      "Bash(powershell -Command \"Set-Location 'C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\office-claude'; py -3 -m pytest tests/unit/ scripts/e2e/tests/ --tb=short -q 2>&1 | Select-Object -Last 20\")",
+      "Bash(powershell -Command ' *)",
+      "Bash(powershell -Command \"Get-ChildItem -Path 'C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\office-claude\\\\scripts' -Recurse -Name '*.py' | Select-Object -First 20\")",
+      "Bash(powershell -Command *)",
+      "Bash(python tmp/verify_named_style.py)",
+      "Bash(py tmp/verify_named_style.py)",
+      "Bash(py -m pytest tests/unit/test_finding_grouper.py -v)",
+      "Bash(py -m pytest)",
+      "Bash(py tmp/inspect_template.py)",
+      "Bash(py tmp/indent_samples.py)",
+      "Bash(py office/office-claude/tmp/indent_samples.py)"
     ]
   }
 }

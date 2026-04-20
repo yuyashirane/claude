@@ -382,7 +382,6 @@ class CheckContext:
     references: Optional[ReferenceBundle] = None
 
     # ─── メタ情報 ───
-    company_name: str = ""   # 会社名（レポート表示用。Phase 6.11b で追加）
     skill_name: str = ""
     debug_mode: bool = False
 

@@ -146,6 +146,25 @@ def get_amount(row) -> Decimal:
     return max(d, c)  # 異常データの救済
 
 
+def extract_debit_credit(row) -> "tuple[Optional[int], Optional[int]]":
+    """TransactionRow から (借方金額, 貸方金額) を int で取得する。
+
+    借方計上 → (int(debit_amount), None)
+    貸方計上 → (None, int(credit_amount))
+    両方0 or 両方>0 → (None, None)（不明・異常データの救済）
+
+    Phase 6.11b で追加。Finding の debit_amount / credit_amount に格納するための
+    変換ヘルパー。is_debit_side / is_credit_side と同じ判定規約を使用。
+    """
+    d = getattr(row, "debit_amount", Decimal("0"))
+    c = getattr(row, "credit_amount", Decimal("0"))
+    if d > 0 and c == 0:
+        return (int(d), None)
+    if c > 0 and d == 0:
+        return (None, int(c))
+    return (None, None)
+
+
 # ── tax_code 解決ヘルパー(Phase 3-R で共通化) ──
 
 def resolve_tax_code(row, ctx) -> Optional[int]:
@@ -259,6 +278,9 @@ def create_finding(
 
     review_level = _ERROR_TYPE_TO_REVIEW_LEVEL.get(error_type, "🔴必修")
 
+    # 借方・貸方金額を row から自動抽出（Phase 6.11b）
+    debit_amount, credit_amount = extract_debit_credit(row)
+
     schema_mod = _load_schema_module()
 
     return schema_mod.Finding(
@@ -275,6 +297,8 @@ def create_finding(
         suggested_value=suggested_value,
         confidence=confidence,
         message=message,
+        debit_amount=debit_amount,
+        credit_amount=credit_amount,
         subarea=subarea,
         show_by_default=show_by_default,
         link_hints=link_hints,

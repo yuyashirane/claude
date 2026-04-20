@@ -12,10 +12,8 @@ from datetime import date as _date_cls
 from pathlib import Path
 
 from openpyxl import load_workbook
-from openpyxl.styles import Font, PatternFill
+from openpyxl.styles import PatternFill
 from openpyxl.worksheet.datavalidation import DataValidation
-
-from skills._common.lib.freee_link_generator import generate_gl_url, generate_jnl_url
 
 from skills.export.excel_report.styles import SEVERITY_DISPLAY
 from skills.export.excel_report.sort_priority_map import get_sort_priority
@@ -110,31 +108,6 @@ _FALLBACK_FILLS: dict[str, PatternFill] = {
     "要注意": PatternFill(start_color="FFEB9C", end_color="FFEB9C", fill_type="solid"),
     "要確認": PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid"),
 }
-
-
-# ─────────────────────────────────────────────────────────────────────
-# 表示整形ヘルパー
-# ─────────────────────────────────────────────────────────────────────
-
-def format_target_month(yyyymm: str) -> str:
-    """'202512' を '2025年12月' に整形する。
-
-    現在の実装は単月単明細モデル（指定月の取引を個別判定）。
-    将来 PL 累計モデルへ拡張時は期間表示（例: '2025年4月〜2025年12月'）に
-    変更する（Phase 8 検討事項）。
-
-    Args:
-        yyyymm: 'YYYYMM' 形式の文字列（例: '202512'）
-
-    Returns:
-        'YYYY年M月' 形式の文字列（例: '2025年12月'）
-        不正入力の場合はそのまま返す（防御的実装）。
-    """
-    if len(yyyymm) == 6 and yyyymm.isdigit():
-        year = yyyymm[:4]
-        month = int(yyyymm[4:6])
-        return f"{year}年{month}月"
-    return yyyymm  # フォールバック: 不正入力はそのまま返す
 
 
 # ─────────────────────────────────────────────────────────────────────
@@ -298,7 +271,7 @@ def _fill_summary(
 
     # Row 3-5: メタ情報（値のみ上書き）
     ws.cell(_SUM_COMPANY_CELL[0], _SUM_COMPANY_CELL[1]).value = company_name
-    ws.cell(_SUM_PERIOD_CELL[0],  _SUM_PERIOD_CELL[1]).value  = format_target_month(period) if period else ""
+    ws.cell(_SUM_PERIOD_CELL[0],  _SUM_PERIOD_CELL[1]).value  = period if period else ""
     ws.cell(_SUM_DATE_CELL[0],    _SUM_DATE_CELL[1]).value    = _date_cls.today().strftime("%Y/%m/%d")
 
     # Row 10-16: TC 別件数（D/E/F/G 列を上書き）
@@ -485,37 +458,6 @@ def _write_finding_row(
         ws.cell(row, _D_DEBIT).number_format = "#,##0"
     if credit_val is not None:
         ws.cell(row, _D_CREDIT).number_format = "#,##0"
-
-    # Q/R 列: freee へのハイパーリンクを設定（Phase 7）
-    # _apply_row_style() の後に設定することでスタイル（フォント種別・罫線等）を壊さない。
-    # Font は明示指定：テンプレートの他セルと揃えるため name/size を継承しつつ色・下線を追加。
-    link_hints = getattr(finding, "link_hints", None)
-
-    url_gl = generate_gl_url(link_hints)
-    if url_gl:
-        cell_gl = ws.cell(row, _D_LINK_GL)
-        cell_gl.value = "🔗"
-        cell_gl.hyperlink = url_gl
-        cell_gl.font = Font(
-            name="Meiryo UI",
-            size=10,
-            color="0563C1",
-            underline="single",
-        )
-
-    # finding.deal_id を渡す: build_link_hints("general_ledger") は deal_id を含まないため、
-    # Finding から直接取得してピンポイント URL を生成する
-    url_jnl = generate_jnl_url(link_hints, deal_id=getattr(finding, "deal_id", None))
-    if url_jnl:
-        cell_jnl = ws.cell(row, _D_LINK_JNL)
-        cell_jnl.value = "🔗"
-        cell_jnl.hyperlink = url_jnl
-        cell_jnl.font = Font(
-            name="Meiryo UI",
-            size=10,
-            color="0563C1",
-            underline="single",
-        )
 
 
 # ─────────────────────────────────────────────────────────────────────
