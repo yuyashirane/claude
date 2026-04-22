@@ -22,6 +22,7 @@ def export_to_excel(
     company_name: str = "",
     period: str = "",
     template_path: Path | None = None,
+    ctx=None,
 ) -> Path:
     """Finding 配列を Excel ファイルに変換して保存する。
 
@@ -31,6 +32,9 @@ def export_to_excel(
         company_name:  会社名（レポートタイトル用、省略可）
         period:        対象期間の文字列（例: "2026/02" "2026年2月期"）
         template_path: テンプレートファイルのパス。None の場合はデフォルト使用
+        ctx:           CheckContext（Phase 8-C 追加）。渡されると親行 GL リンク
+                      が会計期間全体（ctx.period_start/period_end）で生成される。
+                      None の場合は link_hints ベース（単月）にフォールバック。
 
     Returns:
         output_path: 保存された Excel ファイルのパス（引数と同じ）
@@ -49,4 +53,5 @@ def export_to_excel(
         company_name=company_name,
         period=period,
         template_path=template_path,
+        ctx=ctx,
     )

@@ -135,3 +135,138 @@ def generate_jnl_url(link_hints, deal_id: Optional[str] = None) -> Optional[str]
             params["company_id"] = v
 
     return f"{_BASE_URL}/reports/journals?{urllib.parse.urlencode(params)}"
+
+
+def _extract_tax_group_code(finding, ctx) -> Optional[str]:
+    """Finding から税区分コード (文字列) を逆引きする pure helper。
+
+    Phase 8-C 視覚確認後修正 v2 の確定仕様:
+        1. Finding.current_value == row.tax_label (TC-01〜07 で共通保証)
+        2. ctx.tax_code_master[tax_label] → コード文字列 (例: "136")
+        3. ctx が None / tax_code_master 不在 / 逆引き失敗 → None
+
+    checker 層・Finding スキーマは一切変更せず、既存の ctx.tax_code_master を
+    Excel 層側で活用するアプローチ。
+
+    Args:
+        finding: Finding オブジェクト（current_value 属性を持つ想定）
+        ctx:     CheckContext（tax_code_master 辞書を持つ想定）
+
+    Returns:
+        税区分コード文字列。解決できない場合は None。
+    """
+    if ctx is None:
+        return None
+    tax_label = getattr(finding, "current_value", None)
+    if not tax_label:
+        return None
+    tax_code_master = getattr(ctx, "tax_code_master", None)
+    if not tax_code_master:
+        return None
+    return tax_code_master.get(tax_label)
+
+
+def _collect_group_tax_codes(group, ctx) -> list:
+    """FindingGroup 内の全税区分コードを収集する pure helper。
+
+    処理順序（Phase 8-C Fix v2 確定仕様）:
+        1. グループ内の各 Finding から _extract_tax_group_code で税区分コードを抽出
+        2. None を除外
+        3. set で重複排除
+        4. sorted でソートして安定化（決定的動作 P12）
+
+    Args:
+        group: FindingGroup
+        ctx:   CheckContext（None 可）
+
+    Returns:
+        ソート済み・重複排除済みの税区分コード文字列リスト。
+        全件解決できない場合は空リスト（呼び出し側でフィルタなし扱い）。
+    """
+    codes = []
+    for finding in group.findings:
+        code = _extract_tax_group_code(finding, ctx)
+        if code is not None:
+            codes.append(code)
+    return sorted(set(codes))
+
+
+def build_group_gl_link(group, ctx=None) -> Optional[str]:
+    """FindingGroup に対する総勘定元帳リンクを生成する (Phase 8-C 親行 Q 列用)。
+
+    Phase 8-C 視覚確認後修正 v2 の確定仕様:
+        期間:
+            グループ代表 Finding の link_hints.period_start / period_end（単月）。
+            ctx 由来の会計期間ではなく、取引月そのもの。
+        税区分:
+            FindingGroup 内の全税区分を tax_group_codes として複数指定
+            （ctx.tax_code_master 経由で Finding.current_value から逆引き）。
+            全件解決できなければフィルタなし。
+        勘定科目:
+            group.findings[0].link_hints.account_name
+        会計期 ID / 会社 ID:
+            ctx 優先、link_hints フォールバック
+
+    設計思想（戦略 Claude 確定）:
+        「グループと完全一致するフィルタビュー」= 単月×複数税区分。
+        子行 GL は単月×フィルタなしで広く、親行 GL は単月×絞込で精密に。
+
+    Args:
+        group: FindingGroup
+        ctx:   CheckContext（None 可。ctx がなければ tax_group_codes は付与されない）
+
+    Returns:
+        URL 文字列。group.findings 空 / account_name 欠落時は None。
+    """
+    if not group.findings:
+        return None
+
+    first = group.findings[0]
+    link_hints = getattr(first, "link_hints", None)
+
+    # 勘定科目名: link_hints.account_name が必須 (GL リンクの必須パラメタ)
+    account_name = (
+        getattr(link_hints, "account_name", None) if link_hints is not None else None
+    )
+    if not account_name:
+        return None
+
+    # 期間: グループ代表 link_hints の単月（ctx.period_start/end は使わない）
+    period_start = (
+        getattr(link_hints, "period_start", None) if link_hints is not None else None
+    )
+    period_end = (
+        getattr(link_hints, "period_end", None) if link_hints is not None else None
+    )
+
+    # 会計期 / 会社 ID: ctx 優先、link_hints フォールバック
+    def _pick(attr):
+        if ctx is not None:
+            v = getattr(ctx, attr, None)
+            if v is not None:
+                return v
+        return getattr(link_hints, attr, None) if link_hints is not None else None
+
+    fiscal_year_id = _pick("fiscal_year_id")
+    company_id = _pick("company_id")
+
+    # 税区分コード: ctx.tax_code_master 経由で逆引き（複数可）
+    tax_codes = _collect_group_tax_codes(group, ctx)
+
+    # urlencode(params, doseq=True) は list value を複数クエリに展開する。
+    # ただし順序保証のため list of tuples 形式で組み立てる。
+    params: list[tuple[str, str]] = [("name", account_name)]
+    if v := _fmt(period_start):
+        params.append(("start_date", v))
+    if v := _fmt(period_end):
+        params.append(("end_date", v))
+    if v := _fmt(fiscal_year_id):
+        params.append(("fiscal_year_id", v))
+    if v := _fmt(company_id):
+        params.append(("company_id", v))
+
+    # 税区分は list of tuples で複数クエリ展開: tax_group_codes=2&tax_group_codes=20
+    for code in tax_codes:
+        params.append(("tax_group_codes", str(code)))
+
+    return f"{_BASE_URL}/reports/general_ledgers/show?{urllib.parse.urlencode(params)}"

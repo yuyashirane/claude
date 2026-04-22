@@ -12,10 +12,18 @@ from datetime import date as _date_cls
 from pathlib import Path
 
 from openpyxl import load_workbook
-from openpyxl.styles import Font, PatternFill
+from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.worksheet.datavalidation import DataValidation
 
-from skills._common.lib.freee_link_generator import generate_gl_url, generate_jnl_url
+from skills._common.lib.freee_link_generator import (
+    build_group_gl_link,
+    generate_gl_url,
+    generate_jnl_url,
+)
+from skills._common.lib.finding_grouper import (
+    group as _group_findings,
+    is_mixing_pattern,
+)
 
 from skills.export.excel_report.styles import SEVERITY_DISPLAY
 from skills.export.excel_report.sort_priority_map import get_sort_priority
@@ -111,26 +119,166 @@ _FALLBACK_FILLS: dict[str, PatternFill] = {
     "要確認": PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid"),
 }
 
+# ─────────────────────────────────────────────────────────────────────
+# Phase 8-B: severity → 親行 Named Style 名の対応表
+# ─────────────────────────────────────────────────────────────────────
+# add_named_styles.py で TC_template.xlsx に登録済みの 4 つの親行スタイルに
+# Finding.severity 文字列をマップする。未知値は low スタイルにフォールバック。
+SEVERITY_TO_PARENT_STYLE: dict[str, str] = {
+    "🔴 Critical": "parent_row_style_critical",
+    "🔴 High":     "parent_row_style_critical",
+    "🟠 Warning":  "parent_row_style_warning",
+    "🟡 Medium":   "parent_row_style_medium",
+    "🟢 Low":      "parent_row_style_low",
+}
+
+_PARENT_STYLE_FALLBACK = "parent_row_style_low"
+_CHILD_STYLE = "child_row_style"
+
+
+# ─────────────────────────────────────────────────────────────────────
+# Phase 8-B 実務レビュー受 (2026-04-22): 列単位 Alignment 上書き定義
+# ─────────────────────────────────────────────────────────────────────
+# Named Style (テンプレ) は行全体の共通スタイルのみを担い、
+# 列ごとに異なる横位置・折り返しは Python 側でセル単位に上書きする。
+# 既存の C 列 indent=2 と同じパターン (テンプレ哲学 + 列単位例外)。
+#
+# 設計根拠:
+#   Phase 8-B 完了後の実務レビュー (悠皓さん確認) で視覚的改善 4 点を検出:
+#     ① 子行 F/G/H/I/J/K の中央揃え
+#     ③ 親行 C/D/E の wrap_text=True (折り返し)
+#     ⑤ O/P (借方/貸方金額) 列の右揃え (親子両方)
+#     ⑥ A/B/Q/R の中央揃え (親子両方)
+#
+# Phase 8-C 再利用性:
+#   子行 D/E 復活 (④) / 親行リンク追加 (②) の際も本定義をそのまま拡張可能。
+
+_PARENT_COLUMN_ALIGNMENTS: dict[int, Alignment] = {
+    _D_PRIORITY:   Alignment(vertical="center", horizontal="center"),          # A 優先度
+    _D_SUBCODE:    Alignment(vertical="center", horizontal="center"),          # B 項目
+    _D_TCNAME:     Alignment(vertical="center", horizontal="left",  wrap_text=True),  # C 項目名
+    _D_VIEWPOINT:  Alignment(vertical="center", horizontal="left",  wrap_text=True),  # D 観点
+    _D_RESULT:     Alignment(vertical="center", horizontal="left",  wrap_text=True),  # E チェック結果
+    _D_DEBIT:      Alignment(vertical="center", horizontal="right"),           # O 借方金額
+    _D_CREDIT:     Alignment(vertical="center", horizontal="right"),           # P 貸方金額
+    _D_LINK_GL:    Alignment(vertical="center", horizontal="center"),          # Q 🔗GL
+    _D_LINK_JNL:   Alignment(vertical="center", horizontal="center"),          # R 🔗JNL
+    _D_CONFIDENCE: Alignment(vertical="center", horizontal="center"),          # S 確信度 (Phase 8-C ⑦)
+    _D_ERRTYPE:    Alignment(vertical="center", horizontal="center"),          # T エラー型 (Phase 8-C ⑦)
+}
+
+_CHILD_COLUMN_ALIGNMENTS: dict[int, Alignment] = {
+    _D_PRIORITY:   Alignment(vertical="center", horizontal="center"),          # A 優先度
+    _D_SUBCODE:    Alignment(vertical="center", horizontal="center"),          # B 項目
+    _D_TCNAME:     Alignment(vertical="center", horizontal="left", indent=2),  # C 項目名 (既存 indent 維持)
+    # D 列は Phase 8-C Fix v2 で常に空欄化したためエントリを削除 (親行 D がグループ観点を担う)
+    _D_RESULT:     Alignment(vertical="center", horizontal="left", wrap_text=True),  # E チェック結果 (Phase 8-C ④)
+    _D_CURRENT:    Alignment(vertical="center", horizontal="center"),          # F 現在の税区分
+    _D_SUGGESTED:  Alignment(vertical="center", horizontal="center"),          # G 推奨税区分
+    _D_DATE:       Alignment(vertical="center", horizontal="center"),          # H 取引日
+    _D_ACCOUNT:    Alignment(vertical="center", horizontal="center"),          # I 勘定科目
+    _D_PARTNER:    Alignment(vertical="center", horizontal="center"),          # J 取引先
+    _D_ITEM:       Alignment(vertical="center", horizontal="center"),          # K 品目
+    _D_DEBIT:      Alignment(vertical="center", horizontal="right"),           # O 借方金額
+    _D_CREDIT:     Alignment(vertical="center", horizontal="right"),           # P 貸方金額
+    _D_LINK_GL:    Alignment(vertical="center", horizontal="center"),          # Q 🔗GL
+    _D_LINK_JNL:   Alignment(vertical="center", horizontal="center"),          # R 🔗JNL
+    _D_CONFIDENCE: Alignment(vertical="center", horizontal="center"),          # S 確信度 (Phase 8-C ⑦)
+    _D_ERRTYPE:    Alignment(vertical="center", horizontal="center"),          # T エラー型 (Phase 8-C ⑦)
+}
+
+
+_HYPERLINK_FONT = Font(
+    name="Meiryo UI",
+    size=10,
+    color="0563C1",
+    underline="single",
+)
+
+
+def _apply_parent_row_alignment(ws, row_idx: int) -> None:
+    """親行に列単位 Alignment を上書き適用する (Named Style 後に呼ぶ)。"""
+    for col_idx, alignment in _PARENT_COLUMN_ALIGNMENTS.items():
+        ws.cell(row=row_idx, column=col_idx).alignment = alignment
+
+
+def _apply_child_row_alignment(ws, row_idx: int) -> None:
+    """子行に列単位 Alignment を上書き適用する (Named Style 後に呼ぶ)。"""
+    for col_idx, alignment in _CHILD_COLUMN_ALIGNMENTS.items():
+        ws.cell(row=row_idx, column=col_idx).alignment = alignment
+
 
 # ─────────────────────────────────────────────────────────────────────
 # 表示整形ヘルパー
 # ─────────────────────────────────────────────────────────────────────
 
-def format_target_month(yyyymm: str) -> str:
-    """'202512' を '2025年12月' に整形する。
+def _parse_to_date(val):
+    """ISO 文字列 / 'YYYYMM' 文字列 / date オブジェクトを date に正規化する。
 
-    現在の実装は単月単明細モデル（指定月の取引を個別判定）。
-    将来 PL 累計モデルへ拡張時は期間表示（例: '2025年4月〜2025年12月'）に
-    変更する（Phase 8 検討事項）。
+    Phase 8-C γ 案の期間表示拡張で使用。パース失敗時は None を返す。
+    """
+    if val is None:
+        return None
+    # 既に date/datetime のようなオブジェクト
+    if hasattr(val, "year") and hasattr(val, "month"):
+        return val
+    if isinstance(val, str):
+        s = val.strip()
+        if not s:
+            return None
+        # ISO 形式 (YYYY-MM-DD)
+        try:
+            return _date_cls.fromisoformat(s)
+        except ValueError:
+            pass
+        # 'YYYYMM' 形式
+        if len(s) == 6 and s.isdigit():
+            try:
+                return _date_cls(int(s[:4]), int(s[4:6]), 1)
+            except ValueError:
+                return None
+    return None
+
+
+def format_target_month(yyyymm_or_start, period_end=None) -> str:
+    """対象期間を表示用文字列に変換する（単月 / 累計 両モード対応）。
+
+    単月モード（既存互換、1 引数）:
+        format_target_month("202512") → "2025年12月"
+        format_target_month("202504") → "2025年4月"
+        不正入力は値をそのまま返す（防御的実装）。
+
+    累計モード（Phase 8-C γ 案で追加、2 引数）:
+        format_target_month("2025-04-01", "2025-12-31") → "2025年4月〜2025年12月"
+        format_target_month(date(2025,4,1), date(2025,12,31)) → 同上
+        開始月=終了月の場合は単月表示にフォールバック。
+        パース失敗時は生入力を「〜」で連結したフォールバック文字列を返す。
 
     Args:
-        yyyymm: 'YYYYMM' 形式の文字列（例: '202512'）
+        yyyymm_or_start: 'YYYYMM' 文字列（単月）または期間開始（累計: 文字列 / date）
+        period_end:      期間終了。指定されれば累計モードで動作
 
     Returns:
-        'YYYY年M月' 形式の文字列（例: '2025年12月'）
-        不正入力の場合はそのまま返す（防御的実装）。
+        表示用の期間文字列。
     """
-    if len(yyyymm) == 6 and yyyymm.isdigit():
+    # ── 累計モード（2 引数） ──
+    if period_end is not None:
+        start = _parse_to_date(yyyymm_or_start)
+        end = _parse_to_date(period_end)
+        if start is None or end is None:
+            # パース失敗: 生入力を連結してフォールバック
+            return f"{yyyymm_or_start}〜{period_end}"
+        # 同一月は単月表示にフォールバック（意味的に単月）
+        if start.year == end.year and start.month == end.month:
+            return f"{start.year}年{start.month}月"
+        return (
+            f"{start.year}年{start.month}月〜"
+            f"{end.year}年{end.month}月"
+        )
+
+    # ── 単月モード（既存互換） ──
+    yyyymm = yyyymm_or_start
+    if isinstance(yyyymm, str) and len(yyyymm) == 6 and yyyymm.isdigit():
         year = yyyymm[:4]
         month = int(yyyymm[4:6])
         return f"{year}年{month}月"
@@ -518,6 +666,314 @@ def _write_finding_row(
         )
 
 
+# ═════════════════════════════════════════════════════════════════════
+# Phase 8-B: 親子行描画（R3 二層責務）
+#
+# finding_grouper.group() が返す FindingGroup を受け取り、
+# 親行 1 + 子行 N を順に描画する。親行は NamedStyle "parent_row_style_*"、
+# 子行は "child_row_style" を適用し、仕様案 Z（子行は白地）を保つ。
+#
+# pure helper の設計原則（戦略 Claude §pure helper §NG/OK パターン 準拠）:
+#     - _parent_row_summary / _parent_row_observation / _parent_row_check_result
+#       は worksheet/cell に触れず、FindingGroup だけから文字列を組み立てる。
+#     - _write_parent_row / _write_child_row は上記 pure helper の結果を
+#       ws.cell(...) に書き込む薄い I/O 層。
+# ═════════════════════════════════════════════════════════════════════
+
+
+def _group_account(group) -> str:
+    """FindingGroup の代表勘定科目名を取り出す pure helper。
+
+    子 Finding の link_hints.account_name を参照。全子で同じ想定
+    （group_key に account が含まれるため）。
+    """
+    if not group.findings:
+        return ""
+    first = group.findings[0]
+    lh = getattr(first, "link_hints", None)
+    if lh is None:
+        return ""
+    return getattr(lh, "account_name", "") or ""
+
+
+def _parent_row_summary(group) -> str:
+    """親行 C 列用のサマリー文字列 (C-β-3 form)。pure helper。
+
+    Pattern A (単方向):
+        "{account} — {count} 件・合計 ¥{total:,}（{current}→{suggested}）"
+    Pattern B (混在検知):
+        "{account} — {count} 件・合計 ¥{total:,}（税区分混在）"
+
+    total は total_debit + total_credit。単一 Finding は通常どちらか片方なので
+    合算で実態と一致する。
+    """
+    account = _group_account(group) or "（科目名なし）"
+    total = group.total_debit + group.total_credit
+    if is_mixing_pattern(group):
+        tail = "（税区分混在）"
+    else:
+        first = group.findings[0] if group.findings else None
+        cur = getattr(first, "current_value", "") if first else ""
+        sug = getattr(first, "suggested_value", "") if first else ""
+        tail = f"（{cur}→{sug}）"
+    return f"{account} — {group.count} 件・合計 ¥{total:,}{tail}"
+
+
+def _parent_row_observation(group) -> str:
+    """親行 D 列用の観点文字列。pure helper。
+
+    Pattern A: 「{TC名称}の税区分誤り」
+    Pattern B: 「同一科目に税区分混在」
+    """
+    if is_mixing_pattern(group):
+        return "同一科目に税区分混在"
+    tc_name = _TC_DISPLAY.get(group.tc_code, "")
+    return f"{tc_name}の税区分誤り" if tc_name else "税区分誤り"
+
+
+def _parent_row_check_result(group) -> str:
+    """親行 E 列用のチェック結果文字列。pure helper。
+
+    Pattern A: "{count} 件を「{current}」→「{suggested}」へ修正要確認"
+    Pattern B: "{variants} 種類の税区分混在 — 勘定科目のルール確認要"
+    """
+    if is_mixing_pattern(group):
+        variants = {
+            getattr(f, "current_value", "") for f in group.findings
+        }
+        variants.discard("")
+        n = len(variants) if variants else group.count
+        return f"{n} 種類の税区分混在 — 勘定科目のルール確認要"
+    first = group.findings[0] if group.findings else None
+    cur = (getattr(first, "current_value", "") if first else "") or "-"
+    sug = (getattr(first, "suggested_value", "") if first else "") or "-"
+    return f"{group.count} 件を「{cur}」→「{sug}」へ修正要確認"
+
+
+def _write_parent_row(ws, row: int, group, ctx=None) -> None:
+    """親行 1 行を詳細シートの指定行に描画する。
+
+    - A 列: severity 表示ラベル（重大/要注意/要確認）
+    - B 列: 代表 sub_code
+    - C 列: C-β-3 サマリー（件数・合計・論点パターン）
+    - D 列: 観点
+    - E 列: チェック結果
+    - O/P 列: 集計合計（total_debit / total_credit）
+    - Q 列: GL リンク（Phase 8-C ②、ctx.period_start/period_end で会計期間全体）
+    - それ以外: 空欄
+    - 全セルに Named Style "parent_row_style_{severity}" を適用
+
+    Args:
+        ctx: Phase 8-C で追加。CheckContext を渡すと GL リンクが会計期間全体の
+             範囲で生成される。None の場合は子 Finding[0] の link_hints 期間
+             (単月スコープ) にフォールバック。
+    """
+    style_name = SEVERITY_TO_PARENT_STYLE.get(
+        group.severity, _PARENT_STYLE_FALLBACK,
+    )
+    sev_label = _severity_label(group.severity)
+
+    values: dict[int, object] = {
+        _D_PRIORITY:  sev_label,
+        _D_SUBCODE:   group.sub_code,
+        _D_TCNAME:    _parent_row_summary(group),
+        _D_VIEWPOINT: _parent_row_observation(group),
+        _D_RESULT:    _parent_row_check_result(group),
+        _D_DEBIT:     group.total_debit if group.total_debit else "",
+        _D_CREDIT:    group.total_credit if group.total_credit else "",
+    }
+
+    for col in range(1, _DET_TOTAL_COLS + 1):
+        cell = ws.cell(row, col)
+        cell.value = values.get(col, "")
+        cell.style = style_name
+
+    if group.total_debit:
+        ws.cell(row, _D_DEBIT).number_format = "#,##0"
+    if group.total_credit:
+        ws.cell(row, _D_CREDIT).number_format = "#,##0"
+
+    # Phase 8-C ②: 親行 Q 列に GL ハイパーリンクを追加
+    # Named Style と Alignment の適用後に font を上書きしても style name は保持される。
+    gl_url = build_group_gl_link(group, ctx=ctx)
+    if gl_url:
+        cell_gl = ws.cell(row, _D_LINK_GL)
+        cell_gl.value = "GL"  # 判断 4: ラベルは "GL" 固定
+        cell_gl.hyperlink = gl_url
+        cell_gl.font = _HYPERLINK_FONT
+
+    # 列単位 Alignment 上書き (③⑤⑥⑦ 対応、Named Style の後に適用)
+    _apply_parent_row_alignment(ws, row)
+    # 折り返し表示のため行高を Excel 自動計算に委ねる (③ 対応)
+    ws.row_dimensions[row].height = None
+
+
+def _child_row_d_e(message: str, prev_message) -> tuple[str, str]:
+    """子行 D/E 列の値を決定する pure helper。
+
+    Phase 8-C Fix v2 確定仕様:
+        - D 列は常に空欄（親行 D がグループ観点を担うため、子行は冗長）
+        - E 列:
+            ・message 空 → 空欄
+            ・直前子行と同一 message → 「同上」圧縮
+            ・それ以外 → Finding.message 全文
+
+    親行 D と子行 D の責務分離:
+        親行 D = グループ観点（"給与/人件費の税区分誤り" など、Phase 8-B 仕様）
+        子行 D = 常に空欄（本ヘルパーが保証）
+        子行 E = Finding.message 全文（詳細理由）
+
+    Args:
+        message:      今回の Finding.message（空文字列可）
+        prev_message: 直前の子行 message。None または未設定なら最初の子行扱い。
+
+    Returns:
+        (d_value, e_value) タプル。d_value は常に空文字列。
+    """
+    if not message:
+        return ("", "")
+    # 同一 message の 2 件目以降は E 列のみ "同上" で圧縮（D は空欄のまま）
+    if prev_message is not None and prev_message != "" and message == prev_message:
+        return ("", "同上")
+    return ("", message)
+
+
+def _write_child_row(ws, row: int, finding, prev_message=None) -> None:
+    """子行 1 行を詳細シートの指定行に描画する。
+
+    - A/B/C 列: 空欄（親行に集約済み）
+    - D/E 列: Phase 8-C ④ で復活。Finding.message を表示。
+              同一グループ内同一 message の 2 件目以降は「同上」で圧縮。
+    - F/G 列: 個別の現在/推奨税区分
+    - H 列: 取引日
+    - I 列: 勘定科目
+    - J〜N 列: 空欄（将来拡張予定: 取引先・品目・部門・メモ・摘要）
+    - O/P 列: 個別の借方/貸方金額
+    - Q/R 列: freee ハイパーリンク
+    - S 列: 確信度
+    - T 列: エラー型
+    - U/V 列: 空欄（スタッフ入力欄）
+    - W 列: walletTxnId
+    - 全セルに Named Style "child_row_style"（白地）を適用
+
+    Args:
+        prev_message: 直前子行の Finding.message。「同上」圧縮の判定に使う。
+                      None なら圧縮しない（最初の子行扱い）。
+    """
+    debit_val  = getattr(finding, "debit_amount",  None)
+    credit_val = getattr(finding, "credit_amount", None)
+
+    # Phase 8-C ④: 子行 D/E に Finding.message 由来の文言を復活
+    message = getattr(finding, "message", "") or ""
+    d_val, e_val = _child_row_d_e(message, prev_message)
+
+    values: dict[int, object] = {
+        _D_PRIORITY:   "",
+        _D_SUBCODE:    "",
+        _D_TCNAME:     "",
+        _D_VIEWPOINT:  d_val,
+        _D_RESULT:     e_val,
+        _D_CURRENT:    getattr(finding, "current_value", ""),
+        _D_SUGGESTED:  getattr(finding, "suggested_value", ""),
+        _D_DATE:       _txn_date(finding),
+        _D_ACCOUNT:    _account_name(finding),
+        _D_PARTNER:    "",
+        _D_ITEM:       "",
+        _D_DEPT:       "",
+        _D_MEMO:       "",
+        _D_DESC:       "",
+        _D_DEBIT:      debit_val  if debit_val  is not None else "",
+        _D_CREDIT:     credit_val if credit_val is not None else "",
+        _D_LINK_GL:    "",
+        _D_LINK_JNL:   "",
+        _D_CONFIDENCE: getattr(finding, "confidence", 0),
+        _D_ERRTYPE:    getattr(finding, "error_type", ""),
+        _D_CONFIRM:    "",
+        _D_STAFFMEMO:  "",
+        _D_WALLETTXN:  getattr(finding, "wallet_txn_id", ""),
+    }
+
+    for col in range(1, _DET_TOTAL_COLS + 1):
+        cell = ws.cell(row, col)
+        cell.value = values.get(col, "")
+        cell.style = _CHILD_STYLE
+
+    if debit_val is not None:
+        ws.cell(row, _D_DEBIT).number_format = "#,##0"
+    if credit_val is not None:
+        ws.cell(row, _D_CREDIT).number_format = "#,##0"
+
+    # Q/R 列: freee ハイパーリンク（Phase 7 ロジック継承）
+    link_hints = getattr(finding, "link_hints", None)
+
+    url_gl = generate_gl_url(link_hints)
+    if url_gl:
+        cell_gl = ws.cell(row, _D_LINK_GL)
+        cell_gl.value = "🔗"
+        cell_gl.hyperlink = url_gl
+        cell_gl.font = Font(
+            name="Meiryo UI", size=10, color="0563C1", underline="single",
+        )
+
+    url_jnl = generate_jnl_url(
+        link_hints, deal_id=getattr(finding, "deal_id", None),
+    )
+    if url_jnl:
+        cell_jnl = ws.cell(row, _D_LINK_JNL)
+        cell_jnl.value = "🔗"
+        cell_jnl.hyperlink = url_jnl
+        cell_jnl.font = Font(
+            name="Meiryo UI", size=10, color="0563C1", underline="single",
+        )
+
+    # 列単位 Alignment 上書き (①⑤⑥⑦ 対応、Named Style の後に適用)
+    _apply_child_row_alignment(ws, row)
+    # E の wrap_text 対応: 行高を Excel 自動計算に委ねる
+    ws.row_dimensions[row].height = None
+
+
+def _fill_detail_sheet_grouped(ws, findings: list, ctx=None) -> None:
+    """Phase 8-B: Finding をグループ化し、親行→子行の順で描画する。
+
+    事前に `_sort_findings` でソート済みの findings を受け取る想定。
+    finding_grouper.group() は挿入順を保持するため、ソート結果がそのまま
+    グループ順序になる。
+
+    Phase 8-C: ctx (CheckContext) を受け取り、親行 GL リンクに会計期間全体
+    を渡せるよう拡張。既存の子行 GL リンクは link_hints (単月) ベースのまま。
+    """
+    # Row 4+ のサンプルデータを削除
+    last_row = ws.max_row
+    if last_row >= _DET_DATA_START:
+        ws.delete_rows(
+            _DET_DATA_START, last_row - _DET_DATA_START + 1,
+        )
+
+    groups = _group_findings(findings)
+
+    row = _DET_DATA_START
+    for g in groups:
+        _write_parent_row(ws, row, g, ctx=ctx)
+        row += 1
+        prev_message = None
+        for child in g.findings:
+            _write_child_row(ws, row, child, prev_message=prev_message)
+            prev_message = getattr(child, "message", None) or ""
+            row += 1
+
+    # U 列（確認状況）にプルダウン。親行 U は空欄だが範囲に含めても害なし。
+    if findings:
+        last_data_row = row - 1
+        dv = DataValidation(
+            type="list",
+            formula1='"〇,×,保留"',
+            allow_blank=True,
+            showDropDown=False,
+        )
+        dv.sqref = f"U{_DET_DATA_START}:U{last_data_row}"
+        ws.add_data_validation(dv)
+
+
 # ─────────────────────────────────────────────────────────────────────
 # メインエントリポイント
 # ─────────────────────────────────────────────────────────────────────
@@ -528,6 +984,7 @@ def build_output(
     company_name: str = "",
     period: str = "",
     template_path: Path | None = None,
+    ctx=None,
 ) -> Path:
     """テンプレートを読み込み、Finding データを流し込んで Excel を生成する。
 
@@ -537,6 +994,8 @@ def build_output(
         company_name:  会社名（タイトル・メタ情報に反映）
         period:        対象期間文字列（例: "2026/02"）
         template_path: テンプレートファイルのパス。None の場合はデフォルト使用
+        ctx:           CheckContext（Phase 8-C 追加）。渡されると親行 GL リンク
+                      が会計期間全体（ctx.period_start/period_end）で生成される。
 
     Returns:
         output_path: 保存されたファイルのパス
@@ -585,7 +1044,10 @@ def build_output(
             wb.remove(ws)
         else:
             sorted_f = _sort_findings(area_findings[area])
-            _fill_detail_sheet(ws, sorted_f, severity_fills)
+            # Phase 8-B: 親子行レイアウト。旧 _fill_detail_sheet は dead code として
+            # 残置（Phase 8-C 累計モデル化で再利用される可能性があるため）。
+            # Phase 8-C: ctx を渡すと親行 Q 列に会計期間全体の GL リンクが付く。
+            _fill_detail_sheet_grouped(ws, sorted_f, ctx=ctx)
 
     # ── 参考シートはそのまま（何もしない） ──
 

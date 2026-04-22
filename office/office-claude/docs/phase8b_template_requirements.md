@@ -1,9 +1,10 @@
-# Phase 8-B テンプレート修正要件
+# Phase 8-B テンプレート修正要件（確定版 v2）
 
-**作成**: Claude Code (事前調査フェーズ)
-**日付**: 2026-04-19
+**作成**: Claude Code
+**初版**: 2026-04-19（事前調査フェーズ）
+**確定版**: 2026-04-20（Q1-Q5 判断確定後）
 **対象**: `data/reports/template/TC_template.xlsx`
-**担当**: 悠皓さん（テンプレ修正）/ Claude Code（実装）
+**担当**: 悠皓さん（テンプレ修正）/ Claude Code（実装・検証）
 **前提**: Phase 8-A 完了（FindingGroup + finding_grouper 実装済み、317 tests green）
 **関連**: `docs/phase8_prestudy.md` §6.3 / §6.4、Phase 8-B 本実装指示書
 
@@ -11,229 +12,377 @@
 
 ## 0. 本書の位置付け
 
-Phase 8-B 本実装の「入力」となる要件定義書。Claude Code が事前調査フェーズで作成し、戦略 Claude + 悠皓さんのレビューを経て確定する。確定後、悠皓さんが TC_template.xlsx に Named Style を追加し、Claude Code が本実装に着手する。
+Phase 8-B 本実装の入力となる要件定義書。初版の Q1-Q5 について戦略 Claude + 悠皓さんがレビュー済み。本確定版に基づいて悠皓さんが TC_template.xlsx に **5 つの Named Style** を追加する。
 
-**本書は "テンプレ側" と "Python 側" の責務境界を明文化する**:
+### 責務境界（再掲・厳守）
 
 | 層 | 責務 |
 |---|---|
-| テンプレ側（悠皓さん） | 親行/子行の**視覚スタイル定義**（色・フォント・罫線・行高・インデント等） |
-| Python 側（Claude Code） | スタイル**名の参照のみ**。`cell.style = "parent_row_style"` のように名前で指定し、定数を書かない |
-
-この境界により、将来スタイル調整が必要になった場合も **テンプレ修正のみ**で完結し、Python コードに触らずに済む（template-driven philosophy の徹底）。
+| テンプレ側（悠皓さん） | 親行 4 つ + 子行 1 つの **視覚スタイル定義**（色・フォント・罫線・配置） |
+| Python 側（Claude Code） | スタイル**名の参照のみ**。severity → style 名のマッピング以外で定数を書かない |
 
 ---
 
-## 1. 現状テンプレートの構造（事前調査結果）
+## 1. Q1-Q5 最終判断（確定）
 
-### 1.1 シート構成
-
-```
-['サマリー', 'A4 家賃・地代', 'A5 人件費', 'A8 旅費',
- 'A10 その他経費', 'A11 営業外・特別損益', 'A12 税金', '参考']
-```
-
-### 1.2 Named Styles 登録状況
-
-現状登録: `['標準']` のみ。
-
-**Phase 8-B では `parent_row_style` / `child_row_style` の 2 つを追加する必要がある。**
-
-### 1.3 Row 4 (データ行1件目) の既存プロパティ（A5 人件費シート基準）
-
-| 項目 | 値 |
-|---|---|
-| 行高 | 42.75 pt |
-| フォント | Meiryo UI 10 pt, bold=False, color=None (自動=黒) |
-| 背景色 | テーマ色(severity 依存。Python で後から塗る) |
-| 横揃え | center（C/D/E 列は h=None=既定） |
-| 縦揃え | center |
-| インデント | 0.0 |
-| 罫線 | 全方向 thin（詳細は既存 Row 3-8 から継承） |
-
-**重要**: Row 4 の fill は `severity_fills` (Python 側の `_extract_severity_fills`) が実行時に重ね塗りする構造。この挙動は Phase 8-B でも**子行については維持**する（Section 3.2 参照）。
+| # | 論点 | **確定結果** | 判断者 |
+|---|------|---------------|--------|
+| Q1 | インデント方式 | **案 c（C 列のみ `Alignment.indent=2`）** | 悠皓さん |
+| Q2 | 親行背景色 | **severity 連動 4 色 × Named Style 4 つ（方式 X）** | 悠皓さん + 戦略 Claude |
+| Q3 | 親行行高 | **42.75pt 維持**（子行と同じ、現行 Row 4 と同値） | 悠皓さん |
+| Q4 | 子行 fill | **なし**（severity 塗り分けは従来通り Python 側が重ね塗り） | 戦略 Claude |
+| Q5 | number_format | **Named Style に含めない**。O/P 列は従来通り Python 側で `#,##0` を設定 | 戦略 Claude |
 
 ---
 
-## 2. Named Style の追加要件（確定案）
+## 2. 親行色分けの設計（方式 X 採用・方式 Y 不採用）
 
-### 2.1 親行スタイル `parent_row_style`
+### 2.1 採用: 方式 X（Named Style を severity ごとに 4 つ用意）
 
-「グループの要約行。ひと目で識別できる視覚強調」を目的とする。
-
-| プロパティ | 推奨値 | 根拠 |
-|---|---|---|
-| フォント名 | Meiryo UI | 既存行と整合 |
-| フォントサイズ | 10 pt | 既存行と整合 |
-| bold | **True** | 親行の識別性 |
-| 文字色 | `#1F4E78`（濃い青） | ヘッダー (`#2F5496`) と明るい子行の中間 |
-| 背景色 | `#DEEBF7`（淡い青） | ヘッダー列と同系統、ただし控えめ |
-| 塗りつぶしタイプ | solid | — |
-| 横揃え | left | 要約文 (C 列) 可読性優先 |
-| 縦揃え | center | 既存と整合 |
-| インデント | 0 | 親行はインデントしない |
-| 罫線 (top) | **medium** `#2F5496` | **グループ開始を視覚化**（重要） |
-| 罫線 (left/right/bottom) | thin `#8EA9DB` | 既存の雰囲気を踏襲 |
-| 行高 | 24 pt（現行 42.75 より低い） | 要約なので短文想定・低めで情報密度を上げる |
-
-**意図**:
-- top 罫線を太くすることで「ここから新しいグループ」と視覚的にわかる
-- 行高は 24pt（子行の 42.75 より低い）で「タイトル行」の印象にする
-- fill は淡い青にして、severity (赤/黄) に依存しないニュートラルな親行
-
-### 2.2 子行スタイル `child_row_style`
-
-「親行の詳細。個別取引 1 件 = 1 行」。既存 Row 4 のスタイルを踏襲しつつ、親行との識別を軽くつける。
-
-| プロパティ | 推奨値 | 根拠 |
-|---|---|---|
-| フォント名 | Meiryo UI | 既存行と整合 |
-| フォントサイズ | 10 pt | 既存行と整合 |
-| bold | False | 既存と整合 |
-| 文字色 | `#595959`（濃いグレー）または自動 | 親行との識別を軽く付ける |
-| 背景色 | **なし または `#F8F8F8`（極薄グレー）** | severity 塗り分けを優先するため、極薄または無色 |
-| 横揃え | left | 本文可読性 |
-| 縦揃え | center | 既存と整合 |
-| インデント | **§2.3 で選定** | — |
-| 罫線 (top) | thin `#D9D9D9` | グループ内の罫線は控えめに |
-| 罫線 (left/right/bottom) | thin `#D9D9D9` | 同上 |
-| 行高 | 42.75 pt（現行維持） | 既存と整合 |
-
-**重要な設計判断: 背景色は極薄または無色にする**
-- 現行テンプレは `severity_fills` を Python 層が子行に重ね塗りする（赤=重大, 黄=要注意, 緑=要確認）
-- 子行スタイルに強い背景色を入れると severity 塗り分けが消える
-- 対応: Python 側は **子行に対しては従来通り `severity_fills` を重ね塗り**（Section 3.2）、テンプレ側の `child_row_style` の fill は `None` か極薄色にする
-
-### 2.3 インデント方式の 3 案（**悠皓さん判断**）
-
-Claude Code は 1 案に絞らず、3 案すべてのサンプル Excel を `tmp/` に生成済み:
-
-| 案 | ファイル | 方式 | メリット | デメリット |
-|---|---|---|---|---|
-| **a** | `tmp/indent_sample_a_alignment.xlsx` | `Alignment.indent=1`（全セル） | openpyxl 慣用。テンプレに封じ込め可。実装 1 行 | 全列にインデントが入るため、右寄せ金額列も左に動く |
-| **b** | `tmp/indent_sample_b_zenkaku.xlsx` | C 列の値先頭に全角スペース挿入 | 視覚的にシンプル。検索・コピペに弱いがインパクトは強 | Python 側で値加工が必要（philosophy 違反の懸念） |
-| **c** | `tmp/indent_sample_c_c_only.xlsx` | C 列のみ `Alignment.indent=2` | 金額列が動かない。意味的に自然（項目名だけインデント） | NamedStyle 1 つで完結しない（C 列だけ別定義が必要） |
-
-**Claude Code の予備的所見**（最終判断は悠皓さん）:
-- 案 a は実装が最も清潔だが、O/P (金額) 列が左にずれる副作用
-- 案 b は Python 側で「子行の C 列だけ全角スペースを足す」というロジックが必要になり、**template-driven philosophy に反する**（推奨しない）
-- 案 c が最もバランスが良い可能性が高い。ただし NamedStyle 2 つ必要 (`child_row_style` + `child_row_style_indent_c` のような派生)、あるいは Python 側が C 列のみ `Alignment` を上書きする（1 行で済む）
-
-→ **戦略 Claude の方針「1 案に絞らず悠皓さんに見てもらう」に従い、3 サンプル Excel を開いて比較判断してください。**
-
-### 2.4 テンプレ追加手順（悠皓さん向け）
-
-Excel UI で直接 Named Style を作るのは煩雑なので、**openpyxl スクリプトで追加** することを推奨する。以下のスクリプトを実行するだけで、上記 2.1 / 2.2 の要件通りに Named Style が登録される。
+テンプレ側に親行 Named Style を 4 つ定義し、Python 側は severity 文字列 → style 名のマッピングを参照するだけ。
 
 ```python
-# tmp/add_named_styles.py (参考実装、悠皓さんレビュー後 Claude Code が提供)
+# template_engine.py に追加されるマッピング（定数の部類だが "スタイル構築" ではなく "名前参照"）
+SEVERITY_TO_PARENT_STYLE = {
+    "🔴 Critical": "parent_row_style_critical",
+    "🔴 High":     "parent_row_style_critical",  # Phase 8-A 互換
+    "🟠 Warning":  "parent_row_style_warning",
+    "🟡 Medium":   "parent_row_style_medium",
+    "🟢 Low":      "parent_row_style_low",
+}
+
+def _apply_parent_row_style(cell, group_severity: str) -> None:
+    style_name = SEVERITY_TO_PARENT_STYLE.get(
+        group_severity, "parent_row_style_medium"  # 未知 severity フォールバック
+    )
+    cell.style = style_name
+```
+
+### 2.2 不採用: 方式 Y（親行 1 style + Python で fill 重ね塗り）
+
+不採用理由:
+- styles.py に「親行用 severity fill 4 色」の定数追加が必要になる
+- 指示書 §8 落とし穴 3「styles.py への新規定数追加禁止」に抵触
+- テンプレ駆動哲学の「例外」をさらに 1 つ生む（既存の severity_fills 抽出は**子行のみ**に留めたい）
+
+### 2.3 方式 X のメリット
+
+- Python は「名前参照」のみで新しい定数を書かない（哲学完全準拠）
+- 色調整は悠皓さんがテンプレ UI でダイレクトに実施可能
+- severity 追加時は「テンプレに Named Style を追加 + Python のマッピングに 1 行追加」で対応可能
+
+---
+
+## 3. 追加する Named Style 5 つ（完全定義）
+
+すべて TC_template.xlsx に登録する。既存の `標準` スタイルは変更しない。
+
+### 3.1 `parent_row_style_critical`（重大・赤系）
+
+| プロパティ | 値 |
+|---|---|
+| フォント名 | Meiryo UI |
+| フォントサイズ | 10 pt |
+| bold | **True** |
+| 文字色 | `#000000`（自動 / 黒） |
+| 背景色 | **`#FCEBEB`**（淡い赤） |
+| 塗りつぶしタイプ | solid |
+| 横揃え | left |
+| 縦揃え | center |
+| インデント | 0 |
+| 罫線 top | **medium** `#C00000`（重大の開始を視覚化） |
+| 罫線 bottom | thin `#C00000` |
+| 罫線 left/right | thin `#D9D9D9` |
+| number_format | なし（Python 側で設定） |
+
+### 3.2 `parent_row_style_warning`（要注意・オレンジ系）
+
+| プロパティ | 値 |
+|---|---|
+| フォント名 | Meiryo UI |
+| フォントサイズ | 10 pt |
+| bold | **True** |
+| 文字色 | `#000000` |
+| 背景色 | **`#FAEEDA`**（淡いオレンジ） |
+| 塗りつぶしタイプ | solid |
+| 横揃え | left |
+| 縦揃え | center |
+| インデント | 0 |
+| 罫線 top | medium `#ED7D31` |
+| 罫線 bottom | thin `#ED7D31` |
+| 罫線 left/right | thin `#D9D9D9` |
+| number_format | なし |
+
+### 3.3 `parent_row_style_medium`（判断・黄系）
+
+| プロパティ | 値 |
+|---|---|
+| フォント名 | Meiryo UI |
+| フォントサイズ | 10 pt |
+| bold | **True** |
+| 文字色 | `#000000` |
+| 背景色 | **`#FEF5D6`**（淡い黄 / 悠皓さん微調整可） |
+| 塗りつぶしタイプ | solid |
+| 横揃え | left |
+| 縦揃え | center |
+| インデント | 0 |
+| 罫線 top | medium `#BF8F00` |
+| 罫線 bottom | thin `#BF8F00` |
+| 罫線 left/right | thin `#D9D9D9` |
+| number_format | なし |
+
+### 3.4 `parent_row_style_low`（参考・緑系）
+
+| プロパティ | 値 |
+|---|---|
+| フォント名 | Meiryo UI |
+| フォントサイズ | 10 pt |
+| bold | **True** |
+| 文字色 | `#000000` |
+| 背景色 | **`#EAF3DE`**（淡い緑） |
+| 塗りつぶしタイプ | solid |
+| 横揃え | left |
+| 縦揃え | center |
+| インデント | 0 |
+| 罫線 top | medium `#548235` |
+| 罫線 bottom | thin `#548235` |
+| 罫線 left/right | thin `#D9D9D9` |
+| number_format | なし |
+
+### 3.5 `child_row_style`（子行共通）
+
+| プロパティ | 値 |
+|---|---|
+| フォント名 | Meiryo UI |
+| フォントサイズ | 10 pt |
+| bold | False |
+| 文字色 | `#000000`（自動） |
+| 背景色 | **なし**（`fill_type=None`）— severity_fills が重ね塗りするため |
+| 横揃え | left |
+| 縦揃え | center |
+| **インデント** | **0**（C 列のインデントは Python 側で個別適用 / 方式 α） |
+| 罫線 bottom | thin `#D9D9D9` |
+| 罫線 top/left/right | 無指定 or thin `#D9D9D9` |
+| number_format | なし |
+
+### 3.6 共通の行高
+
+- 親行 / 子行ともに **42.75 pt**（現行 Row 4 と同値、Q3 確定）
+
+---
+
+## 4. 親行スタイル適用範囲（重要・厳守）
+
+### 4.1 ルール
+
+親行の Named Style は **A 列 〜 最終列（現状 W 列 = 23 列）すべてのセル** に適用する。子行も同様に全列に `child_row_style` を適用する。
+
+### 4.2 理由
+
+- Excel 上で「1 行の帯」として視覚認識させるため
+- 部分適用（A〜D だけ塗る、C だけ強調 等）は帯が途切れ、グループ構造が伝わらない
+- severity 連動 4 色（Q2）の意図は「行全体の色分け」で初めて成立する
+- 将来列追加時も破綻しない
+
+### 4.3 正しい擬似コード
+
+```python
+MAX_COL = 23  # A〜W
+
+parent_style_name = SEVERITY_TO_PARENT_STYLE.get(
+    group.severity, "parent_row_style_medium"
+)
+for col_idx in range(1, MAX_COL + 1):
+    cell = ws.cell(row=parent_row_idx, column=col_idx)
+    cell.style = parent_style_name
+    # 値は後で列ごとに設定（summary / severity / 空欄など）
+```
+
+### 4.4 ❌ 禁止パターン
+
+- 値のあるセルだけ塗る
+- C 列だけ強調
+- Q/R 列（freee リンク列）を白く抜く（親行では値空欄でも**背景色は続ける**）
+- 空欄列を塗り飛ばす
+
+---
+
+## 5. C 列インデントの実装方式（方式 α 採用）
+
+### 5.1 採用: 方式 α（child_row_style に indent を含めず、C 列のみ Python 側で適用）
+
+```python
+# 子行描画時
+cell.style = "child_row_style"
+if col == _D_TCNAME:  # C 列（項目名）
+    cell.alignment = Alignment(
+        vertical="center", horizontal="left", indent=2,
+    )
+```
+
+### 5.2 採用理由
+
+- Named Style 数を 5 つに抑えられる（方式 β なら 6 つに増える）
+- C 列の特殊扱いを Python 側 1 箇所で吸収
+- Phase 7 のハイパーリンク Q/R 列の「セル単位の属性上書き」と同じ性質（既存パターンの踏襲）
+
+### 5.3 不採用: 方式 β（child_row_style_c_column を別立て）
+
+- Named Style 6 つになる冗長さ
+- テンプレ修正作業が増える
+
+※ Claude Code が実装時に「方式 β の方が自然」と判断した場合は、理由を明示した上で変更を許容（戦略 Claude の合意事項）。
+
+---
+
+## 6. 悠皓さん向け: TC_template.xlsx への追加手順
+
+### 6.1 openpyxl スクリプトでの追加（推奨）
+
+Excel UI で Named Style を直接作るのは煩雑なので、以下のスクリプトで一括追加する。Claude Code が提供する確定版スクリプトは、悠皓さんの最終確認後に `tmp/add_named_styles.py` として生成する。
+
+```python
+# tmp/add_named_styles.py（参考実装）
 from pathlib import Path
 from openpyxl import load_workbook
 from openpyxl.styles import Font, PatternFill, NamedStyle, Alignment
 from openpyxl.styles.borders import Border, Side
 
-tpl = Path("data/reports/template/TC_template.xlsx")
-wb = load_workbook(tpl)
+TPL = Path("data/reports/template/TC_template.xlsx")
 
-def make_parent():
-    ns = NamedStyle(name="parent_row_style")
-    ns.font = Font(name="Meiryo UI", size=10, bold=True, color="FF1F4E78")
-    ns.fill = PatternFill("solid", fgColor="FFDEEBF7")
+PARENT_COLORS = [
+    ("parent_row_style_critical", "FCEBEB", "C00000"),  # 赤系
+    ("parent_row_style_warning",  "FAEEDA", "ED7D31"),  # オレンジ系
+    ("parent_row_style_medium",   "FEF5D6", "BF8F00"),  # 黄系
+    ("parent_row_style_low",      "EAF3DE", "548235"),  # 緑系
+]
+
+def make_parent(name: str, bg_hex: str, accent_hex: str) -> NamedStyle:
+    ns = NamedStyle(name=name)
+    ns.font = Font(name="Meiryo UI", size=10, bold=True, color="FF000000")
+    ns.fill = PatternFill("solid", fgColor=f"FF{bg_hex}")
     ns.alignment = Alignment(vertical="center", horizontal="left")
-    thin = Side(border_style="thin", color="FF8EA9DB")
-    top  = Side(border_style="medium", color="FF2F5496")
-    ns.border = Border(left=thin, right=thin, top=top, bottom=thin)
+    thin_gray = Side(border_style="thin", color="FFD9D9D9")
+    medium_accent = Side(border_style="medium", color=f"FF{accent_hex}")
+    thin_accent   = Side(border_style="thin",   color=f"FF{accent_hex}")
+    ns.border = Border(
+        left=thin_gray, right=thin_gray,
+        top=medium_accent, bottom=thin_accent,
+    )
     return ns
 
-def make_child():
+def make_child() -> NamedStyle:
     ns = NamedStyle(name="child_row_style")
-    ns.font = Font(name="Meiryo UI", size=10, color="FF595959")
-    # 背景色は設定しない（severity 塗り分けを壊さないため）
+    ns.font = Font(name="Meiryo UI", size=10, bold=False, color="FF000000")
+    # 背景色はあえて設定しない（severity_fills が重ね塗りするため）
     ns.alignment = Alignment(vertical="center", horizontal="left")
     thin = Side(border_style="thin", color="FFD9D9D9")
     ns.border = Border(left=thin, right=thin, top=thin, bottom=thin)
     return ns
 
-wb.add_named_style(make_parent())
-wb.add_named_style(make_child())
-wb.save(tpl)
-print("Named Styles 追加完了")
+def main() -> None:
+    wb = load_workbook(TPL)
+    existing = {s.name if hasattr(s, "name") else s for s in wb.named_styles}
+
+    for name, bg, accent in PARENT_COLORS:
+        if name not in existing:
+            wb.add_named_style(make_parent(name, bg, accent))
+
+    if "child_row_style" not in existing:
+        wb.add_named_style(make_child())
+
+    wb.save(TPL)
+    print("追加完了。登録済み Named Styles:",
+          [s.name if hasattr(s, "name") else s for s in wb.named_styles])
+
+if __name__ == "__main__":
+    main()
 ```
 
-**重要**: 悠皓さんがインデント方式（a/b/c）を選んだら、child_row_style の Alignment に `indent=N` を入れる（案 a なら 1、案 c なら項目名列のみ Python 側で適用）。
+### 6.2 Excel UI での追加（代替手順）
 
-### 2.5 テンプレ検証手順（Claude Code 実施）
+openpyxl を使いたくない場合は Excel UI で作成可能。大まかな流れ:
 
-悠皓さんがテンプレ修正完了後、Claude Code が以下を自動検証する:
+1. TC_template.xlsx を開く
+2. リボン「ホーム」→「セルのスタイル」→「新しいセルのスタイル」
+3. 名前に `parent_row_style_critical` を入力
+4. 書式設定ダイアログで §3.1 の値をすべて設定
+5. OK で登録
+6. §3.2 / 3.3 / 3.4 / 3.5 も同様に登録（合計 5 つ）
+7. 上書き保存
 
-1. `load_workbook(tpl)` で開いて `wb.named_styles` に `parent_row_style` / `child_row_style` が含まれることを確認
-2. `copy_worksheet` 後も Named Style が維持されることを確認（Phase 8-A の P1 再実行）
-3. `save → load` のラウンドトリップでも維持されることを確認（Phase 8-A の P2 再実行）
-4. 上記 3 件がすべて OK になったら本実装に着手
+※ Excel UI は罫線の色指定に制約があり、正確な hex 色 (`#C00000` 等) を設定しにくい。**openpyxl スクリプトの方が確実**。
+
+### 6.3 色の微調整について
+
+- 背景色 4 色（`#FCEBEB` / `#FAEEDA` / `#FEF5D6` / `#EAF3DE`）は初期値。悠皓さんがテンプレで確認して微調整してよい
+- 罫線の accent 色（`#C00000` 等）も、印刷時に濃すぎる場合は 1 段薄くして OK
+- 微調整後は Claude Code に hex 値を連絡 → Python 側のドキュメント更新（コード定数は不要、テンプレが唯一の正）
 
 ---
 
-## 3. Python 側の実装方針（参考、Phase 8-B 本実装で確定）
+## 7. Claude Code によるテンプレ検証手順（悠皓さん作業後）
 
-### 3.1 スタイル参照のみ・定数定義なし
+悠皓さんから「テンプレ修正完了」連絡を受けた後、Claude Code が以下を自動検証する:
+
+### 7.1 検証項目
+
+- [ ] `load_workbook(TPL)` 後、`wb.named_styles` に **5 つの Named Style** がすべて登録されている:
+  - `parent_row_style_critical`
+  - `parent_row_style_warning`
+  - `parent_row_style_medium`
+  - `parent_row_style_low`
+  - `child_row_style`
+- [ ] 各 Named Style の `fill.fgColor.rgb` が §3 の指定 hex と一致（大文字小文字・alpha 許容）
+- [ ] 親行 4 style の `font.bold = True`
+- [ ] `child_row_style` の `font.bold = False`、`fill.fill_type in (None, "none", None)`
+- [ ] `copy_worksheet` 後も全 Named Style が維持される（Phase 8-A P1 再実行）
+- [ ] `save → load` ラウンドトリップ後も全 Named Style が維持される（Phase 8-A P2 再実行）
+
+### 7.2 検証スクリプト
+
+Claude Code が悠皓さん作業後に `tmp/verify_phase8b_template.py` を生成・実行する（検証後は削除）。
 
 ```python
-# Phase 8-B 本実装で template_engine.py に追加（禁止事項に違反しないよう命名参照のみ）
-cell.style = "parent_row_style"   # ← Named Style 名を参照するだけ
-cell.style = "child_row_style"
+# 検証スクリプト雛形
+from pathlib import Path
+from openpyxl import load_workbook
+
+REQUIRED = {
+    "parent_row_style_critical": "FCEBEB",
+    "parent_row_style_warning":  "FAEEDA",
+    "parent_row_style_medium":   "FEF5D6",
+    "parent_row_style_low":      "EAF3DE",
+    "child_row_style":           None,  # fill なし
+}
+
+def main():
+    wb = load_workbook("data/reports/template/TC_template.xlsx")
+    names = {s.name if hasattr(s, "name") else s for s in wb.named_styles}
+    # REQUIRED の各スタイルを検証 ...
 ```
 
-styles.py への新規定数追加は禁止（指示書 §8 落とし穴 3）。
+---
 
-### 3.2 子行の severity 塗り分けは従来通り
+## 8. 禁止事項（Claude Code が守る、継続）
 
-```python
-# _write_finding_row() の子行描画時
-cell.style = "child_row_style"           # まず Named Style を適用
-if row_fill is not None:                  # 次に severity fill を重ね塗り（従来と同じ）
-    cell.fill = copy(row_fill)
-```
-
-Named Style の fill は「極薄色 or なし」にしておくことで、severity_fills の上書きが自然に効く。
-
-### 3.3 親行描画時は severity 塗り分けしない
-
-親行は `parent_row_style` の淡い青背景のみ。severity の強調は **A 列の値** （"重大"/"要注意"/"要確認"）で表現する（子行と同じ列を使うので視覚的一貫性も保てる）。
+- ❌ `template_engine.py` / `exporter.py` の編集（本実装 GO 判断後のみ解禁）
+- ❌ `styles.py` への新規定数追加
+- ❌ Python 側で Font / PatternFill / Border / Alignment を**新規構築**する（既存の severity_fills 抽出・Q/R 列ハイパーリンク Font は例外として継続）
+- ❌ Finding dataclass へのフィールド追加
+- ❌ checker / finding_factory への変更
+- ✅ テンプレ駆動哲学: Python 側は「名前参照」と「C 列 indent=2 の上書き」のみ
 
 ---
 
-## 4. 悠皓さんへのお願い（チェックリスト）
+## 9. 次のステップ
 
-- [ ] 3 つのサンプル Excel (`tmp/indent_sample_a/b/c_*.xlsx`) を開いて視覚比較
-- [ ] インデント案 a / b / c のいずれかを選択
-- [ ] §2.1 / §2.2 の親行・子行スタイル要件をレビュー（色・行高など違和感あれば指摘）
-- [ ] §2.4 のスクリプトで TC_template.xlsx に Named Style を追加（または Claude Code が実施してよければその旨連絡）
-- [ ] 追加後のテンプレを保存し、Claude Code に検証を依頼
-
----
-
-## 5. 戦略 Claude へのお願い（レビューポイント）
-
-- [ ] §2.1 親行スタイルの色・罫線・行高が意図に合っているか
-- [ ] §2.2 子行スタイルの背景色方針（極薄 or なし）が severity 塗り分けと両立するか
-- [ ] §2.3 インデント 3 案のトレードオフ評価が妥当か
-- [ ] §3.2 子行の severity fill 重ね塗り方針を維持することに異論ないか
-- [ ] Phase 8-B の列割当案（指示書 §4.2）との整合に問題ないか
+1. **戦略 Claude**: 本確定版 (v2) のレビュー → OK なら悠皓さんへ転送
+2. **悠皓さん**: §6.1 のスクリプト（または §6.2 UI 手順）で TC_template.xlsx に 5 つの Named Style を追加 → Claude Code に完了連絡
+3. **Claude Code**: §7 の検証スクリプト実行 → 5 style 全件確認 → 結果を戦略 Claude に報告
+4. **戦略 Claude**: 検証結果確認 → 本実装 GO 判断
+5. **Claude Code**: Phase 8-B 本実装着手（template_engine.py 改修 + 18 tests 追加 + E2E 検証）
 
 ---
 
-## 6. 未解決の論点（エスカレーション対象）
-
-| # | 論点 | 推奨 | 最終判断者 |
-|---|---|---|---|
-| Q1 | インデント方式（a/b/c） | 案 c（C 列のみ indent=2） | 悠皓さん |
-| Q2 | 親行の背景色（淡い青 vs 淡いグレー） | 淡い青 `#DEEBF7`（ヘッダー同系統で統一感） | 悠皓さん |
-| Q3 | 親行の行高（24pt vs 既存 42.75pt 維持） | 24pt（要約であることを視覚化） | 悠皓さん |
-| Q4 | 子行の Named Style の fill を「なし」にするか「極薄」にするか | **なし**（severity fill を壊さない） | 戦略 Claude |
-| Q5 | parent_row_style に Number Format 設定を入れるか | 入れない（Python 側で `cell.number_format = "#,##0"` は従来通り） | 戦略 Claude |
-
-上記 Q1〜Q5 の確定後、Claude Code は TC_template.xlsx に Named Style を追加（または悠皓さんが実施）し、Phase 8-B 本実装に着手する。
-
----
-
-**以上、Phase 8-B テンプレート修正要件。**
+**以上、Phase 8-B テンプレート修正要件 確定版 v2。**

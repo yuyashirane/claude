@@ -372,7 +372,29 @@
       "Bash(py -m pytest)",
       "Bash(py tmp/inspect_template.py)",
       "Bash(py tmp/indent_samples.py)",
-      "Bash(py office/office-claude/tmp/indent_samples.py)"
+      "Bash(py office/office-claude/tmp/indent_samples.py)",
+      "Bash(py tmp/gen_preview_named_styles.py)",
+      "Bash(py tmp/add_named_styles.py)",
+      "Bash(PYTHONIOENCODING=utf-8 py tmp/add_named_styles.py)",
+      "Bash(PYTHONIOENCODING=utf-8 py tmp/verify_phase8b_template.py)",
+      "Bash(PYTHONIOENCODING=utf-8 py -c \"from skills.export.excel_report import template_engine; print\\('import OK'\\); print\\('helpers:', [n for n in dir\\(template_engine\\) if 'parent' in n or 'child' in n]\\)\")",
+      "Bash(PYTHONIOENCODING=utf-8 py -m pytest tests/unit/test_excel_export.py -x --tb=short -q)",
+      "Bash(PYTHONIOENCODING=utf-8 py -m pytest tests/unit/test_excel_export.py --tb=no -q)",
+      "Bash(PYTHONIOENCODING=utf-8 py -m pytest tests/unit/test_excel_export.py --tb=short -q)",
+      "Bash(PYTHONIOENCODING=utf-8 py -m pytest tests/ --tb=short -q)",
+      "Bash(PYTHONIOENCODING=utf-8 py -m pytest tests/ --collect-only -q)",
+      "Bash(PYTHONIOENCODING=utf-8 py -m pytest tests/unit/test_template_engine_phase8b.py --tb=short -q)",
+      "Bash(PYTHONIOENCODING=utf-8 py tmp/verify_phase8b.py)",
+      "Bash(PYTHONIOENCODING=utf-8 py -m pytest tests/unit/test_template_engine_phase8b.py -v --tb=short)",
+      "Bash(awk -F'::' '{print $1}')",
+      "Bash(PYTHONIOENCODING=utf-8 py -m pytest tests/unit/test_excel_export.py --collect-only -q)",
+      "Bash(PYTHONIOENCODING=utf-8 python -m pytest tests/unit/test_excel_export.py::test_format_target_month_standard tests/unit/test_excel_export.py::test_format_target_month_fallback tests/unit/test_excel_export.py::test_format_target_month_cumulative tests/unit/test_excel_export.py::test_format_target_month_cumulative_same_month -v)",
+      "Bash(PYTHONIOENCODING=utf-8 py -m pytest tests/unit/test_excel_export.py::test_format_target_month_standard tests/unit/test_excel_export.py::test_format_target_month_fallback tests/unit/test_excel_export.py::test_format_target_month_cumulative tests/unit/test_excel_export.py::test_format_target_month_cumulative_same_month -v)",
+      "Bash(PYTHONIOENCODING=utf-8 py -m pytest tests/unit/test_excel_export.py tests/unit/test_template_engine_phase8b.py -v)",
+      "Bash(PYTHONIOENCODING=utf-8 py -m pytest tests/unit/test_template_engine_phase8b.py::TestChildRowDetailRevival -v)",
+      "Bash(PYTHONIOENCODING=utf-8 py -m pytest tests/)",
+      "Bash(PYTHONIOENCODING=utf-8 py tmp/verify_phase8c.py)",
+      "Bash(PYTHONIOENCODING=utf-8 py -m pytest tests/ -q)"
     ]
   }
 }

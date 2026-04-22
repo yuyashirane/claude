@@ -185,6 +185,26 @@ def _sum_amount(findings: Sequence[FindingLike], field: str) -> int:
     return total
 
 
+def is_mixing_pattern(group_or_subcode) -> bool:
+    """指定 FindingGroup(または sub_code 文字列)が Pattern B(混在検知)かを判定する。
+
+    Phase 8-B の Excel 層は、親行の D/E 列文言を生成する際にパターン種別を
+    参照する(単方向エラー vs 混在検知で文言が異なる)。その唯一の判定窓口。
+
+    Args:
+        group_or_subcode: FindingGroup か sub_code 文字列(例: "TC-06a")
+
+    Returns:
+        Pattern B(混在検知)なら True、Pattern A または未登録なら False。
+    """
+    sub_code = (
+        group_or_subcode.sub_code
+        if hasattr(group_or_subcode, "sub_code")
+        else group_or_subcode
+    )
+    return GROUP_KEY_STRATEGIES.get(sub_code) is _pattern_b
+
+
 def group(findings: Sequence[FindingLike]) -> list[FindingGroup]:
     """Finding のリストを FindingGroup のリストに集約する。
 
