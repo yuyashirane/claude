@@ -435,6 +435,14 @@ def main() -> int:
                 mj_candidate.exists() and mj_candidate.stat().st_size > 0
             ) else None
 
+            # Phase C-1 クラスタ C-1: items master を optional 配線
+            # ファイル不在時は build_check_context 側で None として扱われ、
+            # 既存の動作と完全に同一になる。
+            items_candidate = _period_dir(company_id, period_end) / "items_all.json"
+            items_path = items_candidate if (
+                items_candidate.exists() and items_candidate.stat().st_size > 0
+            ) else None
+
             ctx = build_check_context(
                 deals_path=deals_path,
                 partners_path=paths["partners_all.json"],
@@ -442,6 +450,7 @@ def main() -> int:
                 company_info_path=paths["company_info.json"],
                 taxes_codes_path=paths["taxes_codes.json"],
                 manual_journals_path=manual_journals_path,
+                items_path=items_path,
             )
 
             checker = _load_checker()
