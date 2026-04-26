@@ -90,6 +90,92 @@ def normalize_partners(raw_pages: list[dict]) -> list[dict]:
     return all_partners
 
 
+def normalize_items(raw_pages: list[dict]) -> list[dict]:
+    """items の複数ページレスポンスを 1 つの配列にまとめる。
+
+    Phase C-1 クラスタ B 追加。`/api/1/items` のレスポンスを
+    normalize_partners と同じパターンで整形する。
+
+    Args:
+        raw_pages: 各ページの API レスポンス dict のリスト。
+                   各要素は {"items": [...]} の形。
+                   空レスポンス {"items": []} が末尾に含まれる想定。
+
+    Returns:
+        items dict のリスト(空レスポンスは除外)。各要素は最低限 id / name を含む。
+
+    Raises:
+        ValueError: ページに "items" キーが存在しない場合。
+    """
+    all_items: list[dict] = []
+    for i, page in enumerate(raw_pages):
+        if "items" not in page:
+            raise ValueError(
+                f"ページ {i} に 'items' キーがありません。"
+                f"レスポンスキー: {list(page.keys())}"
+            )
+        items = page["items"]
+        if items:
+            all_items.extend(items)
+    return all_items
+
+
+def normalize_sections(raw_pages: list[dict]) -> list[dict]:
+    """sections の複数ページレスポンスを 1 つの配列にまとめる。
+
+    Phase C-1 クラスタ B 追加。`/api/1/sections` のレスポンス整形。
+
+    Args:
+        raw_pages: 各ページの API レスポンス dict のリスト。
+                   各要素は {"sections": [...]} の形。
+
+    Returns:
+        sections dict のリスト(空レスポンスは除外)。
+
+    Raises:
+        ValueError: ページに "sections" キーが存在しない場合。
+    """
+    all_sections: list[dict] = []
+    for i, page in enumerate(raw_pages):
+        if "sections" not in page:
+            raise ValueError(
+                f"ページ {i} に 'sections' キーがありません。"
+                f"レスポンスキー: {list(page.keys())}"
+            )
+        sections = page["sections"]
+        if sections:
+            all_sections.extend(sections)
+    return all_sections
+
+
+def normalize_tags(raw_pages: list[dict]) -> list[dict]:
+    """tags(メモタグ) の複数ページレスポンスを 1 つの配列にまとめる。
+
+    Phase C-1 クラスタ B 追加。`/api/1/tags` のレスポンス整形。
+
+    Args:
+        raw_pages: 各ページの API レスポンス dict のリスト。
+                   各要素は {"tags": [...]} の形。
+
+    Returns:
+        tags dict のリスト(空レスポンスは除外)。
+
+    Raises:
+        ValueError: ページに "tags" キーが存在しない場合。
+    """
+    all_tags: list[dict] = []
+    for i, page in enumerate(raw_pages):
+        if "tags" not in page:
+            raise ValueError(
+                f"ページ {i} に 'tags' キーがありません。"
+                f"レスポンスキー: {list(page.keys())}"
+            )
+        tags = page["tags"]
+        if tags:
+            all_tags.extend(tags)
+    return all_tags
+
+
 def save_json(data: dict | list, path: Path) -> None:
     """data を JSON ファイルに保存する。
 

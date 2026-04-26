@@ -742,3 +742,300 @@ class TestBuildCheckContextManualJournals:
                 all_paths["taxes_codes"],
                 manual_journals_path=bad_path,
             )
+
+
+# ═══════════════════════════════════════════════════════════════
+# Phase C-1 クラスタ B: deals 由来 item / section / memo_tag 解決
+# ═══════════════════════════════════════════════════════════════
+
+
+class TestTransformDealClusterBContext:
+    """Phase C-1 クラスタ B: transform_deal_to_rows の items/sections/tags 解決テスト。"""
+
+    @pytest.fixture
+    def partners_cache(self):
+        return {201: "株式会社テスト商事"}
+
+    @pytest.fixture
+    def account_items_cache(self):
+        return {101: "法定福利費"}
+
+    @pytest.fixture
+    def items_cache(self):
+        return {
+            194722695: "健康保険料(事業主負担分)",
+            194722696: "厚生年金保険料(事業主負担分)",
+        }
+
+    @pytest.fixture
+    def sections_cache(self):
+        return {11: "本社", 12: "支店"}
+
+    @pytest.fixture
+    def tags_cache(self):
+        return {21: "プロジェクトA", 22: "プロジェクトB"}
+
+    def _make_deal(self, item_id=None, section_id=None, tag_ids=None):
+        return {
+            "id": 1001,
+            "issue_date": "2025-12-31",
+            "partner_id": 201,
+            "details": [
+                {
+                    "id": 9001,
+                    "account_item_id": 101,
+                    "tax_code": 129,
+                    "item_id": item_id,
+                    "section_id": section_id,
+                    "tag_ids": tag_ids if tag_ids is not None else [],
+                    "amount": 50000,
+                    "vat": 0,
+                    "description": "12月分",
+                    "entry_side": "debit",
+                }
+            ],
+        }
+
+    def test_item_id_resolved_to_name(
+        self, partners_cache, account_items_cache, items_cache
+    ):
+        """detail.item_id がキャッシュで解決され row.item に格納される。"""
+        deal = self._make_deal(item_id=194722695)
+
+        rows = transform_deal_to_rows(
+            deal, partners_cache, account_items_cache,
+            items_cache=items_cache,
+        )
+
+        assert rows[0].item == "健康保険料(事業主負担分)"
+        # raw にも item_id を保持(デバッグ用)
+        assert rows[0].raw["item_id"] == 194722695
+
+    def test_item_id_null_returns_none(
+        self, partners_cache, account_items_cache, items_cache
+    ):
+        """item_id=None → row.item は None。"""
+        deal = self._make_deal(item_id=None)
+
+        rows = transform_deal_to_rows(
+            deal, partners_cache, account_items_cache,
+            items_cache=items_cache,
+        )
+
+        assert rows[0].item is None
+
+    def test_item_id_unknown_returns_none(
+        self, partners_cache, account_items_cache, items_cache
+    ):
+        """未知 item_id → row.item は None(エラーにしない)。"""
+        deal = self._make_deal(item_id=999999999)
+
+        rows = transform_deal_to_rows(
+            deal, partners_cache, account_items_cache,
+            items_cache=items_cache,
+        )
+
+        assert rows[0].item is None
+
+    def test_section_id_resolved_to_name(
+        self, partners_cache, account_items_cache, sections_cache
+    ):
+        """detail.section_id がキャッシュで解決され row.section に格納される。"""
+        deal = self._make_deal(section_id=11)
+
+        rows = transform_deal_to_rows(
+            deal, partners_cache, account_items_cache,
+            sections_cache=sections_cache,
+        )
+
+        assert rows[0].section == "本社"
+
+    def test_section_id_null_returns_none(
+        self, partners_cache, account_items_cache, sections_cache
+    ):
+        """section_id=None → row.section は None。"""
+        deal = self._make_deal(section_id=None)
+
+        rows = transform_deal_to_rows(
+            deal, partners_cache, account_items_cache,
+            sections_cache=sections_cache,
+        )
+
+        assert rows[0].section is None
+
+    def test_tag_ids_resolved_and_joined(
+        self, partners_cache, account_items_cache, tags_cache
+    ):
+        """tag_ids が複数 → 「、」結合された名称が row.memo_tag に入る。"""
+        deal = self._make_deal(tag_ids=[21, 22])
+
+        rows = transform_deal_to_rows(
+            deal, partners_cache, account_items_cache,
+            tags_cache=tags_cache,
+        )
+
+        assert rows[0].memo_tag == "プロジェクトA、プロジェクトB"
+
+    def test_tag_ids_empty_returns_none(
+        self, partners_cache, account_items_cache, tags_cache
+    ):
+        """tag_ids=[] → row.memo_tag は None。"""
+        deal = self._make_deal(tag_ids=[])
+
+        rows = transform_deal_to_rows(
+            deal, partners_cache, account_items_cache,
+            tags_cache=tags_cache,
+        )
+
+        assert rows[0].memo_tag is None
+
+    def test_tag_ids_unknown_skipped(
+        self, partners_cache, account_items_cache, tags_cache
+    ):
+        """tag_ids に未知 ID が混在 → 既知のみ抽出して結合(未知は無視)。"""
+        deal = self._make_deal(tag_ids=[21, 999])
+
+        rows = transform_deal_to_rows(
+            deal, partners_cache, account_items_cache,
+            tags_cache=tags_cache,
+        )
+
+        assert rows[0].memo_tag == "プロジェクトA"
+
+    def test_no_caches_keeps_backward_compat(
+        self, partners_cache, account_items_cache
+    ):
+        """items/sections/tags キャッシュ未指定 → row.item/section/memo_tag は None(従来挙動)。"""
+        deal = self._make_deal(item_id=194722695, section_id=11, tag_ids=[21])
+
+        rows = transform_deal_to_rows(
+            deal, partners_cache, account_items_cache,
+        )
+
+        assert rows[0].item is None
+        assert rows[0].section is None
+        assert rows[0].memo_tag is None
+        # 既存挙動の確認: partner / account / description などは健在
+        assert rows[0].partner == "株式会社テスト商事"
+        assert rows[0].account == "法定福利費"
+        assert rows[0].description == "12月分"
+
+    def test_combined_resolution(
+        self, partners_cache, account_items_cache,
+        items_cache, sections_cache, tags_cache
+    ):
+        """item / section / tag を全て同時解決した場合の組み合わせ確認。"""
+        deal = self._make_deal(item_id=194722696, section_id=12, tag_ids=[22])
+
+        rows = transform_deal_to_rows(
+            deal, partners_cache, account_items_cache,
+            items_cache=items_cache,
+            sections_cache=sections_cache,
+            tags_cache=tags_cache,
+        )
+
+        row = rows[0]
+        assert row.item == "厚生年金保険料(事業主負担分)"
+        assert row.section == "支店"
+        assert row.memo_tag == "プロジェクトB"
+
+
+class TestBuildCheckContextClusterB:
+    """Phase C-1 クラスタ B: build_check_context が optional な items/sections/tags パスを受け取る。"""
+
+    @pytest.fixture
+    def all_paths(self, tmp_path):
+        import shutil
+        for fname in [
+            "sample_deal_single.json",
+            "sample_partners.json",
+            "sample_account_items.json",
+            "sample_company_info.json",
+            "sample_taxes_codes.json",
+        ]:
+            shutil.copy(FIXTURES_DIR / fname, tmp_path / fname)
+        return {
+            "deals": tmp_path / "sample_deal_single.json",
+            "partners": tmp_path / "sample_partners.json",
+            "account_items": tmp_path / "sample_account_items.json",
+            "company_info": tmp_path / "sample_company_info.json",
+            "taxes_codes": tmp_path / "sample_taxes_codes.json",
+        }
+
+    def test_no_master_paths_works_as_before(self, all_paths):
+        """items/sections/tags パスを渡さない → 従来挙動(row.item/section/memo_tag が None)。"""
+        ctx = build_check_context(
+            all_paths["deals"],
+            all_paths["partners"],
+            all_paths["account_items"],
+            all_paths["company_info"],
+            all_paths["taxes_codes"],
+        )
+
+        assert ctx.transactions[0].item is None
+        assert ctx.transactions[0].section is None
+        assert ctx.transactions[0].memo_tag is None
+
+    def test_items_master_resolves_deal_item(self, all_paths, tmp_path, capsys):
+        """items master を渡すと deals 由来の item が解決される。"""
+        # sample_deal_single の item_id を埋め込む
+        deals_data = json.loads(all_paths["deals"].read_text(encoding="utf-8"))
+        deals_data["deals"][0]["details"][0]["item_id"] = 194722695
+        all_paths["deals"].write_text(
+            json.dumps(deals_data, ensure_ascii=False), encoding="utf-8"
+        )
+
+        items_path = tmp_path / "items_all.json"
+        items_path.write_text(
+            json.dumps(
+                [{"id": 194722695, "name": "健康保険料(事業主負担分)"}],
+                ensure_ascii=False,
+            ),
+            encoding="utf-8",
+        )
+
+        ctx = build_check_context(
+            all_paths["deals"],
+            all_paths["partners"],
+            all_paths["account_items"],
+            all_paths["company_info"],
+            all_paths["taxes_codes"],
+            items_path=items_path,
+        )
+
+        assert ctx.transactions[0].item == "健康保険料(事業主負担分)"
+
+        captured = capsys.readouterr()
+        assert "items cached: 1" in captured.out
+
+    def test_master_paths_missing_silently_skipped(self, all_paths):
+        """items/sections/tags パスを渡したが file 不在 → 例外ではなく空キャッシュとして扱う。"""
+        ctx = build_check_context(
+            all_paths["deals"],
+            all_paths["partners"],
+            all_paths["account_items"],
+            all_paths["company_info"],
+            all_paths["taxes_codes"],
+            items_path=Path("/nonexistent/items.json"),
+            sections_path=Path("/nonexistent/sections.json"),
+            tags_path=Path("/nonexistent/tags.json"),
+        )
+
+        assert ctx.transactions[0].item is None
+        assert ctx.transactions[0].section is None
+        assert ctx.transactions[0].memo_tag is None
+
+    def test_items_master_as_dict_raises_value_error(self, all_paths, tmp_path):
+        """items master が配列でなく dict → ValueError(§1.1 準拠)。"""
+        bad_path = tmp_path / "bad_items.json"
+        bad_path.write_text(json.dumps({"items": []}), encoding="utf-8")
+
+        with pytest.raises(ValueError, match="items JSON must be a JSON array"):
+            build_check_context(
+                all_paths["deals"],
+                all_paths["partners"],
+                all_paths["account_items"],
+                all_paths["company_info"],
+                all_paths["taxes_codes"],
+                items_path=bad_path,
+            )

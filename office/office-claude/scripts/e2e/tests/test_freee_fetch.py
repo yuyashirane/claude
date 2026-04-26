@@ -16,7 +16,10 @@ sys.path.insert(0, str(_E2E_DIR.parent.parent))  # PROJECT_ROOT を sys.path に
 
 from scripts.e2e.freee_fetch import (
     merge_deals_pages,
+    normalize_items,
     normalize_partners,
+    normalize_sections,
+    normalize_tags,
     normalize_taxes_codes,
     save_json,
     validate_completeness,
@@ -309,3 +312,72 @@ class TestNormalizeTaxesCodes:
 
         with pytest.raises(ValueError, match="taxes"):
             normalize_taxes_codes(raw)
+
+
+# ─────────────────────────────────────────────────────────────
+# Phase C-1 クラスタ B: normalize_items / sections / tags
+# ─────────────────────────────────────────────────────────────
+
+
+class TestNormalizeItems:
+    """normalize_items の3テスト。normalize_partners と同じパターン。"""
+
+    def test_two_pages_merged(self):
+        """2 ページ + 空ページ → 連結結果が返る。"""
+        page1 = {"items": [{"id": 1, "name": "品目A"}, {"id": 2, "name": "品目B"}]}
+        page2 = {"items": [{"id": 3, "name": "品目C"}]}
+        empty = {"items": []}
+
+        result = normalize_items([page1, page2, empty])
+
+        assert len(result) == 3
+        assert [i["id"] for i in result] == [1, 2, 3]
+
+    def test_only_empty_page_returns_empty_list(self):
+        """空ページのみ → 空配列。"""
+        assert normalize_items([{"items": []}]) == []
+
+    def test_missing_items_key_raises_value_error(self):
+        """ページに "items" キーがない → ValueError。"""
+        with pytest.raises(ValueError, match="items"):
+            normalize_items([{"data": [{"id": 1}]}])
+
+
+class TestNormalizeSections:
+    """normalize_sections の3テスト。"""
+
+    def test_two_pages_merged(self):
+        page1 = {"sections": [{"id": 11, "name": "本社"}]}
+        page2 = {"sections": [{"id": 12, "name": "支店"}]}
+
+        result = normalize_sections([page1, page2])
+
+        assert len(result) == 2
+        assert result[0]["name"] == "本社"
+
+    def test_only_empty_page_returns_empty_list(self):
+        assert normalize_sections([{"sections": []}]) == []
+
+    def test_missing_sections_key_raises_value_error(self):
+        with pytest.raises(ValueError, match="sections"):
+            normalize_sections([{"foo": []}])
+
+
+class TestNormalizeTags:
+    """normalize_tags の3テスト。"""
+
+    def test_two_pages_merged(self):
+        page1 = {"tags": [{"id": 21, "name": "健康保険料(事業主負担分)"}]}
+        page2 = {"tags": [{"id": 22, "name": "厚生年金保険料"}]}
+
+        result = normalize_tags([page1, page2])
+
+        assert len(result) == 2
+        assert result[1]["name"] == "厚生年金保険料"
+
+    def test_only_empty_page_returns_empty_list(self):
+        assert normalize_tags([{"tags": []}]) == []
+
+    def test_missing_tags_key_raises_value_error(self):
+        with pytest.raises(ValueError, match="tags"):
+            normalize_tags([{"foo": []}])

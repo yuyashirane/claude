@@ -241,6 +241,7 @@ class TransactionRow:
         debit_amount: 借方金額(Decimal、float は使わない)
         credit_amount: 貸方金額(Decimal、float は使わない)
         item: 品目(オプション)
+        section: 部門(オプション、Phase C-1 クラスタ B 追加)
         memo_tag: メモタグ(オプション)
         notes: 備考(オプション)
         raw: CSVの元行など(デバッグ用、オプション)
@@ -263,6 +264,7 @@ class TransactionRow:
 
     # ─── メタ情報(オプション) ───
     item: Optional[str] = None
+    section: Optional[str] = None
     memo_tag: Optional[str] = None
     notes: Optional[str] = None
 

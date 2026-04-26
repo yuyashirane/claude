@@ -145,6 +145,9 @@ def transform_deal_to_rows(
     partners_cache: dict[int, str],
     account_items_cache: dict[int, str],
     code_to_name_ja: dict[int, str] | None = None,
+    items_cache: dict[int, str] | None = None,
+    sections_cache: dict[int, str] | None = None,
+    tags_cache: dict[int, str] | None = None,
 ) -> list:
     """1 deal を details[] を展開して TransactionRow リストに変換する。
 
@@ -156,6 +159,9 @@ def transform_deal_to_rows(
     - details が空配列 / null / キー欠落の場合は空リスト [] を返す（例外禁止）
     - tax_label: code_to_name_ja が与えられた場合は name_ja に変換
                  マスタに無い未知コードは str(tax_code) にフォールバック（空文字禁止）
+    - Phase C-1 クラスタ B: detail.item_id / section_id / tag_ids を items/sections/tags
+      キャッシュで名称解決し、TransactionRow.item / section / memo_tag に格納。
+      キャッシュ未指定または ID が null/未知の場合は None。
 
     Args:
         deal: freee deals API の1取引レスポンス dict。
@@ -163,6 +169,9 @@ def transform_deal_to_rows(
         account_items_cache: {account_item_id: account_name}。
         code_to_name_ja: {tax_code(int): name_ja(str)} の逆引き dict（Phase 6.10 追加）。
                          None の場合は従来どおり str(tax_code) を使用。
+        items_cache: {item_id: item_name} の辞書。Phase C-1 クラスタ B 追加。
+        sections_cache: {section_id: section_name} の辞書。Phase C-1 クラスタ B 追加。
+        tags_cache: {tag_id: tag_name} の辞書。Phase C-1 クラスタ B 追加。
 
     Returns:
         TransactionRow のリスト。details が空/欠落の場合は空リスト []。
@@ -185,6 +194,9 @@ def transform_deal_to_rows(
 
     # ── 逆引き dict が無い場合は空 dict（str フォールバックのみで動作）
     _code_to_name = code_to_name_ja if code_to_name_ja is not None else {}
+    _items = items_cache or {}
+    _sections = sections_cache or {}
+    _tags = tags_cache or {}
 
     # ── 各 detail 行を TransactionRow に変換
     rows = []
@@ -205,6 +217,19 @@ def transform_deal_to_rows(
         # tax_label: name_ja に変換。未知コードは str フォールバック（空文字禁止）
         tax_label = _code_to_name.get(tax_code, str(tax_code))
 
+        # Phase C-1 クラスタ B: item / section / memo_tag を ID → 名称解決
+        item_id = detail.get("item_id")
+        item_name = _items.get(item_id) if item_id is not None else None
+        item_value = item_name or None  # 空文字も None に揃える
+
+        section_id = detail.get("section_id")
+        section_name = _sections.get(section_id) if section_id is not None else None
+        section_value = section_name or None
+
+        tag_ids = detail.get("tag_ids") or []
+        tag_names = [_tags[tid] for tid in tag_ids if tid in _tags and _tags[tid]]
+        memo_value = "、".join(tag_names) if tag_names else None
+
         row = TransactionRow(
             wallet_txn_id=wallet_txn_id,
             deal_id=deal_id,
@@ -215,6 +240,9 @@ def transform_deal_to_rows(
             description=description,
             debit_amount=debit_amount,
             credit_amount=credit_amount,
+            item=item_value,
+            section=section_value,
+            memo_tag=memo_value,
             raw={                           # 元データ保持（デバッグ用、非スキーマフィールドもここに）
                 "deal_id": deal["id"],
                 "row_id": detail["id"],
@@ -224,6 +252,9 @@ def transform_deal_to_rows(
                 "tax_code": tax_code,
                 "amount": raw_amount,
                 "vat": detail.get("vat"),
+                "item_id": item_id,
+                "section_id": section_id,
+                "tag_ids": tag_ids,
             },
         )
         rows.append(row)
@@ -347,6 +378,9 @@ def build_check_context(
     company_info_path: Path,
     taxes_codes_path: Path,
     manual_journals_path: Path | None = None,
+    items_path: Path | None = None,
+    sections_path: Path | None = None,
+    tags_path: Path | None = None,
 ) -> object:
     """5 つの JSON ファイルから CheckContext を組み立てる。
 
@@ -435,6 +469,26 @@ def build_check_context(
         for k, v in tax_code_master.items()
     }
 
+    # ── 2.5 items / sections / tags キャッシュ（Phase C-1 クラスタ B 追加、オプショナル）
+    def _build_id_name_cache(path: Path | None, role: str) -> dict[int, str]:
+        if path is None or not Path(path).exists():
+            return {}
+        data = _load_json(Path(path), role)
+        if not isinstance(data, list):
+            raise ValueError(
+                f"{role} JSON must be a JSON array per spec §1.1 "
+                f"(actual type: {type(data).__name__})"
+            )
+        return {
+            entry["id"]: entry.get("name", "")
+            for entry in data
+            if "id" in entry
+        }
+
+    items_cache = _build_id_name_cache(items_path, "items")
+    sections_cache = _build_id_name_cache(sections_path, "sections")
+    tags_cache = _build_id_name_cache(tags_path, "tags")
+
     # ── 3. deals を展開して TransactionRow リスト構築
     deals = deals_data.get("deals", [])
     all_rows = []
@@ -443,7 +497,13 @@ def build_check_context(
 
     for deal in deals:
         rows = transform_deal_to_rows(
-            deal, partners_cache, account_items_cache, code_to_name_ja
+            deal,
+            partners_cache,
+            account_items_cache,
+            code_to_name_ja,
+            items_cache=items_cache,
+            sections_cache=sections_cache,
+            tags_cache=tags_cache,
         )
         if not rows:
             skipped += 1
@@ -543,5 +603,11 @@ def build_check_context(
         print(f"manual_journals: {mj_total}")
         print(f"manual_journals skipped: {mj_skipped}")
         print(f"manual_journals rows: {mj_rows_added}")
+    if items_cache:
+        print(f"items cached: {len(items_cache)}")
+    if sections_cache:
+        print(f"sections cached: {len(sections_cache)}")
+    if tags_cache:
+        print(f"tags cached: {len(tags_cache)}")
 
     return ctx

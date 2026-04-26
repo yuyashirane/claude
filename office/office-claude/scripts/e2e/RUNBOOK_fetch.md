@@ -292,6 +292,51 @@ save_json(
 
 ---
 
+## Step 5-c — 品目 / 部門 / メモタグ マスタ取得（Phase C-1 クラスタ B 追加 / オプショナル）
+
+> deals.details に存在する `item_id` / `section_id` / `tag_ids` を ID から名称に
+> 解決するためのマスタ。各エンドポイントは `partners` と同じく `offset/limit`
+> ページング方式で、空配列が返るまでループする。
+> **0 件の会社・該当データが無い会社では、これらの保存は不要**(run.py / adapter
+> 側でファイル不在は許容する)。
+
+**MCP 呼び出し（共通パターン）:**
+
+```python
+mcp__freee-mcp__freee_api_get(
+    service="accounting",
+    path="/api/1/items",       # /sections, /tags も同様
+    params={"company_id": 3525430, "offset": 0, "limit": 100},
+)
+```
+
+**保存:**
+
+```python
+from scripts.e2e.freee_fetch import (
+    normalize_items, normalize_sections, normalize_tags, save_json
+)
+from pathlib import Path
+
+# items_pages = [page1, page2, ..., empty_page]
+items_list = normalize_items(items_pages)
+save_json(items_list, Path("data/e2e/3525430/202512/items_all.json"))
+
+sections_list = normalize_sections(sections_pages)
+save_json(sections_list, Path("data/e2e/3525430/202512/sections_all.json"))
+
+tags_list = normalize_tags(tags_pages)
+save_json(tags_list, Path("data/e2e/3525430/202512/tags_all.json"))
+```
+
+**完了基準**:
+
+- 各ファイルが配列形式で保存される(`{"items": [...]}` 等のラップなし)
+- 空ページ受信で即終了(過剰リクエスト禁止)
+- 各要素に最低限 `id` / `name` が含まれる
+
+---
+
 ## 最終検証
 
 **5 ファイルの確認:**
