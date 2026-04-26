@@ -119,7 +119,7 @@ def _check_01a_standard_with_kw(row, ctx, keywords: dict):
         sort_priority=21,
         row=row,
         current_value=row.tax_label,
-        suggested_value="別区分の可能性",
+        suggested_value="",
         confidence=50,
         message=(
             f"売上が課税売上10%で計上されていますが、"
@@ -185,7 +185,7 @@ def _check_01c_export_no_overseas_kw(row, ctx, keywords: dict):
         sort_priority=7,
         row=row,
         current_value=row.tax_label,
-        suggested_value="課税売上(要確認)",
+        suggested_value="",
         confidence=80,
         message=(
             f"売上が輸出免税で計上されていますが、摘要に海外取引を示すキーワードが含まれていません。"
@@ -216,7 +216,7 @@ def _check_01d_non_taxable_no_exception_kw(row, ctx, keywords: dict):
         sort_priority=8,
         row=row,
         current_value=row.tax_label,
-        suggested_value="課税売上の可能性",
+        suggested_value="",
         confidence=85,
         message=(
             f"売上が非課税売上で計上されていますが、"
@@ -247,7 +247,7 @@ def _check_01e_non_subject_no_exception_kw(row, ctx, keywords: dict):
         sort_priority=9,
         row=row,
         current_value=row.tax_label,
-        suggested_value="課税売上の可能性",
+        suggested_value="",
         confidence=85,
         message=(
             f"売上が対象外(不課税)で計上されていますが、"

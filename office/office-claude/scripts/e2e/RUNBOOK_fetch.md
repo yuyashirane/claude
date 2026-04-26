@@ -221,6 +221,77 @@ save_json(taxes_list, Path("data/e2e/3525430/202512/taxes_codes.json"))
 
 ---
 
+## Step 5-b — 振替伝票取得 → `manual_journals_{period}.json`（Step 3-A 追加 / オプショナル）
+
+> manual_journals は deals に乗らない振替伝票（決算整理仕訳など）を扱う。
+> deals が 0 件で manual_journals 中心の会社（例: 資産管理会社）でも
+> `rows > 0` でチェックを走らせるために必要。
+> **deals と同じ期間条件**で取得し、`data/e2e/<company_id>/<period_end>/`
+> 配下に保存する。
+
+**取得パターン**: 本エンドポイントは **`meta.total_count` を返さない**ため、
+deals のような件数事前確認はできない。**空配列が返るまで `offset` を進めて
+ページング取得する**方式で全件取得する。
+
+> ⚠️ Step 3-A 実機検証（2 社目）で判明: `GET /api/1/manual_journals` の
+> レスポンスには `meta` 自体が含まれない（あるいは `total_count` が `None`）。
+> 件数による終了判定は使えないため、空配列を終了シグナルとする。
+
+```python
+# 擬似コード: 空配列が返るまでループ
+offset = 0
+limit = 500       # API の最大値。100〜500 の範囲で運用
+pages = []
+while True:
+    response = mcp__freee-mcp__freee_api_get(
+        service="accounting",
+        path="/api/1/manual_journals",
+        params={
+            "company_id": 3525430,
+            "start_issue_date": "2025-04-01",
+            "end_issue_date": "2026-03-31",
+            "offset": offset,
+            "limit": limit,
+        },
+    )
+    journals = response.get("manual_journals", [])
+    if not journals:
+        break       # 空配列 = 取得完了
+    pages.append(response)
+    offset += limit
+```
+
+**保存:**
+
+```python
+from scripts.e2e.freee_fetch import save_json
+from pathlib import Path
+
+# pages = [page1, page2, ...]（最後の空ページはループ内で break するためここに含めない）
+all_journals = []
+for page in pages:
+    all_journals.extend(page.get("manual_journals", []))
+
+# total_count はクライアント側で算出（API は返さない）
+merged = {
+    "manual_journals": all_journals,
+    "meta": {"total_count": len(all_journals)},
+}
+
+save_json(
+    merged,
+    Path("data/e2e/3525430/2026-03/manual_journals_2025-04_to_2026-03.json"),
+)
+```
+
+**完了基準**:
+- 空配列を受信した時点でループ終了している（過剰リクエスト禁止）
+- ファイルが保存されている（`{"manual_journals": [...], "meta": {"total_count": N}}` 形式）
+- `merged["meta"]["total_count"] == len(merged["manual_journals"])`（クライアント算出値の自己整合）
+- **0 件の会社では本ファイルを保存しなくて良い**（run.py 側でオプショナル扱い）
+
+---
+
 ## 最終検証
 
 **5 ファイルの確認:**

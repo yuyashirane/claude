@@ -1,0 +1,51 @@
+{
+  "manual_journals": [
+    {
+      "id": 5001,
+      "company_id": 3525430,
+      "issue_date": "2025-12-31",
+      "adjustment": false,
+      "txn_number": "MJ-001",
+      "details": [
+        {
+          "id": 7001,
+          "entry_side": "debit",
+          "account_item_id": 102,
+          "tax_code": 136,
+          "partner_id": 201,
+          "partner_name": "株式会社テスト商事",
+          "item_id": null,
+          "item_name": "",
+          "section_id": null,
+          "section_name": "",
+          "tag_ids": [],
+          "tag_names": [],
+          "amount": 30000,
+          "vat": 2727,
+          "description": "決算整理仕訳"
+        },
+        {
+          "id": 7002,
+          "entry_side": "credit",
+          "account_item_id": 101,
+          "tax_code": 2,
+          "partner_id": null,
+          "partner_name": "",
+          "item_id": null,
+          "item_name": "",
+          "section_id": null,
+          "section_name": "",
+          "tag_ids": [],
+          "tag_names": [],
+          "amount": 30000,
+          "vat": 0,
+          "description": "決算整理仕訳"
+        }
+      ],
+      "receipt_ids": []
+    }
+  ],
+  "meta": {
+    "total_count": 1
+  }
+}

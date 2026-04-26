@@ -368,7 +368,7 @@ def _make_finding_07e(row, ctx, code: int, matched_kw: Optional[str]):
         sort_priority=28,
         row=row,
         current_value=row.tax_label,
-        suggested_value="課税仕入の可能性",
+        suggested_value="",
         confidence=60,
         message=(
             f"福利厚生費が対象外/非課仕入として処理されていますが、"
@@ -396,7 +396,7 @@ def _make_finding_07f(row, ctx, code: int, kw_category: str, matched_kw: Optiona
         sort_priority=29,
         row=row,
         current_value=row.tax_label,
-        suggested_value="要判断(軽減税率の可能性)",
+        suggested_value="",
         confidence=70,
         message=(
             f"福利厚生費に食品関連の摘要(KW:{matched_kw})があり、"

@@ -1,15 +1,16 @@
-"""Phase 6.5/6.10: freee JSON → CheckContext Adapter（最小版）。
+"""Phase 6.5/6.10/Step 3-A: freee JSON → CheckContext Adapter（最小版）。
 
-入力: Claude Code が事前保存した5つの JSON ファイル
-    - deals_YYYYMM.json       月次取引（ページネーション済み統合版）
-    - partners_all.json       全取引先マスタ
-    - account_items_all.json  全勘定科目マスタ
-    - company_info.json       会社基本情報
-    - taxes_codes.json        freee 税区分マスタ（Phase 6.10 追加）
+入力: Claude Code が事前保存した JSON ファイル（必須5 + オプショナル1）
+    - deals_YYYY-MM_to_YYYY-MM.json    期間取引（ページネーション済み統合版）
+    - partners_all.json                全取引先マスタ
+    - account_items_all.json           全勘定科目マスタ
+    - company_info.json                会社基本情報
+    - taxes_codes.json                 freee 税区分マスタ（Phase 6.10 追加）
+    - manual_journals_YYYY-MM_to_YYYY-MM.json  振替伝票（Step 3-A 追加、オプショナル）
 
-出力: CheckContext（deals の行レベルに展開済み）
+出力: CheckContext（deals + manual_journals の行レベルに展開済み）
 
-対応範囲: deals のみ（manual_journals / wallet_txns / journals は非対応）
+対応範囲: deals + manual_journals（wallet_txns / journals は非対応）
 
 設計原則:
     - freee API を直接叩かない（JSON 読み込みのみ）
@@ -231,6 +232,111 @@ def transform_deal_to_rows(
 
 
 # ─────────────────────────────────────────────────────────────
+# 純粋関数 4-b: transform_journal_to_rows（Step 3-A 追加）
+# ─────────────────────────────────────────────────────────────
+
+def transform_journal_to_rows(
+    journal: dict,
+    partners_cache: dict[int, str],
+    account_items_cache: dict[int, str],
+    code_to_name_ja: dict[int, str] | None = None,
+) -> list:
+    """1 manual_journal を details[] を展開して TransactionRow リストに変換する。
+
+    deals との主な差異:
+        - partner_id は details レベルに存在（deals は deal レベル共通）
+        - partner_name はレスポンスに含まれることがある（detail.partner_name）
+        - account_name は details 行ごとに account_items_cache から解決
+        - deal_id 相当は無いため row.deal_id は None
+        - raw["source"] = "manual_journal" を必ず付与（deals 由来との区別用）
+        - raw["manual_journal_id"] に journal.id を保持
+
+    Args:
+        journal: freee manual_journals API の 1 レスポンス dict。
+        partners_cache: {partner_id: partner_name}。
+        account_items_cache: {account_item_id: account_name}。
+        code_to_name_ja: {tax_code(int): name_ja(str)} の逆引き dict。
+
+    Returns:
+        TransactionRow のリスト。details が空/欠落の場合は空リスト []。
+    """
+    # ── details の取得（空/null/欠落すべて空リストとして扱う）
+    details = journal.get("details") or []
+    if not details:
+        return []
+
+    # ── journal レベルで共通の情報
+    journal_id = journal["id"]
+    issue_date_str = journal.get("issue_date", "")
+    try:
+        transaction_date = date.fromisoformat(issue_date_str)
+    except (ValueError, TypeError):
+        transaction_date = None
+
+    _code_to_name = code_to_name_ja if code_to_name_ja is not None else {}
+
+    rows = []
+    for detail in details:
+        wallet_txn_id = str(detail["id"])
+        account_item_id = detail["account_item_id"]
+        account_name = resolve_account_name(account_item_id, account_items_cache)
+        tax_code = detail.get("tax_code", 0)
+        description = detail.get("description", "")
+        entry_side = detail["entry_side"]
+
+        # partner_id は detail レベル
+        partner_id = detail.get("partner_id")
+        # partner_name: レスポンス値を優先、空ならキャッシュ逆引き、それでも空なら ""
+        resp_partner_name = detail.get("partner_name") or ""
+        if resp_partner_name:
+            partner_name = resp_partner_name
+        else:
+            partner_name = resolve_partner_name(partner_id, partners_cache)
+
+        raw_amount = detail.get("amount", 0)
+        amount = Decimal(str(raw_amount))
+        debit_amount, credit_amount = split_entry_side(entry_side, amount)
+
+        tax_label = _code_to_name.get(tax_code, str(tax_code))
+
+        item_name = detail.get("item_name", "")
+        tag_names = detail.get("tag_names") or []
+
+        row = TransactionRow(
+            wallet_txn_id=wallet_txn_id,
+            deal_id=None,                   # manual_journal には deal_id 無し
+            transaction_date=transaction_date,
+            account=account_name,
+            tax_label=tax_label,
+            partner=partner_name,
+            description=description,
+            debit_amount=debit_amount,
+            credit_amount=credit_amount,
+            item=item_name or None,
+            memo_tag="、".join(tag_names) if tag_names else None,
+            notes=None,
+            raw={
+                "source": "manual_journal",  # deals 由来との識別子
+                "manual_journal_id": journal_id,
+                "row_id": detail["id"],
+                "account_item_id": account_item_id,
+                "partner_id": partner_id,
+                "entry_side": entry_side,
+                "tax_code": tax_code,
+                "amount": raw_amount,
+                "vat": detail.get("vat"),
+                "adjustment": journal.get("adjustment"),
+                "txn_number": journal.get("txn_number"),
+                "section_id": detail.get("section_id"),
+                "section_name": detail.get("section_name"),
+            },
+        )
+        rows.append(row)
+
+    return rows
+
+
+# ─────────────────────────────────────────────────────────────
 # 純粋関数 5: build_check_context
 # ─────────────────────────────────────────────────────────────
 
@@ -240,6 +346,7 @@ def build_check_context(
     account_items_path: Path,
     company_info_path: Path,
     taxes_codes_path: Path,
+    manual_journals_path: Path | None = None,
 ) -> object:
     """5 つの JSON ファイルから CheckContext を組み立てる。
 
@@ -257,6 +364,8 @@ def build_check_context(
         account_items_path: account_items JSON のパス。
         company_info_path: company_info JSON のパス。
         taxes_codes_path: taxes_codes JSON のパス（Phase 6.10 追加）。
+        manual_journals_path: manual_journals JSON のパス（Step 3-A 追加、オプショナル）。
+            None または存在しないファイルの場合は manual_journals 合流をスキップ。
 
     Returns:
         組み立て済みの CheckContext（tax_code_master 含む）。
@@ -347,6 +456,35 @@ def build_check_context(
                     fallback_count += 1
             all_rows.extend(rows)
 
+    # ── 3.5. manual_journals を展開して TransactionRow に追加（Step 3-A）
+    mj_total = 0
+    mj_rows_added = 0
+    mj_skipped = 0
+    mj_loaded = False
+    if manual_journals_path is not None and Path(manual_journals_path).exists():
+        manual_journals_data = _load_json(manual_journals_path, "manual_journals")
+        if not isinstance(manual_journals_data, dict):
+            raise ValueError(
+                "manual_journals.json must be a JSON object with 'manual_journals' key "
+                f"(actual type: {type(manual_journals_data).__name__})"
+            )
+        manual_journals = manual_journals_data.get("manual_journals", [])
+        mj_total = len(manual_journals)
+        mj_loaded = True
+        for journal in manual_journals:
+            rows = transform_journal_to_rows(
+                journal, partners_cache, account_items_cache, code_to_name_ja
+            )
+            if not rows:
+                mj_skipped += 1
+            else:
+                for row in rows:
+                    raw_tc = row.raw.get("tax_code", 0)
+                    if row.tax_label == str(raw_tc):
+                        fallback_count += 1
+                all_rows.extend(rows)
+                mj_rows_added += len(rows)
+
     # ── 4. company_info から会社・会計期情報を取得
     # company_data は §1.1 に従いフラット 6 キー dict として受け取る
     if not isinstance(company_data, dict):
@@ -401,5 +539,9 @@ def build_check_context(
         print(f"tax_codes skipped (no name_ja): {_taxes_skipped}")
     if fallback_count > 0:
         print(f"tax_label fallback (unknown codes): {fallback_count}")
+    if mj_loaded:
+        print(f"manual_journals: {mj_total}")
+        print(f"manual_journals skipped: {mj_skipped}")
+        print(f"manual_journals rows: {mj_rows_added}")
 
     return ctx

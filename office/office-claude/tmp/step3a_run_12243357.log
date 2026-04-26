@@ -1,0 +1,10 @@
+deals: 0
+skipped: 0
+rows: 3032
+partners cached: 83
+account_items cached: 206
+tax_codes cached: 175
+manual_journals: 1454
+manual_journals skipped: 0
+manual_journals rows: 3032
+{"status": "ok", "exit_code": 0, "company_id": 12243357, "company_name": "キャラクターアニメーションスタジオ株式会社", "mode": "target_month_cumulative", "target_month": "2025-07", "period_start": "2024-08", "period_end": "2025-07", "period_jp": "2024年8月〜2025年7月", "findings_count": 75, "output_path": "data/reports/12243357_キャラクターアニメーションスタジオ株式会社/v1-3-10_2024-08_to_2025-07_20260425_070144.xlsx", "output_abs_path": "C:\\Users\\yuya_\\claude\\office\\office-claude\\data\\reports\\12243357_キャラクターアニメーションスタジオ株式会社\\v1-3-10_2024-08_to_2025-07_20260425_070144.xlsx"}

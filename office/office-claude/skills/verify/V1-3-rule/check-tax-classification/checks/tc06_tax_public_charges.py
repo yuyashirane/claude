@@ -197,7 +197,7 @@ def _check_fuel_related(row, ctx, code: int, keywords: dict):
         sort_priority=26,
         row=row,
         current_value=row.tax_label,
-        suggested_value="要判断",
+        suggested_value="",
         confidence=70,
         message=(
             f"科目「{row.account}」に軽油関連のキーワード({', '.join(kw_hits)})が含まれています。"
@@ -236,7 +236,7 @@ def _check_entertainment(row, ctx, code: int, keywords: dict):
         sort_priority=27,
         row=row,
         current_value=row.tax_label,
-        suggested_value="要判断",
+        suggested_value="",
         confidence=70,
         message=(
             f"科目「{row.account}」に利用税関連のキーワード({', '.join(kw_hits)})が含まれています。"

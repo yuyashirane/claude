@@ -551,37 +551,53 @@ class TestParentRowGlHyperlink:
         ws = load_workbook(output)["A5 人件費"]
         assert ws.cell(4, 17).value == "GL"
 
-    def test_parent_row_gl_url_uses_single_month_period(self, tmp_path):
-        """Phase 8-C Fix v2: 親行 GL URL の期間は単月 (link_hints 期間)。
+    def test_parent_row_gl_url_uses_ctx_period_when_available(self, tmp_path):
+        """Step 3-C C-2: 親行 GL URL の期間は ctx.period_start/end (会計期間全体)。
 
-        ctx.period_start/end (会計期間) は使わず、グループ代表 Finding の
-        link_hints.period_start/end (取引月) を使う。
+        ctx が渡された場合は会計期間全体でフィルタを開く。子行 GL は
+        link_hints 単月のままで、親と子のスコープが意図的に分離する。
         """
         import urllib.parse
         from skills.export.excel_report.exporter import export_to_excel
-        # ctx の期間と link_hints の期間を意図的に差別化
         f = _mk_finding(
             period_start=date(2025, 12, 1),
             period_end=date(2025, 12, 31),
         )
         ctx = _MockCtx(
-            period_start=date(2025, 4, 1),   # 会計期首 (URL には使わない)
-            period_end=date(2026, 3, 31),    # 会計期末 (URL には使わない)
+            period_start=date(2025, 4, 1),   # 会計期首
+            period_end=date(2026, 3, 31),    # 会計期末
         )
         output = tmp_path / "out.xlsx"
         export_to_excel([f], output, ctx=ctx)
         ws = load_workbook(output)["A5 人件費"]
         parent_url = ws.cell(4, 17).hyperlink.target
         parsed = urllib.parse.parse_qs(urllib.parse.urlparse(parent_url).query)
-        # 親行は単月 (link_hints)。ctx の会計期間は反映されない。
-        assert parsed["start_date"] == ["2025-12-01"], (
-            f"親行 GL URL start_date は link_hints 単月: got {parsed.get('start_date')}"
+        # 親行は ctx 会計期間
+        assert parsed["start_date"] == ["2025-04-01"], (
+            f"親行 GL URL start_date は ctx 会計期間: got {parsed.get('start_date')}"
         )
-        assert parsed["end_date"] == ["2025-12-31"]
-        # 子行も link_hints 期間 (単月) で同じ
+        assert parsed["end_date"] == ["2026-03-31"]
+        # 子行は link_hints 単月のまま
         child_url = ws.cell(5, 17).hyperlink.target
         child_parsed = urllib.parse.parse_qs(urllib.parse.urlparse(child_url).query)
         assert child_parsed["start_date"] == ["2025-12-01"]
+        assert child_parsed["end_date"] == ["2025-12-31"]
+
+    def test_parent_row_gl_url_falls_back_to_link_hints_when_no_ctx(self, tmp_path):
+        """Step 3-C C-2: ctx が渡されない (None) 場合は link_hints の単月にフォールバック。"""
+        import urllib.parse
+        from skills.export.excel_report.exporter import export_to_excel
+        f = _mk_finding(
+            period_start=date(2025, 12, 1),
+            period_end=date(2025, 12, 31),
+        )
+        output = tmp_path / "out.xlsx"
+        export_to_excel([f], output)  # ctx 省略
+        ws = load_workbook(output)["A5 人件費"]
+        parent_url = ws.cell(4, 17).hyperlink.target
+        parsed = urllib.parse.parse_qs(urllib.parse.urlparse(parent_url).query)
+        assert parsed["start_date"] == ["2025-12-01"]
+        assert parsed["end_date"] == ["2025-12-31"]
 
     def test_parent_row_gl_url_includes_single_tax_code(self, tmp_path):
         """グループ内の税区分が 1 種類の場合、tax_group_codes を 1 つ付与。"""

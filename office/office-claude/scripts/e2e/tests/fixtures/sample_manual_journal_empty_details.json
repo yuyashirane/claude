@@ -1,0 +1,16 @@
+{
+  "manual_journals": [
+    {
+      "id": 5099,
+      "company_id": 3525430,
+      "issue_date": "2025-12-31",
+      "adjustment": false,
+      "txn_number": "MJ-099",
+      "details": [],
+      "receipt_ids": []
+    }
+  ],
+  "meta": {
+    "total_count": 1
+  }
+}

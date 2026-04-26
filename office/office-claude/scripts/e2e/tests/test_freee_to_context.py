@@ -22,6 +22,7 @@ from scripts.e2e.freee_to_context import (
     resolve_partner_name,
     split_entry_side,
     transform_deal_to_rows,
+    transform_journal_to_rows,
 )
 
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
@@ -473,4 +474,271 @@ class TestPhase610TaxCodeMaster:
                 all_paths["account_items"],
                 all_paths["company_info"],
                 bad_path,
+            )
+
+
+# ─────────────────────────────────────────────────────────────
+# Step 3-A: transform_journal_to_rows
+# ─────────────────────────────────────────────────────────────
+
+class TestTransformJournalToRows:
+    """Step 3-A: transform_journal_to_rows のテスト。"""
+
+    @pytest.fixture
+    def partners_cache(self):
+        return {201: "株式会社テスト商事", 202: "合同会社サンプル"}
+
+    @pytest.fixture
+    def account_items_cache(self):
+        return {101: "売上高", 102: "旅費交通費", 103: "消耗品費"}
+
+    @pytest.fixture
+    def code_to_name_ja(self):
+        return {2: "対象外", 129: "課税売上10%", 136: "課対仕入10%"}
+
+    def test_two_details_returns_two_rows(
+        self, partners_cache, account_items_cache, code_to_name_ja
+    ):
+        """振替伝票 2 details → 2 rows、debit / credit に分かれる。"""
+        with open(FIXTURES_DIR / "sample_manual_journal_single.json", encoding="utf-8") as f:
+            data = json.load(f)
+        journal = data["manual_journals"][0]
+
+        rows = transform_journal_to_rows(
+            journal, partners_cache, account_items_cache, code_to_name_ja
+        )
+
+        assert len(rows) == 2
+        # 1 行目: debit 旅費交通費
+        assert rows[0].wallet_txn_id == "7001"
+        assert rows[0].deal_id is None  # manual_journal には deal_id 無し
+        assert rows[0].account == "旅費交通費"
+        assert rows[0].tax_label == "課対仕入10%"
+        assert rows[0].partner == "株式会社テスト商事"
+        assert rows[0].debit_amount == Decimal("30000")
+        assert rows[0].credit_amount == Decimal("0")
+        assert rows[0].raw["source"] == "manual_journal"
+        assert rows[0].raw["manual_journal_id"] == 5001
+        # 2 行目: credit 売上高、partner_id=null → partner=""
+        assert rows[1].wallet_txn_id == "7002"
+        assert rows[1].account == "売上高"
+        assert rows[1].partner == ""
+        assert rows[1].debit_amount == Decimal("0")
+        assert rows[1].credit_amount == Decimal("30000")
+        assert rows[1].tax_label == "対象外"
+
+    def test_empty_details_returns_empty_list(
+        self, partners_cache, account_items_cache, code_to_name_ja
+    ):
+        """details=[] → 空リスト []（例外を投げない）。"""
+        with open(
+            FIXTURES_DIR / "sample_manual_journal_empty_details.json", encoding="utf-8"
+        ) as f:
+            data = json.load(f)
+        journal = data["manual_journals"][0]
+
+        rows = transform_journal_to_rows(
+            journal, partners_cache, account_items_cache, code_to_name_ja
+        )
+        assert rows == []
+
+    def test_null_details_returns_empty_list(
+        self, partners_cache, account_items_cache, code_to_name_ja
+    ):
+        """details=null → 空リスト []。"""
+        journal = {
+            "id": 5500,
+            "issue_date": "2025-12-15",
+            "details": None,
+        }
+        rows = transform_journal_to_rows(
+            journal, partners_cache, account_items_cache, code_to_name_ja
+        )
+        assert rows == []
+
+    def test_partner_name_in_response_preferred(
+        self, partners_cache, account_items_cache, code_to_name_ja
+    ):
+        """detail.partner_name が空でなければレスポンス値を採用する。"""
+        journal = {
+            "id": 5600,
+            "issue_date": "2025-12-15",
+            "details": [
+                {
+                    "id": 7600,
+                    "entry_side": "debit",
+                    "account_item_id": 102,
+                    "tax_code": 136,
+                    "partner_id": 999,  # partners_cache に無い
+                    "partner_name": "API直接の取引先名",  # ← これが採用される
+                    "amount": 1000,
+                    "description": "test",
+                }
+            ],
+        }
+        rows = transform_journal_to_rows(
+            journal, partners_cache, account_items_cache, code_to_name_ja
+        )
+        assert len(rows) == 1
+        assert rows[0].partner == "API直接の取引先名"
+
+    def test_unknown_tax_code_fallback_to_str(
+        self, partners_cache, account_items_cache, code_to_name_ja
+    ):
+        """未知 tax_code → str(tax_code) にフォールバック。"""
+        journal = {
+            "id": 5700,
+            "issue_date": "2025-12-15",
+            "details": [
+                {
+                    "id": 7700,
+                    "entry_side": "credit",
+                    "account_item_id": 101,
+                    "tax_code": 9999,
+                    "partner_id": None,
+                    "amount": 500,
+                    "description": "未知コード",
+                }
+            ],
+        }
+        rows = transform_journal_to_rows(
+            journal, partners_cache, account_items_cache, code_to_name_ja
+        )
+        assert rows[0].tax_label == "9999"
+
+    def test_invalid_issue_date_returns_none_date(
+        self, partners_cache, account_items_cache, code_to_name_ja
+    ):
+        """issue_date が不正 → transaction_date は None（例外を投げない）。"""
+        journal = {
+            "id": 5800,
+            "issue_date": "not-a-date",
+            "details": [
+                {
+                    "id": 7800,
+                    "entry_side": "debit",
+                    "account_item_id": 102,
+                    "tax_code": 136,
+                    "partner_id": None,
+                    "amount": 100,
+                    "description": "",
+                }
+            ],
+        }
+        rows = transform_journal_to_rows(
+            journal, partners_cache, account_items_cache, code_to_name_ja
+        )
+        assert rows[0].transaction_date is None
+
+
+# ─────────────────────────────────────────────────────────────
+# Step 3-A: build_check_context への manual_journals 合流
+# ─────────────────────────────────────────────────────────────
+
+class TestBuildCheckContextManualJournals:
+    """Step 3-A: manual_journals_path 合流の動作確認。"""
+
+    @pytest.fixture
+    def all_paths(self, tmp_path):
+        import shutil
+        for fname in [
+            "sample_deal_single.json",
+            "sample_partners.json",
+            "sample_account_items.json",
+            "sample_company_info.json",
+            "sample_taxes_codes.json",
+            "sample_manual_journal_single.json",
+        ]:
+            shutil.copy(FIXTURES_DIR / fname, tmp_path / fname)
+        return {
+            "deals": tmp_path / "sample_deal_single.json",
+            "partners": tmp_path / "sample_partners.json",
+            "account_items": tmp_path / "sample_account_items.json",
+            "company_info": tmp_path / "sample_company_info.json",
+            "taxes_codes": tmp_path / "sample_taxes_codes.json",
+            "manual_journals": tmp_path / "sample_manual_journal_single.json",
+        }
+
+    def test_path_none_keeps_legacy_behavior(self, all_paths):
+        """manual_journals_path=None（既定）→ 既存動作完全維持。rows=1 のみ。"""
+        ctx = build_check_context(
+            all_paths["deals"],
+            all_paths["partners"],
+            all_paths["account_items"],
+            all_paths["company_info"],
+            all_paths["taxes_codes"],
+        )
+        assert len(ctx.transactions) == 1  # deals のみ
+
+    def test_with_manual_journals_merges_rows(self, all_paths, capsys):
+        """manual_journals_path を渡す → rows = deals + manual_journals。"""
+        ctx = build_check_context(
+            all_paths["deals"],
+            all_paths["partners"],
+            all_paths["account_items"],
+            all_paths["company_info"],
+            all_paths["taxes_codes"],
+            manual_journals_path=all_paths["manual_journals"],
+        )
+        # deals=1 row + manual_journals=2 rows
+        assert len(ctx.transactions) == 3
+
+        # 由来の識別: deals 由来は raw["source"] が無い or "manual_journal" 以外
+        deal_rows = [r for r in ctx.transactions if (r.raw or {}).get("source") != "manual_journal"]
+        mj_rows = [r for r in ctx.transactions if (r.raw or {}).get("source") == "manual_journal"]
+        assert len(deal_rows) == 1
+        assert len(mj_rows) == 2
+
+        # 観測ログ確認
+        captured = capsys.readouterr()
+        assert "manual_journals: 1" in captured.out
+        assert "manual_journals rows: 2" in captured.out
+
+    def test_nonexistent_manual_journals_path_skipped(self, all_paths, tmp_path):
+        """manual_journals_path が存在しないパス → スキップ（FileNotFoundError 出さない）。"""
+        ctx = build_check_context(
+            all_paths["deals"],
+            all_paths["partners"],
+            all_paths["account_items"],
+            all_paths["company_info"],
+            all_paths["taxes_codes"],
+            manual_journals_path=tmp_path / "does_not_exist.json",
+        )
+        assert len(ctx.transactions) == 1
+
+    def test_manual_journals_only_company(
+        self, all_paths, tmp_path, capsys
+    ):
+        """deals 0 件 + manual_journals あり → rows = manual_journals 件数。"""
+        empty_deals = tmp_path / "empty_deals.json"
+        empty_deals.write_text(
+            '{"deals": [], "meta": {"total_count": 0}}', encoding="utf-8"
+        )
+
+        ctx = build_check_context(
+            empty_deals,
+            all_paths["partners"],
+            all_paths["account_items"],
+            all_paths["company_info"],
+            all_paths["taxes_codes"],
+            manual_journals_path=all_paths["manual_journals"],
+        )
+        assert len(ctx.transactions) == 2  # manual_journals 由来のみ
+        assert all(
+            (r.raw or {}).get("source") == "manual_journal" for r in ctx.transactions
+        )
+
+    def test_manual_journals_as_list_raises_value_error(self, all_paths, tmp_path):
+        """manual_journals.json が dict でなく list の場合 → ValueError。"""
+        bad_path = tmp_path / "bad_mj.json"
+        bad_path.write_text(json.dumps([{"id": 1}]), encoding="utf-8")
+
+        with pytest.raises(ValueError, match="manual_journals.json must be a JSON object"):
+            build_check_context(
+                all_paths["deals"],
+                all_paths["partners"],
+                all_paths["account_items"],
+                all_paths["company_info"],
+                all_paths["taxes_codes"],
+                manual_journals_path=bad_path,
             )

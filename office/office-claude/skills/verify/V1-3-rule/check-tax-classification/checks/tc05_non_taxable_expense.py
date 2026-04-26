@@ -262,7 +262,7 @@ def _check_payment_fee_for_guarantee(row, ctx, code: int, keywords: dict):
         sort_priority=25,
         row=row,
         current_value=row.tax_label,
-        suggested_value="非課仕入の可能性",
+        suggested_value="",
         confidence=70,
         message=(
             f"支払手数料が課税仕入として処理されていますが、"

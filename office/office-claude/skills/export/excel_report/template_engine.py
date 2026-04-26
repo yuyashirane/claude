@@ -304,11 +304,31 @@ def _sort_key(f) -> tuple:
     sp = getattr(f, "sort_priority", 0)
     if not sp or sp <= 0:
         sp = get_sort_priority(getattr(f, "sub_code", ""))
-    return (getattr(f, "tc_code", ""), sp)
+    # Step 3-C C-2: 同一 (tc_code, sort_priority) 内で取引日 → deal_id の順に安定化
+    lh = getattr(f, "link_hints", None)
+    ps = getattr(lh, "period_start", None) if lh is not None else None
+    date_key = ps.isoformat() if hasattr(ps, "isoformat") else (str(ps) if ps else "")
+    deal_key = str(getattr(f, "deal_id", "") or "")
+    return (getattr(f, "tc_code", ""), sp, date_key, deal_key)
 
 
 def _sort_findings(findings: list) -> list:
     return sorted(findings, key=_sort_key)
+
+
+# Step 3-C C-3: suggested_value がマスタ値か判定する中央集約ヘルパー。
+# Step 3-B 制約により suggested_value はマスタ値または "" のみ許容される。
+# 親行 C/E 列の文言分岐(マスタ提示型 vs 「要判断」/メッセージ誘導型)で使う。
+_TAX_MASTER_VALUES: frozenset[str] = frozenset({
+    "課税売上10%", "課税売上8%(軽)", "輸出売上", "非課売上",
+    "課対仕入10%", "課対仕入8%(軽)", "非課仕入",
+    "対象外",
+})
+
+
+def _is_master_value(sug) -> bool:
+    """suggested_value が税区分マスタ値か判定。"" / None は False。"""
+    return isinstance(sug, str) and sug in _TAX_MASTER_VALUES
 
 
 def _txn_date(finding) -> str:
@@ -699,23 +719,37 @@ def _group_account(group) -> str:
 def _parent_row_summary(group) -> str:
     """親行 C 列用のサマリー文字列 (C-β-3 form)。pure helper。
 
-    Pattern A (単方向):
-        "{account} — {count} 件・合計 ¥{total:,}（{current}→{suggested}）"
-    Pattern B (混在検知):
-        "{account} — {count} 件・合計 ¥{total:,}（税区分混在）"
+    Step 3-C C-3: suggested_value 空欄ケースを考慮した 3 分岐文言。
 
-    total は total_debit + total_credit。単一 Finding は通常どちらか片方なので
-    合算で実態と一致する。
+        ① Pattern B かつ current_value が 2 種類以上:
+              "{account} — {count} 件・合計 ¥{total:,}（税区分混在）"
+        ② suggested_value がマスタ値:
+              "{account} — {count} 件・合計 ¥{total:,}（{current}→{suggested}）"
+        ③ suggested_value が空文字 (要判断ケース):
+              "{account} — {count} 件・合計 ¥{total:,}（{current}→要判断）"
+
+    Pattern B でも variants=1 のケースは ②/③ に流れる(混在表現が論理破綻するため)。
+    total は total_debit + total_credit。
     """
     account = _group_account(group) or "（科目名なし）"
     total = group.total_debit + group.total_credit
-    if is_mixing_pattern(group):
+
+    variants = {
+        getattr(f, "current_value", "") for f in group.findings
+    }
+    variants.discard("")
+    n_variants = len(variants)
+
+    if is_mixing_pattern(group) and n_variants >= 2:
         tail = "（税区分混在）"
     else:
         first = group.findings[0] if group.findings else None
         cur = getattr(first, "current_value", "") if first else ""
         sug = getattr(first, "suggested_value", "") if first else ""
-        tail = f"（{cur}→{sug}）"
+        if _is_master_value(sug):
+            tail = f"（{cur}→{sug}）"
+        else:
+            tail = f"（{cur}→要判断）"
     return f"{account} — {group.count} 件・合計 ¥{total:,}{tail}"
 
 
@@ -734,20 +768,40 @@ def _parent_row_observation(group) -> str:
 def _parent_row_check_result(group) -> str:
     """親行 E 列用のチェック結果文字列。pure helper。
 
-    Pattern A: "{count} 件を「{current}」→「{suggested}」へ修正要確認"
-    Pattern B: "{variants} 種類の税区分混在 — 勘定科目のルール確認要"
+    Step 3-C C-3: suggested_value 空欄ケースを考慮した 4 分岐文言。
+
+        ① Pattern B かつ current_value が 2 種類以上:
+              "{n} 種類の税区分混在 — 勘定科目のルール確認要"
+        ② Pattern B かつ variants=1 (グルーピング副作用、混在表現は論理破綻):
+              "{count} 件: 現状「{cur}」— 勘定科目のルール確認要"
+        ③ Pattern A かつ suggested_value がマスタ値:
+              "{count} 件を「{cur}」→「{sug}」へ修正要確認"
+        ④ Pattern A かつ suggested_value が空文字 (要判断ケース):
+              "{count} 件: 現状「{cur}」— 詳細は子行 E 列(メッセージ)を確認"
+
+    Step 3-B 制約により suggested_value は master 値 or "" のみ。
+    旧実装の `or "-"` フォールバックは「→「-」へ修正要確認」を生む論理破綻の元。
     """
+    variants = {
+        getattr(f, "current_value", "") for f in group.findings
+    }
+    variants.discard("")
+    n_variants = len(variants)
+
     if is_mixing_pattern(group):
-        variants = {
-            getattr(f, "current_value", "") for f in group.findings
-        }
-        variants.discard("")
-        n = len(variants) if variants else group.count
-        return f"{n} 種類の税区分混在 — 勘定科目のルール確認要"
+        if n_variants >= 2:
+            return f"{n_variants} 種類の税区分混在 — 勘定科目のルール確認要"
+        # ② Pattern B variants=1: 混在表現は不適切なので現状を提示
+        first = group.findings[0] if group.findings else None
+        cur = getattr(first, "current_value", "") if first else ""
+        return f"{group.count} 件: 現状「{cur}」— 勘定科目のルール確認要"
+
     first = group.findings[0] if group.findings else None
-    cur = (getattr(first, "current_value", "") if first else "") or "-"
-    sug = (getattr(first, "suggested_value", "") if first else "") or "-"
-    return f"{group.count} 件を「{cur}」→「{sug}」へ修正要確認"
+    cur = getattr(first, "current_value", "") if first else ""
+    sug = getattr(first, "suggested_value", "") if first else ""
+    if _is_master_value(sug):
+        return f"{group.count} 件を「{cur}」→「{sug}」へ修正要確認"
+    return f"{group.count} 件: 現状「{cur}」— 詳細は子行 E 列(メッセージ)を確認"
 
 
 def _write_parent_row(ws, row: int, group, ctx=None) -> None:
@@ -838,7 +892,7 @@ def _child_row_d_e(message: str, prev_message) -> tuple[str, str]:
     return ("", message)
 
 
-def _write_child_row(ws, row: int, finding, prev_message=None) -> None:
+def _write_child_row(ws, row: int, finding, prev_message=None, txn_index=None) -> None:
     """子行 1 行を詳細シートの指定行に描画する。
 
     - A/B/C 列: 空欄（親行に集約済み）
@@ -847,7 +901,9 @@ def _write_child_row(ws, row: int, finding, prev_message=None) -> None:
     - F/G 列: 個別の現在/推奨税区分
     - H 列: 取引日
     - I 列: 勘定科目
-    - J〜N 列: 空欄（将来拡張予定: 取引先・品目・部門・メモ・摘要）
+    - J〜N 列: Step 3-C C-1 で復活。txn_index (wallet_txn_id → TransactionRow)
+              から逆引きして取引先・品目・部門・メモ・摘要を埋める。
+              部門は schema 未定義のため常に空欄。
     - O/P 列: 個別の借方/貸方金額
     - Q/R 列: freee ハイパーリンク
     - S 列: 確信度
@@ -859,6 +915,8 @@ def _write_child_row(ws, row: int, finding, prev_message=None) -> None:
     Args:
         prev_message: 直前子行の Finding.message。「同上」圧縮の判定に使う。
                       None なら圧縮しない（最初の子行扱い）。
+        txn_index: wallet_txn_id をキーとした TransactionRow 逆引き辞書。
+                   None もしくは該当なしなら J〜N 列は空欄のまま。
     """
     debit_val  = getattr(finding, "debit_amount",  None)
     credit_val = getattr(finding, "credit_amount", None)
@@ -866,6 +924,17 @@ def _write_child_row(ws, row: int, finding, prev_message=None) -> None:
     # Phase 8-C ④: 子行 D/E に Finding.message 由来の文言を復活
     message = getattr(finding, "message", "") or ""
     d_val, e_val = _child_row_d_e(message, prev_message)
+
+    # Step 3-C C-1: J〜N 列を ctx.transactions から wallet_txn_id 逆引きで埋める
+    txn = None
+    if txn_index:
+        wid = getattr(finding, "wallet_txn_id", None)
+        if wid:
+            txn = txn_index.get(wid)
+    partner_val = (getattr(txn, "partner", "") or "") if txn is not None else ""
+    item_val    = (getattr(txn, "item", None) or "") if txn is not None else ""
+    memo_val    = (getattr(txn, "memo_tag", None) or "") if txn is not None else ""
+    desc_val    = (getattr(txn, "description", "") or "") if txn is not None else ""
 
     values: dict[int, object] = {
         _D_PRIORITY:   "",
@@ -877,11 +946,11 @@ def _write_child_row(ws, row: int, finding, prev_message=None) -> None:
         _D_SUGGESTED:  getattr(finding, "suggested_value", ""),
         _D_DATE:       _txn_date(finding),
         _D_ACCOUNT:    _account_name(finding),
-        _D_PARTNER:    "",
-        _D_ITEM:       "",
+        _D_PARTNER:    partner_val,
+        _D_ITEM:       item_val,
         _D_DEPT:       "",
-        _D_MEMO:       "",
-        _D_DESC:       "",
+        _D_MEMO:       memo_val,
+        _D_DESC:       desc_val,
         _D_DEBIT:      debit_val  if debit_val  is not None else "",
         _D_CREDIT:     credit_val if credit_val is not None else "",
         _D_LINK_GL:    "",
@@ -951,13 +1020,21 @@ def _fill_detail_sheet_grouped(ws, findings: list, ctx=None) -> None:
 
     groups = _group_findings(findings)
 
+    # Step 3-C C-1: ctx.transactions から wallet_txn_id 逆引き辞書を構築
+    txn_index: dict = {}
+    if ctx is not None:
+        for t in getattr(ctx, "transactions", None) or ():
+            wid = getattr(t, "wallet_txn_id", None)
+            if wid:
+                txn_index[wid] = t
+
     row = _DET_DATA_START
     for g in groups:
         _write_parent_row(ws, row, g, ctx=ctx)
         row += 1
         prev_message = None
         for child in g.findings:
-            _write_child_row(ws, row, child, prev_message=prev_message)
+            _write_child_row(ws, row, child, prev_message=prev_message, txn_index=txn_index)
             prev_message = getattr(child, "message", None) or ""
             row += 1
 

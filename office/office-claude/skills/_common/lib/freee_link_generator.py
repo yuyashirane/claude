@@ -194,10 +194,11 @@ def _collect_group_tax_codes(group, ctx) -> list:
 def build_group_gl_link(group, ctx=None) -> Optional[str]:
     """FindingGroup に対する総勘定元帳リンクを生成する (Phase 8-C 親行 Q 列用)。
 
-    Phase 8-C 視覚確認後修正 v2 の確定仕様:
+    Step 3-C C-2 改修後の確定仕様:
         期間:
-            グループ代表 Finding の link_hints.period_start / period_end（単月）。
-            ctx 由来の会計期間ではなく、取引月そのもの。
+            ctx.period_start / ctx.period_end（会計期間全体）を優先。
+            ctx がない、または ctx の期間値が欠落していれば
+            グループ代表 link_hints.period_start / period_end（単月）にフォールバック。
         税区分:
             FindingGroup 内の全税区分を tax_group_codes として複数指定
             （ctx.tax_code_master 経由で Finding.current_value から逆引き）。
@@ -207,13 +208,14 @@ def build_group_gl_link(group, ctx=None) -> Optional[str]:
         会計期 ID / 会社 ID:
             ctx 優先、link_hints フォールバック
 
-    設計思想（戦略 Claude 確定）:
-        「グループと完全一致するフィルタビュー」= 単月×複数税区分。
-        子行 GL は単月×フィルタなしで広く、親行 GL は単月×絞込で精密に。
+    設計思想:
+        親行 GL は「期間全体 × 勘定科目 × グループ税区分」で
+        会計期間を通したフィルタビューを開く。子行 GL は単月で精密に。
 
     Args:
         group: FindingGroup
-        ctx:   CheckContext（None 可。ctx がなければ tax_group_codes は付与されない）
+        ctx:   CheckContext（None 可。ctx がなければ tax_group_codes は付与されず、
+               期間も link_hints の単月にフォールバック）
 
     Returns:
         URL 文字列。group.findings 空 / account_name 欠落時は None。
@@ -231,13 +233,16 @@ def build_group_gl_link(group, ctx=None) -> Optional[str]:
     if not account_name:
         return None
 
-    # 期間: グループ代表 link_hints の単月（ctx.period_start/end は使わない）
-    period_start = (
-        getattr(link_hints, "period_start", None) if link_hints is not None else None
-    )
-    period_end = (
-        getattr(link_hints, "period_end", None) if link_hints is not None else None
-    )
+    # 期間: ctx の会計期間全体を優先、欠落時 link_hints の単月にフォールバック
+    def _pick_period(attr):
+        if ctx is not None:
+            v = getattr(ctx, attr, None)
+            if v is not None:
+                return v
+        return getattr(link_hints, attr, None) if link_hints is not None else None
+
+    period_start = _pick_period("period_start")
+    period_end = _pick_period("period_end")
 
     # 会計期 / 会社 ID: ctx 優先、link_hints フォールバック
     def _pick(attr):

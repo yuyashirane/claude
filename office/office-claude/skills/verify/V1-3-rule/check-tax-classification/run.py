@@ -426,12 +426,22 @@ def main() -> int:
             from skills.export.excel_report.exporter import export_to_excel
 
             deals_path = paths[f"deals_{period_start}_to_{period_end}.json"]
+
+            # ── Step 3-A: manual_journals JSON は「オプショナル」
+            #    存在すれば合流し、無ければスキップ（missing_files 扱いにしない）
+            mj_filename = f"manual_journals_{period_start}_to_{period_end}.json"
+            mj_candidate = _period_dir(company_id, period_end) / mj_filename
+            manual_journals_path = mj_candidate if (
+                mj_candidate.exists() and mj_candidate.stat().st_size > 0
+            ) else None
+
             ctx = build_check_context(
                 deals_path=deals_path,
                 partners_path=paths["partners_all.json"],
                 account_items_path=paths["account_items_all.json"],
                 company_info_path=paths["company_info.json"],
                 taxes_codes_path=paths["taxes_codes.json"],
+                manual_journals_path=manual_journals_path,
             )
 
             checker = _load_checker()

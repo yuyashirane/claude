@@ -221,7 +221,7 @@ def _check_damage_compensation(row, ctx, code: int):
         sort_priority=19,
         row=row,
         current_value=row.tax_label,
-        suggested_value="要判断",
+        suggested_value="",
         confidence=70,
         message=(
             f"損害賠償金が課税売上として処理されています。"
@@ -263,7 +263,7 @@ def _check_misc_revenue(row, ctx, code: int, keywords: dict):
         sort_priority=20,
         row=row,
         current_value=row.tax_label,
-        suggested_value="対象外の可能性",
+        suggested_value="",
         confidence=50,
         message=(
             f"雑収入が課税売上として処理されていますが、"
