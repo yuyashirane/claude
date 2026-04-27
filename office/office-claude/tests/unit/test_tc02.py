@@ -232,6 +232,36 @@ class TestTC02f:
         assert findings[0].sub_code == "TC-02f"
         assert findings[0].confidence == 45
 
+    def test_item_flows_through_build_search_text(self, schema, make_row_factory):
+        """Phase C-1 教訓: row.item は keyword_matcher.build_search_text() 経由で
+        間接的に判定に寄与する。description だけではキーワードヒットしない条件で、
+        row.item を付け外しすると Finding 結果が変わることを再現する。
+
+        - description="5月分" のみ ⇒ 事業用 KW にヒットせず Finding 0
+        - item="事務所賃料" 追加 ⇒ build_search_text に "事務所" が混じり TC-02f が発火
+        """
+        from checks.tc02_land_rent import run
+
+        row_no_item = make_row_factory(
+            account="地代家賃", tax_label="非課仕入",
+            description="5月分",
+            debit_amount=377000, credit_amount=0,
+            item=None,
+        )
+        assert run(_make_ctx(schema, [row_no_item])) == [], (
+            "item=None で TC-02f が発火してしまった"
+        )
+
+        row_with_item = make_row_factory(
+            account="地代家賃", tax_label="非課仕入",
+            description="5月分",
+            debit_amount=377000, credit_amount=0,
+            item="事務所賃料",
+        )
+        findings = run(_make_ctx(schema, [row_with_item]))
+        assert len(findings) == 1, "item 付与で TC-02f が 1 件発火する想定"
+        assert findings[0].sub_code == "TC-02f"
+
 
 # ═══════════════════════════════════════════════════════════════
 # スコープ判定
