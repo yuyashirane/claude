@@ -426,6 +426,15 @@ if (isFourPlan) {
     contentChildren.push(
       bodyText("■ 年次料金（プランA1・A2 共通）"),
       pricingTable(config.pricing.commonAnnualA, pricingColWidths),
+      spacer(200),
+    );
+  }
+
+  // A初年度のみ
+  if (config.pricing.firstYearOnlyA) {
+    contentChildren.push(
+      bodyText("■ 初年度のみの年次料金（プランA1・A2）"),
+      pricingTable(config.pricing.firstYearOnlyA, pricingColWidths),
       spacer(300),
     );
   }
@@ -474,11 +483,58 @@ if (isFourPlan) {
 
   // サマリーA（A1/A2）
   if (config.pricing.summaryA) {
-    contentChildren.push(
-      bodyText("■ 年間費用サマリー：プランA1・A2（税別）"),
-      annualSummaryTable(config.pricing.summaryA),
-      spacer(200),
-    );
+    const sumA = config.pricing.summaryA;
+    const hasFirstYearA = sumA.planA && sumA.planA.firstYearOnlyTotal;
+    if (hasFirstYearA) {
+      const aRows = [
+        new TableRow({
+          children: [
+            headerCell("", 3000),
+            headerCell(sumA.planA.label, 3000),
+            headerCell(sumA.planB.label, 3000),
+          ],
+        }),
+        new TableRow({
+          children: [
+            dataCell("月次料金 × 12ヶ月", 3000, { bold: true, fill: LIGHT_BG }),
+            dataCell(sumA.planA.monthlyTotal, 3000, { align: AlignmentType.RIGHT, fill: LIGHT_BG }),
+            dataCell(sumA.planB.monthlyTotal, 3000, { align: AlignmentType.RIGHT, fill: LIGHT_BG }),
+          ],
+        }),
+        new TableRow({
+          children: [
+            dataCell("年次料金（毎年）", 3000, { bold: true }),
+            dataCell(sumA.planA.annualTotal, 3000, { align: AlignmentType.RIGHT }),
+            dataCell(sumA.planB.annualTotal, 3000, { align: AlignmentType.RIGHT }),
+          ],
+        }),
+        new TableRow({
+          children: [
+            dataCell("年次料金（初年度のみ）", 3000, { bold: true, fill: LIGHT_BG }),
+            dataCell(sumA.planA.firstYearOnlyTotal, 3000, { align: AlignmentType.RIGHT, fill: LIGHT_BG }),
+            dataCell(sumA.planB.firstYearOnlyTotal, 3000, { align: AlignmentType.RIGHT, fill: LIGHT_BG }),
+          ],
+        }),
+        new TableRow({
+          children: [
+            highlightCell("年間合計（税別・初年度）", 3000),
+            highlightCell(sumA.planA.grandTotal, 3000, { align: AlignmentType.RIGHT }),
+            highlightCell(sumA.planB.grandTotal, 3000, { align: AlignmentType.RIGHT }),
+          ],
+        }),
+      ];
+      contentChildren.push(
+        bodyText("■ 年間費用サマリー：プランA1・A2（税別）"),
+        new Table({ rows: aRows, width: { size: 9000, type: WidthType.DXA } }),
+        spacer(200),
+      );
+    } else {
+      contentChildren.push(
+        bodyText("■ 年間費用サマリー：プランA1・A2（税別）"),
+        annualSummaryTable(config.pricing.summaryA),
+        spacer(200),
+      );
+    }
   }
 
   // サマリーB（B1/B2）

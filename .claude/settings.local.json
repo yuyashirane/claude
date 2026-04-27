@@ -453,7 +453,17 @@
       "Bash(py -m pytest scripts/e2e/tests/ skills/verify/V1-3-rule/check-tax-classification/tests/)",
       "Bash(py -m pytest scripts/e2e/tests/ skills/verify/V1-3-rule/check-tax-classification/)",
       "Bash(py skills/verify/V1-3-rule/check-tax-classification/run.py --company-id 3525430 --period-start 2025-04 --period-end 2025-12)",
-      "Bash(py)"
+      "Bash(py)",
+      "mcp__freee__freee_list_companies",
+      "mcp__freee__freee_api_get",
+      "mcp__freee__freee_set_current_company",
+      "Bash(python tmp/generate_comnet_tax_check.py)",
+      "Bash(py -c \"import openpyxl; print\\(openpyxl.__version__\\)\")",
+      "Bash(py tmp/generate_comnet_tax_check.py)",
+      "Bash(py skills/verify/V1-3-rule/check-tax-classification/run.py --company-id 12243357 --period-start 2024-08 --period-end 2025-07)",
+      "Bash(py skills/verify/V1-3-rule/check-tax-classification/run.py --company-id 10794380 --period-start 2025-06 --period-end 2025-12)",
+      "Bash(node src/v1/create-proposal.js references/pricing/config_aurahada_v1.json)",
+      "Bash(py -m pytest tests/unit/test_tc02.py::TestTC02f::test_item_flows_through_build_search_text -v)"
     ]
   }
 }
