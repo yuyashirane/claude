@@ -36,6 +36,7 @@ def _mk_txn(
     *,
     partner: str = "",
     item: str | None = None,
+    section: str | None = None,
     memo_tag: str | None = None,
     description: str = "",
     account: str = "給与手当",
@@ -55,6 +56,7 @@ def _mk_txn(
         debit_amount=Decimal("100000"),
         credit_amount=Decimal("0"),
         item=item,
+        section=section,
         memo_tag=memo_tag,
     )
 
@@ -82,7 +84,8 @@ def _mk_ctx(transactions, *, period_start=date(2025, 4, 1), period_end=date(2026
 class TestC1ChildRowJtoNFromTxnIndex:
     """C-1: 子行 J/K/L/M/N が ctx.transactions から逆引きで埋まる。
 
-    L (DEPT) は schema に部門フィールドがないため常に空欄。
+    Phase C-1 クラスタ C-2 で TransactionRow.section を追加し、L (DEPT)
+    も txn.section から流すよう拡張(section が None の場合は空欄)。
     """
 
     def test_partner_filled_from_txn(self, tmp_path):
@@ -112,12 +115,12 @@ class TestC1ChildRowJtoNFromTxnIndex:
         ws = load_workbook(out)["A5 人件費"]
         assert ws.cell(5, 10).value == "A社"     # J 取引先
         assert ws.cell(5, 11).value == "品目X"    # K 品目
-        assert ws.cell(5, 12).value in (None, "")  # L 部門 (schema 未定義 → 空)
+        assert ws.cell(5, 12).value in (None, "")  # L 部門 (section 未指定 → 空)
         assert ws.cell(5, 13).value == "メモY"    # M メモ
         assert ws.cell(5, 14).value == "摘要Z"    # N 摘要
 
-    def test_dept_always_empty(self, tmp_path):
-        """schema に部門フィールドが存在しないため L 列は常に空欄。"""
+    def test_dept_empty_when_section_none(self, tmp_path):
+        """section=None のとき L 列は空欄。"""
         from skills.export.excel_report.exporter import export_to_excel
         f = _mk_finding(wallet_txn_id="W3")
         ctx = _mk_ctx([_mk_txn("W3", partner="X", item="Y", description="Z")])
@@ -125,6 +128,16 @@ class TestC1ChildRowJtoNFromTxnIndex:
         export_to_excel([f], out, ctx=ctx)
         ws = load_workbook(out)["A5 人件費"]
         assert ws.cell(5, 12).value in (None, "")
+
+    def test_dept_filled_from_section(self, tmp_path):
+        """Phase C-1 クラスタ C-2: section があれば L 列に表示される。"""
+        from skills.export.excel_report.exporter import export_to_excel
+        f = _mk_finding(wallet_txn_id="W4")
+        ctx = _mk_ctx([_mk_txn("W4", partner="X", section="営業部", description="Z")])
+        out = tmp_path / "out.xlsx"
+        export_to_excel([f], out, ctx=ctx)
+        ws = load_workbook(out)["A5 人件費"]
+        assert ws.cell(5, 12).value == "営業部"
 
 
 # ═════════════════════════════════════════════════════════════════════

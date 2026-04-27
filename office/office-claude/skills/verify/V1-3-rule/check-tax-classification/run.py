@@ -435,13 +435,16 @@ def main() -> int:
                 mj_candidate.exists() and mj_candidate.stat().st_size > 0
             ) else None
 
-            # Phase C-1 クラスタ C-1: items master を optional 配線
+            # Phase C-1 クラスタ C-1/C-2: items / sections / tags master を optional 配線
             # ファイル不在時は build_check_context 側で None として扱われ、
             # 既存の動作と完全に同一になる。
-            items_candidate = _period_dir(company_id, period_end) / "items_all.json"
-            items_path = items_candidate if (
-                items_candidate.exists() and items_candidate.stat().st_size > 0
-            ) else None
+            def _optional_path(filename: str) -> "Path | None":
+                cand = _period_dir(company_id, period_end) / filename
+                return cand if (cand.exists() and cand.stat().st_size > 0) else None
+
+            items_path = _optional_path("items_all.json")
+            sections_path = _optional_path("sections_all.json")
+            tags_path = _optional_path("tags_all.json")
 
             ctx = build_check_context(
                 deals_path=deals_path,
@@ -451,6 +454,8 @@ def main() -> int:
                 taxes_codes_path=paths["taxes_codes.json"],
                 manual_journals_path=manual_journals_path,
                 items_path=items_path,
+                sections_path=sections_path,
+                tags_path=tags_path,
             )
 
             checker = _load_checker()

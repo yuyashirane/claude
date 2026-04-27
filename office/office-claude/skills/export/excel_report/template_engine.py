@@ -903,7 +903,7 @@ def _write_child_row(ws, row: int, finding, prev_message=None, txn_index=None) -
     - I 列: 勘定科目
     - J〜N 列: Step 3-C C-1 で復活。txn_index (wallet_txn_id → TransactionRow)
               から逆引きして取引先・品目・部門・メモ・摘要を埋める。
-              部門は schema 未定義のため常に空欄。
+              部門は Phase C-1 クラスタ C-2 で txn.section から流すよう拡張。
     - O/P 列: 個別の借方/貸方金額
     - Q/R 列: freee ハイパーリンク
     - S 列: 確信度
@@ -933,6 +933,7 @@ def _write_child_row(ws, row: int, finding, prev_message=None, txn_index=None) -
             txn = txn_index.get(wid)
     partner_val = (getattr(txn, "partner", "") or "") if txn is not None else ""
     item_val    = (getattr(txn, "item", None) or "") if txn is not None else ""
+    section_val = (getattr(txn, "section", None) or "") if txn is not None else ""
     memo_val    = (getattr(txn, "memo_tag", None) or "") if txn is not None else ""
     desc_val    = (getattr(txn, "description", "") or "") if txn is not None else ""
 
@@ -948,7 +949,7 @@ def _write_child_row(ws, row: int, finding, prev_message=None, txn_index=None) -
         _D_ACCOUNT:    _account_name(finding),
         _D_PARTNER:    partner_val,
         _D_ITEM:       item_val,
-        _D_DEPT:       "",
+        _D_DEPT:       section_val,
         _D_MEMO:       memo_val,
         _D_DESC:       desc_val,
         _D_DEBIT:      debit_val  if debit_val  is not None else "",
