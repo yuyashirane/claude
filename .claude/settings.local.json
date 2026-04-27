@@ -463,7 +463,9 @@
       "Bash(py skills/verify/V1-3-rule/check-tax-classification/run.py --company-id 12243357 --period-start 2024-08 --period-end 2025-07)",
       "Bash(py skills/verify/V1-3-rule/check-tax-classification/run.py --company-id 10794380 --period-start 2025-06 --period-end 2025-12)",
       "Bash(node src/v1/create-proposal.js references/pricing/config_aurahada_v1.json)",
-      "Bash(py -m pytest tests/unit/test_tc02.py::TestTC02f::test_item_flows_through_build_search_text -v)"
+      "Bash(py -m pytest tests/unit/test_tc02.py::TestTC02f::test_item_flows_through_build_search_text -v)",
+      "Bash(py -c \"import sys; sys.path.insert\\(0,'.'\\); from importlib import import_module; m = import_module\\('skills.verify.V1-3-rule.check-tax-classification.run'\\); print\\(type\\(m\\)\\)\")",
+      "Bash(py -m pytest tests/unit/test_invoice_registration_status.py -v)"
     ]
   }
 }
