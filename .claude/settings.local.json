@@ -465,7 +465,16 @@
       "Bash(node src/v1/create-proposal.js references/pricing/config_aurahada_v1.json)",
       "Bash(py -m pytest tests/unit/test_tc02.py::TestTC02f::test_item_flows_through_build_search_text -v)",
       "Bash(py -c \"import sys; sys.path.insert\\(0,'.'\\); from importlib import import_module; m = import_module\\('skills.verify.V1-3-rule.check-tax-classification.run'\\); print\\(type\\(m\\)\\)\")",
-      "Bash(py -m pytest tests/unit/test_invoice_registration_status.py -v)"
+      "Bash(py -m pytest tests/unit/test_invoice_registration_status.py -v)",
+      "Bash(PYTHONIOENCODING=utf-8 py -3 -m pytest tests/unit/test_invoice_registration_status.py -v)",
+      "Bash(PYTHONIOENCODING=utf-8 py -3 skills/verify/V1-3-rule/check-invoice-registration-status/run.py --company-id 99999999 --period-start 2025-04 --period-end 2025-12)",
+      "Bash(echo \"exit: $?\")",
+      "Bash(PYTHONIOENCODING=utf-8 py -3 skills/verify/V1-3-rule/check-invoice-registration-status/run.py --company-id 99999999 --target-month 2025-12)",
+      "Bash(PYTHONIOENCODING=utf-8 py -3 skills/verify/V1-3-rule/check-invoice-registration-status/run.py --company-id 99999999 --target-month 2025-12 --single-month)",
+      "Bash(PYTHONIOENCODING=utf-8 py -3 skills/verify/V1-3-rule/check-invoice-registration-status/run.py --company-id 3525430 --period-start 2025-04 --period-end 2025-12 --target-month 2025-12)",
+      "Bash(PYTHONIOENCODING=utf-8 py -3 -m pytest tests/unit/test_invoice_registration_status.py)",
+      "PowerShell(Set-Location 'C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\office-claude'; cmd /c \"set PYTHONIOENCODING=utf-8&& py -3 skills\\\\verify\\\\V1-3-rule\\\\check-invoice-registration-status\\\\run.py --company-id 3525430 --target-month 2025-12 > ..\\\\freee-auto\\\\docs\\\\beta2\\\\observation_3525430.json\"; Write-Host \"exit=$LASTEXITCODE\")",
+      "PowerShell(Set-Location 'C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\office-claude'; $f = '..\\\\freee-auto\\\\docs\\\\beta2\\\\observation_3525430.json'; $size = \\(Get-Item $f\\).Length; $jsonOk = $false; try { Get-Content $f -Raw -Encoding utf8 | ConvertFrom-Json | Out-Null; $jsonOk = $true } catch {}; Write-Host \"size=$size json_ok=$jsonOk\")"
     ]
   }
 }
