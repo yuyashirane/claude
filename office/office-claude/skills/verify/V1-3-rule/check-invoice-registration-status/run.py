@@ -45,7 +45,9 @@ exit code:
 from __future__ import annotations
 
 import argparse
+import contextlib
 import importlib.util
+import io
 import json
 import re
 import sys
@@ -328,6 +330,84 @@ def _calculate_partner_unknown_breakdown(
     }
 
 
+def _calculate_tax_code_distribution(
+    rows: list,  # type: ignore[type-arg]
+) -> dict[str, Any]:
+    """tax_code 分布を集計（β2-D L1-A observations）。
+
+    judging-target 0 件の会社で「なぜ 0 件なのか」を tax_code 分布で説明する
+    観察項目（原因構造系）。
+
+    Args:
+        rows: InvoiceCheckRow のリスト（main() で _normalize_deals が生成済み）
+
+    Returns:
+        {
+            "top_codes": {"<tax_code 文字列>": <件数>, ...},
+            "judging_target_count": <経過措置レンジ該当件数>,
+            "judging_target_ratio": <該当比率、小数点以下 4 桁>,
+        }
+    """
+    counter: Counter[int] = Counter()
+    judging_target = 0
+    for row in rows:
+        tc = row.tax_code
+        if tc is None:
+            continue
+        counter[tc] += 1
+        # L1-A: 経過措置レンジ（183〜230）のみを judging_target にカウント
+        # FULL_DEDUCTION 系コードを含める拡張は L1-B 以降
+        if is_transitional_tax(tc):
+            judging_target += 1
+
+    # 件数降順、同数なら tax_code 昇順（決定論的順序）
+    sorted_items = sorted(counter.items(), key=lambda x: (-x[1], x[0]))
+    top_codes = {str(code): count for code, count in sorted_items}
+
+    total = len(rows)
+    ratio = round(judging_target / total, 4) if total > 0 else 0.0
+
+    return {
+        "top_codes": top_codes,
+        "judging_target_count": judging_target,
+        "judging_target_ratio": ratio,
+    }
+
+
+def _calculate_source_breakdown(
+    transactions: list,  # type: ignore[type-arg]
+) -> dict[str, int]:
+    """source 別行数を集計（β2-D L1-B: source 由来で分岐）。
+
+    L1-A 暫定固定（manual_journals_rows: 0）を廃止し、TransactionRow.raw["source"]
+    で deals 由来 / manual_journals 由来をカウントする。
+
+    入力は ctx.transactions（list[TransactionRow]）であり、InvoiceCheckRow ではない。
+    InvoiceCheckRow は raw フィールドを持たないため、source 判定ができない。
+
+    Args:
+        transactions: ctx.transactions（list[TransactionRow]）。
+            manual_journals 由来は raw["source"] = "manual_journal"（freee_to_context.py L350）。
+            deals 由来は raw に "source" キーを持たない（同 L246〜L258）。
+
+    Returns:
+        {"deals_rows": N, "manual_journals_rows": M, "total": N + M}
+    """
+    deals_rows = 0
+    manual_journals_rows = 0
+    for tr in transactions:
+        source = (tr.raw or {}).get("source")
+        if source == "manual_journal":
+            manual_journals_rows += 1
+        else:
+            deals_rows += 1
+    return {
+        "deals_rows": deals_rows,
+        "manual_journals_rows": manual_journals_rows,
+        "total": deals_rows + manual_journals_rows,
+    }
+
+
 def _finding_to_dict(finding) -> dict[str, Any]:  # type: ignore[no-untyped-def]
     """InvoiceFinding を JSON 出力用 dict に変換する（β2-C）。
 
@@ -514,7 +594,7 @@ def _resolve_mode(args: argparse.Namespace) -> str:
 # ─────────────────────────────────────────────────────────────────────
 
 def _company_root(company_id: int) -> Path:
-    return PROJECT_ROOT / "data" / "e2e" / str(company_id)
+    return PROJECT_ROOT / "tests" / "e2e" / str(company_id)
 
 
 def _period_dir(company_id: int, period_end: str) -> Path:
@@ -667,6 +747,79 @@ def _yyyymm_to_last_day(yyyymm: str) -> date:
     yi, mi = int(y), int(m)
     last = monthrange(yi, mi)[1]
     return date(yi, mi, last)
+
+
+# ─────────────────────────────────────────────────────────────────────
+# TransactionRow → InvoiceCheckRow adapter（L1-B 追加）
+# ─────────────────────────────────────────────────────────────────────
+
+def _build_invoice_check_rows(ctx) -> list["InvoiceCheckRow"]:  # type: ignore[no-untyped-def]
+    """V1-3-10 共通の TransactionRow を V1-3-20 の InvoiceCheckRow に変換する。
+
+    本関数は **純粋な変換のみ** を担う（L1-B 設計確定）：
+        - 入力: ctx.transactions（list[TransactionRow]）+ ctx.partner_master
+        - 出力: list[InvoiceCheckRow]
+        - 条件分岐や正規化ロジックは持たない
+        - I/O フリー（運用原則 P1）
+        - 決定論的（同じ ctx に対して常に同じ rows を返す）
+
+    入力は deals 由来 / manual_journals 由来の TransactionRow が混在する。
+    両方とも同じマッピングで InvoiceCheckRow に変換する。
+
+    9 フィールドのマッピング:
+        - wallet_txn_id ← tr.wallet_txn_id
+        - transaction_date ← tr.transaction_date
+        - partner ← tr.partner
+        - description ← tr.description
+        - tax_label ← tr.tax_label
+        - debit_amount ← tr.debit_amount
+        - credit_amount ← tr.credit_amount
+        - is_qualified_invoice ← ctx.partner_master[tr.partner]["is_invoice_registered"]
+            （partner_master に未登録の場合は False）
+        - tax_code ← tr.raw.get("tax_code") を int 化
+            （None / 変換失敗の場合は None）
+
+    Args:
+        ctx: V1-3-10 共通の CheckContext。
+            必要なフィールド: transactions, partner_master。
+
+    Returns:
+        InvoiceCheckRow のリスト。順序は ctx.transactions の順序を保持する。
+    """
+    rows: list[InvoiceCheckRow] = []
+    partner_master = ctx.partner_master if ctx.partner_master else {}
+
+    for tr in ctx.transactions:
+        # tax_code の int 化（_normalize_deals L839〜L845 のロジックを踏襲）
+        tax_code_raw = (tr.raw or {}).get("tax_code")
+        if tax_code_raw is None:
+            tax_code: Optional[int] = None
+        else:
+            try:
+                tax_code = int(tax_code_raw)
+            except (TypeError, ValueError):
+                tax_code = None
+
+        # is_qualified_invoice の解決
+        # partner_master の key は partner name（_resolve_partner_name 由来）
+        partner_info = partner_master.get(tr.partner) or {}
+        is_qualified = bool(partner_info.get("is_invoice_registered", False))
+
+        rows.append(
+            InvoiceCheckRow(
+                wallet_txn_id=tr.wallet_txn_id,
+                transaction_date=tr.transaction_date,
+                partner=tr.partner,
+                description=tr.description,
+                tax_label=tr.tax_label,
+                debit_amount=tr.debit_amount,
+                credit_amount=tr.credit_amount,
+                is_qualified_invoice=is_qualified,
+                tax_code=tax_code,
+            )
+        )
+
+    return rows
 
 
 # ─────────────────────────────────────────────────────────────────────
@@ -904,35 +1057,58 @@ def main() -> int:
         )
         return EXIT_JSON_MISSING
 
-    # Step 4: deals → InvoiceCheckRow 正規化
+    # Step 4: build_check_context 経由で TransactionRow を取得し、adapter で InvoiceCheckRow に変換（L1-B）
+    base_dir: Path = _period_dir(company_id, period_end)
+    # V1-3-20 には --verbose 引数が存在しないため、stdout を一律 StringIO に捨てる
+    # build_check_context が出力する観測ログは V1-3-20 では使用しない
+    # （想定外論点 args.verbose 不在 への対処：β 採用、B1_continuation_prompt.md §1.1 参照）
+    sink = io.StringIO()
+    manual_journals_path: Optional[Path] = None  # B-1 で scope 動的化のため保持
     try:
-        with open(paths["partners_all.json"], encoding="utf-8") as f:
-            partners_json = json.load(f)
-        with open(paths["taxes_codes.json"], encoding="utf-8") as f:
-            taxes_json = json.load(f)
-        deals_filename = f"deals_{period_start}_to_{period_end}.json"
-        with open(paths[deals_filename], encoding="utf-8") as f:
-            deals_json = json.load(f)
-    except (json.JSONDecodeError, OSError) as e:
-        _emit_error(
-            error_stage="json_read",
-            exit_code=EXIT_UNEXPECTED,
-            message=f"JSON 読み込みに失敗: {type(e).__name__}: {e}",
-            extra={"company_id": company_id, "period_end": period_end},
-        )
-        return EXIT_UNEXPECTED
+        with contextlib.redirect_stdout(sink):
+            # `scripts/` パッケージは office-claude 直下に固定。
+            # PROJECT_ROOT は V1_3_20_PROJECT_ROOT で test 用に override 可能だが、
+            # コード本体の所在は __file__ から固定で解決する（データパスとモジュール
+            # パスの責務分離）。
+            _SKILL_ROOT = Path(__file__).resolve().parents[4]  # office-claude/
+            if str(_SKILL_ROOT) not in sys.path:
+                sys.path.insert(0, str(_SKILL_ROOT))
+            from scripts.e2e.freee_to_context import build_check_context
 
-    partners_map = _build_partners_map(partners_json)
-    taxes_map = _build_taxes_map(taxes_json)
+            # manual_journals は対象期間内のものを参照（freee 側で取得済みのファイル）
+            mj_candidate = base_dir / f"manual_journals_{period_start}_to_{period_end}.json"
+            if mj_candidate.exists() and mj_candidate.stat().st_size > 0:
+                manual_journals_path = mj_candidate
 
-    try:
-        rows = _normalize_deals(deals_json, partners_map, taxes_map)
+            # build_check_context シグネチャ（freee_to_context.py L374〜L383）厳守:
+            #   必須 5: deals_path / partners_path / account_items_path / company_info_path / taxes_codes_path
+            #   Optional: manual_journals_path / items_path / sections_path / tags_path
+            #   period_start / period_end / company_id は渡さない（内部で company_info.json から抽出）
+            #   全引数 Path 型（str() 変換不要）
+            ctx = build_check_context(
+                deals_path=base_dir / f"deals_{period_start}_to_{period_end}.json",
+                partners_path=base_dir / "partners_all.json",
+                account_items_path=base_dir / "account_items_all.json",
+                company_info_path=base_dir / "company_info.json",
+                taxes_codes_path=base_dir / "taxes_codes.json",
+                manual_journals_path=manual_journals_path,
+            )
+
+        rows = _build_invoice_check_rows(ctx)
+        # L1-B: source_breakdown は ctx.transactions（TransactionRow）を入力に取る
+        # InvoiceCheckRow は raw フィールドを持たないため、adapter 前の transactions を保持
+        transactions = ctx.transactions
     except Exception as e:  # noqa: BLE001
         _emit_error(
             error_stage="normalize",
             exit_code=EXIT_UNEXPECTED,
-            message=f"deals 正規化に失敗: {type(e).__name__}: {e}",
-            extra={"traceback": traceback.format_exc()},
+            message=f"CheckContext 構築または adapter 変換に失敗: {type(e).__name__}: {e}",
+            extra={
+                "company_id": company_id,
+                "period_start": period_start,
+                "period_end": period_end,
+                "traceback": traceback.format_exc(),
+            },
         )
         return EXIT_UNEXPECTED
 
@@ -988,8 +1164,10 @@ def main() -> int:
     # Step 7: classification 単位の group 化（β2-C 確定、必ず 3 件、順序固定）
     groups = find_groups(findings)
 
-    # Step 7.5: observations 集計（β2-C 確定、partner_unknown_breakdown のみ）
+    # Step 7.5: observations 集計（β2-C 確定 + β2-D L1-A 拡張）
     partner_unknown_breakdown = _calculate_partner_unknown_breakdown(classified)
+    tax_code_distribution = _calculate_tax_code_distribution(rows)  # L1-A 新規
+    source_breakdown = _calculate_source_breakdown(transactions)    # L1-B: TransactionRow 入力
 
     # Step 8: JSON 出力（β2-C）
     #   - groups[].findings に Finding 本体を集約
@@ -1018,12 +1196,14 @@ def main() -> int:
             "target_month": args.target_month,
             "single_month": bool(args.single_month),
             "rule_code": RULE_CODE,
-            "scope": {"deals": True, "manual_journals": False},
+            "scope": {"deals": True, "manual_journals": manual_journals_path is not None},
             "classification_counts": dict(classification_counts),
             "groups": groups_payload,
             "findings_count": len(findings),
             "observations": {
                 "partner_unknown_breakdown": partner_unknown_breakdown,
+                "tax_code_distribution": tax_code_distribution,    # L1-A 新規
+                "source_breakdown": source_breakdown,              # L1-A 新規
             },
         }
     )

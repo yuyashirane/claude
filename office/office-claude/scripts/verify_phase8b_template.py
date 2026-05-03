@@ -12,7 +12,7 @@ add_named_styles.py 実行後に TC_template.xlsx に対して走らせる。
 
 Usage:
     cd office/office-claude
-    py tmp/verify_phase8b_template.py
+    py scripts/verify_phase8b_template.py
 """
 from __future__ import annotations
 
@@ -23,7 +23,7 @@ from pathlib import Path
 from openpyxl import load_workbook
 
 
-TPL = Path("data/reports/template/TC_template.xlsx")
+TPL = Path("templates/TC_template.xlsx")
 
 EXPECTED = {
     # name: dict(bg, accent, bold)

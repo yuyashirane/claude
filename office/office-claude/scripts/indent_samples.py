@@ -1,6 +1,6 @@
 """Phase 8-B 事前調査: インデント 3 案のサンプル Excel を生成する。
 
-悠皓さんが視覚判断するための素材。tmp/ 配下に生成し、
+悠皓さんが視覚判断するための素材。data/ 配下に生成し、
 コミットせず破棄可能。
 """
 from __future__ import annotations
@@ -13,10 +13,10 @@ from openpyxl.styles import Font, PatternFill, NamedStyle, Alignment
 from openpyxl.styles.borders import Border, Side
 
 
-TPL = Path("data/reports/template/TC_template.xlsx")
-OUT_A = Path("tmp/indent_sample_a_alignment.xlsx")
-OUT_B = Path("tmp/indent_sample_b_zenkaku.xlsx")
-OUT_C = Path("tmp/indent_sample_c_c_only.xlsx")
+TPL = Path("templates/TC_template.xlsx")
+OUT_A = Path("data/indent_sample_a_alignment.xlsx")
+OUT_B = Path("data/indent_sample_b_zenkaku.xlsx")
+OUT_C = Path("data/indent_sample_c_c_only.xlsx")
 
 
 def _make_parent_style() -> NamedStyle:

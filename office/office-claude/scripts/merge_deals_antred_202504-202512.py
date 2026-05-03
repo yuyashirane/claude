@@ -28,7 +28,7 @@ PAGE_FILES = [
     TR + r"\mcp-freee-mcp-freee_api_get-1776949485491.txt",   # offset 1400
     TR + r"\mcp-freee-mcp-freee_api_get-1776949493866.txt",   # offset 1500
     TR + r"\mcp-freee-mcp-freee_api_get-1776949497767.txt",   # offset 1600
-    "tmp/page1700_antred.json",                                # offset 1700 (inline)
+    "data/page1700_antred.json",                               # offset 1700 (inline)
 ]
 
 # page 1700 was returned inline — save it first
@@ -37,7 +37,7 @@ PAGE1700_DATA = {"deals":[{"id":2729823243,"company_id":3525430,"issue_date":"20
 
 def main() -> int:
     # save inline page 1700
-    p1700 = Path("tmp/page1700_antred.json")
+    p1700 = Path("data/page1700_antred.json")
     p1700.parent.mkdir(parents=True, exist_ok=True)
     with open(p1700, "w", encoding="utf-8") as f:
         json.dump(PAGE1700_DATA, f, ensure_ascii=False)

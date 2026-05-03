@@ -112,7 +112,7 @@ taxes_inline = [
     {"code":163,"name":"purchase_with_tax_reduced_8","name_ja":"課対仕入8%（軽）"},
     {"code":182,"name":"taxable_reduced_8","name_ja":"課税8%（軽）"},
 ]
-# taxes は API の inline 完全版（155コード）を使用済み → tmp/taxes_full.jsonから読む
+# taxes は API の inline 完全版（155コード）を使用済み → 同階層の taxes_full.json から読む
 taxes_full_path = Path(__file__).parent / "taxes_full.json"
 if taxes_full_path.exists():
     with open(taxes_full_path, encoding="utf-8") as f:

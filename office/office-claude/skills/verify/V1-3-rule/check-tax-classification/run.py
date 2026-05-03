@@ -196,7 +196,7 @@ def _resolve_mode(args: argparse.Namespace) -> str:
 
 
 def _company_root(company_id: int) -> Path:
-    return PROJECT_ROOT / "data" / "e2e" / str(company_id)
+    return PROJECT_ROOT / "tests" / "e2e" / str(company_id)
 
 
 def _period_dir(company_id: int, period_end: str) -> Path:

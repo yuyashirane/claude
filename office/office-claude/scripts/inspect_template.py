@@ -10,7 +10,7 @@ from pathlib import Path
 from openpyxl import load_workbook
 
 
-TPL = Path("data/reports/template/TC_template.xlsx")
+TPL = Path("templates/TC_template.xlsx")
 
 
 def main() -> None:

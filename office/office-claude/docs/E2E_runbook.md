@@ -55,7 +55,7 @@ E2E 開始前に以下を確認する。1 つでも未充足なら E2E に進ま
 
 ### 1.3 ディレクトリチェック
 
-- `data/e2e/3525430/202512/` が存在しない場合は問題なし(`save_json` が自動作成)
+- `tests/e2e/3525430/202512/` が存在しない場合は問題なし(`save_json` が自動作成)
 - 既存ファイルがある場合は上書きされる(再実行ケース)
 
 ### 1.4 確認完了
@@ -70,10 +70,10 @@ E2E 開始前に以下を確認する。1 つでも未充足なら E2E に進ま
 
 `scripts/e2e/RUNBOOK_fetch.md` の Step 1〜4 + 最終検証に従って、以下 4 ファイルを取得・保存する。
 
-- `data/e2e/3525430/202512/company_info.json`
-- `data/e2e/3525430/202512/account_items_all.json`
-- `data/e2e/3525430/202512/partners_all.json`
-- `data/e2e/3525430/202512/deals_202512.json`
+- `tests/e2e/3525430/202512/company_info.json`
+- `tests/e2e/3525430/202512/account_items_all.json`
+- `tests/e2e/3525430/202512/partners_all.json`
+- `tests/e2e/3525430/202512/deals_202512.json`
 
 **取得対象期間**: 2025-12-01 〜 2025-12-31
 
@@ -115,7 +115,7 @@ E2E 開始前に以下を確認する。1 つでも未充足なら E2E に進ま
 from pathlib import Path
 from scripts.e2e.freee_to_context import build_check_context
 
-base_dir = Path("data/e2e/3525430/202512")
+base_dir = Path("tests/e2e/3525430/202512")
 ctx = build_check_context(
     deals_path=base_dir / "deals_202512.json",
     partners_path=base_dir / "partners_all.json",
@@ -207,7 +207,7 @@ for tc, count in sorted(tc_counts.items()):
 
 ### 前提：Phase 6.12 テンプレート駆動方式
 
-Step 4 の Excel 出力は **テンプレート駆動方式** で動作する。Python はスタイル・レイアウトを一切生成せず、`data/reports/template/TC_template.xlsx` を読み込んでデータだけを流し込む。
+Step 4 の Excel 出力は **テンプレート駆動方式** で動作する。Python はスタイル・レイアウトを一切生成せず、`templates/TC_template.xlsx` を読み込んでデータだけを流し込む。
 
 そのため本 Step では、以下 2 種類のチェックを行う：
 
@@ -223,7 +223,7 @@ from skills.export.excel_report.exporter import export_to_excel
 from pathlib import Path
 from datetime import datetime
 
-output_path = Path(f"data/e2e/3525430/202512/e2e_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx")
+output_path = Path(f"tests/e2e/3525430/202512/e2e_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx")
 export_to_excel(findings, output_path)
 print(f"Excel report saved: {output_path}")
 print(f"File size: {output_path.stat().st_size:,} bytes")
@@ -247,7 +247,7 @@ DATA_START_ROW = 4
 wb = load_workbook(output_path)
 
 # ① 使用テンプレートパス（ログから確認）
-print(f"[1] Template path used: data/reports/template/TC_template.xlsx")
+print(f"[1] Template path used: templates/TC_template.xlsx")
 
 # ② シート一覧と「参考」シート保持
 sheet_names = wb.sheetnames
@@ -353,7 +353,7 @@ if error_type_violations:
 | .xlsx 生成 + 読み戻し成功 | Step 5(悠皓さんレビュー)へ |
 | .xlsx 生成失敗(例外) | 即中断、§6 リカバリ方針 |
 | 0 バイトファイル | 即中断、export 処理の異常 |
-| テンプレート読込失敗（FileNotFoundError） | 即中断、`data/reports/template/TC_template.xlsx` の配置を確認 |
+| テンプレート読込失敗（FileNotFoundError） | 即中断、`templates/TC_template.xlsx` の配置を確認 |
 | `参考` シート欠落 | 即中断、template_engine.py の実装確認 |
 | 列数が 23 でない、または最終列名が walletTxnId でない | 即中断、Python 側の列書き込みロジック確認 |
 | 主要列名が欠落している | 即中断、テンプレートまたは列書き込みロジック確認 |
@@ -404,7 +404,7 @@ if error_type_violations:
 | Excel 生成成功だが開けない | エラー | 即中断、openpyxl 関連調査 |
 | timeout(MCP 応答遅延) | エラー | 即中断、再試行 1 回 → ダメなら戦略Claude 相談 |
 | 想定外の例外 | エラー | 即中断、例外メッセージとスタックトレースを戦略Claude へ報告 |
-| テンプレートファイル欠落 | エラー | 即中断、`data/reports/template/TC_template.xlsx` の配置を確認 |
+| テンプレートファイル欠落 | エラー | 即中断、`templates/TC_template.xlsx` の配置を確認 |
 | 構造整合性チェック失敗 | エラー | 即中断、どのチェック（[1]〜[5]）が失敗したかを明示して報告 |
 
 ### 中断時の報告フォーマット

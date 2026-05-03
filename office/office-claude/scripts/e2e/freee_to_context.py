@@ -436,6 +436,22 @@ def build_check_context(
         for p in partners_data
     }
 
+    # ── partner_master 生成（L1-B 追加: V1-3-20 / V1-3-10 共通）
+    # name → {partner_id, is_invoice_registered} の逆引き辞書を構築する。
+    # 同名 partner は後勝ちとなる（設計メモ §5.1.4）。
+    # name 解決ロジックは _resolve_partner_name と整合（name → long_name → ""）。
+    partner_master: dict[str, dict] = {}
+    for p in partners_data:
+        if not isinstance(p, dict):
+            continue
+        name = p.get("name") or p.get("long_name") or ""
+        if not name:
+            continue
+        partner_master[name] = {
+            "partner_id": p.get("id"),
+            "is_invoice_registered": bool(p.get("qualified_invoice_issuer")),
+        }
+
     # account_items_data は §1.1 に従い配列直下形式 [...] で受け取る
     if not isinstance(account_items_data, list):
         raise ValueError(
@@ -577,7 +593,7 @@ def build_check_context(
             f"company_info.json の fiscal_year_start / fiscal_year_end が不正です: {company_data}"
         ) from e
 
-    # ── 5. CheckContext 組み立て（tax_code_master を含む）
+    # ── 5. CheckContext 組み立て（tax_code_master + partner_master を含む）
     ctx = CheckContext(
         company_id=company_id,
         fiscal_year_id=fiscal_year_id,
@@ -585,6 +601,7 @@ def build_check_context(
         period_end=period_end,
         transactions=all_rows,
         tax_code_master=tax_code_master,
+        partner_master=partner_master,                # L1-B 追加: 逆引き辞書
         company_name=company_data["company_name"],   # Phase 6.11b: レポート表示用
     )
 

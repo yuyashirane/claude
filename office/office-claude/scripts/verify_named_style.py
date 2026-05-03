@@ -64,7 +64,7 @@ def pattern2_roundtrip() -> tuple[bool, str]:
 
 
 def pattern3_template_preregistered() -> tuple[bool, str]:
-    tpl = Path("data/reports/template/TC_template.xlsx")
+    tpl = Path("templates/TC_template.xlsx")
     if not tpl.exists():
         return False, f"template not found at {tpl}"
     wb = load_workbook(tpl)

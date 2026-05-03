@@ -21,7 +21,7 @@ Phase 3-5 のゴール:
 
 Usage:
     cd office/office-claude
-    PYTHONIOENCODING=utf-8 py tmp/verify_phase8b.py
+    PYTHONIOENCODING=utf-8 py scripts/verify_phase8b.py
 """
 from __future__ import annotations
 
@@ -39,7 +39,7 @@ from scripts.e2e.freee_to_context import build_check_context
 from skills.export.excel_report.exporter import export_to_excel
 
 
-TPL = Path("data/reports/template/TC_template.xlsx")
+TPL = Path("templates/TC_template.xlsx")
 BASE = Path("data/e2e/3525430/202512")
 
 EXPECTED_STYLES = {

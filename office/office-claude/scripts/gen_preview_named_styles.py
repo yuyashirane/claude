@@ -14,7 +14,7 @@ v3 差分（仕様案 Z 確定）:
 親行は A〜W 列すべてに Named Style を適用（要件 §4「1 行の帯」ルール）。
 子行は C 列のみ Alignment(indent=2) を Python 側で上書き（方式 α）。
 
-出力: tmp/preview_named_styles_sample.xlsx
+出力: data/preview_named_styles_sample.xlsx
 本番テンプレ (TC_template.xlsx) には触れない。
 """
 from __future__ import annotations
@@ -329,13 +329,13 @@ def main() -> None:
         ws_info.cell(i, 1).font = Font(name="Meiryo UI", size=11, bold=True)
         ws_info.cell(i, 2).font = Font(name="Meiryo UI", size=11)
 
-    out = Path("tmp/preview_named_styles_sample.xlsx")
+    out = Path("data/preview_named_styles_sample.xlsx")
     out.parent.mkdir(parents=True, exist_ok=True)
     try:
         wb.save(out)
     except PermissionError:
         # v1/v2 が Excel で開かれている場合のフォールバック
-        out = Path("tmp/preview_named_styles_sample_v3.xlsx")
+        out = Path("data/preview_named_styles_sample_v3.xlsx")
         wb.save(out)
         print("[WARN] 既存ファイルが開かれていたため v3 を別名保存しました")
     print(f"saved: {out}")

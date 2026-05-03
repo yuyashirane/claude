@@ -31,7 +31,7 @@ PAGE_FILES = [
     TR + r"\mcp-freee-mcp-freee_api_get-1776873082703.txt",  # 1600
     TR + r"\mcp-freee-mcp-freee_api_get-1776873088338.txt",  # 1700
     TR + r"\mcp-freee-mcp-freee_api_get-1776873093808.txt",  # 1800
-    "tmp/deals_offset_1900_comnet.json",                     # 1900 (inline saved manually)
+    "data/deals_offset_1900_comnet.json",                    # 1900 (inline saved manually)
 ]
 
 

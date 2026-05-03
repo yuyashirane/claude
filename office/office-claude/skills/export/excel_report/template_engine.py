@@ -32,7 +32,7 @@ from skills.export.excel_report.sort_priority_map import get_sort_priority
 # パス・マスタ定数
 # ─────────────────────────────────────────────────────────────────────
 
-DEFAULT_TEMPLATE_PATH = Path("data/reports/template/TC_template.xlsx")
+DEFAULT_TEMPLATE_PATH = Path("templates/TC_template.xlsx")
 
 AREA_ORDER: list[str] = ["A4", "A5", "A8", "A10", "A11", "A12"]
 

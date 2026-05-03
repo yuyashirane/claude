@@ -20,7 +20,7 @@ $PROJECT_ROOT = C:\Users\yuya_\claude\office\office-claude
 * 4 ファイル(deals / partners / account_items / company_info)が §1.1 準拠で確定
 * 対象会社: アントレッド株式会社(company_id: 3525430、3 月決算)
 * 対象期間: 2025-12-01 〜 2025-12-31(単月)
-* 出力先: data/e2e/3525430/202512/
+* 出力先: tests/e2e/3525430/202512/
 * これが**初回 E2E**(本番データを実際に通すのは初めて)
 
 重要: Step ごとに悠皓さん確認を待つ慎重モード

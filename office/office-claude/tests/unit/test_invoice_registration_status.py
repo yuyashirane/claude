@@ -776,20 +776,23 @@ class TestExitZeroEndToEnd:
         - 除外される行（非課仕入）を 1 件
         """
         company_id = 11111111  # 衝突しないダミー ID
-        period_dir = tmp_path / "data" / "e2e" / str(company_id) / "2025-12"
+        period_dir = tmp_path / "tests" / "e2e" / str(company_id) / "2025-12"
         period_dir.mkdir(parents=True)
 
         # company_info（target_month モード用に直下にも置く）
+        # L1-B: build_check_context が要求する 6 キー（spec §5.1 の必須キー集合）
         company_info = {
             "company_id": company_id,
             "company_name": "テスト株式会社",
+            "fiscal_year_id": 99990001,           # L1-B 追加: build_check_context 必須キー
             "fiscal_year_start": "2025-04-01",
             "fiscal_year_end": "2026-03-31",
+            "target_yyyymm": "202512",            # L1-B 追加: build_check_context 必須キー
         }
         (period_dir / "company_info.json").write_text(
             json.dumps(company_info, ensure_ascii=False), encoding="utf-8"
         )
-        (tmp_path / "data" / "e2e" / str(company_id) / "company_info.json").write_text(
+        (tmp_path / "tests" / "e2e" / str(company_id) / "company_info.json").write_text(
             json.dumps(company_info, ensure_ascii=False), encoding="utf-8"
         )
 
@@ -817,44 +820,51 @@ class TestExitZeroEndToEnd:
         )
 
         # deals: 5 分類すべてが網羅される構成（β2-B）
+        # L1-B: 各 detail に account_item_id 必須（transform_deal_to_rows L205）
         deals = {
             "deals": [
                 # 1) NONQUALIFIED_BUT_FULL_DEDUCTION_TAX (Finding 化)
                 {
                     "id": 1001, "issue_date": "2025-12-15", "partner_id": 100,
                     "ref_number": "REF-1001",
-                    "details": [{"id": 1, "tax_code": 136, "amount": 250000,
-                                 "entry_side": "debit", "description": "広告費"}],
+                    "details": [{"id": 1, "account_item_id": 9001, "tax_code": 136,
+                                 "amount": 250000, "entry_side": "debit",
+                                 "description": "広告費"}],
                 },
                 # 2) EXPECTED_FULL_DEDUCTION_TAX (観察用)
                 {
                     "id": 1002, "issue_date": "2025-12-16", "partner_id": 200,
-                    "details": [{"id": 2, "tax_code": 136, "amount": 300000,
-                                 "entry_side": "debit", "description": "適格分"}],
+                    "details": [{"id": 2, "account_item_id": 9001, "tax_code": 136,
+                                 "amount": 300000, "entry_side": "debit",
+                                 "description": "適格分"}],
                 },
                 # 3) NONE (非対仕入)
                 {
                     "id": 1003, "issue_date": "2025-12-17", "partner_id": 300,
-                    "details": [{"id": 3, "tax_code": 137, "amount": 500000,
-                                 "entry_side": "debit", "description": "非課仕入"}],
+                    "details": [{"id": 3, "account_item_id": 9001, "tax_code": 137,
+                                 "amount": 500000, "entry_side": "debit",
+                                 "description": "非課仕入"}],
                 },
                 # 4) QUALIFIED_BUT_TRANSITIONAL_TAX (Finding 化)
                 {
                     "id": 1004, "issue_date": "2025-12-18", "partner_id": 200,
-                    "details": [{"id": 4, "tax_code": 189, "amount": 220000,
-                                 "entry_side": "debit", "description": "適格×経過措置"}],
+                    "details": [{"id": 4, "account_item_id": 9001, "tax_code": 189,
+                                 "amount": 220000, "entry_side": "debit",
+                                 "description": "適格×経過措置"}],
                 },
                 # 5) EXPECTED_TRANSITIONAL_TAX (観察用)
                 {
                     "id": 1005, "issue_date": "2025-12-19", "partner_id": 100,
-                    "details": [{"id": 5, "tax_code": 189, "amount": 100000,
-                                 "entry_side": "debit", "description": "非適格×経過措置"}],
+                    "details": [{"id": 5, "account_item_id": 9001, "tax_code": 189,
+                                 "amount": 100000, "entry_side": "debit",
+                                 "description": "非適格×経過措置"}],
                 },
                 # 6) PARTNER_UNKNOWN (Finding 化、partner_id が partners_map に無い)
                 {
                     "id": 1006, "issue_date": "2025-12-20", "partner_id": 999999,
-                    "details": [{"id": 6, "tax_code": 189, "amount": 240000,
-                                 "entry_side": "debit", "description": "partner不明×経過措置×20万以上"}],
+                    "details": [{"id": 6, "account_item_id": 9001, "tax_code": 189,
+                                 "amount": 240000, "entry_side": "debit",
+                                 "description": "partner不明×経過措置×20万以上"}],
                 },
             ]
         }
@@ -954,9 +964,12 @@ class TestExitZeroEndToEnd:
         payload = json.loads(result.stdout.strip().splitlines()[0])
 
         # groups 経由で wallet_txn_id を集約
+        # L1-B: wallet_txn_id 形式が build_check_context 経由（str(detail["id"])）に
+        # 統一された。旧 "_normalize_deals" 由来の f"{deal_id}-{det_id}" 形式から、
+        # V1-3-10 と整合する detail.id 単独形式に変化（spec v2 §6.3 構造的書き換え許可）。
         all_findings = [f for g in payload["groups"] for f in g["findings"]]
         ids = {f["wallet_txn_id"] for f in all_findings}
-        assert ids == {"1001-1", "1004-4", "1006-6"}
+        assert ids == {"1", "4", "6"}
 
         # 各 Finding の構造（β2-C: classification + raw 8 フィールド）
         for f in all_findings:
@@ -982,18 +995,21 @@ class TestExitZeroEndToEnd:
     def test_exit_0_with_zero_candidates(self, tmp_path):
         """候補 0 件でも exit 0 + groups 3 件すべて空 + observations すべて 0。"""
         company_id = 22222222
-        period_dir = tmp_path / "data" / "e2e" / str(company_id) / "2025-12"
+        period_dir = tmp_path / "tests" / "e2e" / str(company_id) / "2025-12"
         period_dir.mkdir(parents=True)
+        # L1-B: build_check_context が要求する 6 キー
         info = {
             "company_id": company_id,
             "company_name": "ゼロ件テスト",
+            "fiscal_year_id": 99990003,           # L1-B 追加
             "fiscal_year_start": "2025-04-01",
             "fiscal_year_end": "2026-03-31",
+            "target_yyyymm": "202512",            # L1-B 追加
         }
         (period_dir / "company_info.json").write_text(
             json.dumps(info, ensure_ascii=False), encoding="utf-8"
         )
-        (tmp_path / "data" / "e2e" / str(company_id) / "company_info.json").write_text(
+        (tmp_path / "tests" / "e2e" / str(company_id) / "company_info.json").write_text(
             json.dumps(info, ensure_ascii=False), encoding="utf-8"
         )
         (period_dir / "account_items_all.json").write_text("[]", encoding="utf-8")
@@ -1946,4 +1962,258 @@ class TestObservations:
             "absorbed_into_nonqualified": 0,
             "remaining_partner_unknown": 0,
         }
+
+
+# ─────────────────────────────────────────────────────────────────────
+# β2-D L1-A: observations 拡張（tax_code_distribution / source_breakdown）
+# ─────────────────────────────────────────────────────────────────────
+
+class TestTaxCodeDistribution:
+    """β2-D L1-A: _calculate_tax_code_distribution の単体テスト（T1〜T4）。"""
+
+    def test_tax_code_distribution_output_structure(self, v1320):
+        """T1: tax_code_distribution の出力構造（3 キー固定）。"""
+        rows = [_make_row_b(v1320, tax_code=136)]
+        result = v1320._calculate_tax_code_distribution(rows)
+        assert isinstance(result, dict)
+        assert set(result.keys()) == {
+            "top_codes",
+            "judging_target_count",
+            "judging_target_ratio",
+        }
+        assert isinstance(result["top_codes"], dict)
+        assert isinstance(result["judging_target_count"], int)
+        assert isinstance(result["judging_target_ratio"], float)
+
+    def test_tax_code_distribution_top_codes_content(self, v1320):
+        """T2: top_codes が件数降順 + tax_code 昇順、None は除外。"""
+        rows = (
+            [_make_row_b(v1320, tax_code=2) for _ in range(3)]
+            + [_make_row_b(v1320, tax_code=183) for _ in range(5)]
+            + [_make_row_b(v1320, tax_code=23) for _ in range(5)]
+            + [_make_row_b(v1320, tax_code=None) for _ in range(2)]
+        )
+        result = v1320._calculate_tax_code_distribution(rows)
+        # 件数降順（5, 5, 3）。同数の 23 と 183 は tax_code 昇順（23 が先）。
+        assert result["top_codes"] == {"23": 5, "183": 5, "2": 3}
+        # 順序検証（dict の挿入順）
+        assert list(result["top_codes"].keys()) == ["23", "183", "2"]
+        # None は集計対象外（"None" や "0" のキーが出ない）
+        assert "None" not in result["top_codes"]
+        assert "0" not in result["top_codes"]
+
+    def test_tax_code_distribution_judging_target(self, v1320):
+        """T3: judging_target は経過措置レンジ（183〜230）のみ、FULL_DEDUCTION 系は含めない。"""
+        rows = (
+            # 経過措置レンジ内
+            [_make_row_b(v1320, tax_code=183) for _ in range(2)]
+            + [_make_row_b(v1320, tax_code=230)]
+            # 経過措置レンジ外（境界）
+            + [_make_row_b(v1320, tax_code=182)]
+            + [_make_row_b(v1320, tax_code=231)]
+            # FULL_DEDUCTION 系（L1-A では judging_target に含めない）
+            + [_make_row_b(v1320, tax_code=34)]
+            # レンジ外
+            + [_make_row_b(v1320, tax_code=2) for _ in range(4)]
+        )
+        result = v1320._calculate_tax_code_distribution(rows)
+        # 183 (×2), 230 (×1) のみが judging_target → 3 件
+        assert result["judging_target_count"] == 3
+        # 3 / 10 = 0.3
+        assert result["judging_target_ratio"] == 0.3
+
+    def test_tax_code_distribution_empty_rows(self, v1320):
+        """T4: rows が空でも構造を維持（ZeroDivisionError なし）。"""
+        result = v1320._calculate_tax_code_distribution([])
+        assert result["top_codes"] == {}
+        assert result["judging_target_count"] == 0
+        assert result["judging_target_ratio"] == 0.0
+
+
+def _make_tr_mock(source: Optional[str] = None):
+    """β2-D L1-B: _calculate_source_breakdown 用の TransactionRow-like mock。
+
+    L1-B で source_breakdown は ctx.transactions（list[TransactionRow]）を入力に取り、
+    `tr.raw["source"]` で deals / manual_journals を分岐する。
+    本 mock は SimpleNamespace で .raw 属性のみを持つ最小構造を提供する。
+
+    Args:
+        source: raw["source"] に格納する値。None なら raw に "source" キーを持たない
+                （deals 由来 TransactionRow と同等。freee_to_context.py L246〜L258 参照）。
+
+    Returns:
+        SimpleNamespace(raw=...) で .raw 属性を持つオブジェクト。
+    """
+    from types import SimpleNamespace
+    raw = {"source": source} if source else {}
+    return SimpleNamespace(raw=raw)
+
+
+class TestSourceBreakdown:
+    """β2-D L1-B: _calculate_source_breakdown の単体テスト（T5〜T6 + L1-B 追加）。
+
+    L1-A 仕様（deals 固定、manual_journals_rows=0）は L1-B で廃止され、
+    raw["source"] による動的分岐に切り替わった。tests も TransactionRow-like
+    mock を入力する形に構造的に書き換えている（spec §6.3 許可、運用原則 5）。
+    """
+
+    def test_source_breakdown_output_structure(self, v1320):
+        """T5: source_breakdown の出力構造（3 キー固定、すべて int）。"""
+        rows = [_make_tr_mock() for _ in range(3)]
+        result = v1320._calculate_source_breakdown(rows)
+        assert isinstance(result, dict)
+        assert set(result.keys()) == {"deals_rows", "manual_journals_rows", "total"}
+        for key in ("deals_rows", "manual_journals_rows", "total"):
+            assert isinstance(result[key], int)
+
+    def test_source_breakdown_deals_only(self, v1320):
+        """T6: deals 由来のみ（raw に source キー無し）→ deals_rows = N、manual_journals_rows = 0。"""
+        rows = [_make_tr_mock() for _ in range(5)]
+        result = v1320._calculate_source_breakdown(rows)
+        assert result["deals_rows"] == 5
+        assert result["manual_journals_rows"] == 0
+        assert result["total"] == 5
+
+    def test_source_breakdown_with_manual_journals(self, v1320):
+        """L1-B 追加: deals + manual_journals 混在 → 正しく分岐される。"""
+        rows = (
+            [_make_tr_mock() for _ in range(3)]                    # deals 3 件
+            + [_make_tr_mock(source="manual_journal") for _ in range(2)]  # MJ 2 件
+        )
+        result = v1320._calculate_source_breakdown(rows)
+        assert result["deals_rows"] == 3
+        assert result["manual_journals_rows"] == 2
+        assert result["total"] == 5
+
+    def test_source_breakdown_raw_none(self, v1320):
+        """L1-B 追加: tr.raw が None でも防御（(tr.raw or {}).get(...) ガード）。"""
+        from types import SimpleNamespace
+        rows = [SimpleNamespace(raw=None) for _ in range(3)]
+        result = v1320._calculate_source_breakdown(rows)
+        # raw=None は "source" キーを持たない扱い → deals_rows にカウント
+        assert result["deals_rows"] == 3
+        assert result["manual_journals_rows"] == 0
+        assert result["total"] == 3
+
+
+class TestObservationsExtendedE2E:
+    """β2-D L1-A: observations 拡張の E2E 検証（T7〜T8）。
+
+    TestExitZeroEndToEnd の fixture_dataset と同等の最小 e2e 構成を使い、
+    main() 出力 JSON で observations 3 キーと境界線①②を検証する。
+    """
+
+    @pytest.fixture
+    def fixture_dataset(self, tmp_path):
+        """TestExitZeroEndToEnd と同じ最小 e2e フィクスチャ（独立コピー）。"""
+        company_id = 33333333  # 衝突回避のため別 ID
+        period_dir = tmp_path / "tests" / "e2e" / str(company_id) / "2025-12"
+        period_dir.mkdir(parents=True)
+
+        # L1-B: build_check_context が要求する 6 キー（spec §5.1 の必須キー集合）
+        company_info = {
+            "company_id": company_id,
+            "company_name": "L1-A テスト株式会社",
+            "fiscal_year_id": 99990002,           # L1-B 追加: build_check_context 必須キー
+            "fiscal_year_start": "2025-04-01",
+            "fiscal_year_end": "2026-03-31",
+            "target_yyyymm": "202512",            # L1-B 追加: build_check_context 必須キー
+        }
+        (period_dir / "company_info.json").write_text(
+            json.dumps(company_info, ensure_ascii=False), encoding="utf-8"
+        )
+        (tmp_path / "tests" / "e2e" / str(company_id) / "company_info.json").write_text(
+            json.dumps(company_info, ensure_ascii=False), encoding="utf-8"
+        )
+        (period_dir / "account_items_all.json").write_text("[]", encoding="utf-8")
+
+        partners = [
+            {"id": 100, "name": "未登録ベンダー", "qualified_invoice_issuer": False},
+            {"id": 200, "name": "適格ベンダー", "qualified_invoice_issuer": True},
+        ]
+        (period_dir / "partners_all.json").write_text(
+            json.dumps(partners, ensure_ascii=False), encoding="utf-8"
+        )
+        taxes = [
+            {"code": 136, "name": "purchase_with_tax_10", "name_ja": "課対仕入10%"},
+            {"code": 189, "name": "purchase_with_tax_10_exempt_80",
+             "name_ja": "課対仕入（控80）10%"},
+        ]
+        (period_dir / "taxes_codes.json").write_text(
+            json.dumps(taxes, ensure_ascii=False), encoding="utf-8"
+        )
+        # L1-B: 各 detail に account_item_id 必須
+        deals = {
+            "deals": [
+                {
+                    "id": 2001, "issue_date": "2025-12-15", "partner_id": 100,
+                    "details": [{"id": 1, "account_item_id": 9001, "tax_code": 136,
+                                 "amount": 250000, "entry_side": "debit",
+                                 "description": "x"}],
+                },
+                {
+                    "id": 2002, "issue_date": "2025-12-16", "partner_id": 200,
+                    "details": [{"id": 2, "account_item_id": 9001, "tax_code": 189,
+                                 "amount": 220000, "entry_side": "debit",
+                                 "description": "y"}],
+                },
+            ]
+        }
+        (period_dir / "deals_2025-04_to_2025-12.json").write_text(
+            json.dumps(deals, ensure_ascii=False), encoding="utf-8"
+        )
+        return tmp_path, company_id
+
+    def test_observations_keys_extended(self, fixture_dataset):
+        """T7: observations の 3 キー揃い、partner_unknown_breakdown は β2-C 通り。"""
+        tmp_path, company_id = fixture_dataset
+        result = _run_cli(
+            "--company-id", str(company_id),
+            "--target-month", "2025-12",
+            cwd=tmp_path,
+            project_root=tmp_path,
+        )
+        assert result.returncode == 0, result.stdout + result.stderr
+        payload = json.loads(result.stdout.strip().splitlines()[0])
+        observations = payload["observations"]
+        assert isinstance(observations, dict)
+        assert set(observations.keys()) == {
+            "partner_unknown_breakdown",
+            "tax_code_distribution",
+            "source_breakdown",
+        }
+        # 既存 partner_unknown_breakdown のキーが β2-C 通り
+        assert set(observations["partner_unknown_breakdown"].keys()) == {
+            "absorbed_into_nonqualified",
+            "remaining_partner_unknown",
+        }
+        # 新規 2 項目もキー集合確認
+        assert set(observations["tax_code_distribution"].keys()) == {
+            "top_codes",
+            "judging_target_count",
+            "judging_target_ratio",
+        }
+        assert set(observations["source_breakdown"].keys()) == {
+            "deals_rows",
+            "manual_journals_rows",
+            "total",
+        }
+
+    def test_scope_manual_journals_remains_false(self, fixture_dataset):
+        """T8: L1-A 境界線①（scope.manual_journals=false）と②（manual_journals_rows=0）。"""
+        tmp_path, company_id = fixture_dataset
+        result = _run_cli(
+            "--company-id", str(company_id),
+            "--target-month", "2025-12",
+            cwd=tmp_path,
+            project_root=tmp_path,
+        )
+        assert result.returncode == 0, result.stdout + result.stderr
+        payload = json.loads(result.stdout.strip().splitlines()[0])
+        # 境界線①: scope.manual_journals は false のまま維持
+        assert payload["scope"]["manual_journals"] is False
+        # β2-C 維持: scope.deals は true
+        assert payload["scope"]["deals"] is True
+        # 境界線②: source_breakdown.manual_journals_rows は 0
+        assert payload["observations"]["source_breakdown"]["manual_journals_rows"] == 0
 

@@ -1,11 +1,11 @@
-"""Phase A E2E 検証スクリプト (株式会社輝陽 2025/04-2026/03)。
+"""Phase A E2E 検証スクリプト (株式会社コムネットシステム 2025/04-2026/03)。
 
-verify_phase8c.py を参考に、輝陽の会計期間 (2025-04-01〜2026-03-31) で
+verify_phase8c.py を参考に、コムネットシステムの会計期間全体 (2025-04-01〜2026-03-31) で
 V1-3-10 checker を実行し、Phase 8-C の Excel exporter でレポートを出力する。
 
 Usage:
     cd office/office-claude
-    PYTHONIOENCODING=utf-8 py tmp/verify_phase_a_kiyo_202504-202603.py
+    PYTHONIOENCODING=utf-8 py scripts/verify_phase_a_comnet-system_202504-202603.py
 """
 from __future__ import annotations
 
@@ -24,9 +24,9 @@ from scripts.e2e.freee_to_context import build_check_context
 from skills.export.excel_report.exporter import export_to_excel
 
 
-TPL = Path("data/reports/template/TC_template.xlsx")
-BASE = Path("data/e2e/1062190_株式会社輝陽/202504-202603")
-COMPANY_SHORT = "kiyo"
+TPL = Path("templates/TC_template.xlsx")
+BASE = Path("data/e2e/1362187_comnet-system/202504-202603")
+COMPANY_SHORT = "comnet-system"
 PERIOD_DISPLAY = "2025年4月〜2026年3月"
 
 EXPECTED_STYLES = {
@@ -105,7 +105,7 @@ def main() -> int:
 
     print()
     print("=" * 64)
-    print("E2E 実行（株式会社輝陽 2025/04-2026/03、Phase 8-C: ctx 連携）")
+    print("E2E 実行（コムネットシステム 2025/04-2026/03、Phase 8-C: ctx 連携）")
     print("=" * 64)
     output, ctx, n_findings = _run_e2e()
     wb = load_workbook(output)

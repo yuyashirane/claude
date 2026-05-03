@@ -5,12 +5,12 @@ TC_template.xlsx に 5 つの Named Style を追加する。
 - 既存衝突はエラー終了（上書きしない）
 - 保存後の即時検証
 
-悠皓さんがプレビュー (tmp/preview_named_styles_sample.xlsx) を視覚確認し
+悠皓さんがプレビュー (data/preview_named_styles_sample.xlsx) を視覚確認し
 OK を出した後にのみ実行する。
 
 Usage:
     cd office/office-claude
-    py tmp/add_named_styles.py
+    py scripts/add_named_styles.py
 """
 from __future__ import annotations
 
@@ -24,7 +24,7 @@ from openpyxl.styles import Alignment, Font, NamedStyle, PatternFill
 from openpyxl.styles.borders import Border, Side
 
 
-TPL = Path("data/reports/template/TC_template.xlsx")
+TPL = Path("templates/TC_template.xlsx")
 
 # 要件ドキュメント v2 §3 の色定義
 CRITICAL_BG,     CRITICAL_BORDER = "FCEBEB", "C00000"

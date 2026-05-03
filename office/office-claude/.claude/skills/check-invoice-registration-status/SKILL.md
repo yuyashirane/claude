@@ -155,11 +155,11 @@ manual_journals 連携・登録番号妥当性チェック・経過措置（80%/
 
 ### 必要な JSON ファイル
 
-`data/e2e/{company_id}/{period_end}/` 配下に以下 **5 ファイル**：
+`tests/e2e/{company_id}/{period_end}/` 配下に以下 **5 ファイル**：
 
 | ファイル | 役割 |
 |---|---|
-| `company_info.json` | 会社・会計期情報（パターン 2/3 では `data/e2e/{company_id}/` 直下も可） |
+| `company_info.json` | 会社・会計期情報（パターン 2/3 では `tests/e2e/{company_id}/` 直下も可） |
 | `account_items_all.json` | 勘定科目マスタ |
 | `partners_all.json` | 取引先マスタ（**`qualified_invoice_issuer` フィールドで適格判定**） |
 | `taxes_codes.json` | 税区分マスタ（`name_ja` を tax_label として使用） |
@@ -172,14 +172,14 @@ manual_journals 連携・登録番号妥当性チェック・経過措置（80%/
 
 1. 会話から引数を抽出（パターン 1/2/3 を判定）
 2. パターン 2/3 の場合：
-   - `data/e2e/{company_id}/company_info.json` の存在確認
+   - `tests/e2e/{company_id}/company_info.json` の存在確認
    - 無ければ **RUNBOOK_fetch.md Step 1 に従って fetch**
    - company_info を読んで `fiscal_year_start` から period_start を決定
      - パターン 2: `period_start = 期首YYYY-MM`, `period_end = target_month`
      - パターン 3: `period_start = period_end = target_month`
-3. `data/e2e/{company_id}/{period_end}/` の **5 ファイル**を確認、不足は fetch
+3. `tests/e2e/{company_id}/{period_end}/` の **5 ファイル**を確認、不足は fetch
    - **fetch 詳細は `scripts/e2e/RUNBOOK_fetch.md` を参照**（保存先は新命名規則
-     `data/e2e/{company_id}/{period_end}/` を使う、`{period_end}` は YYYY-MM 形式）
+     `tests/e2e/{company_id}/{period_end}/` を使う、`{period_end}` は YYYY-MM 形式）
 4. run.py を実行（後述コマンド）
 5. exit code に応じて分岐：
    - **0**: 結果 JSON を整形して報告
@@ -326,8 +326,9 @@ PYTHONIOENCODING=utf-8 py -3 skills/verify/V1-3-rule/check-invoice-registration-
 11. 20 万円閾値・課税仕入 prefix を **悠皓さんの依頼で可変化しない**
     （実行時カスタムは α 仕様維持、β1 でも固定）
 12. exit 2 リトライは **最大 2 回**まで（それ以降は悠皓さんに報告）
-13. `tmp/` 配下のスクリプトを **本 Skill の代替として実行しない**
-    （run.py が唯一の正規エントリポイント）
+13. `tmp/` 配下のスクリプト（旧E2E検証時の暫定スクリプト群。2026-05-01 の整理で
+    `scripts/` に移送済みだが、Skill実行の代替手段としては引き続き使用禁止）を
+    **本 Skill の代替として実行しない**（run.py が唯一の正規エントリポイント）
 
 ## 関連情報
 

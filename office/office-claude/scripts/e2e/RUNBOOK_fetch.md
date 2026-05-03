@@ -2,7 +2,7 @@
 
 **対象**: Claude Code セッション内で実行  
 **目的**: 指定会社・指定月のデータを freee-MCP から取得し、adapter が読める 5 ファイルを保存する  
-**出力先**: `data/e2e/<company_id>/YYYYMM/`（自動作成される）
+**出力先**: `tests/e2e/<company_id>/YYYYMM/`（自動作成される）
 
 ---
 
@@ -12,7 +12,7 @@
 |---|---|
 | 対象会社の `company_id` | アントレッド株式会社 = `3525430` |
 | 取得対象月 | `202512`（2025年12月） |
-| 出力先 | `data/e2e/3525430/202512/` |
+| 出力先 | `tests/e2e/3525430/202512/` |
 
 **出力ファイル 5 点**:
 
@@ -55,7 +55,7 @@ info = {
     "target_yyyymm": "202512",
 }
 
-save_json(info, Path("data/e2e/3525430/202512/company_info.json"))
+save_json(info, Path("tests/e2e/3525430/202512/company_info.json"))
 ```
 
 **完了基準**:
@@ -85,7 +85,7 @@ from pathlib import Path
 
 # レスポンスの account_items 配列をそのまま保存（ラップなし）
 account_items = response["account_items"]
-save_json(account_items, Path("data/e2e/3525430/202512/account_items_all.json"))
+save_json(account_items, Path("tests/e2e/3525430/202512/account_items_all.json"))
 ```
 
 **完了基準**:
@@ -123,7 +123,7 @@ from pathlib import Path
 
 # raw_pages = [page1_response, page2_response, ..., empty_page_response]
 partners_list = normalize_partners(raw_pages)
-save_json(partners_list, Path("data/e2e/3525430/202512/partners_all.json"))
+save_json(partners_list, Path("tests/e2e/3525430/202512/partners_all.json"))
 ```
 
 **完了基準**:
@@ -178,7 +178,7 @@ merged = merge_deals_pages(pages)
 report = validate_completeness(merged)
 print(report)  # warnings があれば内容を確認・記録
 
-save_json(merged, Path("data/e2e/3525430/202512/deals_202512.json"))
+save_json(merged, Path("tests/e2e/3525430/202512/deals_202512.json"))
 ```
 
 **完了基準**:
@@ -209,7 +209,7 @@ from pathlib import Path
 
 # response は {"taxes": [...]} 形式
 taxes_list = normalize_taxes_codes(response)
-save_json(taxes_list, Path("data/e2e/3525430/202512/taxes_codes.json"))
+save_json(taxes_list, Path("tests/e2e/3525430/202512/taxes_codes.json"))
 ```
 
 **完了基準**:
@@ -226,7 +226,7 @@ save_json(taxes_list, Path("data/e2e/3525430/202512/taxes_codes.json"))
 > manual_journals は deals に乗らない振替伝票（決算整理仕訳など）を扱う。
 > deals が 0 件で manual_journals 中心の会社（例: 資産管理会社）でも
 > `rows > 0` でチェックを走らせるために必要。
-> **deals と同じ期間条件**で取得し、`data/e2e/<company_id>/<period_end>/`
+> **deals と同じ期間条件**で取得し、`tests/e2e/<company_id>/<period_end>/`
 > 配下に保存する。
 
 **取得パターン**: 本エンドポイントは **`meta.total_count` を返さない**ため、
@@ -280,7 +280,7 @@ merged = {
 
 save_json(
     merged,
-    Path("data/e2e/3525430/2026-03/manual_journals_2025-04_to_2026-03.json"),
+    Path("tests/e2e/3525430/2026-03/manual_journals_2025-04_to_2026-03.json"),
 )
 ```
 
@@ -320,13 +320,13 @@ from pathlib import Path
 
 # items_pages = [page1, page2, ..., empty_page]
 items_list = normalize_items(items_pages)
-save_json(items_list, Path("data/e2e/3525430/202512/items_all.json"))
+save_json(items_list, Path("tests/e2e/3525430/202512/items_all.json"))
 
 sections_list = normalize_sections(sections_pages)
-save_json(sections_list, Path("data/e2e/3525430/202512/sections_all.json"))
+save_json(sections_list, Path("tests/e2e/3525430/202512/sections_all.json"))
 
 tags_list = normalize_tags(tags_pages)
-save_json(tags_list, Path("data/e2e/3525430/202512/tags_all.json"))
+save_json(tags_list, Path("tests/e2e/3525430/202512/tags_all.json"))
 ```
 
 **完了基準**:
@@ -345,7 +345,7 @@ save_json(tags_list, Path("data/e2e/3525430/202512/tags_all.json"))
 from pathlib import Path
 import json
 
-base = Path("data/e2e/3525430/202512")
+base = Path("tests/e2e/3525430/202512")
 for fname in [
     "company_info.json",
     "account_items_all.json",
@@ -360,7 +360,7 @@ for fname in [
 ```
 
 **チェック項目**:
-- `data/e2e/3525430/202512/` に 5 ファイルが存在する
+- `tests/e2e/3525430/202512/` に 5 ファイルが存在する
 - 各ファイルが UTF-8 で読み戻せる（漢字が正しく表示される）
 - `validate_completeness` の `warnings` があれば報告書に記載する
 - `taxes_codes.json` の件数が 10 件以上であること（少なすぎる場合は取得エラーの可能性）
@@ -376,11 +376,11 @@ from scripts.e2e.freee_to_context import build_check_context
 from pathlib import Path
 
 ctx = build_check_context(
-    deals_path="data/e2e/<company_id>/YYYYMM/deals_YYYYMM.json",
-    partners_path="data/e2e/<company_id>/YYYYMM/partners_all.json",
-    account_items_path="data/e2e/<company_id>/YYYYMM/account_items_all.json",
-    company_info_path="data/e2e/<company_id>/YYYYMM/company_info.json",
-    taxes_codes_path="data/e2e/<company_id>/YYYYMM/taxes_codes.json",
+    deals_path="tests/e2e/<company_id>/YYYYMM/deals_YYYYMM.json",
+    partners_path="tests/e2e/<company_id>/YYYYMM/partners_all.json",
+    account_items_path="tests/e2e/<company_id>/YYYYMM/account_items_all.json",
+    company_info_path="tests/e2e/<company_id>/YYYYMM/company_info.json",
+    taxes_codes_path="tests/e2e/<company_id>/YYYYMM/taxes_codes.json",
 )
 ```
 
@@ -396,4 +396,4 @@ ctx = build_check_context(
 2. **再実行は上書き**: 2 回目以降の実行は既存ファイルを上書きする。データ再取得のつもりで使う。
 3. **partners のループは自動停止**: 空レスポンス（`partners=[]`）を受信した時点で終了。手動停止は不要。
 4. **レート制限は未確認**: 連続して大量リクエストを送ると制限を受ける可能性があるため、ループ間に短い間隔を設けることを推奨。
-5. **別会社・別月への適用**: `company_id` と `target_yyyymm`（および日付範囲）を変更するだけで同じ手順が使える。出力先は自動的に `data/e2e/<company_id>/YYYYMM/` になる。
+5. **別会社・別月への適用**: `company_id` と `target_yyyymm`（および日付範囲）を変更するだけで同じ手順が使える。出力先は自動的に `tests/e2e/<company_id>/YYYYMM/` になる。
