@@ -464,7 +464,6 @@ def main() -> int:
             company_name = ctx.company_name
             reports_dir = (
                 PROJECT_ROOT
-                / "data"
                 / "reports"
                 / f"{company_id}_{company_name}"
             )
