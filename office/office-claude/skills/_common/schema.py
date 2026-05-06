@@ -12,7 +12,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import date
-from typing import Literal, Optional
+from typing import Any, Literal, Optional
 
 
 # ===========================================================================
@@ -125,6 +125,11 @@ class Finding:
     transaction_date: Optional[str] = None  # YYYY-MM-DD 形式
     is_qualified_invoice: Optional[bool] = None
     tax_code: Optional[int] = None  # 税区分コード(V1-3-20 raw["tax_code"] と同型)
+
+    # === V1-3-20 由来の raw 構造 (β2-E E3-b で追加、E3-c で解体予定) ===
+    # 短期的な互換のための妥協。E3-c で raw を解体し直下属性に振り分けた後、
+    # 削除候補となる。
+    raw: Optional[dict[str, Any]] = None
 
 
 # ===========================================================================
