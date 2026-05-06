@@ -474,7 +474,10 @@
       "Bash(PYTHONIOENCODING=utf-8 py -3 skills/verify/V1-3-rule/check-invoice-registration-status/run.py --company-id 3525430 --period-start 2025-04 --period-end 2025-12 --target-month 2025-12)",
       "Bash(PYTHONIOENCODING=utf-8 py -3 -m pytest tests/unit/test_invoice_registration_status.py)",
       "PowerShell(Set-Location 'C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\office-claude'; cmd /c \"set PYTHONIOENCODING=utf-8&& py -3 skills\\\\verify\\\\V1-3-rule\\\\check-invoice-registration-status\\\\run.py --company-id 3525430 --target-month 2025-12 > ..\\\\freee-auto\\\\docs\\\\beta2\\\\observation_3525430.json\"; Write-Host \"exit=$LASTEXITCODE\")",
-      "PowerShell(Set-Location 'C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\office-claude'; $f = '..\\\\freee-auto\\\\docs\\\\beta2\\\\observation_3525430.json'; $size = \\(Get-Item $f\\).Length; $jsonOk = $false; try { Get-Content $f -Raw -Encoding utf8 | ConvertFrom-Json | Out-Null; $jsonOk = $true } catch {}; Write-Host \"size=$size json_ok=$jsonOk\")"
+      "PowerShell(Set-Location 'C:\\\\Users\\\\yuya_\\\\claude\\\\office\\\\office-claude'; $f = '..\\\\freee-auto\\\\docs\\\\beta2\\\\observation_3525430.json'; $size = \\(Get-Item $f\\).Length; $jsonOk = $false; try { Get-Content $f -Raw -Encoding utf8 | ConvertFrom-Json | Out-Null; $jsonOk = $true } catch {}; Write-Host \"size=$size json_ok=$jsonOk\")",
+      "Bash(.venv/Scripts/python.exe -m pytest tests/unit/test_invoice_registration_status.py)",
+      "Bash(.venv/Scripts/python.exe -m pytest tests/unit/test_invoice_registration_status.py::TestFindingConversion -v)",
+      "Bash(.venv/Scripts/python.exe -m pytest tests/unit/)"
     ]
   }
 }
