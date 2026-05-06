@@ -254,7 +254,7 @@ def _make_finding_07a(row, ctx, code: int, matched_kw: Optional[str]):
     return create_finding(
         tc_code="TC-07",
         sub_code="TC-07a",
-        severity="🔴 High",
+        severity="🔴 Critical",
         error_type="direct_error",
         area="A10",
         sort_priority=14,
@@ -280,7 +280,7 @@ def _make_finding_07b(row, ctx, code: int, matched_kw: Optional[str]):
     return create_finding(
         tc_code="TC-07",
         sub_code="TC-07b",
-        severity="🔴 High",
+        severity="🔴 Critical",
         error_type="direct_error",
         area="A10",
         sort_priority=15,

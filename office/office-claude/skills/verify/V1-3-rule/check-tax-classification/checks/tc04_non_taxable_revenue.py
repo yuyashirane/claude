@@ -88,7 +88,7 @@ def _check_interest(row, ctx, code: int):
         return create_finding(
             tc_code="TC-04",
             sub_code="TC-04a",
-            severity="🔴 High",
+            severity="🔴 Critical",
             error_type="direct_error",
             area="A11",
             sort_priority=4,
@@ -162,7 +162,7 @@ def _check_non_consideration(row, ctx, code: int):
         return create_finding(
             tc_code="TC-04",
             sub_code="TC-04b",
-            severity="🔴 High",
+            severity="🔴 Critical",
             error_type="direct_error",
             area="A11",
             sort_priority=5,

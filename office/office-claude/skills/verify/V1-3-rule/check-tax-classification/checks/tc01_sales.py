@@ -147,7 +147,7 @@ def _check_01b_reduced_not_food(row, ctx, keywords: dict, food_business_accounts
     return create_finding(
         tc_code="TC-01",
         sub_code="TC-01b",
-        severity="🔴 High",
+        severity="🔴 Critical",
         error_type="direct_error",
         area="A8",
         sort_priority=6,
@@ -179,7 +179,7 @@ def _check_01c_export_no_overseas_kw(row, ctx, keywords: dict):
     return create_finding(
         tc_code="TC-01",
         sub_code="TC-01c",
-        severity="🔴 High",
+        severity="🔴 Critical",
         error_type="direct_error",
         area="A8",
         sort_priority=7,
@@ -210,7 +210,7 @@ def _check_01d_non_taxable_no_exception_kw(row, ctx, keywords: dict):
     return create_finding(
         tc_code="TC-01",
         sub_code="TC-01d",
-        severity="🔴 High",
+        severity="🔴 Critical",
         error_type="direct_error",
         area="A8",
         sort_priority=8,
@@ -241,7 +241,7 @@ def _check_01e_non_subject_no_exception_kw(row, ctx, keywords: dict):
     return create_finding(
         tc_code="TC-01",
         sub_code="TC-01e",
-        severity="🔴 High",
+        severity="🔴 Critical",
         error_type="direct_error",
         area="A8",
         sort_priority=9,
