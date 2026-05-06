@@ -229,11 +229,12 @@ def get_period_range(fiscal_year_id: str, ctx) -> Optional[tuple[date, date]]:
 # ═══════════════════════════════════════════════════════════════
 
 # error_type → review_level のデフォルト対応表
+# 記述順は深刻度順(🔴→🟠→🟡→🟢)。対応関係は β2-E E2-b2 以前と完全一致。
 _ERROR_TYPE_TO_REVIEW_LEVEL: dict[str, str] = {
-    "direct_error":    "🔴必修",
-    "gray_review":     "🟡判断",
-    "reverse_suspect": "🟠警戒",
-    "mild_warning":    "🟢参考",
+    "direct_error":    "🔴 必須確認",   # 旧: 🔴必修
+    "reverse_suspect": "🟠 重点確認",   # 旧: 🟠警戒
+    "gray_review":     "🟡 通常確認",   # 旧: 🟡判断
+    "mild_warning":    "🟢 参考確認",   # 旧: 🟢参考
 }
 
 
@@ -259,10 +260,10 @@ def create_finding(
     """Finding 構造体を生成する。
 
     review_level は error_type から自動導出:
-        direct_error    → 🔴必修
-        gray_review     → 🟡判断
-        reverse_suspect → 🟠警戒
-        mild_warning    → 🟢参考
+        direct_error    → 🔴 必須確認
+        reverse_suspect → 🟠 重点確認
+        gray_review     → 🟡 通常確認
+        mild_warning    → 🟢 参考確認
 
     Args:
         row: TransactionRow（wallet_txn_id と deal_id を自動取得）
@@ -276,7 +277,7 @@ def create_finding(
         from skills._common.lib.note_markers import validate_note
         validate_note(note)
 
-    review_level = _ERROR_TYPE_TO_REVIEW_LEVEL.get(error_type, "🔴必修")
+    review_level = _ERROR_TYPE_TO_REVIEW_LEVEL.get(error_type, "🔴 必須確認")
 
     # 借方・貸方金額を row から自動抽出（Phase 6.11b）
     debit_amount, credit_amount = extract_debit_credit(row)

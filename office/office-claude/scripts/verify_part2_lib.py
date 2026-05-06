@@ -245,7 +245,7 @@ def test_finding_factory() -> None:
         subarea="payroll",
     )
     assert f.tc_code == "TC-03"
-    assert f.review_level == "🔴必修"  # 自動導出
+    assert f.review_level == "🔴 必須確認"  # 自動導出
     assert f.wallet_txn_id == "abc1"
     assert f.deal_id == "d001"
     print("  create_finding: OK (review_level auto-derived)")

@@ -341,7 +341,7 @@ class TestFindingFactory:
             current_value="課対仕入10%", suggested_value="対象外",
             confidence=90, message="給与は対象外です。",
         )
-        assert f.review_level == "🔴必修"
+        assert f.review_level == "🔴 必須確認"
         assert f.wallet_txn_id == "test-001"
 
     def test_create_finding_mild_warning(self, sample_row):
@@ -355,7 +355,7 @@ class TestFindingFactory:
             note="tax_impact_negligible",
             show_by_default=False,
         )
-        assert f.review_level == "🟢参考"
+        assert f.review_level == "🟢 参考確認"
         assert f.note == "tax_impact_negligible"
         assert f.show_by_default is False
 
