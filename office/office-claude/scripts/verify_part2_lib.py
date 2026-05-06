@@ -233,7 +233,7 @@ def test_finding_factory() -> None:
     f = create_finding(
         tc_code="TC-03",
         sub_code="TC-03a",
-        severity="🔴 High",
+        severity="🔴 Critical",
         error_type="direct_error",
         area="A5",
         sort_priority=1,
@@ -284,7 +284,7 @@ def test_finding_factory() -> None:
     bad_f = create_finding(
         tc_code="TC-03",
         sub_code="TC-03a",
-        severity="🔴 High",
+        severity="🔴 Critical",
         error_type="direct_error",
         area="A5",
         sort_priority=1,
@@ -300,7 +300,7 @@ def test_finding_factory() -> None:
 
     # --- check_exclusive_match ---
     f1 = create_finding(
-        tc_code="TC-04", sub_code="TC-04a", severity="🔴 High",
+        tc_code="TC-04", sub_code="TC-04a", severity="🔴 Critical",
         error_type="direct_error", area="A11", sort_priority=1,
         row=row, current_value="x", suggested_value="y",
         confidence=90, message="test1",

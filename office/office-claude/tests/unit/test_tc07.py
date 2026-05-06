@@ -106,7 +106,7 @@ class TestTC07a:
         findings = run(_make_ctx(schema, [row]))
         assert len(findings) == 1
         assert findings[0].sub_code == "TC-07a"
-        assert findings[0].severity == "🔴 High"
+        assert findings[0].severity == "🔴 Critical"
         assert findings[0].error_type == "direct_error"
         assert findings[0].confidence == 90
         assert findings[0].area == "A10"

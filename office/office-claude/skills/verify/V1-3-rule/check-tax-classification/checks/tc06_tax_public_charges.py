@@ -88,7 +88,7 @@ def _check_tax_public_charges(row, ctx, code: int, keywords: dict):
         return create_finding(
             tc_code="TC-06",
             sub_code="TC-06a",
-            severity="🔴 High",
+            severity="🔴 Critical",
             error_type="direct_error",
             area="A12",
             sort_priority=11,
@@ -152,7 +152,7 @@ def _check_corporate_tax(row, ctx, code: int):
     return create_finding(
         tc_code="TC-06",
         sub_code="TC-06b",
-        severity="🔴 High",
+        severity="🔴 Critical",
         error_type="direct_error",
         area="A12",
         sort_priority=3,

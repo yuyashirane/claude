@@ -82,7 +82,7 @@ class TestTC06b:
         findings = run(_make_ctx(schema, [row]))
         assert len(findings) == 1
         assert findings[0].note == "high_anomaly"
-        assert findings[0].severity == "🔴 High"
+        assert findings[0].severity == "🔴 Critical"
 
 
 class TestTC06c:

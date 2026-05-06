@@ -118,7 +118,7 @@ def test_finding_minimal() -> None:
     finding = schema.Finding(
         tc_code="TC-03",
         sub_code="TC-03a",
-        severity="🔴 High",
+        severity="🔴 Critical",
         error_type="direct_error",
         review_level="🔴 必須確認",
         area="A5",

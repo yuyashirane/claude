@@ -336,7 +336,7 @@ class TestFindingFactory:
         from skills._common.lib.finding_factory import create_finding
         f = create_finding(
             tc_code="TC-03", sub_code="TC-03a",
-            severity="🔴 High", error_type="direct_error",
+            severity="🔴 Critical", error_type="direct_error",
             area="A5", sort_priority=1, row=sample_row,
             current_value="課対仕入10%", suggested_value="対象外",
             confidence=90, message="給与は対象外です。",
@@ -401,7 +401,7 @@ class TestFindingFactory:
         from skills._common.lib.finding_factory import create_finding, validate_finding
         f = create_finding(
             tc_code="TC-03", sub_code="TC-03a",
-            severity="🔴 High", error_type="direct_error",
+            severity="🔴 Critical", error_type="direct_error",
             area="A5", sort_priority=1, row=sample_row,
             current_value="x", suggested_value="y",
             confidence=90, message="テスト",
@@ -412,7 +412,7 @@ class TestFindingFactory:
         from skills._common.lib.finding_factory import create_finding, validate_finding
         f = create_finding(
             tc_code="TC-03", sub_code="TC-03a",
-            severity="🔴 High", error_type="direct_error",
+            severity="🔴 Critical", error_type="direct_error",
             area="A5", sort_priority=1, row=sample_row,
             current_value="x", suggested_value="y",
             confidence=90, message="",
@@ -426,7 +426,7 @@ class TestFindingFactory:
         from skills._common.lib.finding_factory import create_finding, check_exclusive_match
         f1 = create_finding(
             tc_code="TC-04", sub_code="TC-04a",
-            severity="🔴 High", error_type="direct_error",
+            severity="🔴 Critical", error_type="direct_error",
             area="A11", sort_priority=1, row=sample_row,
             current_value="x", suggested_value="y",
             confidence=90, message="direct error",
@@ -446,7 +446,7 @@ class TestFindingFactory:
         from skills._common.lib.finding_factory import create_finding, check_exclusive_match
         f1 = create_finding(
             tc_code="TC-04", sub_code="TC-04a",
-            severity="🔴 High", error_type="direct_error",
+            severity="🔴 Critical", error_type="direct_error",
             area="A11", sort_priority=1, row=sample_row,
             current_value="x", suggested_value="y",
             confidence=90, message="a",

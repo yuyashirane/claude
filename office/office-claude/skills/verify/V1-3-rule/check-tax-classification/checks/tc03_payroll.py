@@ -83,7 +83,7 @@ def _check_salary(row, ctx, salary_accounts: list[str]):
     return create_finding(
         tc_code="TC-03",
         sub_code="TC-03a",
-        severity="🔴 High",
+        severity="🔴 Critical",
         error_type="direct_error",
         area="A5",
         sort_priority=1,
@@ -129,7 +129,7 @@ def _check_social_insurance(row, ctx, social_insurance_accounts: list[str]):
         return create_finding(
             tc_code="TC-03",
             sub_code="TC-03b",
-            severity="🔴 High",
+            severity="🔴 Critical",
             error_type="direct_error",
             area="A5",
             sort_priority=2,

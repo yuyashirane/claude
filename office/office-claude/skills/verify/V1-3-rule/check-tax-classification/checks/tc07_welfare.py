@@ -5,8 +5,8 @@
 摘要 KW の優先順位でサブタイプを決定する。
 
 6サブタイプ:
-    TC-07a: 慶弔見舞金が課税仕入(direct_error, 🔴 High, confidence=90)
-    TC-07b: 商品券等が課税仕入(direct_error, 🔴 High, confidence=90)
+    TC-07a: 慶弔見舞金が課税仕入(direct_error, 🔴 Critical, confidence=90)
+    TC-07b: 商品券等が課税仕入(direct_error, 🔴 Critical, confidence=90)
     TC-07c: 慶弔見舞金が非課仕入(direct_error, 🟡 Med, confidence=80,
             note=tax_impact_negligible)
     TC-07d: 商品券等が対象外(direct_error, 🟡 Med, confidence=80,
@@ -254,7 +254,7 @@ def _make_finding_07a(row, ctx, code: int, matched_kw: Optional[str]):
     return create_finding(
         tc_code="TC-07",
         sub_code="TC-07a",
-        severity="🔴 High",
+        severity="🔴 Critical",
         error_type="direct_error",
         area="A10",
         sort_priority=14,
@@ -280,7 +280,7 @@ def _make_finding_07b(row, ctx, code: int, matched_kw: Optional[str]):
     return create_finding(
         tc_code="TC-07",
         sub_code="TC-07b",
-        severity="🔴 High",
+        severity="🔴 Critical",
         error_type="direct_error",
         area="A10",
         sort_priority=15,

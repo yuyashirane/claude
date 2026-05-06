@@ -37,16 +37,15 @@ from skills._common.lib.schema import FindingGroup, FindingLike
 
 SEVERITY_ORDER: dict[str, int] = {
     "🔴 Critical": 4,
-    "🔴 High":     4,  # 既存 Finding は "🔴 High" を使う。Critical は同ランク
-    "🟠 Warning":  3,
+    "🟠 High":     3,
     "🟡 Medium":   2,
     "🟢 Low":      1,
 }
 """severity 文字列 → 序列値の対応表。大きいほど強い。
 
-既存 Finding は "🔴 High" / "🟡 Medium" / "🟠 Warning" / "🟢 Low" を使う
-(check-tax-classification/schema.py の Severity Literal 参照)。
-戦略 Claude の指示により "🔴 Critical" も同じ rank=4 で受け入れる。
+Severity Literal は skills/_common/schema.py が正本
+("🔴 Critical" / "🟠 High" / "🟡 Medium" / "🟢 Low")。
+β2-E E2-b3 で旧名称 ("🔴 High" / "🟠 Warning") から新名称体系に統一。
 未知値は _severity_rank() が 0 にフォールバック。
 """
 

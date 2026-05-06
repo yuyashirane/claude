@@ -46,7 +46,7 @@ from openpyxl import load_workbook
 def _make_finding(
     sub_code: str = "TC-07a",
     area: str = "A10",
-    severity: str = "🔴 High",
+    severity: str = "🔴 Critical",
     show_by_default: bool = True,
     sort_priority: int = 12,
     error_type: str = "direct_error",
@@ -400,13 +400,13 @@ def test_summary_sheet_sorted_by_area_order(tmp_path):
 # ─────────────────────────────────────────────────────────────────────
 
 def test_high_severity_row_has_red_fill(tmp_path):
-    """🔴 High/Critical の親行が重大色 (FCEBEB) で塗られる。
+    """🔴 Critical の親行が重大色 (FCEBEB) で塗られる。
 
     Phase 8-B: 親行スタイル parent_row_style_critical の背景色は FCEBEB
     （Named Style テンプレ反映時の §3 確定値）。
     """
     from skills.export.excel_report.exporter import export_to_excel
-    findings = [_make_finding(sub_code="TC-07a", area="A10", severity="🔴 High")]
+    findings = [_make_finding(sub_code="TC-07a", area="A10", severity="🔴 Critical")]
     output = tmp_path / "out.xlsx"
     export_to_excel(findings, output)
     wb = load_workbook(output)
@@ -557,7 +557,7 @@ def test_summary_tc_matrix_tc07_row16(tmp_path):
     """サマリー Row 16（TC-07）に severity 別件数が入る。"""
     from skills.export.excel_report.exporter import export_to_excel
     findings = [
-        _make_finding(sub_code="TC-07a", area="A10", severity="🔴 High"),
+        _make_finding(sub_code="TC-07a", area="A10", severity="🔴 Critical"),
         _make_finding(sub_code="TC-07b", area="A10", severity="🟢 Low"),
         _make_finding(sub_code="TC-07c", area="A10", severity="🟢 Low"),
     ]
@@ -813,7 +813,7 @@ def test_summary_sheet_unaffected_by_area_fix(tmp_path):
     """エリアシート修正後もサマリーシートが正常動作する（回帰確認）。"""
     from skills.export.excel_report.exporter import export_to_excel
     findings = [
-        _make_finding(sub_code="TC-07a", area="A10", severity="🔴 High"),
+        _make_finding(sub_code="TC-07a", area="A10", severity="🔴 Critical"),
         _make_finding(sub_code="TC-03c", area="A5", severity="🟢 Low"),
     ]
     output = tmp_path / "out.xlsx"
