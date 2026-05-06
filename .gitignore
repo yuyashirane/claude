@@ -1,3 +1,11 @@
 node_modules/
 .env
 logs/
+
+# Word/Excel/PowerPoint のロックファイル
+~$*.docx
+~$*.xlsx
+~$*.pptx
+
+# tmp/ ディレクトリ全体
+tmp/
