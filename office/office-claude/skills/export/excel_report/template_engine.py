@@ -126,8 +126,7 @@ _FALLBACK_FILLS: dict[str, PatternFill] = {
 # Finding.severity 文字列をマップする。未知値は low スタイルにフォールバック。
 SEVERITY_TO_PARENT_STYLE: dict[str, str] = {
     "🔴 Critical": "parent_row_style_critical",
-    "🔴 High":     "parent_row_style_critical",
-    "🟠 Warning":  "parent_row_style_warning",
+    "🟠 High":     "parent_row_style_warning",
     "🟡 Medium":   "parent_row_style_medium",
     "🟢 Low":      "parent_row_style_low",
 }
