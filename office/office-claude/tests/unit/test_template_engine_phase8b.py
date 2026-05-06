@@ -44,7 +44,7 @@ def _load_schema():
 def _mk_finding(
     sub_code: str = "TC-03a",
     area: str = "A5",
-    severity: str = "🔴 High",
+    severity: str = "🔴 Critical",
     current_value: str = "課対仕入10%",
     suggested_value: str = "対象外",
     account_name: str = "給与手当",
@@ -200,9 +200,9 @@ class TestNamedStyleApplication:
     """severity 別の親行スタイルが正しい色を持つことを検証（add_named_styles.py §3）。"""
 
     def test_critical_severity_uses_critical_parent_style(self, tmp_path):
-        """🔴 High/Critical → parent_row_style_critical (FCEBEB)。"""
+        """🔴 Critical → parent_row_style_critical (FCEBEB)。"""
         from skills.export.excel_report.exporter import export_to_excel
-        f = _mk_finding(severity="🔴 High")
+        f = _mk_finding(severity="🔴 Critical")
         output = tmp_path / "out.xlsx"
         export_to_excel([f], output)
         ws = load_workbook(output)["A5 人件費"]
@@ -212,9 +212,9 @@ class TestNamedStyleApplication:
         assert "FCEBEB" in rgb, f"critical bg: got {rgb!r}"
 
     def test_warning_severity_uses_warning_parent_style(self, tmp_path):
-        """🟠 Warning → parent_row_style_warning (FAEEDA)。"""
+        """🟠 High → parent_row_style_warning (FAEEDA)。"""
         from skills.export.excel_report.exporter import export_to_excel
-        f = _mk_finding(severity="🟠 Warning")
+        f = _mk_finding(severity="🟠 High")
         output = tmp_path / "out.xlsx"
         export_to_excel([f], output)
         ws = load_workbook(output)["A5 人件費"]
@@ -262,7 +262,7 @@ class TestSpecZWhiteChildRows:
         fill_type は None または "none"。
         """
         from skills.export.excel_report.exporter import export_to_excel
-        f = _mk_finding(severity="🔴 High")  # 親は重大色
+        f = _mk_finding(severity="🔴 Critical")  # 親は重大色
         output = tmp_path / "out.xlsx"
         export_to_excel([f], output)
         ws = load_workbook(output)["A5 人件費"]
@@ -277,7 +277,7 @@ class TestSpecZWhiteChildRows:
     def test_child_row_severity_column_is_blank(self, tmp_path):
         """子行 A 列（severity 表示列）は空欄（仕様案 Z: 親行のみ色と emoji）。"""
         from skills.export.excel_report.exporter import export_to_excel
-        f = _mk_finding(severity="🔴 High")
+        f = _mk_finding(severity="🔴 Critical")
         output = tmp_path / "out.xlsx"
         export_to_excel([f], output)
         ws = load_workbook(output)["A5 人件費"]
@@ -297,7 +297,7 @@ class TestOutOfScopeInvariance:
     def test_summary_sheet_structure_unchanged(self, tmp_path):
         """Phase 8-B 後もサマリーシートの主要セル位置が維持される。"""
         from skills.export.excel_report.exporter import export_to_excel
-        findings = [_mk_finding(severity="🔴 High")]
+        findings = [_mk_finding(severity="🔴 Critical")]
         output = tmp_path / "out.xlsx"
         export_to_excel(findings, output, company_name="テスト株式会社")
         ws = load_workbook(output)["サマリー"]
@@ -777,7 +777,7 @@ class TestParentRowGlHyperlink:
         f = schema.Finding(
             tc_code="TC-03",
             sub_code="TC-03a",
-            severity="🔴 High",
+            severity="🔴 Critical",
             error_type="direct_error",
             review_level="🔴 必須確認",
             area="A5",

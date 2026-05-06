@@ -38,7 +38,7 @@ def _make_finding(
     *,
     tc_code: str = "TC-03",
     sub_code: str = "TC-03a",
-    severity: str = "🔴 High",
+    severity: str = "🔴 Critical",
     area: str = "A10",
     current_value: str = "課対仕入10%",
     suggested_value: str = "対象外",
@@ -183,15 +183,14 @@ class TestSeverityRepresentative:
     def test_max_severity_wins(self):
         """子の最強 severity が親代表になる。"""
         f_low = _make_finding(severity="🟢 Low")
-        f_high = _make_finding(severity="🔴 High")
+        f_high = _make_finding(severity="🔴 Critical")
         groups = group([f_low, f_high])
-        assert groups[0].severity == "🔴 High"
+        assert groups[0].severity == "🔴 Critical"
 
     def test_severity_order_ranks(self):
-        """SEVERITY_ORDER の序列: High/Critical=4 > Warning=3 > Medium=2 > Low=1。"""
+        """SEVERITY_ORDER の序列: Critical=4 > High=3 > Medium=2 > Low=1。"""
         assert _severity_rank("🔴 Critical") == 4
-        assert _severity_rank("🔴 High") == 4
-        assert _severity_rank("🟠 Warning") == 3
+        assert _severity_rank("🟠 High") == 3
         assert _severity_rank("🟡 Medium") == 2
         assert _severity_rank("🟢 Low") == 1
 
