@@ -148,7 +148,7 @@ def check_basic_operation() -> bool:
         f = schema.Finding(
             tc_code="TC-07",
             sub_code="TC-07a",
-            severity="🔴 High",
+            severity="🔴 Critical",
             error_type="direct_error",
             review_level="🔴 必須確認",
             area="A10",

@@ -5,8 +5,8 @@
 摘要 KW の優先順位でサブタイプを決定する。
 
 6サブタイプ:
-    TC-07a: 慶弔見舞金が課税仕入(direct_error, 🔴 High, confidence=90)
-    TC-07b: 商品券等が課税仕入(direct_error, 🔴 High, confidence=90)
+    TC-07a: 慶弔見舞金が課税仕入(direct_error, 🔴 Critical, confidence=90)
+    TC-07b: 商品券等が課税仕入(direct_error, 🔴 Critical, confidence=90)
     TC-07c: 慶弔見舞金が非課仕入(direct_error, 🟡 Med, confidence=80,
             note=tax_impact_negligible)
     TC-07d: 商品券等が対象外(direct_error, 🟡 Med, confidence=80,
