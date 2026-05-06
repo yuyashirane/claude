@@ -120,7 +120,7 @@ def test_finding_minimal() -> None:
         sub_code="TC-03a",
         severity="🔴 High",
         error_type="direct_error",
-        review_level="🔴必修",
+        review_level="🔴 必須確認",
         area="A5",
         sort_priority=1,  # 必須
     )

@@ -50,7 +50,7 @@ def _make_finding(
     show_by_default: bool = True,
     sort_priority: int = 12,
     error_type: str = "direct_error",
-    review_level: str = "🔴必修",
+    review_level: str = "🔴 必須確認",
     current_value: str = "課対仕入10%",
     suggested_value: str = "対象外",
     confidence: int = 80,

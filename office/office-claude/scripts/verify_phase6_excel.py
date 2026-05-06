@@ -150,7 +150,7 @@ def check_basic_operation() -> bool:
             sub_code="TC-07a",
             severity="🔴 High",
             error_type="direct_error",
-            review_level="🔴必修",
+            review_level="🔴 必須確認",
             area="A10",
             sort_priority=12,
             wallet_txn_id="verify-001",
