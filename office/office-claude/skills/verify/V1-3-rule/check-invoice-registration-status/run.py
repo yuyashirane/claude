@@ -409,19 +409,18 @@ def _calculate_source_breakdown(
 
 
 def _finding_to_dict(finding) -> dict[str, Any]:  # type: ignore[no-untyped-def]
-    """InvoiceFinding を JSON 出力用 dict に変換する（β2-C）。
+    """共通 Finding を JSON 出力用 dict に変換する（β2-E E3-b）。
 
-    classification は Enum 値（"nonqualified_but_full_deduction_tax" 等）に変換。
+    JSON 出力キーは β2-C の名前を維持(後方互換):
+        - rule_code: 共通 Finding の tc_code を使用("V1-3-20")
+        - classification: 共通 Finding は str(Enum.value)で保持、そのまま出力
+
     Finding が classification=None で来た場合は null として出力（V1-3-10 互換）。
     """
     return {
         "severity": finding.severity,
-        "rule_code": finding.rule_code,
-        "classification": (
-            finding.classification.value
-            if finding.classification is not None
-            else None
-        ),
+        "rule_code": finding.tc_code,  # E3-b: tc_code = "V1-3-20" を rule_code として出力
+        "classification": finding.classification,  # E3-b: 既に str (Enum.value)
         "message": finding.message,
         "wallet_txn_id": finding.wallet_txn_id,
         "raw": finding.raw,

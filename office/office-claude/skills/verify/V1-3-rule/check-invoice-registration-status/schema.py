@@ -14,9 +14,19 @@
 """
 from __future__ import annotations
 
+import sys
 from dataclasses import dataclass
 from datetime import date
 from enum import Enum
+from pathlib import Path
+
+# E3-b: CLI 単体起動 (python run.py ...) 経由で本ファイルが
+# importlib.util.spec_from_file_location でロードされるとき、
+# ``from skills._common.schema import ...`` を解決可能にするため、
+# PROJECT_ROOT (office-claude/) を sys.path に挿入する。
+_PROJECT_ROOT = Path(__file__).resolve().parents[4]  # office-claude/
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
 
 # 共通 Finding を InvoiceFinding という名前で公開する (E3-b)。
 # 既存 V1-3-20 コードの ``from .schema import InvoiceFinding`` を維持するためのエイリアス。
