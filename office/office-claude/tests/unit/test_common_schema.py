@@ -137,6 +137,27 @@ class TestFindingFrozen:
             f.tc_code = "CHANGED"  # type: ignore
 
 
+class TestInvoiceWarningErrorType:
+    """invoice_warning が ErrorType に追加されている (β2-E E3-pre)"""
+
+    def test_invoice_warning_in_error_type(self):
+        # Literal は実行時に値リストを取得できないため、Finding を実際に構築して検証
+        f = Finding(
+            tc_code="V1-3-20",
+            sub_code="01",
+            severity="🟠 High",
+            error_type="invoice_warning",
+            review_level="🟠 重点確認",
+            area="A14",
+            sort_priority=30,
+        )
+        assert f.error_type == "invoice_warning"
+
+    def test_invoice_warning_to_review_level(self):
+        from skills._common.lib.finding_factory import _ERROR_TYPE_TO_REVIEW_LEVEL
+        assert _ERROR_TYPE_TO_REVIEW_LEVEL["invoice_warning"] == "🟠 重点確認"
+
+
 class TestLegacyMaps:
     """互換変換マップが正しく定義されている"""
 

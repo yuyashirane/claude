@@ -25,7 +25,16 @@ from typing import Literal, Optional
 
 Severity = Literal["🔴 Critical", "🟠 High", "🟡 Medium", "🟢 Low"]
 ReviewLevel = Literal["🔴 必須確認", "🟠 重点確認", "🟡 通常確認", "🟢 参考確認"]
-ErrorType = Literal["direct_error", "mild_warning", "gray_review", "reverse_suspect"]
+# ErrorType は深刻度順(direct_error → reverse_suspect → invoice_warning →
+# gray_review → mild_warning)。invoice_warning は β2-E E3-pre で追加、
+# V1-3-20 系の警告(インボイス未登録の検出等)を表す。
+ErrorType = Literal[
+    "direct_error",
+    "reverse_suspect",
+    "invoice_warning",  # V1-3-20 系の警告 (β2-E E3-pre で追加)
+    "gray_review",
+    "mild_warning",
+]
 LinkTarget = Literal["general_ledger", "journal", "deal_detail"]
 
 
