@@ -197,9 +197,83 @@
 
 ## 6. 不明点(判断前に解消すべきリスト)
 
-1. **V1-3-10 の総テスト件数が未確認**
+1. ~~**V1-3-10 の総テスト件数が未確認**~~ → **2026-05-06 確認済み**
    - memory にある 119 tests は V1-3-20 β2-C の数値であり、V1-3-10 の規模は別途確認が必要
    - 案 A の所要時間見積りに直結する
+   - **2026-05-06 追記**: 集計結果を以下に記載
+
+   #### テスト件数集計 (2026-05-06 時点)
+
+   調査対象: `tests/` 配下の `test_*.py` 全ファイル + `scripts/e2e/tests/` + `tests/e2e/`
+   集計方法: `^\s*(def|async def)\s+test_` 正規表現で関数定義を計数
+   除外: `conftest.py` の 2 件 (docstring 内サンプルコードのみ)
+   注: skill 配下に `tests/` ディレクトリは存在せず、テストはプロジェクト直下 `tests/` に集約
+
+   ##### V1-3-10 直接テスト (TC-01〜TC-07): **124 件**
+
+   | ファイル | テスト数 |
+   |---|---|
+   | `tests/unit/test_tc01.py` | 17 |
+   | `tests/unit/test_tc02.py` | 29 |
+   | `tests/unit/test_tc03.py` | 8 |
+   | `tests/unit/test_tc04.py` | 18 |
+   | `tests/unit/test_tc05.py` | 13 |
+   | `tests/unit/test_tc06.py` | 17 |
+   | `tests/unit/test_tc07.py` | 22 |
+   | **小計** | **124** |
+
+   ##### V1-3-10 共通系テスト (Excel 出力 / Finding 集約 / link / template 等): **228 件**
+
+   | ファイル | テスト数 | 想定対象 |
+   |---|---|---|
+   | `tests/unit/test_common.py` | 69 | 共通ヘルパー |
+   | `tests/unit/test_finding_grouper.py` | 18 | Finding グルーピング |
+   | `tests/unit/test_freee_link_generator.py` | 13 | freee URL 生成 (Phase 7) |
+   | `tests/unit/test_excel_export.py` | 54 | Excel 出力層 |
+   | `tests/unit/test_step3c_exporter.py` | 18 | Step3c エクスポータ |
+   | `tests/unit/test_suggested_value_constraint.py` | 17 | suggested_value 制約 |
+   | `tests/unit/test_template_engine_phase8b.py` | 39 | テンプレートエンジン (Phase 8b) |
+   | **小計** | **228** | |
+
+   ##### V1-3-20 関連テスト: **129 件**
+
+   | ファイル | テスト数 |
+   |---|---|
+   | `tests/unit/test_invoice_registration_status.py` | 129 |
+
+   注: memory の「β2-C 完結時 119 tests passed」(2026-04-29) と比べて +10 件 → β2-C 完結後にテスト追加されている
+
+   ##### E2E テスト: スクリプト形式 (件数集計対象外)
+
+   `tests/e2e/` 配下の以下 3 ファイルは `test_*` 関数を含まず、実行スクリプト形式:
+   - `tests/e2e/run_e2e_step1.py`
+   - `tests/e2e/e2e_phase7.py`
+   - `tests/e2e/process_e2e.py`
+
+   `scripts/e2e/tests/` 配下にも `test_freee_fetch.py` / `test_freee_to_context.py` があるが `test_` 関数なし(移行中もしくはスクリプト形式)
+
+   ##### 総計
+
+   | 分類 | 件数 |
+   |---|---|
+   | V1-3-10 直接 (TC-01〜TC-07) | 124 |
+   | V1-3-10 共通系 | 228 |
+   | V1-3-20 関連 | 129 |
+   | E2E (スクリプト) | 集計外 |
+   | **総計 (unit ベース)** | **481** |
+
+   ##### 案 A への影響再評価
+
+   - 案 A (§13.4.2 完全準拠) で Finding スキーマを 30 属性に再定義した場合、影響想定範囲は最大 **V1-3-10 系 352 件 + V1-3-20 系 129 件 = 481 件**
+   - うち TC-01〜TC-07 直接の 124 件は `create_finding()` 引数追加だけで救える可能性あり
+   - 共通系 228 件のうち `test_excel_export.py` (54) / `test_finding_grouper.py` (18) / `test_freee_link_generator.py` (13) / `test_step3c_exporter.py` (18) / `test_template_engine_phase8b.py` (39) の **142 件は Finding 構造変更の直撃を受ける可能性が高い**
+   - V1-3-20 の 129 件は Classification/FindingGroup の扱い次第で全件影響しうる
+   - **再見積り**: 案 A の所要時間は当初「3〜5 営業日」→ **5〜8 営業日に上方修正**(481 件のテスト確認・修正を含む)
+
+   ##### 残る不明点 (1 の派生)
+
+   - 共通系 228 件のうち V1-3-20 でも共有されるテストがあるか未確認 (Excel 出力層が V1-3-20 でも使われるか)
+   - `test_common.py` の 69 件が V1-3-10 専用ヘルパーか、V1-3-20 でも共有されるかの切り分け未確認
 
 2. **案 A で Classification/FindingGroup を仕様書スキーマにどう統合するかの設計判断未済**
    - 仕様書 §13.4.2 には Classification/FindingGroup の概念がなく、追加属性 / notes マーカー / 拡張 dataclass のいずれで吸収するか合意が必要
