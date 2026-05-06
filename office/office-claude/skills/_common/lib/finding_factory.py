@@ -230,9 +230,11 @@ def get_period_range(fiscal_year_id: str, ctx) -> Optional[tuple[date, date]]:
 
 # error_type → review_level のデフォルト対応表
 # 記述順は深刻度順(🔴→🟠→🟡→🟢)。対応関係は β2-E E2-b2 以前と完全一致。
+# invoice_warning は β2-E E3-pre で追加、V1-3-20 系の警告。
 _ERROR_TYPE_TO_REVIEW_LEVEL: dict[str, str] = {
     "direct_error":    "🔴 必須確認",   # 旧: 🔴必修
     "reverse_suspect": "🟠 重点確認",   # 旧: 🟠警戒
+    "invoice_warning": "🟠 重点確認",   # V1-3-20 系の警告 (β2-E E3-pre で追加)
     "gray_review":     "🟡 通常確認",   # 旧: 🟡判断
     "mild_warning":    "🟢 参考確認",   # 旧: 🟢参考
 }
@@ -262,6 +264,7 @@ def create_finding(
     review_level は error_type から自動導出:
         direct_error    → 🔴 必須確認
         reverse_suspect → 🟠 重点確認
+        invoice_warning → 🟠 重点確認
         gray_review     → 🟡 通常確認
         mild_warning    → 🟢 参考確認
 

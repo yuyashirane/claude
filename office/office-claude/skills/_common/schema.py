@@ -12,7 +12,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass, field
 from datetime import date
-from typing import Literal, Optional
+from typing import Any, Literal, Optional
 
 
 # ===========================================================================
@@ -25,7 +25,16 @@ from typing import Literal, Optional
 
 Severity = Literal["🔴 Critical", "🟠 High", "🟡 Medium", "🟢 Low"]
 ReviewLevel = Literal["🔴 必須確認", "🟠 重点確認", "🟡 通常確認", "🟢 参考確認"]
-ErrorType = Literal["direct_error", "mild_warning", "gray_review", "reverse_suspect"]
+# ErrorType は深刻度順(direct_error → reverse_suspect → invoice_warning →
+# gray_review → mild_warning)。invoice_warning は β2-E E3-pre で追加、
+# V1-3-20 系の警告(インボイス未登録の検出等)を表す。
+ErrorType = Literal[
+    "direct_error",
+    "reverse_suspect",
+    "invoice_warning",  # V1-3-20 系の警告 (β2-E E3-pre で追加)
+    "gray_review",
+    "mild_warning",
+]
 LinkTarget = Literal["general_ledger", "journal", "deal_detail"]
 
 
@@ -116,6 +125,11 @@ class Finding:
     transaction_date: Optional[str] = None  # YYYY-MM-DD 形式
     is_qualified_invoice: Optional[bool] = None
     tax_code: Optional[int] = None  # 税区分コード(V1-3-20 raw["tax_code"] と同型)
+
+    # === V1-3-20 由来の raw 構造 (β2-E E3-b で追加、E3-c で解体予定) ===
+    # 短期的な互換のための妥協。E3-c で raw を解体し直下属性に振り分けた後、
+    # 削除候補となる。
+    raw: Optional[dict[str, Any]] = None
 
 
 # ===========================================================================

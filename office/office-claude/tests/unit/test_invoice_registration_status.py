@@ -680,20 +680,22 @@ class TestFindingConversion:
     def test_to_finding_severity_is_warning(
         self, v1320, v1320_checker, v1320_schema
     ):
+        # E3-b: severity は共通 Severity Literal "🟠 High" (V1320_SEVERITY_MAP 経由)
         f = v1320_checker.to_finding(
             _make_row(v1320),
             v1320_schema.Classification.NONQUALIFIED_BUT_FULL_DEDUCTION_TAX,
         )
-        assert f.severity == "warning"
+        assert f.severity == "🟠 High"
 
     def test_to_finding_rule_code_is_v1_3_20(
         self, v1320, v1320_checker, v1320_schema
     ):
+        # E3-b: rule_code 属性は共通 Finding にないため tc_code で代替("V1-3-20")
         f = v1320_checker.to_finding(
             _make_row(v1320),
             v1320_schema.Classification.NONQUALIFIED_BUT_FULL_DEDUCTION_TAX,
         )
-        assert f.rule_code == "V1-3-20"
+        assert f.tc_code == "V1-3-20"
 
     def test_to_finding_message_contains_partner_and_tax_label(
         self, v1320, v1320_checker, v1320_schema
@@ -971,9 +973,9 @@ class TestExitZeroEndToEnd:
         ids = {f["wallet_txn_id"] for f in all_findings}
         assert ids == {"1", "4", "6"}
 
-        # 各 Finding の構造（β2-C: classification + raw 8 フィールド）
+        # 各 Finding の構造（β2-E E3-b: 共通 Finding 移行後)
         for f in all_findings:
-            assert f["severity"] == "warning"
+            assert f["severity"] == "🟠 High"  # E3-b: V1320_SEVERITY_MAP 経由
             assert f["rule_code"] == "V1-3-20"
             assert f["classification"] in {
                 "qualified_but_transitional_tax",
@@ -1381,19 +1383,16 @@ class TestInvoiceFindingClassification:
 
     def test_classification_field_default_is_none(self, v1320_schema):
         """デフォルト None で生成可能（V1-3-10 統合余地、案 B）。"""
-        f = v1320_schema.InvoiceFinding(
-            severity="warning",
-            message="x",
-            wallet_txn_id="t1",
-        )
+        f = _make_finding(v1320_schema, classification=None)
         assert f.classification is None
 
     def test_classification_field_with_enum_value(self, v1320_schema):
-        """Classification 値で生成可能。"""
-        f = v1320_schema.InvoiceFinding(
-            severity="warning",
-            message="x",
-            wallet_txn_id="t1",
+        """Classification 値で生成可能（E3-b: 共通 Finding は str(Enum.value)で保持）。
+
+        Classification は (str, Enum) 継承のため、文字列比較で Enum と等価。
+        """
+        f = _make_finding(
+            v1320_schema,
             classification=v1320_schema.Classification.NONQUALIFIED_BUT_FULL_DEDUCTION_TAX,
         )
         assert f.classification == (
@@ -1402,9 +1401,7 @@ class TestInvoiceFindingClassification:
 
     def test_finding_remains_frozen(self, v1320_schema):
         """frozen=True が維持されている。"""
-        f = v1320_schema.InvoiceFinding(
-            severity="warning", message="x", wallet_txn_id="t1",
-        )
+        f = _make_finding(v1320_schema, classification=None)
         with pytest.raises(Exception):
             f.classification = (
                 v1320_schema.Classification.PARTNER_UNKNOWN
@@ -1646,13 +1643,27 @@ class TestToFindingsListAPI:
 # ─────────────────────────────────────────────────────────────────────
 
 def _make_finding(v1320_schema, *, classification, wallet_txn_id="t-x"):
-    """β2-C 用の最小 InvoiceFinding ファクトリ（テスト専用）。"""
+    """共通 Finding 用の最小ファクトリ（テスト専用、β2-E E3-b で共通 Finding 対応）。
+
+    InvoiceFinding は schema.py で共通 Finding の re-export エイリアス。
+    必須属性 7 個 + V1-3-20 由来の Optional 属性を埋める。
+
+    classification は Enum を受け取り、共通 Finding に渡すときは
+    Enum.value (str) に変換する。
+    """
     return v1320_schema.InvoiceFinding(
-        severity="warning",
-        message="x",
+        # === 必須属性 (V1-3-10 由来) ===
+        tc_code="V1-3-20",
+        sub_code="01",
+        severity="🟠 High",
+        error_type="invoice_warning",
+        review_level="🟠 重点確認",
+        area="A14",
+        sort_priority=30,
+        # === Optional 属性 ===
         wallet_txn_id=wallet_txn_id,
-        classification=classification,
-        rule_code="V1-3-20",
+        message="x",
+        classification=classification.value if classification else None,
         raw={},
     )
 
@@ -1841,14 +1852,7 @@ class TestFindingToDict:
 
     def test_finding_to_dict_with_classification_none(self, v1320, v1320_schema):
         """V1-3-10 互換：classification=None は null として出力。"""
-        f = v1320_schema.InvoiceFinding(
-            severity="warning",
-            message="x",
-            wallet_txn_id="t1",
-            classification=None,
-            rule_code="V1-3-20",
-            raw={},
-        )
+        f = _make_finding(v1320_schema, classification=None, wallet_txn_id="t1")
         d = v1320._finding_to_dict(f)
         assert d["classification"] is None
 
