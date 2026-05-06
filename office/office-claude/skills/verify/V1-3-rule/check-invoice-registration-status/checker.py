@@ -55,10 +55,28 @@ def _load_sibling(module_name: str, filename: str):
 
 try:
     from .schema import Classification, InvoiceFinding  # type: ignore
+    from .severity_map import to_common_severity  # type: ignore
 except ImportError:
     _schema = _load_sibling("v1_3_20_invoice_schema", "schema.py")
     Classification = _schema.Classification  # type: ignore
     InvoiceFinding = _schema.InvoiceFinding  # type: ignore
+    _severity_map_mod = _load_sibling("v1_3_20_severity_map", "severity_map.py")
+    to_common_severity = _severity_map_mod.to_common_severity  # type: ignore
+
+
+# ─────────────────────────────────────────────────────────────────────
+# Classification → sub_code 番号の対応 (β2-E E3-b で導入)
+# ─────────────────────────────────────────────────────────────────────
+
+_CLASSIFICATION_TO_SUB_CODE: dict = {
+    Classification.QUALIFIED_BUT_TRANSITIONAL_TAX:      "01",
+    Classification.NONQUALIFIED_BUT_FULL_DEDUCTION_TAX: "02",
+    Classification.PARTNER_UNKNOWN:                     "03",
+}
+"""Classification (3 分類) を共通 Finding の sub_code 番号に変換するマップ。
+
+V1-3-10 体系と統一するため番号制を採用。E3-b 確定。
+"""
 
 
 if TYPE_CHECKING:
@@ -102,26 +120,51 @@ Finding 化しないため定義不要（KeyError で「設計違反を検知」
 # ─────────────────────────────────────────────────────────────────────
 
 def to_finding(row, classification):  # type: ignore[no-untyped-def]
-    """1 件の InvoiceCheckRow + Classification を Finding に変換する（β2-C）。
+    """1 件の InvoiceCheckRow + Classification を共通 Finding に変換する(β2-E E3-b)。
+
+    InvoiceFinding は共通 Finding のエイリアス(schema.py で再エクスポート)。
+    本関数は共通 Finding の必須属性 7 個 + V1-3-20 由来の Optional 属性を埋める。
+
+    必須属性の対応:
+        - tc_code         = "V1-3-20"
+        - sub_code        = _CLASSIFICATION_TO_SUB_CODE[classification]  ("01"/"02"/"03")
+        - severity        = "🟠 High" (V1320_SEVERITY_MAP 経由)
+        - error_type      = "invoice_warning" (E3-pre で追加)
+        - review_level    = "🟠 重点確認"
+        - area            = "A14" (インボイス専用エリア)
+        - sort_priority   = 30 (中優先度)
+
+    raw 構造は β2-C 8 フィールドのまま維持(E3-c で解体予定)。
 
     Args:
-        row: InvoiceCheckRow（β2 拡張、tax_code 含む）。
-        classification: Classification（3 分類のいずれか）。
+        row: InvoiceCheckRow(β2 拡張、tax_code 含む)。
+        classification: Classification(3 分類のいずれか)。
             EXPECTED_* / NONE が渡されると _format_message で KeyError。
 
     Returns:
-        InvoiceFinding（severity="warning"、classification 設定済、raw 8 フィールド）。
+        共通 Finding(InvoiceFinding エイリアス、severity="🟠 High"、
+        classification は Enum.value 文字列、raw 8 フィールド)。
 
     Raises:
-        KeyError: classification が MESSAGE_TEMPLATES に未定義の場合
-                  （EXPECTED_* / NONE が誤って渡された＝設計違反）。
+        KeyError: classification が MESSAGE_TEMPLATES または
+                  _CLASSIFICATION_TO_SUB_CODE に未定義の場合
+                  (EXPECTED_* / NONE が誤って渡された＝設計違反)。
     """
     return InvoiceFinding(
-        severity="warning",
-        message=_format_message(row, classification),
+        # === 必須属性 (V1-3-10 由来) ===
+        tc_code="V1-3-20",
+        sub_code=_CLASSIFICATION_TO_SUB_CODE[classification],
+        severity=to_common_severity("warning"),  # = "🟠 High"
+        error_type="invoice_warning",
+        review_level="🟠 重点確認",
+        area="A14",
+        sort_priority=30,
+        # === Optional 属性 (V1-3-10 由来) ===
         wallet_txn_id=row.wallet_txn_id,
-        classification=classification,
-        rule_code="V1-3-20",
+        message=_format_message(row, classification),
+        # === V1-3-20 由来の追加属性 (E1 で共通 Finding に追加済) ===
+        classification=classification.value if classification else None,
+        # === raw 構造は維持 (E3-c で解体予定) ===
         raw=_build_raw(row),
     )
 
