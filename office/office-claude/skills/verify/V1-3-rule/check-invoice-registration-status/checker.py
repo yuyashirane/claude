@@ -164,7 +164,15 @@ def to_finding(row, classification):  # type: ignore[no-untyped-def]
         message=_format_message(row, classification),
         # === V1-3-20 由来の追加属性 (E1 で共通 Finding に追加済) ===
         classification=classification.value if classification else None,
-        # === raw 構造は維持 (E3-c で解体予定) ===
+        partner=row.partner,
+        transaction_date=(
+            row.transaction_date.isoformat()
+            if row.transaction_date is not None
+            else ""
+        ),
+        is_qualified_invoice=row.is_qualified_invoice,
+        tax_code=row.tax_code,
+        # === raw 構造は維持 (raw の完全解体は将来の別タスク) ===
         raw=_build_raw(row),
     )
 

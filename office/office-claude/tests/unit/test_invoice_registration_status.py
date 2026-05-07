@@ -684,13 +684,13 @@ class TestFindingConversion:
             "is_qualified_invoice",
         }
         assert f.raw["tax_label"] == "課対仕入10%"
-        assert f.raw["tax_code"] == 136  # _make_row のヘルパでは tax_code=136
+        assert f.tax_code == 136  # _make_row のヘルパでは tax_code=136
         assert f.raw["debit_amount"] == "300000"
-        assert f.raw["partner"] == "未登録ベンダー"
+        assert f.partner == "未登録ベンダー"
         assert f.raw["description"] == "広告費"
-        assert f.raw["transaction_date"] == "2025-12-15"
+        assert f.transaction_date == "2025-12-15"
         assert f.raw["source"] == "deal"
-        assert f.raw["is_qualified_invoice"] is False
+        assert f.is_qualified_invoice is False
 
     def test_to_finding_severity_is_warning(
         self, v1320, v1320_checker, v1320_schema
@@ -741,7 +741,7 @@ class TestFindingConversion:
         f = v1320_checker.to_finding(
             row, v1320_schema.Classification.NONQUALIFIED_BUT_FULL_DEDUCTION_TAX
         )
-        assert f.raw["transaction_date"] == ""
+        assert f.transaction_date == ""
 
     def test_to_findings_preserves_order(
         self, v1320, v1320_checker, v1320_schema
@@ -1447,7 +1447,7 @@ class TestRawSchemaExtended:
         f = v1320_checker.to_finding(
             row, v1320_schema.Classification.QUALIFIED_BUT_TRANSITIONAL_TAX
         )
-        assert f.raw["tax_code"] == 189
+        assert f.tax_code == 189
 
     def test_raw_tax_code_can_be_none(self, v1320, v1320_checker, v1320_schema):
         """tax_code が None の row は通常 NONE 分類になり Finding 化されないが、
@@ -1457,14 +1457,14 @@ class TestRawSchemaExtended:
         f = v1320_checker.to_finding(
             row, v1320_schema.Classification.NONQUALIFIED_BUT_FULL_DEDUCTION_TAX
         )
-        assert f.raw["tax_code"] is None
+        assert f.tax_code is None
 
     def test_raw_includes_is_qualified_invoice(self, v1320, v1320_checker, v1320_schema):
         row = _make_row_c(v1320, is_qualified_invoice=True)
         f = v1320_checker.to_finding(
             row, v1320_schema.Classification.QUALIFIED_BUT_TRANSITIONAL_TAX
         )
-        assert f.raw["is_qualified_invoice"] is True
+        assert f.is_qualified_invoice is True
 
     def test_raw_preserves_existing_six_fields(self, v1320, v1320_checker, v1320_schema):
         """β1/β2-B の 6 フィールドが値も含めて維持されている。"""
@@ -1474,9 +1474,9 @@ class TestRawSchemaExtended:
         )
         assert f.raw["tax_label"] == "課対仕入10%"
         assert f.raw["debit_amount"] == "250000"
-        assert f.raw["partner"] == "未登録ベンダー"
+        assert f.partner == "未登録ベンダー"
         assert f.raw["description"] == "広告費"
-        assert f.raw["transaction_date"] == "2025-12-15"
+        assert f.transaction_date == "2025-12-15"
         assert f.raw["source"] == "deal"
 
     def test_raw_transaction_date_none_becomes_empty_string(
@@ -1491,7 +1491,7 @@ class TestRawSchemaExtended:
         f = v1320_checker.to_finding(
             row, v1320_schema.Classification.NONQUALIFIED_BUT_FULL_DEDUCTION_TAX
         )
-        assert f.raw["transaction_date"] == ""
+        assert f.transaction_date == ""
 
     def test_raw_does_not_include_classification(
         self, v1320, v1320_checker, v1320_schema
