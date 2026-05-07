@@ -3,6 +3,8 @@
 α (TestInvoiceCandidatesAlpha): 3 条件 AND フィルタの最小 5 ケース（既存・改変禁止）。
 β1 (TestInvoiceCheckContext / TestCliArgValidation / TestMissingFiles
      / TestFindingConversion / TestNormalizeDeals): CLI 化と Finding 変換層の検証。
+β2-E E4-3b: TestInvoiceCheckContext は共通 CheckContext (skills/_common/context.py)
+     を使う形に書き換え (InvoiceCheckContext は廃止)。
 
 V1-3-10 のテスト群と独立しており、共有 conftest を変更せずに動作する。
 ハイフン区切りディレクトリへのアクセスは importlib 経由で行う。
@@ -281,25 +283,34 @@ class TestClassifyTransactionLegacyIntents:
 
 
 # ─────────────────────────────────────────────────────────────────────
-# β1: CheckContext (schema.py)
+# β1 (β2-E E4-3b 後): CheckContext (共通 skills/_common/context.py)
+#
+# β2-E E4-3b で InvoiceCheckContext は廃止され、共通 CheckContext に統合された。
+# 本クラスは従来 InvoiceCheckContext の構築テストだったが、共通 CheckContext を
+# 使う形に書き換えた。テストの意図 (3 パターン + frozen) は維持する。
+# 論点 1 (案 A) の決定により company_id は str 型として扱う。
 # ─────────────────────────────────────────────────────────────────────
 
 class TestInvoiceCheckContext:
-    """InvoiceCheckContext の構築テスト。"""
+    """V1-3-20 で必要な CheckContext の構築テスト (β2-E E4-3b 後は共通 CheckContext)。"""
 
-    def test_context_pattern1(self, v1320_schema):
-        ctx = v1320_schema.InvoiceCheckContext(
-            company_id=3525430,
+    def test_context_pattern1(self):
+        from skills._common.context import CheckContext
+        ctx = CheckContext(
+            company_id="3525430",
+            fiscal_year_id="fy2026",
             period_start=date(2025, 4, 1),
             period_end=date(2026, 3, 31),
         )
-        assert ctx.company_id == 3525430
+        assert ctx.company_id == "3525430"
         assert ctx.target_month is None
         assert ctx.single_month is False
 
-    def test_context_pattern2(self, v1320_schema):
-        ctx = v1320_schema.InvoiceCheckContext(
-            company_id=3525430,
+    def test_context_pattern2(self):
+        from skills._common.context import CheckContext
+        ctx = CheckContext(
+            company_id="3525430",
+            fiscal_year_id="fy2026",
             period_start=date(2025, 4, 1),
             period_end=date(2025, 12, 31),
             target_month=date(2025, 12, 1),
@@ -308,9 +319,11 @@ class TestInvoiceCheckContext:
         assert ctx.target_month == date(2025, 12, 1)
         assert ctx.single_month is False
 
-    def test_context_pattern3(self, v1320_schema):
-        ctx = v1320_schema.InvoiceCheckContext(
-            company_id=3525430,
+    def test_context_pattern3(self):
+        from skills._common.context import CheckContext
+        ctx = CheckContext(
+            company_id="3525430",
+            fiscal_year_id="fy2026",
             period_start=date(2025, 12, 1),
             period_end=date(2025, 12, 31),
             target_month=date(2025, 12, 1),
@@ -319,15 +332,17 @@ class TestInvoiceCheckContext:
         assert ctx.target_month == date(2025, 12, 1)
         assert ctx.single_month is True
 
-    def test_context_is_frozen(self, v1320_schema):
+    def test_context_is_frozen(self):
         """frozen dataclass: 属性変更不可。"""
-        ctx = v1320_schema.InvoiceCheckContext(
-            company_id=1,
+        from skills._common.context import CheckContext
+        ctx = CheckContext(
+            company_id="1",
+            fiscal_year_id="fy2026",
             period_start=date(2025, 4, 1),
             period_end=date(2025, 4, 30),
         )
         with pytest.raises(Exception):
-            ctx.company_id = 2  # type: ignore[misc]
+            ctx.company_id = "2"  # type: ignore[misc]
 
 
 # ─────────────────────────────────────────────────────────────────────

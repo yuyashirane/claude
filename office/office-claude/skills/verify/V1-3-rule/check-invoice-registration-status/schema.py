@@ -1,16 +1,19 @@
-"""V1-3-20 β2-E E3-b 専用スキーマ。
+"""V1-3-20 β2-E E4-3b 後の専用スキーマ。
 
-β2-E E3-b 以降:
+β2-E E4-3b 以降:
     - InvoiceFinding は共通 Finding (skills/_common/schema.py) の re-export エイリアス
-    - Skill 固有の Classification / FindingGroup / InvoiceCheckContext のみ本ファイルに残す
+    - InvoiceCheckContext は廃止。V1-3-20 のテストも共通 CheckContext (skills/_common/context.py)
+      を使う形に書き換え済。
+    - Skill 固有の Classification / FindingGroup のみ本ファイルに残す
     - 既存 V1-3-20 コードの ``from .schema import InvoiceFinding`` を維持するため
       Finding をエイリアス名 InvoiceFinding として公開
 
-設計メモ: docs/design/V1-3-20_beta2_E_design_v0.md
+設計メモ: docs/design/V1-3-20_beta2_E_design_v2.md
 変更履歴:
     - β2-B: Classification Enum 追加 (5 分類体系)
     - β2-C: FindingGroup 追加 (classification 単位の親子行)
     - β2-E E3-b: InvoiceFinding 独自定義を廃止、共通 Finding のエイリアスに変更
+    - β2-E E4-3b: InvoiceCheckContext を削除、共通 CheckContext へ統合
 """
 from __future__ import annotations
 
@@ -61,29 +64,6 @@ class Classification(str, Enum):
 
 
 @dataclass(frozen=True)
-class InvoiceCheckContext:
-    """V1-3-20 β1 専用の最小 CheckContext。
-
-    V1-3-10 の CheckContext (categories / transactions など豊富) には依存しない。
-    period_start / period_end / company_id のみを受け取る。
-
-    Attributes:
-        company_id: freee 事業所 ID。
-        period_start: 期間開始日。累積モードでは期首。
-        period_end: 期間終了日。対象月末。
-        target_month: パターン 2/3 の場合の対象月(YYYY-MM-01 を date で)。
-            パターン 1(period_start/end 指定)では None。
-        single_month: パターン 3(単月)のとき True。
-    """
-
-    company_id: int
-    period_start: date
-    period_end: date
-    target_month: date | None = None
-    single_month: bool = False
-
-
-@dataclass(frozen=True)
 class FindingGroup:
     """β2-C 確定: classification 単位の FindingGroup(最小実装)。
 
@@ -108,4 +88,4 @@ class FindingGroup:
     findings: list[InvoiceFinding]
 
 
-__all__ = ["InvoiceCheckContext", "InvoiceFinding", "Classification", "FindingGroup"]
+__all__ = ["InvoiceFinding", "Classification", "FindingGroup"]
