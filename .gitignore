@@ -12,3 +12,7 @@ tmp/
 
 # Git worktrees (avoid submodule misdetection of mode 160000)
 .claude/worktrees/
+
+# Python compiled bytecode and cache (TODO-E5 で追加、2026-05-08)
+__pycache__/
+*.py[cod]
