@@ -350,7 +350,7 @@ PYTHONIOENCODING=utf-8 py -3 skills/verify/V1-3-rule/check-invoice-registration-
   - `to_finding(row) -> InvoiceFinding`
   - `to_findings(rows) -> list[InvoiceFinding]`
 - スキーマ（`schema.py`）:
-  - `InvoiceCheckContext`（V1-3-20 β1 専用最小版、V1-3-10 とは独立）
+  - 共通 `CheckContext`（`skills/_common/context.py`、β2-E E4 で V1-3-10 と統合済）
   - `InvoiceFinding`（V1-3-10 と共通最小サブセット + `raw` dict）
 
 ### 参考
