@@ -347,6 +347,26 @@ def _account_name(finding) -> str:
     return getattr(lh, "account_name", None) or ""
 
 
+def _format_invoice_memo(finding) -> str:
+    """V1-3-20 固有の classification / is_qualified_invoice をメモ列文字列に整形する.
+
+    両方ある: "課対仕入 · 適格=true"
+    classification のみ: "課対仕入"
+    is_qualified_invoice のみ: "適格=true"
+    両方 None: ""
+
+    V1-3-10 等の Finding は両属性とも None なので空文字を返し、既存挙動と等価。
+    """
+    classification = getattr(finding, "classification", None)
+    is_qualified = getattr(finding, "is_qualified_invoice", None)
+    parts: list[str] = []
+    if classification:
+        parts.append(str(classification))
+    if is_qualified is not None:
+        parts.append(f"適格={'true' if is_qualified else 'false'}")
+    return " · ".join(parts)
+
+
 # ─────────────────────────────────────────────────────────────────────
 # スタイル抽出・適用
 # ─────────────────────────────────────────────────────────────────────
@@ -619,12 +639,12 @@ def _write_finding_row(
         _D_RESULT:     "同上" if same_prev else message,
         _D_CURRENT:    getattr(finding, "current_value", ""),
         _D_SUGGESTED:  getattr(finding, "suggested_value", ""),
-        _D_DATE:       _txn_date(finding),
+        _D_DATE:       getattr(finding, "transaction_date", None) or _txn_date(finding) or "",
         _D_ACCOUNT:    _account_name(finding),
-        _D_PARTNER:    "",
+        _D_PARTNER:    getattr(finding, "partner", None) or "",
         _D_ITEM:       "",
         _D_DEPT:       "",
-        _D_MEMO:       "",
+        _D_MEMO:       _format_invoice_memo(finding),
         _D_DESC:       "",
         _D_DEBIT:      debit_val  if debit_val  is not None else "",
         _D_CREDIT:     credit_val if credit_val is not None else "",
