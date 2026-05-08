@@ -10,6 +10,7 @@ import re
 from copy import copy
 from datetime import date as _date_cls
 from pathlib import Path
+from types import SimpleNamespace
 
 from openpyxl import load_workbook
 from openpyxl.styles import Alignment, Font, PatternFill
@@ -24,6 +25,7 @@ from skills._common.lib.finding_grouper import (
     group as _group_findings,
     is_mixing_pattern,
 )
+from skills._common.lib.invoice_group_adapter import adapt_invoice_groups
 
 from skills.export.excel_report.styles import SEVERITY_DISPLAY
 from skills.export.excel_report.sort_priority_map import get_sort_priority
@@ -1021,6 +1023,88 @@ def _write_child_row(ws, row: int, finding, prev_message=None, txn_index=None) -
     ws.row_dimensions[row].height = None
 
 
+def _group_v1_3_20_findings(findings):
+    """V1-3-20 Finding を classification 単位でグループ化し共通 FindingGroup に変換する.
+
+    Phase 1b-i (β2-E E5-4) で新設。
+
+    流れ:
+        1. findings を f.classification の値でグループ化 (None は "_unknown" 扱い)
+        2. 各グループを SimpleNamespace で V1-3-20 独自 FindingGroup 互換オブジェクトに変換
+           (findings_count / findings 属性のみ持つ)
+        3. Phase 1a の adapt_invoice_groups でリストごと共通 FindingGroup に変換
+
+    Args:
+        findings: V1-3-20 Finding のリスト (tc_code="V1-3-20")
+
+    Returns:
+        共通 FindingGroup の list。空リストを渡された場合は空リストを返す。
+    """
+    if not findings:
+        return []
+    by_class: dict = {}
+    order: list = []
+    for f in findings:
+        c = getattr(f, "classification", None) or "_unknown"
+        if c not in by_class:
+            by_class[c] = []
+            order.append(c)
+        by_class[c].append(f)
+    invoice_groups = [
+        SimpleNamespace(
+            findings_count=len(by_class[c]),
+            findings=by_class[c],
+        )
+        for c in order
+    ]
+    return adapt_invoice_groups(invoice_groups)
+
+
+def _fill_detail_sheet_with_groups(ws, groups, ctx=None) -> None:
+    """事前にグループ化された FindingGroup のリストを ws に書き込む.
+
+    _fill_detail_sheet_grouped は内部で _group_findings を呼んで自動グループ化
+    するが、本関数は groups を外部から受け取る (V1-3-20 のように専用 grouping
+    ロジックを使うケース用)。
+
+    Phase 1b-i (β2-E E5-4) で新設。実装は _fill_detail_sheet_grouped と同等
+    だが、内部グループ化ステップを skip する。
+    """
+    last_row = ws.max_row
+    if last_row >= _DET_DATA_START:
+        ws.delete_rows(
+            _DET_DATA_START, last_row - _DET_DATA_START + 1,
+        )
+
+    txn_index: dict = {}
+    if ctx is not None:
+        for t in getattr(ctx, "transactions", None) or ():
+            wid = getattr(t, "wallet_txn_id", None)
+            if wid:
+                txn_index[wid] = t
+
+    row = _DET_DATA_START
+    for g in groups:
+        _write_parent_row(ws, row, g, ctx=ctx)
+        row += 1
+        prev_message = None
+        for child in g.findings:
+            _write_child_row(ws, row, child, prev_message=prev_message, txn_index=txn_index)
+            prev_message = getattr(child, "message", None) or ""
+            row += 1
+
+    if groups:
+        last_data_row = row - 1
+        dv = DataValidation(
+            type="list",
+            formula1='"〇,×,保留"',
+            allow_blank=True,
+            showDropDown=False,
+        )
+        dv.sqref = f"U{_DET_DATA_START}:U{last_data_row}"
+        ws.add_data_validation(dv)
+
+
 def _fill_detail_sheet_grouped(ws, findings: list, ctx=None) -> None:
     """Phase 8-B: Finding をグループ化し、親行→子行の順で描画する。
 
@@ -1144,7 +1228,26 @@ def build_output(
             # Phase 8-B: 親子行レイアウト。旧 _fill_detail_sheet は dead code として
             # 残置（Phase 8-C 累計モデル化で再利用される可能性があるため）。
             # Phase 8-C: ctx を渡すと親行 Q 列に会計期間全体の GL リンクが付く。
-            _fill_detail_sheet_grouped(ws, sorted_f, ctx=ctx)
+            # E5-4 Phase 1b-i: V1-3-20 (TC-INV カテゴリ) は classification 単位
+            # でグループ化するため専用経路に乗せる。共通 grouper のフォールバック
+            # (sub_code|area|account 戦略) では classification 軸の意図を反映できない。
+            v1_3_20_findings = [
+                f for f in sorted_f if getattr(f, "tc_code", None) == "V1-3-20"
+            ]
+            non_v1_3_20_findings = [
+                f for f in sorted_f if getattr(f, "tc_code", None) != "V1-3-20"
+            ]
+            if v1_3_20_findings and non_v1_3_20_findings:
+                raise ValueError(
+                    f"Mixed tc_code in area {area}: "
+                    f"V1-3-20={len(v1_3_20_findings)}, "
+                    f"others={len(non_v1_3_20_findings)}"
+                )
+            if v1_3_20_findings:
+                v1_3_20_groups = _group_v1_3_20_findings(v1_3_20_findings)
+                _fill_detail_sheet_with_groups(ws, v1_3_20_groups, ctx=ctx)
+            else:
+                _fill_detail_sheet_grouped(ws, sorted_f, ctx=ctx)
 
     # ── 参考シートはそのまま（何もしない） ──
 
