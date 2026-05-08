@@ -580,7 +580,8 @@ def test_summary_tc_matrix_header_row9(tmp_path):
     wb = load_workbook(output)
     ws = wb["サマリー"]
     assert ws.cell(9, 1).value == "項目"
-    assert ws.cell(9, 7).value == "合計"
+    assert ws.cell(9, 7).value == "参考"
+    assert ws.cell(9, 8).value == "合計"
 
 
 def test_header_fill_is_dark_blue(tmp_path):
@@ -701,19 +702,20 @@ def test_multiple_groups_each_parent_has_own_observation(tmp_path):
     assert ws.cell(7, 5).value == "メッセージB", "子行 E7 = メッセージB"
 
 
-def test_summary_legend_in_l_m_columns(tmp_path):
-    """サマリーシートの凡例が L 列（12）に配置される（テンプレート構造準拠）。"""
+def test_summary_legend_in_n_o_columns(tmp_path):
+    """サマリーシートの凡例が N 列（14）に配置される（テンプレート構造準拠）。"""
     from skills.export.excel_report.exporter import export_to_excel
     output = tmp_path / "out.xlsx"
     export_to_excel([], output, company_name="テスト会社")
     wb = load_workbook(output)
     ws = wb["サマリー"]
-    # Row 2: L="【判定凡例】"（テンプレートでは Row 2 に配置）
-    assert ws.cell(2, 12).value == "【判定凡例】"
-    # Row 3: L="重大", Row 4: L="要注意", Row 5: L="要確認"
-    assert ws.cell(3, 12).value == "重大"
-    assert ws.cell(4, 12).value == "要注意"
-    assert ws.cell(5, 12).value == "要確認"
+    # Row 2: N="【判定凡例】"
+    assert ws.cell(2, 14).value == "【判定凡例】"
+    # Row 3-6: N="要修正（必須）", "要判断（重点）", "要確認（推奨）", "参考（任意）"
+    assert ws.cell(3, 14).value == "要修正（必須）"
+    assert ws.cell(4, 14).value == "要判断（重点）"
+    assert ws.cell(5, 14).value == "要確認（推奨）"
+    assert ws.cell(6, 14).value == "参考（任意）"
 
 
 def test_severity_display_low_is_youkakunin(tmp_path):
