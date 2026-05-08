@@ -34,7 +34,7 @@ from skills.export.excel_report.sort_priority_map import get_sort_priority
 
 DEFAULT_TEMPLATE_PATH = Path("templates/TC_template.xlsx")
 
-AREA_ORDER: list[str] = ["A4", "A5", "A8", "A10", "A11", "A12"]
+AREA_ORDER: list[str] = ["A4", "A5", "A8", "A10", "A11", "A12", "A14"]
 
 _TC_NAMES: list[tuple[str, str]] = [
     ("TC-01", "売上の税区分"),
