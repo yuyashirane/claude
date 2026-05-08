@@ -1184,6 +1184,49 @@ def main() -> int:
     period_start_date = _yyyymm_to_first_day(period_start)
     period_end_date = _yyyymm_to_last_day(period_end)
 
+    # Step 7.6: Excel 出力 (β2-E E5-5)。
+    # 失敗時は EXIT_UNEXPECTED で abort し JSON 成功ペイロード (_emit) は出さない
+    # (V1-3-10 と一貫: Excel が出ない場合は status:ok の JSON も出さない方針)。
+    try:
+        from skills.export.excel_report.exporter import export_to_excel
+
+        company_name = getattr(ctx, "company_name", "") or ""
+        reports_dir = (
+            PROJECT_ROOT
+            / "reports"
+            / f"{company_id}_{company_name}"
+        )
+        reports_dir.mkdir(parents=True, exist_ok=True)
+        ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+        output_path = (
+            reports_dir
+            / f"v1-3-20_{period_start}_to_{period_end}_{ts}.xlsx"
+        )
+        # テンプレは固定アセットなのでモジュールパス (__file__ ベース) で解決し、
+        # データパス用 PROJECT_ROOT (V1_3_20_PROJECT_ROOT で test 時 tmp_path に
+        # override される) と切り離す。
+        template_path = (
+            Path(__file__).resolve().parents[4]
+            / "templates"
+            / "TC_template.xlsx"
+        )
+        export_to_excel(
+            findings,
+            output_path,
+            company_name=company_name,
+            period=f"{period_start}〜{period_end}",
+            template_path=template_path,
+            ctx=ctx,
+        )
+    except Exception as e:  # noqa: BLE001
+        _emit_error(
+            error_stage="excel_export",
+            exit_code=EXIT_UNEXPECTED,
+            message=f"Excel 出力に失敗: {type(e).__name__}: {e}",
+            extra={"traceback": traceback.format_exc()},
+        )
+        return EXIT_UNEXPECTED
+
     _emit(
         {
             "status": "ok",
