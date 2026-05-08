@@ -202,16 +202,51 @@ def test_detail_sheet_has_23_columns(tmp_path):
     assert len(header_cells) == 23
 
 
-def test_summary_lower_table_has_11_columns(tmp_path):
-    """サマリーシートの下部テーブルヘッダー行（Row 20）に非空セルが 11 個ある。"""
+def test_summary_lower_table_has_12_columns_at_row_21(tmp_path):
+    """サマリーシートの下部テーブルヘッダー行（Row 21）に非空セルが 12 個ある.
+
+    TODO-T 18a で新テンプレ準拠 (Row 21 ヘッダー、12 列構成) に追従。
+    旧仕様 (Row 20、11 列) からのテスト書き換え。
+    """
     from skills.export.excel_report.exporter import export_to_excel
     findings = [_make_finding(sub_code="TC-07a", area="A10")]
     output = tmp_path / "out.xlsx"
     export_to_excel(findings, output)
     wb = load_workbook(output)
     ws = wb["サマリー"]
-    header_cells = [c for c in ws[20] if c.value is not None]
-    assert len(header_cells) == 11
+    header_cells = [c for c in ws[21] if c.value is not None]
+    assert len(header_cells) == 12
+
+
+def test_summary_lower_table_header_at_row_21_preserved(tmp_path):
+    """テンプレ Row 21 の下段ヘッダー (12 列、テンプレ既存値) が出力 Excel でも保持される.
+
+    TODO-T 18b 追加: T-1 (下段表消失) / T-2 (Row 21 単独行) 解消の恒久検証。
+    `_fill_lower_table` がデータを Row 22 から書くことで、Row 21 のテンプレ既存
+    ヘッダー (新仕様 12 列) が破壊されないことを直接 assert する。
+    """
+    from skills.export.excel_report.exporter import export_to_excel
+    findings = [_make_finding(sub_code="TC-07a", area="A10")]
+    output = tmp_path / "out.xlsx"
+    export_to_excel(findings, output)
+    wb = load_workbook(output)
+    ws = wb["サマリー"]
+    # 12 列ヘッダーが保持されている
+    non_empty_cells = [c for c in ws[21] if c.value is not None]
+    assert len(non_empty_cells) == 12, f"期待: 12 列、実際: {len(non_empty_cells)} 列"
+    # ヘッダー文字列の代表的なものを確認 (テンプレ既存値の保持確認)
+    assert ws.cell(row=21, column=1).value == "エリア"           # A21
+    assert ws.cell(row=21, column=2).value == "エリア名"         # B21
+    assert ws.cell(row=21, column=4).value == "項目"             # D21
+    assert ws.cell(row=21, column=5).value == "チェック項目"     # E21
+    assert ws.cell(row=21, column=8).value == "項目数"           # H21
+    assert ws.cell(row=21, column=9).value == "要修正"           # I21
+    assert ws.cell(row=21, column=10).value == "要判断"          # J21
+    assert ws.cell(row=21, column=11).value == "要確認"          # K21
+    assert ws.cell(row=21, column=12).value == "参考"            # L21
+    assert ws.cell(row=21, column=13).value == "合計件数"        # M21
+    assert ws.cell(row=21, column=14).value == "影響金額合計"    # N21
+    assert ws.cell(row=21, column=15).value == "確認進捗"        # O21
 
 
 def test_detail_sheet_header_values(tmp_path):
@@ -381,7 +416,11 @@ def test_sort_priority_from_map_when_zero(tmp_path):
 
 
 def test_summary_sheet_sorted_by_area_order(tmp_path):
-    """サマリーシートは area 順（A4→A10）にソートされる。データは Row 21 から始まる。"""
+    """サマリーシートは area 順（A4→A10）にソートされる。データは Row 22 から始まる.
+
+    TODO-T 18a で新テンプレ準拠 (Row 21 ヘッダー、Row 22 からデータ) に追従。
+    旧仕様 (Row 21 からデータ) からのテスト書き換え。
+    """
     from skills.export.excel_report.exporter import export_to_excel
     findings = [
         _make_finding(sub_code="TC-07a", area="A10", sort_priority=12),
@@ -391,8 +430,8 @@ def test_summary_sheet_sorted_by_area_order(tmp_path):
     export_to_excel(findings, output)
     wb = load_workbook(output)
     ws = wb["サマリー"]
-    assert ws.cell(21, 1).value == "A4"
-    assert ws.cell(22, 1).value == "A10"
+    assert ws.cell(22, 1).value == "A4"
+    assert ws.cell(23, 1).value == "A10"
 
 
 # ─────────────────────────────────────────────────────────────────────
@@ -554,7 +593,11 @@ def test_summary_header_title_with_company_name(tmp_path):
 
 
 def test_summary_tc_matrix_tc07_row16(tmp_path):
-    """サマリー Row 16（TC-07）に severity 別件数が入る。"""
+    """サマリー Row 16（TC-07）に 4 区分独立で severity 別件数が入る.
+
+    TODO-T 18a で新テンプレ準拠 (4 区分独立: 🔴/🟠/🟡/🟢 を D/E/F/G に独立集計、
+    H 列 = 合計) に追従。旧仕様 (3 区分集約: 🟠+🟡 を E にまとめ書き) から書き換え。
+    """
     from skills.export.excel_report.exporter import export_to_excel
     findings = [
         _make_finding(sub_code="TC-07a", area="A10", severity="🔴 Critical"),
@@ -566,10 +609,11 @@ def test_summary_tc_matrix_tc07_row16(tmp_path):
     wb = load_workbook(output)
     ws = wb["サマリー"]
     assert ws.cell(16, 1).value == "TC-07"   # A列: TC コード
-    assert ws.cell(16, 4).value == 1          # D列: 重大
-    assert ws.cell(16, 5).value == 0          # E列: 要注意
-    assert ws.cell(16, 6).value == 2          # F列: 要確認
-    assert ws.cell(16, 7).value == 3          # G列: 合計
+    assert ws.cell(16, 4).value == 1          # D列: 要修正 (🔴)
+    assert ws.cell(16, 5).value == 0          # E列: 要判断 (🟠 なし)
+    assert ws.cell(16, 6).value == 0          # F列: 要確認 (🟡 なし)
+    assert ws.cell(16, 7).value == 2          # G列: 参考 (🟢 Low 2 件)
+    assert ws.cell(16, 8).value == 3          # H列: 合計
 
 
 def test_summary_tc_matrix_header_row9(tmp_path):
@@ -812,7 +856,11 @@ def test_area_sheet_preserves_template_font(tmp_path):
 
 
 def test_summary_sheet_unaffected_by_area_fix(tmp_path):
-    """エリアシート修正後もサマリーシートが正常動作する（回帰確認）。"""
+    """エリアシート修正後もサマリーシートが正常動作する（回帰確認）.
+
+    TODO-T 18a で新テンプレ準拠 (4 区分独立、🟢 → G 列「参考」) に追従。
+    旧仕様 (🟢 → F 列) からのテスト書き換え。
+    """
     from skills.export.excel_report.exporter import export_to_excel
     findings = [
         _make_finding(sub_code="TC-07a", area="A10", severity="🔴 Critical"),
@@ -824,10 +872,10 @@ def test_summary_sheet_unaffected_by_area_fix(tmp_path):
     ws = wb["サマリー"]
     # タイトルに会社名が含まれる
     assert "回帰テスト株式会社" in ws.cell(1, 1).value
-    # TC-07 行（Row 16）: 重大=1
+    # TC-07 行（Row 16）: 要修正=1 (🔴)
     assert ws.cell(16, 4).value == 1
-    # TC-03 行（Row 12）: 要確認=1
-    assert ws.cell(12, 6).value == 1
+    # TC-03 行（Row 12）: 参考=1 (🟢、新仕様で G 列)
+    assert ws.cell(12, 7).value == 1
     # 両エリアシートが存在する
     assert "A5 人件費" in wb.sheetnames
     assert "A10 その他経費" in wb.sheetnames

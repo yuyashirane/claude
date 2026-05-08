@@ -24,6 +24,7 @@ from skills.export.excel_report.template_engine import (
     DEFAULT_TEMPLATE_PATH,
     _SUM_TC_COL_CODE,
     _SUM_TC_COL_HIGH,
+    _SUM_TC_COL_INFO,
     _SUM_TC_COL_LOW,
     _SUM_TC_COL_MED,
     _SUM_TC_COL_TOTAL,
@@ -355,11 +356,12 @@ class TestFillSummaryV1320:
     def test_fill_summary_aggregates_v1_3_20_into_tc_inv_row(
         self, v1_3_20_finding_factory, loaded_summary_sheet
     ):
-        """V1-3-20 Finding (tc_code='V1-3-20') が TC-INV 行に集計されることを確認.
+        """V1-3-20 Finding (tc_code='V1-3-20') が TC-INV 行に 4 区分独立で集計される.
 
         _TC_NAMES の末尾 (TC-INV) は _SUM_TC_START_ROW + 7 = Row 17 に書かれる.
-        V1-3-20 Finding 3 件 (Critical / High / Low) を渡し、
-        要修正 1 / 要注意 1 / 要確認 1 / 合計 3 が TC-INV 行に出ることを assert.
+        V1-3-20 Finding 3 件 (Critical=🔴 / High=🟠 / Low=🟢) を渡し、TODO-T 18a の
+        4 区分独立集計仕様に基づき、D=1 (🔴) / E=1 (🟠) / F=0 (🟡 なし) /
+        G=1 (🟢) / H=3 (合計) が TC-INV 行に出ることを assert.
         """
         findings = [
             v1_3_20_finding_factory(
@@ -385,7 +387,60 @@ class TestFillSummaryV1320:
         assert (
             loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_CODE).value == "TC-INV"
         )
-        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_HIGH).value == 1
-        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_MED).value == 1
-        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_LOW).value == 1
-        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_TOTAL).value == 3
+        # 4 区分独立 (TODO-T 18a):
+        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_HIGH).value == 1   # D: 🔴
+        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_MED).value == 1    # E: 🟠
+        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_LOW).value == 0    # F: 🟡 なし
+        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_INFO).value == 1   # G: 🟢
+        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_TOTAL).value == 3  # H: 合計
+
+
+# ═══════════════════════════════════════════════════════════════
+# TODO-T 18b: 4 区分独立化の恒久検証 (回帰防止)
+# ═══════════════════════════════════════════════════════════════
+
+class TestFillSummary4SeverityIndependence:
+    """4 区分独立集計の恒久検証 (TODO-T 18a で導入).
+
+    旧仕様 (3 区分集約、🟠 + 🟡 を `_is_medium_or_orange` で E 列にまとめ書き)
+    への逆戻りを検出する。新仕様では 🔴/🟠/🟡/🟢 を D/E/F/G 列に独立集計する。
+    """
+
+    def test_fill_summary_aggregates_4_severities_independently(
+        self, v1_3_20_finding_factory, loaded_summary_sheet
+    ):
+        """🔴/🟠/🟡/🟢 を 1 件ずつ与えて D/E/F/G 列にそれぞれ独立に 1 が出る."""
+        findings = [
+            v1_3_20_finding_factory(
+                "qualified_but_transitional_tax", severity="🔴 Critical",
+                wallet_txn_id="r-1",
+            ),
+            v1_3_20_finding_factory(
+                "qualified_but_transitional_tax", severity="🟠 High",
+                wallet_txn_id="o-1",
+            ),
+            v1_3_20_finding_factory(
+                "qualified_but_transitional_tax", severity="🟡 Med",
+                wallet_txn_id="y-1",
+            ),
+            v1_3_20_finding_factory(
+                "qualified_but_transitional_tax", severity="🟢 Low",
+                wallet_txn_id="g-1",
+            ),
+        ]
+        _fill_summary(
+            loaded_summary_sheet,
+            findings,
+            company_name="独立テスト",
+            period="2025-12",
+            area_sheet_map={"A14": "A14 インボイス"},
+            lower_row_styles=[],
+        )
+        tc_inv_row = _SUM_TC_START_ROW + 7  # Row 17
+        # 4 区分が独立して D/E/F/G に 1 ずつ集計される
+        # (もし 🟠 + 🟡 まとめ書きに逆戻りしたら F=0, E=2 になり fail する)
+        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_HIGH).value == 1   # D: 🔴 のみ
+        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_MED).value == 1    # E: 🟠 のみ
+        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_LOW).value == 1    # F: 🟡 のみ
+        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_INFO).value == 1   # G: 🟢 のみ
+        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_TOTAL).value == 4  # H: 合計
