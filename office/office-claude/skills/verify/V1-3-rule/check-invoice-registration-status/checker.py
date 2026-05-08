@@ -162,6 +162,7 @@ def to_finding(row, classification):  # type: ignore[no-untyped-def]
         # === Optional 属性 (V1-3-10 由来) ===
         wallet_txn_id=row.wallet_txn_id,
         message=_format_message(row, classification),
+        current_value=row.tax_label,
         # === V1-3-20 由来の追加属性 (E1 で共通 Finding に追加済) ===
         classification=classification.value if classification else None,
         partner=row.partner,
