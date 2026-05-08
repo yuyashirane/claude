@@ -46,8 +46,15 @@ _TC_NAMES: list[tuple[str, str]] = [
     ("TC-05", "非課税/対象外の費用"),
     ("TC-06", "税金/租税公課"),
     ("TC-07", "福利厚生"),
+    ("TC-INV", "インボイス"),
 ]
 _TC_DISPLAY: dict[str, str] = {code: name for code, name in _TC_NAMES}
+
+# サマリー集計時の tc_code 変換マッピング (V1-3-20 → TC-INV 等).
+# 将来 V1-3-21 / V1-3-22 等が追加される際もここに追加する。
+_TC_CODE_TO_SUMMARY_KEY: dict[str, str] = {
+    "V1-3-20": "TC-INV",
+}
 
 # ─────────────────────────────────────────────────────────────────────
 # テンプレート内の固定位置（サマリーシート）
@@ -58,7 +65,7 @@ _SUM_COMPANY_CELL = (3, 2)   # B3: 対象会社名
 _SUM_PERIOD_CELL  = (4, 2)   # B4: 対象月
 _SUM_DATE_CELL    = (5, 2)   # B5: チェック実行日
 _SUM_TC_START_ROW = 10   # TC-01 データ行
-_SUM_TC_TOTAL_ROW = 17   # 合計行
+_SUM_TC_TOTAL_ROW = 18   # 合計行 (E5-5 後修正 17a で TC-INV 行追加に伴い 17 → 18)
 _SUM_TC_COL_CODE  = 1    # A: TC コード
 _SUM_TC_COL_HIGH  = 4    # D: 重大件数
 _SUM_TC_COL_MED   = 5    # E: 要注意件数
@@ -490,11 +497,19 @@ def _fill_summary(
     ws.cell(_SUM_PERIOD_CELL[0],  _SUM_PERIOD_CELL[1]).value  = format_target_month(period) if period else ""
     ws.cell(_SUM_DATE_CELL[0],    _SUM_DATE_CELL[1]).value    = _date_cls.today().strftime("%Y/%m/%d")
 
-    # Row 10-16: TC 別件数（D/E/F/G 列を上書き）
+    # Row 10-17: TC 別件数（D/E/F/G 列を上書き、E5-5 後修正 17a で TC-INV 含めて 8 件）
+    def _resolve_summary_tc_code(f) -> str:
+        """Finding の tc_code を集計キーに変換する.
+        V1-3-20 等は _TC_CODE_TO_SUMMARY_KEY 経由で TC-INV 系に正規化、
+        登録なしの場合は tc_code をそのまま返す.
+        """
+        raw_tc = getattr(f, "tc_code", "")
+        return _TC_CODE_TO_SUMMARY_KEY.get(raw_tc, raw_tc)
+
     total_r = total_y = total_g = total_all = 0
     for tc_idx, (tc_code, _) in enumerate(_TC_NAMES):
         row = _SUM_TC_START_ROW + tc_idx
-        tc_f = [f for f in findings if getattr(f, "tc_code", "") == tc_code]
+        tc_f = [f for f in findings if _resolve_summary_tc_code(f) == tc_code]
         r = sum(1 for f in tc_f if "🔴" in getattr(f, "severity", ""))
         y = sum(1 for f in tc_f if _is_medium_or_orange(getattr(f, "severity", "")))
         g = sum(1 for f in tc_f if "🟢" in getattr(f, "severity", ""))

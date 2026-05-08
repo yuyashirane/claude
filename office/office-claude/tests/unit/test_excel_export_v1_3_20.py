@@ -22,6 +22,13 @@ from openpyxl import load_workbook
 from skills._common.schema import Finding, LinkHints
 from skills.export.excel_report.template_engine import (
     DEFAULT_TEMPLATE_PATH,
+    _SUM_TC_COL_CODE,
+    _SUM_TC_COL_HIGH,
+    _SUM_TC_COL_LOW,
+    _SUM_TC_COL_MED,
+    _SUM_TC_COL_TOTAL,
+    _SUM_TC_START_ROW,
+    _fill_summary,
     _group_v1_3_20_findings,
     _write_child_row,
     build_output,
@@ -329,3 +336,56 @@ class TestWriteChildRowV1320:
         _write_child_row(loaded_a14_sheet, 5, finding, txn_index={})
         # _txn_date の出力形式は "%Y/%m/%d" (slash 区切り)
         assert loaded_a14_sheet.cell(row=5, column=_COL_DATE).value == "2025/12/01"
+
+
+# ═══════════════════════════════════════════════════════════════
+# E5-5 後修正 17a: サマリー TC-INV 行への V1-3-20 集計
+# ═══════════════════════════════════════════════════════════════
+
+@pytest.fixture
+def loaded_summary_sheet():
+    """TC_template.xlsx を load し、サマリーシートを返す."""
+    wb = load_workbook(DEFAULT_TEMPLATE_PATH)
+    return wb["サマリー"]
+
+
+class TestFillSummaryV1320:
+    """サマリーシートの TC-INV 行への V1-3-20 Finding 集計を検証する単体テスト群."""
+
+    def test_fill_summary_aggregates_v1_3_20_into_tc_inv_row(
+        self, v1_3_20_finding_factory, loaded_summary_sheet
+    ):
+        """V1-3-20 Finding (tc_code='V1-3-20') が TC-INV 行に集計されることを確認.
+
+        _TC_NAMES の末尾 (TC-INV) は _SUM_TC_START_ROW + 7 = Row 17 に書かれる.
+        V1-3-20 Finding 3 件 (Critical / High / Low) を渡し、
+        要修正 1 / 要注意 1 / 要確認 1 / 合計 3 が TC-INV 行に出ることを assert.
+        """
+        findings = [
+            v1_3_20_finding_factory(
+                "qualified_but_transitional_tax", severity="🔴 Critical"
+            ),
+            v1_3_20_finding_factory(
+                "qualified_but_transitional_tax", severity="🟠 High"
+            ),
+            v1_3_20_finding_factory(
+                "qualified_but_transitional_tax", severity="🟢 Low"
+            ),
+        ]
+        _fill_summary(
+            loaded_summary_sheet,
+            findings,
+            company_name="テスト会社",
+            period="2025-12",
+            area_sheet_map={"A14": "A14 インボイス"},
+            lower_row_styles=[],
+        )
+        # TC-INV 行 = _SUM_TC_START_ROW (10) + 7 (8 番目) = Row 17
+        tc_inv_row = _SUM_TC_START_ROW + 7
+        assert (
+            loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_CODE).value == "TC-INV"
+        )
+        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_HIGH).value == 1
+        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_MED).value == 1
+        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_LOW).value == 1
+        assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_TOTAL).value == 3
