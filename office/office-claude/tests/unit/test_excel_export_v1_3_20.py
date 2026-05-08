@@ -14,14 +14,24 @@ Phase 2 / 3 未実装 (子行 partner / format_invoice_memo 反映、親行 V1-3
 """
 from __future__ import annotations
 
+from datetime import date
+
 import pytest
 from openpyxl import load_workbook
 
-from skills._common.schema import Finding
+from skills._common.schema import Finding, LinkHints
 from skills.export.excel_report.template_engine import (
+    DEFAULT_TEMPLATE_PATH,
     _group_v1_3_20_findings,
+    _write_child_row,
     build_output,
 )
+
+
+# 列定数 (template_engine の _D_DATE / _D_PARTNER / _D_MEMO に対応)
+_COL_DATE = 8     # H
+_COL_PARTNER = 10  # J
+_COL_MEMO = 13    # M
 
 
 @pytest.fixture
@@ -207,3 +217,115 @@ class TestBuildOutputV1320:
         assert non_empty_rows >= 5, (
             f"想定行数以上のデータが書かれていない: {non_empty_rows}"
         )
+
+
+# ═══════════════════════════════════════════════════════════════
+# Phase 2 単体テスト: _write_child_row への直接属性反映
+# ═══════════════════════════════════════════════════════════════
+
+@pytest.fixture
+def loaded_a14_sheet():
+    """TC_template.xlsx を load し、A14 シートを返す.
+
+    _write_child_row は NamedStyle (child_row_style) に依存するため、
+    フレッシュ Workbook ではなく実テンプレを load する必要がある。
+    """
+    wb = load_workbook(DEFAULT_TEMPLATE_PATH)
+    return wb["A14 インボイス"]
+
+
+@pytest.fixture
+def loaded_a4_sheet():
+    """TC_template.xlsx を load し、A4 シート (V1-3-10 経路用) を返す."""
+    wb = load_workbook(DEFAULT_TEMPLATE_PATH)
+    return wb["A4 家賃・地代"]
+
+
+class TestWriteChildRowV1320:
+    """_write_child_row への V1-3-20 直接属性反映の単体テスト (Phase 2)."""
+
+    def test_v1_3_20_child_row_partner_uses_finding_attribute(
+        self, v1_3_20_finding_factory, loaded_a14_sheet
+    ):
+        """V1-3-20 Finding の partner 直接属性が J 列に書かれる."""
+        finding = v1_3_20_finding_factory(
+            "qualified_but_transitional_tax",
+            partner="スモークテスト株式会社",
+        )
+        _write_child_row(loaded_a14_sheet, 5, finding, txn_index={})
+        assert (
+            loaded_a14_sheet.cell(row=5, column=_COL_PARTNER).value
+            == "スモークテスト株式会社"
+        )
+
+    def test_v1_3_20_child_row_transaction_date_uses_finding_attribute(
+        self, v1_3_20_finding_factory, loaded_a14_sheet
+    ):
+        """V1-3-20 Finding の transaction_date 直接属性が H 列に書かれる."""
+        finding = v1_3_20_finding_factory(
+            "qualified_but_transitional_tax",
+            transaction_date="2025-12-01",
+        )
+        _write_child_row(loaded_a14_sheet, 5, finding, txn_index={})
+        assert (
+            loaded_a14_sheet.cell(row=5, column=_COL_DATE).value == "2025-12-01"
+        )
+
+    def test_v1_3_20_child_row_memo_uses_format_invoice_memo(
+        self, v1_3_20_finding_factory, loaded_a14_sheet
+    ):
+        """V1-3-20 Finding の classification + is_qualified_invoice が M 列に整形される."""
+        finding = v1_3_20_finding_factory(
+            "qualified_but_transitional_tax",
+            is_qualified_invoice=True,
+        )
+        _write_child_row(loaded_a14_sheet, 5, finding, txn_index={})
+        assert (
+            loaded_a14_sheet.cell(row=5, column=_COL_MEMO).value
+            == "qualified_but_transitional_tax · 適格=true"
+        )
+
+    def test_v1_3_10_child_row_falls_back_to_txn_index_when_finding_attrs_none(
+        self, loaded_a4_sheet
+    ):
+        """V1-3-10 Finding (直接属性 None + txn_index 空) は H/J/M が空文字になる.
+
+        Phase 2 の or チェーンが既存挙動 (空文字) を保持していることの回帰防止。
+        """
+        finding = Finding(
+            tc_code="V1-3-10",
+            sub_code="TC-02a",
+            severity="🟢 Low",
+            review_level="🟢 参考確認",
+            error_type="balance_mismatch",
+            area="A4",
+            sort_priority=10,
+            message="V1-3-10 test",
+            wallet_txn_id="t-v1310",
+        )
+        _write_child_row(loaded_a4_sheet, 5, finding, txn_index={})
+        assert loaded_a4_sheet.cell(row=5, column=_COL_DATE).value == ""
+        assert loaded_a4_sheet.cell(row=5, column=_COL_PARTNER).value == ""
+        assert loaded_a4_sheet.cell(row=5, column=_COL_MEMO).value == ""
+
+    def test_v1_3_20_child_row_falls_back_when_transaction_date_empty(
+        self, v1_3_20_finding_factory, loaded_a14_sheet
+    ):
+        """transaction_date が空文字のとき _txn_date(finding) にフォールバックする.
+
+        V1-3-20 checker は row.transaction_date が None のとき空文字 ""
+        を Finding に入れる (checker.py:168-172)。空文字は falsy なので
+        or チェーンで _txn_date(finding) (link_hints.period_start 経由)
+        にフォールバックする。
+        """
+        finding = v1_3_20_finding_factory(
+            "qualified_but_transitional_tax",
+            transaction_date="",
+            link_hints=LinkHints(
+                target="general_ledger",
+                period_start=date(2025, 12, 1),
+            ),
+        )
+        _write_child_row(loaded_a14_sheet, 5, finding, txn_index={})
+        # _txn_date の出力形式は "%Y/%m/%d" (slash 区切り)
+        assert loaded_a14_sheet.cell(row=5, column=_COL_DATE).value == "2025/12/01"
