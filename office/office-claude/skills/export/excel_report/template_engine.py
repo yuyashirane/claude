@@ -67,25 +67,30 @@ _SUM_DATE_CELL    = (5, 2)   # B5: チェック実行日
 _SUM_TC_START_ROW = 10   # TC-01 データ行
 _SUM_TC_TOTAL_ROW = 18   # 合計行 (E5-5 後修正 17a で TC-INV 行追加に伴い 17 → 18)
 _SUM_TC_COL_CODE  = 1    # A: TC コード
-_SUM_TC_COL_HIGH  = 4    # D: 重大件数
-_SUM_TC_COL_MED   = 5    # E: 要注意件数
-_SUM_TC_COL_LOW   = 6    # F: 要確認件数
-_SUM_TC_COL_TOTAL = 7    # G: 合計
-_SUM_LOWER_HEADER = 20   # Row 20: 下部テーブルヘッダー
-_SUM_LOWER_DATA   = 21   # Row 21+: 下部テーブルデータ
+# TODO-T 18a: 新テンプレ準拠で 4 区分独立集計に刷新。既存命名は維持し集計対象を変更:
+# (旧仕様は内部 4 区分を Excel 上で 3 列に集約、🟠+🟡 を MED にまとめ書き)
+# (新仕様は内部 4 区分を Excel 上も独立 4 列に展開、INFO 列は 🟢 集計の正規担当)
+_SUM_TC_COL_HIGH  = 4    # D: 要修正 (🔴 Critical、旧と同じ severity)
+_SUM_TC_COL_MED   = 5    # E: 要判断 (🟠 のみ、旧は 🟠+🟡 まとめ書き)
+_SUM_TC_COL_LOW   = 6    # F: 要確認 (🟡 のみ、新規独立、旧は 🟢 集計だった)
+_SUM_TC_COL_INFO  = 7    # G: 参考 (🟢、新規列、旧 LOW の意味継承)
+_SUM_TC_COL_TOTAL = 8    # H: 合計 (旧 G 列 7 → 新 H 列 8)
+_SUM_LOWER_HEADER = 21   # Row 21: 下部テーブルヘッダー (旧 20 → 新 21)
+_SUM_LOWER_DATA   = 22   # Row 22+: 下部テーブルデータ (旧 21 → 新 22、Row 21 ヘッダー保持)
 
-# 下部テーブル列
-_LT_AREA     = 1
-_LT_AREANAME = 2
-_LT_TC       = 4
-_LT_TCNAME   = 5
-_LT_SUBCNT   = 7
-_LT_HIGH     = 8
-_LT_MED      = 9
-_LT_LOW      = 10
-_LT_TOTAL    = 11
-_LT_AMOUNT   = 12
-_LT_PROGRESS = 13
+# 下部テーブル列 (TODO-T 18a: 新テンプレで全列 1 シフト + 新規列追加、4 区分独立集計)
+_LT_AREA      = 1   # A: エリア
+_LT_AREANAME  = 2   # B: エリア名
+_LT_TC        = 4   # D: 項目
+_LT_TCNAME    = 5   # E: チェック項目
+_LT_SUBCNT    = 8   # H: 項目数 (旧 G 列 7 → 新 H 列 8)
+_LT_HIGH      = 9   # I: 要修正 (🔴 Critical、旧 H 列 8 → 新 I 列 9)
+_LT_MED       = 10  # J: 要判断 (🟠 のみ、旧 I 列 9 → 新 J 列 10、旧は 🟠+🟡 まとめ)
+_LT_LOW       = 11  # K: 要確認 (🟡 のみ、旧 J 列 10 → 新 K 列 11、新規独立)
+_LT_INFO      = 12  # L: 参考 (🟢、新規列、旧 _LT_LOW の意味継承)
+_LT_TOTAL     = 13  # M: 合計件数 (旧 K 列 11 → 新 M 列 13)
+_LT_AMOUNT    = 14  # N: 影響金額合計 (旧 L 列 12 → 新 N 列 14)
+_LT_PROGRESS  = 15  # O: 確認進捗 (旧 M 列 13 → 新 O 列 15)
 
 # ─────────────────────────────────────────────────────────────────────
 # テンプレート内の固定位置（詳細シート・23列）
@@ -304,10 +309,6 @@ def _severity_label(severity: str) -> str:
     return severity
 
 
-def _is_medium_or_orange(severity: str) -> bool:
-    return "🟡" in severity or "🟠" in severity
-
-
 def _sort_key(f) -> tuple:
     sp = getattr(f, "sort_priority", 0)
     if not sp or sp <= 0:
@@ -506,25 +507,33 @@ def _fill_summary(
         raw_tc = getattr(f, "tc_code", "")
         return _TC_CODE_TO_SUMMARY_KEY.get(raw_tc, raw_tc)
 
-    total_r = total_y = total_g = total_all = 0
+    # TODO-T 18a: 4 区分独立集計 (🔴/🟠/🟡/🟢 を D/E/F/G 列に独立して書く)
+    total_critical = total_high = total_low = total_info = total_all = 0
     for tc_idx, (tc_code, _) in enumerate(_TC_NAMES):
         row = _SUM_TC_START_ROW + tc_idx
         tc_f = [f for f in findings if _resolve_summary_tc_code(f) == tc_code]
-        r = sum(1 for f in tc_f if "🔴" in getattr(f, "severity", ""))
-        y = sum(1 for f in tc_f if _is_medium_or_orange(getattr(f, "severity", "")))
-        g = sum(1 for f in tc_f if "🟢" in getattr(f, "severity", ""))
+        critical_cnt = sum(1 for f in tc_f if "🔴" in getattr(f, "severity", ""))
+        high_cnt     = sum(1 for f in tc_f if "🟠" in getattr(f, "severity", ""))
+        low_cnt      = sum(1 for f in tc_f if "🟡" in getattr(f, "severity", ""))
+        info_cnt     = sum(1 for f in tc_f if "🟢" in getattr(f, "severity", ""))
         t = len(tc_f)
-        ws.cell(row, _SUM_TC_COL_CODE).value  = tc_code   # 末尾スペース除去
-        ws.cell(row, _SUM_TC_COL_HIGH).value  = r
-        ws.cell(row, _SUM_TC_COL_MED).value   = y
-        ws.cell(row, _SUM_TC_COL_LOW).value   = g
-        ws.cell(row, _SUM_TC_COL_TOTAL).value = t
-        total_r += r; total_y += y; total_g += g; total_all += t
+        ws.cell(row, _SUM_TC_COL_CODE).value  = tc_code
+        ws.cell(row, _SUM_TC_COL_HIGH).value  = critical_cnt   # D: 要修正 (🔴)
+        ws.cell(row, _SUM_TC_COL_MED).value   = high_cnt       # E: 要判断 (🟠)
+        ws.cell(row, _SUM_TC_COL_LOW).value   = low_cnt        # F: 要確認 (🟡)
+        ws.cell(row, _SUM_TC_COL_INFO).value  = info_cnt       # G: 参考 (🟢)
+        ws.cell(row, _SUM_TC_COL_TOTAL).value = t              # H: 合計
+        total_critical += critical_cnt
+        total_high     += high_cnt
+        total_low      += low_cnt
+        total_info     += info_cnt
+        total_all      += t
 
-    # Row 17: 合計（値のみ上書き）
-    ws.cell(_SUM_TC_TOTAL_ROW, _SUM_TC_COL_HIGH).value  = total_r
-    ws.cell(_SUM_TC_TOTAL_ROW, _SUM_TC_COL_MED).value   = total_y
-    ws.cell(_SUM_TC_TOTAL_ROW, _SUM_TC_COL_LOW).value   = total_g
+    # Row 18: 合計 (TODO-T 18a で 4 区分独立)
+    ws.cell(_SUM_TC_TOTAL_ROW, _SUM_TC_COL_HIGH).value  = total_critical
+    ws.cell(_SUM_TC_TOTAL_ROW, _SUM_TC_COL_MED).value   = total_high
+    ws.cell(_SUM_TC_TOTAL_ROW, _SUM_TC_COL_LOW).value   = total_low
+    ws.cell(_SUM_TC_TOTAL_ROW, _SUM_TC_COL_INFO).value  = total_info
     ws.cell(_SUM_TC_TOTAL_ROW, _SUM_TC_COL_TOTAL).value = total_all
 
     # Row 21+: 既存データ行を削除して再生成
@@ -555,10 +564,12 @@ def _fill_lower_table(
             sheet_name = area_sheet_map.get(area, area)
             area_disp  = re.sub(r"^A\d+\s+", "", sheet_name)
             tc_name    = _TC_DISPLAY.get(tc, tc)
-            sub_count  = len({getattr(f, "sub_code", "") for f in tc_f})
-            r_cnt = sum(1 for f in tc_f if "🔴" in getattr(f, "severity", ""))
-            y_cnt = sum(1 for f in tc_f if _is_medium_or_orange(getattr(f, "severity", "")))
-            g_cnt = sum(1 for f in tc_f if "🟢" in getattr(f, "severity", ""))
+            sub_count    = len({getattr(f, "sub_code", "") for f in tc_f})
+            # TODO-T 18a: 4 区分独立集計
+            critical_cnt = sum(1 for f in tc_f if "🔴" in getattr(f, "severity", ""))
+            high_cnt     = sum(1 for f in tc_f if "🟠" in getattr(f, "severity", ""))
+            low_cnt      = sum(1 for f in tc_f if "🟡" in getattr(f, "severity", ""))
+            info_cnt     = sum(1 for f in tc_f if "🟢" in getattr(f, "severity", ""))
             total = len(tc_f)
 
             row_data = {
@@ -567,10 +578,11 @@ def _fill_lower_table(
                 _LT_TC:       tc,
                 _LT_TCNAME:   tc_name,
                 _LT_SUBCNT:   sub_count,
-                _LT_HIGH:     r_cnt,
-                _LT_MED:      y_cnt,
-                _LT_LOW:      g_cnt,
-                _LT_TOTAL:    total,
+                _LT_HIGH:     critical_cnt,  # I: 要修正 (🔴)
+                _LT_MED:      high_cnt,      # J: 要判断 (🟠)
+                _LT_LOW:      low_cnt,       # K: 要確認 (🟡)
+                _LT_INFO:     info_cnt,      # L: 参考 (🟢)
+                _LT_TOTAL:    total,         # M: 合計件数
                 _LT_AMOUNT:   "-",
                 _LT_PROGRESS: "",
             }
