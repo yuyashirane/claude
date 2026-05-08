@@ -1079,6 +1079,17 @@ def main() -> int:
             if mj_candidate.exists() and mj_candidate.stat().st_size > 0:
                 manual_journals_path = mj_candidate
 
+            # Phase C-1 クラスタ C-1/C-2: items / sections / tags master を optional 配線
+            # ファイル不在時は build_check_context 側で None として扱われ、
+            # 既存の動作と完全に同一になる。
+            def _optional_path(filename: str) -> "Path | None":
+                cand = base_dir / filename
+                return cand if (cand.exists() and cand.stat().st_size > 0) else None
+
+            items_path = _optional_path("items_all.json")
+            sections_path = _optional_path("sections_all.json")
+            tags_path = _optional_path("tags_all.json")
+
             # build_check_context シグネチャ（freee_to_context.py L374〜L383）厳守:
             #   必須 5: deals_path / partners_path / account_items_path / company_info_path / taxes_codes_path
             #   Optional: manual_journals_path / items_path / sections_path / tags_path
@@ -1091,6 +1102,9 @@ def main() -> int:
                 company_info_path=base_dir / "company_info.json",
                 taxes_codes_path=base_dir / "taxes_codes.json",
                 manual_journals_path=manual_journals_path,
+                items_path=items_path,
+                sections_path=sections_path,
+                tags_path=tags_path,
             )
 
         rows = _build_invoice_check_rows(ctx)
