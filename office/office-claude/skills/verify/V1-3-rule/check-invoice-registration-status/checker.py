@@ -172,6 +172,8 @@ def to_finding(row, classification):  # type: ignore[no-untyped-def]
         ),
         is_qualified_invoice=row.is_qualified_invoice,
         tax_code=row.tax_code,
+        debit_amount=int(row.debit_amount),
+        credit_amount=int(row.credit_amount),
         # === raw 構造は維持 (raw の完全解体は将来の別タスク) ===
         raw=_build_raw(row),
     )
