@@ -39,7 +39,7 @@ def check_files() -> bool:
         "skills/export/excel_report/SKILL.md",
         "skills/export/excel_report/__init__.py",
         "skills/export/excel_report/exporter.py",
-        "skills/export/excel_report/sheet_builder.py",
+        # sheet_builder.py は TODO-I (commit 023) で削除済 (dead code)
         "skills/export/excel_report/styles.py",
         "skills/export/excel_report/sort_priority_map.py",
         "skills/export/excel_report/references/area-sheet-mapping.json",
