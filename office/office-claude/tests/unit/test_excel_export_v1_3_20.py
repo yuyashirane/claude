@@ -444,3 +444,63 @@ class TestFillSummary4SeverityIndependence:
         assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_LOW).value == 1    # F: 🟡 のみ
         assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_INFO).value == 1   # G: 🟢 のみ
         assert loaded_summary_sheet.cell(tc_inv_row, _SUM_TC_COL_TOTAL).value == 4  # H: 合計
+
+
+# ═══════════════════════════════════════════════════════════════
+# TODO-V 020: 下段表 D/E 列の TC コードマッピング適用 (恒久検証)
+# ═══════════════════════════════════════════════════════════════
+
+class TestLowerTableV1320Mapping:
+    """V1-3-20 Finding が下段表で TC-INV / 業務文言にマッピング表示される恒久検証.
+
+    `_TC_CODE_TO_SUMMARY_KEY` のキー変換が `_fill_lower_table` で適用され、
+    生 tc_code='V1-3-20' が下段表の D 列 = 'TC-INV' (TC コード)、E 列 =
+    'インボイス適格/非適格など' (業務文言、`_TC_DISPLAY` 経由) として
+    表示されることを確認する。
+
+    回帰防止の観点: もし `_fill_lower_table` の集約キーから
+    `_TC_CODE_TO_SUMMARY_KEY` 変換を外すと、D/E 列が "V1-3-20" 生表示に
+    逆戻りして本テストが fail する。
+    """
+
+    def test_lower_table_v1_3_20_mapped_to_tc_inv(
+        self, v1_3_20_finding_factory, loaded_summary_sheet
+    ):
+        """V1-3-20 Finding が下段表 Row 22 で D='TC-INV', E='インボイス適格/非適格など'."""
+        from skills.export.excel_report.template_engine import (
+            _LT_TC,
+            _LT_TCNAME,
+            _SUM_LOWER_DATA,
+            _fill_lower_table,
+        )
+
+        findings = [
+            v1_3_20_finding_factory(
+                "qualified_but_transitional_tax", severity="🟠 High",
+                wallet_txn_id="lt-1",
+            ),
+            v1_3_20_finding_factory(
+                "qualified_but_transitional_tax", severity="🟠 High",
+                wallet_txn_id="lt-2",
+            ),
+        ]
+        # 下段表書き込み (V1-3-10 経路と同じ呼び出しパターン)
+        _fill_lower_table(
+            loaded_summary_sheet,
+            findings,
+            area_sheet_map={"A14": "A14 インボイス"},
+            row_styles=[],
+        )
+
+        # V1-3-20 Finding は area="A14" で 1 グループに集約される
+        # → _SUM_LOWER_DATA (Row 22) に書き込まれる
+        data_row = _SUM_LOWER_DATA
+        # D 列 (項目) = TC コード ("TC-INV"、_TC_CODE_TO_SUMMARY_KEY 変換後)
+        assert (
+            loaded_summary_sheet.cell(data_row, _LT_TC).value == "TC-INV"
+        ), f"D{data_row} は 'TC-INV' を期待 (生 'V1-3-20' が出ていれば追従漏れ)"
+        # E 列 (チェック項目) = 業務文言 (_TC_DISPLAY["TC-INV"] = "インボイス適格/非適格など")
+        assert (
+            loaded_summary_sheet.cell(data_row, _LT_TCNAME).value
+            == "インボイス適格/非適格など"
+        ), f"E{data_row} は 'インボイス適格/非適格など' を期待 (テンプレ E29 と一致)"

@@ -46,7 +46,7 @@ _TC_NAMES: list[tuple[str, str]] = [
     ("TC-05", "非課税/対象外の費用"),
     ("TC-06", "税金/租税公課"),
     ("TC-07", "福利厚生"),
-    ("TC-INV", "インボイス"),
+    ("TC-INV", "インボイス適格/非適格など"),
 ]
 _TC_DISPLAY: dict[str, str] = {code: name for code, name in _TC_NAMES}
 
@@ -551,9 +551,15 @@ def _fill_lower_table(
     row_styles: list[dict],
 ) -> None:
     """サマリー下部テーブル（Row 21+）にエリア別集計行を生成する。"""
+    # TODO-V (020): 集約キーで _TC_CODE_TO_SUMMARY_KEY によるキー変換を適用。
+    # V1-3-20 等の生 tc_code (例: "V1-3-20") を TC-INV 系に正規化することで、
+    # 下段表 D 列 (TC コード) と E 列 (_TC_DISPLAY 経由の業務文言) が
+    # サマリー上段と整合する。V1-3-10 経路は辞書未登録で素通り。
     groups: dict[tuple[str, str], list] = {}
     for f in findings:
-        key = (getattr(f, "area", ""), getattr(f, "tc_code", ""))
+        raw_tc = getattr(f, "tc_code", "")
+        mapped_tc = _TC_CODE_TO_SUMMARY_KEY.get(raw_tc, raw_tc)
+        key = (getattr(f, "area", ""), mapped_tc)
         groups.setdefault(key, []).append(f)
 
     row = _SUM_LOWER_DATA
