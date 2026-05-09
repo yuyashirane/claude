@@ -549,12 +549,16 @@ class TestParentRowObservationV1320Mapping:
             == "給与/人件費の税区分誤り"
         )
 
-    def test_v1_3_10_tc01_double_label_preserved(self):
-        """V1-3-10 (TC-01) 系の二重「の税区分」表記は現状維持 (TODO-AA 範囲明示).
+    def test_v1_3_10_tc01_no_redundancy(self):
+        """V1-3-10 (TC-01) 系の二重「の税区分」表記が解消されたことを確認 (TODO-AA 完了).
 
-        `_TC_DISPLAY["TC-01"]` = "売上の税区分" のため、合成結果は
-        「売上の税区分の税区分誤り」になる. 二重「の税区分」表記は
-        TODO-AA で別途処理予定であり、本タスク (TODO-Y) のスコープ外.
+        TODO-AA (029) で `_TC_NAMES["TC-01"]` の値を「売上の税区分」→「売上」に
+        変更したため、`_parent_row_observation` の合成結果は
+        「売上の税区分の税区分誤り」→「売上の税区分誤り」に正常化される.
+
+        本テストは TODO-Y で追加された旧 assert (二重表記を許容) を TODO-AA で
+        書き換えたもの. 重複源 (`_TC_NAMES` の TC-01 値) を再度「の税区分」に
+        戻すと本テストが fail する (回帰検出).
         """
         from types import SimpleNamespace
         from skills.export.excel_report.template_engine import (
@@ -563,5 +567,22 @@ class TestParentRowObservationV1320Mapping:
         group = SimpleNamespace(tc_code="TC-01", sub_code="")
         assert (
             _parent_row_observation(group)
-            == "売上の税区分の税区分誤り"
+            == "売上の税区分誤り"
+        )
+
+    def test_v1_3_10_tc01_no_double_tax_class_substring(self):
+        """TODO-AA 防御テスト: TC-01 の親行 D 列に「の税区分の税区分」substring が出現しない.
+
+        修正源 (`_TC_NAMES["TC-01"]`) を将来また「○○の税区分」のような値に
+        戻した場合、format テンプレート `f"{tc_name}の税区分誤り"` と組み合わさって
+        substring 「の税区分の税区分」が再発する. 本防御 assert で即時検出する.
+        """
+        from types import SimpleNamespace
+        from skills.export.excel_report.template_engine import (
+            _parent_row_observation,
+        )
+        group = SimpleNamespace(tc_code="TC-01", sub_code="")
+        result = _parent_row_observation(group)
+        assert "の税区分の税区分" not in result, (
+            f"重複文字列 'の税区分の税区分' が再発: {result!r}"
         )
