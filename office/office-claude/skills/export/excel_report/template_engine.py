@@ -869,7 +869,7 @@ def _parent_row_check_result(group) -> str:
 def _write_parent_row(ws, row: int, group, ctx=None) -> None:
     """親行 1 行を詳細シートの指定行に描画する。
 
-    - A 列: severity 表示ラベル（重大/要注意/要確認）
+    - A 列: severity 表示ラベル（要修正/要判断/要確認/参考）
     - B 列: 代表 sub_code
     - C 列: C-β-3 サマリー（件数・合計・論点パターン）
     - D 列: 観点
