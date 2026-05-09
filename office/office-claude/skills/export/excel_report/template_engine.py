@@ -127,10 +127,12 @@ _D_WALLETTXN  = 23   # W: walletTxnId
 _DET_TOTAL_COLS = 23
 
 # severity 抽出に失敗した場合の最小限フォールバック
+# TODO-W (022): 新 4 区分独立化、TC_template.xlsx A4 家賃・地代 シートの実測値を採用
 _FALLBACK_FILLS: dict[str, PatternFill] = {
-    "重大":   PatternFill(start_color="FFC7CE", end_color="FFC7CE", fill_type="solid"),
-    "要注意": PatternFill(start_color="FFEB9C", end_color="FFEB9C", fill_type="solid"),
-    "要確認": PatternFill(start_color="C6EFCE", end_color="C6EFCE", fill_type="solid"),
+    "要修正": PatternFill(start_color="FFFCEBEB", end_color="FFFCEBEB", fill_type="solid"),
+    "要判断": PatternFill(start_color="FFFAEEDA", end_color="FFFAEEDA", fill_type="solid"),
+    "要確認": PatternFill(start_color="FFFEF5D6", end_color="FFFEF5D6", fill_type="solid"),
+    "参考":   PatternFill(start_color="FFEAF3DE", end_color="FFEAF3DE", fill_type="solid"),
 }
 
 # ─────────────────────────────────────────────────────────────────────
@@ -401,7 +403,7 @@ def _extract_severity_fills(wb) -> dict[str, PatternFill]:
     抽出に失敗したラベルはフォールバック値を使用。
     """
     fills: dict[str, PatternFill] = {}
-    labels_needed = {"重大", "要注意", "要確認"}
+    labels_needed = {"要修正", "要判断", "要確認", "参考"}  # TODO-W: 新 4 区分
 
     for sheet_name in wb.sheetnames:
         if sheet_name in ("サマリー", "参考"):

@@ -762,9 +762,12 @@ def test_summary_legend_in_n_o_columns(tmp_path):
     assert ws.cell(6, 14).value == "参考（任意）"
 
 
-def test_severity_display_low_is_youkakunin(tmp_path):
-    """🟢 Low の親行 A 列表示が「要確認」になる。子行 A 列は空欄。
+def test_severity_display_low_is_sankou(tmp_path):
+    """🟢 Low の親行 A 列表示が「参考」になる。子行 A 列は空欄。
 
+    TODO-W (022) で新 4 区分仕様に追従:
+      旧仕様: 🟢 Low → "要確認"
+      新仕様: 🟢 Low → "参考" (🟡 Medium が新「要確認」へ独立)
     Phase 8-B: 親行 A 列に severity ラベル表示、子行 A 列は空欄。
     """
     from skills.export.excel_report.exporter import export_to_excel
@@ -773,11 +776,39 @@ def test_severity_display_low_is_youkakunin(tmp_path):
     export_to_excel(findings, output)
     wb = load_workbook(output)
     ws = wb["A10 その他経費"]
-    # 親行 A 列: 要確認
-    assert ws.cell(4, 1).value == "要確認"
+    # 親行 A 列: 参考 (新仕様)
+    assert ws.cell(4, 1).value == "参考"
     # 子行 A 列: 空欄
     assert ws.cell(5, 1).value in (None, ""), \
         f"子行 A5 は空欄: got {ws.cell(5, 1).value!r}"
+
+
+def test_severity_display_4_severities_distinct_labels():
+    """SEVERITY_DISPLAY で 4 severity が 4 ラベルに独立マッピングされる (TODO-W 恒久検証).
+
+    新仕様では 🔴/🟠/🟡/🟢 が「要修正/要判断/要確認/参考」の 4 区分に独立対応する。
+    旧仕様 (🟠/🟡 統合 "要注意"、🟢 = "要確認") からの移行を恒久検証。
+    TODO-T 18b の test_fill_summary_aggregates_4_severities_independently と
+    対の A シート (詳細シート) 版。
+    """
+    from skills.export.excel_report.styles import SEVERITY_DISPLAY
+    expected = {
+        "🔴": "要修正",
+        "🟠": "要判断",
+        "🟡": "要確認",
+        "🟢": "参考",
+    }
+    for emoji, label in expected.items():
+        assert SEVERITY_DISPLAY[emoji] == label, (
+            f"SEVERITY_DISPLAY[{emoji!r}] expected {label!r}, "
+            f"got {SEVERITY_DISPLAY[emoji]!r}"
+        )
+
+    # 4 ラベルが互いに重複しないことを確認 (旧仕様の "要注意" 統合の再発防止)
+    labels = {SEVERITY_DISPLAY[e] for e in ["🔴", "🟠", "🟡", "🟢"]}
+    assert len(labels) == 4, (
+        f"4 severities should map to 4 distinct labels, got {labels}"
+    )
 
 
 # ─────────────────────────────────────────────────────────────────────

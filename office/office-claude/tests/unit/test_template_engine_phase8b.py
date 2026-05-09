@@ -281,8 +281,8 @@ class TestSpecZWhiteChildRows:
         output = tmp_path / "out.xlsx"
         export_to_excel([f], output)
         ws = load_workbook(output)["A5 人件費"]
-        # 親行 A = 重大
-        assert ws.cell(4, 1).value == "重大"
+        # 親行 A = 要修正 (TODO-W 022 で新 4 区分仕様: 🔴 Critical → "要修正"、旧「重大」)
+        assert ws.cell(4, 1).value == "要修正"
         # 子行 A は空
         assert ws.cell(5, 1).value in (None, "")
 
