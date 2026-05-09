@@ -504,3 +504,64 @@ class TestLowerTableV1320Mapping:
             loaded_summary_sheet.cell(data_row, _LT_TCNAME).value
             == "インボイス適格/非適格など"
         ), f"E{data_row} は 'インボイス適格/非適格など' を期待 (テンプレ E29 と一致)"
+
+
+# ═══════════════════════════════════════════════════════════════
+# TODO-Y 026: _parent_row_observation の TC コードマッピング適用
+# ═══════════════════════════════════════════════════════════════
+
+class TestParentRowObservationV1320Mapping:
+    """`_parent_row_observation` で V1-3-20 → TC-INV マッピング適用 (TODO-Y 026).
+
+    `_TC_CODE_TO_SUMMARY_KEY` 経由で V1-3-20 が "TC-INV" に正規化され、
+    `_TC_DISPLAY["TC-INV"]` = "インボイス適格/非適格など" を引いて
+    「インボイス適格/非適格などの税区分誤り」が返ることを確認する.
+
+    回帰防止: マッピングを外すと空文字フォールバック「税区分誤り」(prefix なし)
+    に逆戻りして本テストが fail する. `_fill_lower_table` の TODO-V (020) で
+    確立した正規化方針を親行書き込みヘルパーにも波及させる位置づけ.
+
+    sub_code は GROUP_KEY_STRATEGIES の Pattern B に登録されていない値を
+    指定して `is_mixing_pattern` を False に固定し、Pattern A 経路を通す.
+    """
+
+    def test_v1_3_20_returns_invoice_label(self):
+        """V1-3-20 → 「インボイス適格/非適格などの税区分誤り」(新仕様)."""
+        from types import SimpleNamespace
+        from skills.export.excel_report.template_engine import (
+            _parent_row_observation,
+        )
+        group = SimpleNamespace(tc_code="V1-3-20", sub_code="01")
+        assert (
+            _parent_row_observation(group)
+            == "インボイス適格/非適格などの税区分誤り"
+        )
+
+    def test_v1_3_10_tc03_returns_payroll_label(self):
+        """V1-3-10 (TC-03) 系の現状動作維持: 「給与/人件費の税区分誤り」(回帰防止)."""
+        from types import SimpleNamespace
+        from skills.export.excel_report.template_engine import (
+            _parent_row_observation,
+        )
+        group = SimpleNamespace(tc_code="TC-03", sub_code="")
+        assert (
+            _parent_row_observation(group)
+            == "給与/人件費の税区分誤り"
+        )
+
+    def test_v1_3_10_tc01_double_label_preserved(self):
+        """V1-3-10 (TC-01) 系の二重「の税区分」表記は現状維持 (TODO-AA 範囲明示).
+
+        `_TC_DISPLAY["TC-01"]` = "売上の税区分" のため、合成結果は
+        「売上の税区分の税区分誤り」になる. 二重「の税区分」表記は
+        TODO-AA で別途処理予定であり、本タスク (TODO-Y) のスコープ外.
+        """
+        from types import SimpleNamespace
+        from skills.export.excel_report.template_engine import (
+            _parent_row_observation,
+        )
+        group = SimpleNamespace(tc_code="TC-01", sub_code="")
+        assert (
+            _parent_row_observation(group)
+            == "売上の税区分の税区分誤り"
+        )

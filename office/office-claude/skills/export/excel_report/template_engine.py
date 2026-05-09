@@ -814,10 +814,16 @@ def _parent_row_observation(group) -> str:
 
     Pattern A: 「{TC名称}の税区分誤り」
     Pattern B: 「同一科目に税区分混在」
+
+    TODO-Y (026): `_TC_CODE_TO_SUMMARY_KEY` 経由でキー正規化を行う。
+    V1-3-20 → "TC-INV" → "インボイス適格/非適格など" を解決し、サマリー
+    上段・下段表 (`_resolve_summary_tc_code` / `_fill_lower_table`) と
+    整合させる。V1-3-10 系 (TC-01〜TC-07) は辞書未登録で素通り。
     """
     if is_mixing_pattern(group):
         return "同一科目に税区分混在"
-    tc_name = _TC_DISPLAY.get(group.tc_code, "")
+    mapped_tc = _TC_CODE_TO_SUMMARY_KEY.get(group.tc_code, group.tc_code)
+    tc_name = _TC_DISPLAY.get(mapped_tc, "")
     return f"{tc_name}の税区分誤り" if tc_name else "税区分誤り"
 
 
