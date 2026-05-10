@@ -56,6 +56,7 @@ SKILL_DIR = Path(__file__).resolve().parent
 
 V1_3_10_DIR = PROJECT_ROOT / "skills" / "verify" / "V1-3-rule" / "check-tax-classification"
 V1_3_20_DIR = PROJECT_ROOT / "skills" / "verify" / "V1-3-rule" / "check-invoice-registration-status"
+V1_3_11_DIR = PROJECT_ROOT / "skills" / "verify" / "V1-3-rule" / "check-reduced-tax-rate"
 
 EXIT_OK = 0
 EXIT_ARGS = 1
@@ -380,6 +381,16 @@ def _load_v1_3_20_run_module():
     return _load_module("v1_3_20_run", V1_3_20_DIR / "run.py")
 
 
+def _load_v1_3_11_checker():
+    """V1-3-11 (check-reduced-tax-rate) の checker.py を動的ロード。
+
+    V1-3-11 は `checks/` サブパッケージ名衝突を回避するため、checker.py
+    内部で importlib による独立ロードを行う。本関数は checker.py 自体を
+    一意な sys.modules キーで読むのみ (sys.path 操作不要)。
+    """
+    return _load_module("v1_3_11_checker", V1_3_11_DIR / "checker.py")
+
+
 # ─────────────────────────────────────────────────────────────
 # checker runner functions
 # ─────────────────────────────────────────────────────────────
@@ -388,6 +399,11 @@ def _run_v1_3_10(ctx) -> list:
     """V1-3-10 を実行して findings を返す。"""
     checker = _load_v1_3_10_checker()
     return checker.run(ctx)
+
+
+def _run_v1_3_11(ctx) -> list:
+    """V1-3-11 (check-reduced-tax-rate) を実行して findings を返す。"""
+    return _load_v1_3_11_checker().run(ctx)
 
 
 def _run_v1_3_20(ctx) -> list:
@@ -424,6 +440,7 @@ def _run_v1_3_20(ctx) -> list:
 _INTERNAL_CHECKERS: list[tuple[str, Callable[[Any], list]]] = [
     ("V1-3-10", _run_v1_3_10),
     ("V1-3-20", _run_v1_3_20),
+    ("V1-3-11", _run_v1_3_11),
 ]
 
 

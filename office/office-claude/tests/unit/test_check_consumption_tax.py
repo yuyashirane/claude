@@ -110,10 +110,11 @@ class TestSkillStartupSmoke:
         assert ex_info.value.code == run_module.EXIT_ARGS
 
     def test_internal_checkers_declared(self, run_module):
-        """_INTERNAL_CHECKERS に V1-3-10 と V1-3-20 が登録されている (将来拡張点の確認)。"""
+        """_INTERNAL_CHECKERS に V1-3-10 / V1-3-20 / V1-3-11 が登録されている (将来拡張点の確認)。"""
         names = [name for name, _ in run_module._INTERNAL_CHECKERS]
         assert "V1-3-10" in names
         assert "V1-3-20" in names
+        assert "V1-3-11" in names
         # 各 entry が (name, callable) であること
         for name, fn in run_module._INTERNAL_CHECKERS:
             assert callable(fn), f"{name} の runner_fn が callable でない"
