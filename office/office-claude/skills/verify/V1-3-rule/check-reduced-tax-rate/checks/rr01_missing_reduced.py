@@ -1,44 +1,40 @@
 """RR-01: 軽減税率 8% 漏れ検出 (主検出)。
 
-標準税率10% で計上されているが、軽減税率対象 (食品 / 新聞) の可能性が
-高い row を検出する。Pattern: 税区分起点 + 科目フィルタ + KW 判定 +
+標準税率10% で計上されているが、軽減税率対象 (食品 / 新聞 定期購読) の
+可能性が高い row を検出する。Pattern: 税区分起点 + 科目フィルタ + KW 判定 +
 negative match (digital サービス除外)。
 
 3 サブタイプ:
-    RR-01a: 新聞図書費 + 標準10% + (新聞 KW or ¥200 × コンビニ partner)
-            → direct_error, 🔴 Critical, confidence=75-85
+    RR-01a: 新聞図書費 + 標準10% + 定期購読 KW
+            → direct_error, 🔴 Critical, confidence=85
     RR-01b: 会議費系 (会議費/福利厚生費/接待交際費) + 標準10% + 強食品 KW
             → direct_error, 🔴 Critical, confidence=80
     RR-01c: その他関連科目 (消耗品費/通信費/雑費) + 標準10% + 弱食品 KW
             → direct_error, 🟡 Medium, confidence=60
 
-判定要素の重要度 (035-survey §3.1 / 実データ検証):
+判定要素の重要度 (035-survey §3.1 / 036.5 補修後):
     税区分コード ★★★  起点 (is_standard_purchase_10)
     勘定科目     ★★★  dispatch 軸 (新聞 / 会議費系 / その他)
-    摘要 KW (強) ★★★  弁当 / 食料品 / テイクアウト 等
-    取引先       ★★   コンビニ partner で score 上昇
+    摘要 KW (強) ★★★  弁当 / 食料品 / テイクアウト / 定期購読 等
     摘要 KW (弱) ★★   コーヒー / お茶 / 飲料 等
-    金額         ★    ¥200 × コンビニ = 新聞推定 (補助情報)
+    取引先       ★    補助情報のみ (RR-01a の判定要素からは除外、036.5 補修)
+
+軽減税率対象の業務的根拠 (国税庁通達):
+    新聞のうち軽減税率対象は、「一定の題号を用い、政治、経済、社会、文化等
+    に関する一般社会的事実を掲載する週 2 回以上発行される新聞であって、
+    定期購読契約に基づくものに限られます」。
+    → 駅売り・コンビニ等での 1 部売り (新聞単発購入) は標準 10% が正。
+    → 036.5 補修で「コンビニ + 低額」条件を削除し、定期購読 KW 必須化。
 
 False positive 制御:
-    negative_digital KW (Amazonプライム会費等) に該当する row は検出しない。
-    実データ ㈱デイリーユニフォーム 2025-06〜12 で「Amazonプライム」が
-    通信費 + 標準10% で大量に存在することを 035-survey §2.5 で確認済。
+    - negative_digital KW (Amazonプライム会費等) に該当する row は検出しない。
+    - 036.5 補修: 新聞単発購入を軽減対象として誤検出する条件を撤去。
+      KW なしの新聞図書費は判別不能のため検出しない (false negative 許容)。
 
-設計メモ: 035-survey §3.1 / §3.2.3
+設計メモ: 035-survey §3.1 / §3.2.3 + 036.5 補修方針
 配置: skills/verify/V1-3-rule/check-reduced-tax-rate/checks/rr01_missing_reduced.py
 """
 from __future__ import annotations
-
-from decimal import Decimal
-
-
-# ═══════════════════════════════════════════════════════════════
-# モジュール定数
-# ═══════════════════════════════════════════════════════════════
-
-# 新聞単発購入の推定金額しきい値 (¥200 程度の日刊紙)
-_NEWSPAPER_AMOUNT_THRESHOLD = Decimal("500")
 
 
 # ═══════════════════════════════════════════════════════════════
@@ -109,34 +105,24 @@ def run(ctx) -> list:
 # ═══════════════════════════════════════════════════════════════
 
 def _check_rr01a_newspaper(row, ctx, keywords: dict, search_text: str):
-    """RR-01a: 新聞図書費 + 標準10% + (新聞 KW or ¥200 × コンビニ partner)。
+    """RR-01a: 新聞図書費 + 標準10% + 定期購読 KW。
 
-    新聞は軽減税率対象。新聞図書費科目で 10% 計上は強い候補。
+    軽減税率対象は「定期購読契約に基づく新聞」のみ (国税庁通達)。
+    駅売り・コンビニ等での 1 部売り (新聞単発購入) は標準 10% が正しいため、
+    定期購読 KW がない row は検出しない (036.5 補修)。
+
+    note: 「新聞」「日刊」「朝刊」等の KW のみでは定期購読か単発か判別不能の
+    ため、必ず「定期購読」「月極」等の購読契約を示す KW とのコンテキストで
+    検出する設計。これにより新聞単発購入の false positive を撲滅。
     """
     from skills._common.lib.finding_factory import create_finding, build_link_hints
-    from skills._common.lib.keyword_matcher import matches_any, matches_of
+    from skills._common.lib.keyword_matcher import matches_of
 
-    newspaper_strong = keywords.get("newspaper_strong", [])
     newspaper_subscription = keywords.get("newspaper_subscription", [])
-    convenience_partners = keywords.get("convenience_partners", [])
 
-    # パターン 1: 新聞 KW あり (高確度)
-    matched = matches_of(search_text, newspaper_strong + newspaper_subscription)
-    if matched:
-        confidence = 85
-        reason = f"摘要に新聞関連 KW ({', '.join(matched)}) が含まれています"
-    # パターン 2: コンビニ partner + 低額 (新聞単発購入推定)
-    elif (
-        matches_any(search_text, convenience_partners)
-        and _is_low_amount(row, _NEWSPAPER_AMOUNT_THRESHOLD)
-    ):
-        confidence = 75
-        reason = (
-            f"取引先がコンビニで金額が ¥{_NEWSPAPER_AMOUNT_THRESHOLD} 以下のため、"
-            f"新聞単発購入 (軽減税率対象) の可能性があります"
-        )
-    else:
-        return None  # 新聞図書費でも書籍購入等 (標準10%) の可能性 → 検出しない
+    matched = matches_of(search_text, newspaper_subscription)
+    if not matched:
+        return None  # 定期購読 KW なし → 単発購入 or 書籍購入の可能性、検出しない
 
     link_hints = build_link_hints("general_ledger", row, ctx)
 
@@ -150,10 +136,11 @@ def _check_rr01a_newspaper(row, ctx, keywords: dict, search_text: str):
         row=row,
         current_value=row.tax_label,
         suggested_value="課対仕入8%(軽)",
-        confidence=confidence,
+        confidence=85,
         message=(
             f"科目「{row.account}」が標準税率10%で計上されていますが、"
-            f"{reason}。軽減税率8%(軽)の可能性があるため、確認してください。"
+            f"摘要に定期購読 KW ({', '.join(matched)}) が含まれています。"
+            f"定期購読契約に基づく新聞は軽減税率8%(軽)対象のため、確認してください。"
         ),
         link_hints=link_hints,
     )
@@ -234,17 +221,3 @@ def _check_rr01c_weak_food(row, ctx, keywords: dict, search_text: str):
     )
 
 
-# ═══════════════════════════════════════════════════════════════
-# ヘルパー
-# ═══════════════════════════════════════════════════════════════
-
-def _is_low_amount(row, threshold: Decimal) -> bool:
-    """row の借方金額が threshold 以下か判定する。
-
-    新聞単発購入 (¥200 程度) を「コンビニ partner + 低額」のパターンで
-    推定するための補助判定。
-    """
-    debit = getattr(row, "debit_amount", Decimal("0")) or Decimal("0")
-    if not isinstance(debit, Decimal):
-        debit = Decimal(str(debit))
-    return Decimal("0") < debit <= threshold

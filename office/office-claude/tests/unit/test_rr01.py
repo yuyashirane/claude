@@ -1,7 +1,7 @@
 """V1-3-11 RR-01 (軽減税率 8% 漏れ主検出) のユニットテスト。
 
 3 サブタイプ (RR-01a/b/c) + 全体動作を網羅:
-    RR-01a: 新聞図書費 + 標準10% + (新聞 KW or ¥200×コンビニ)
+    RR-01a: 新聞図書費 + 標準10% + 定期購読 KW (036.5 補修: 単発購入条件削除)
     RR-01b: 会議費系 + 標準10% + 強食品 KW
     RR-01c: その他関連科目 + 標準10% + 弱食品 KW
 
@@ -71,14 +71,19 @@ def _make_ctx(schema, rows):
 # ═════════════════════════════════════════════════════════════
 
 class TestRR01a:
-    """新聞図書費 (10%) で軽減税率漏れの可能性を検出。"""
+    """新聞図書費 (10%) + 定期購読 KW で軽減税率漏れの可能性を検出。
 
-    def test_positive_newspaper_keyword(self, schema, make_row_factory):
-        """摘要に「日経新聞」KW あり → RR-01a (conf=85) 検出。"""
+    036.5 補修: 「コンビニ + 低額」条件を削除。軽減税率対象は定期購読契約に
+    基づく新聞のみ (国税庁通達)、新聞単発購入 (コンビニ等での 1 部売り) は
+    標準 10% が正しいため。
+    """
+
+    def test_positive_subscription_keyword(self, schema, make_row_factory):
+        """摘要に「定期購読」あり → RR-01a (conf=85) 検出。"""
         rr01 = _load_rr01()
         row = make_row_factory(
             account="新聞図書費", tax_label="課対仕入10%",
-            description="日経新聞 12月分", partner="",
+            description="日経新聞 定期購読料 12月分", partner="",
             debit_amount=4000, credit_amount=0,
         )
         findings = rr01.run(_make_ctx(schema, [row]))
@@ -90,10 +95,10 @@ class TestRR01a:
         assert f.error_type == "direct_error"
         assert f.area == "A10"
         assert f.confidence == 85
-        assert "日経" in f.message or "新聞" in f.message
+        assert "定期購読" in f.message
 
-    def test_positive_subscription_keyword(self, schema, make_row_factory):
-        """摘要に「定期購読」あり → RR-01a 検出。"""
+    def test_positive_subscription_alone(self, schema, make_row_factory):
+        """「定期購読」KW 単独 (新聞 KW なし) でも検出。"""
         rr01 = _load_rr01()
         row = make_row_factory(
             account="新聞図書費", tax_label="課対仕入10%",
@@ -104,8 +109,39 @@ class TestRR01a:
         assert len(findings) == 1
         assert findings[0].sub_code == "RR-01a"
 
-    def test_positive_convenience_low_amount(self, schema, make_row_factory):
-        """コンビニ partner + ¥200 (低額) → RR-01a (conf=75、新聞推定)。"""
+    def test_positive_subscription_subscription_word(self, schema, make_row_factory):
+        """「subscription」(英語表記) でも検出。"""
+        rr01 = _load_rr01()
+        row = make_row_factory(
+            account="新聞図書費", tax_label="課対仕入10%",
+            description="Newspaper subscription 2025-12",
+            debit_amount=4500, credit_amount=0,
+        )
+        findings = rr01.run(_make_ctx(schema, [row]))
+        assert len(findings) == 1
+        assert findings[0].sub_code == "RR-01a"
+
+    def test_negative_newspaper_keyword_only(self, schema, make_row_factory):
+        """「新聞」KW あるが「定期購読」KW なし → 検出なし。
+
+        036.5 補修: 「新聞」「日刊」「朝刊」KW 単独では定期購読か単発か
+        判別不能のため検出しない。新聞単発購入 (10%) の false positive を回避。
+        """
+        rr01 = _load_rr01()
+        row = make_row_factory(
+            account="新聞図書費", tax_label="課対仕入10%",
+            description="日経新聞 (1 部売り)", partner="",
+            debit_amount=200, credit_amount=0,
+        )
+        findings = rr01.run(_make_ctx(schema, [row]))
+        assert findings == []
+
+    def test_negative_convenience_single_purchase(self, schema, make_row_factory):
+        """コンビニ partner + ¥200 (新聞単発購入) → 検出なし (036.5 補修確認)。
+
+        036-impl では検出されていたが、新聞単発購入は標準 10% が正しいため
+        036.5 で条件を撤去。本テストは回帰防止のため重要。
+        """
         rr01 = _load_rr01()
         row = make_row_factory(
             account="新聞図書費", tax_label="課対仕入10%",
@@ -113,14 +149,13 @@ class TestRR01a:
             debit_amount=200, credit_amount=0,
         )
         findings = rr01.run(_make_ctx(schema, [row]))
-        assert len(findings) == 1
-        f = findings[0]
-        assert f.sub_code == "RR-01a"
-        assert f.confidence == 75
-        assert "コンビニ" in f.message
+        assert findings == []
 
-    def test_positive_convenience_in_description(self, schema, make_row_factory):
-        """description にコンビニ名 + 低額 → RR-01a (実データに多いパターン)。"""
+    def test_negative_convenience_in_description(self, schema, make_row_factory):
+        """description がコンビニ名のみ (定期購読 KW なし) → 検出なし。
+
+        036-impl では検出していた実データ多数パターン (036.5 補修で消える)。
+        """
         rr01 = _load_rr01()
         row = make_row_factory(
             account="新聞図書費", tax_label="課対仕入10%",
@@ -128,11 +163,10 @@ class TestRR01a:
             debit_amount=200, credit_amount=0,
         )
         findings = rr01.run(_make_ctx(schema, [row]))
-        assert len(findings) == 1
-        assert findings[0].sub_code == "RR-01a"
+        assert findings == []
 
     def test_negative_book_purchase(self, schema, make_row_factory):
-        """書籍購入 (高額、新聞 KW なし) → 検出なし (書籍は標準10%)。"""
+        """書籍購入 (高額、定期購読 KW なし) → 検出なし (書籍は標準10%)。"""
         rr01 = _load_rr01()
         row = make_row_factory(
             account="新聞図書費", tax_label="課対仕入10%",
@@ -143,23 +177,12 @@ class TestRR01a:
         assert findings == []
 
     def test_negative_already_reduced(self, schema, make_row_factory):
-        """既に軽減税率 8% で計上 → 検出不要。"""
+        """既に軽減税率 8% で計上 (定期購読でも) → 検出不要。"""
         rr01 = _load_rr01()
         row = make_row_factory(
             account="新聞図書費", tax_label="課対仕入8%(軽)",
-            description="日経新聞",
+            description="日経新聞 定期購読",
             debit_amount=4000, credit_amount=0,
-        )
-        findings = rr01.run(_make_ctx(schema, [row]))
-        assert findings == []
-
-    def test_negative_high_amount_convenience(self, schema, make_row_factory):
-        """コンビニ + 高額 (¥1000、新聞でない) → 検出なし。"""
-        rr01 = _load_rr01()
-        row = make_row_factory(
-            account="新聞図書費", tax_label="課対仕入10%",
-            description="", partner="ローソン",
-            debit_amount=1000, credit_amount=0,
         )
         findings = rr01.run(_make_ctx(schema, [row]))
         assert findings == []
@@ -390,11 +413,11 @@ class TestRR01General:
         """複数 row 混合: 検出対象 + スキップ対象が同一 ctx に存在。"""
         rr01 = _load_rr01()
         rows = [
-            # detect: RR-01a
+            # detect: RR-01a (036.5 補修後は定期購読 KW 必須)
             make_row_factory(
                 wallet_txn_id="t1",
                 account="新聞図書費", tax_label="課対仕入10%",
-                description="日経新聞", debit_amount=4000, credit_amount=0,
+                description="日経新聞 定期購読", debit_amount=4000, credit_amount=0,
             ),
             # detect: RR-01b
             make_row_factory(
@@ -447,7 +470,7 @@ class TestRR01General:
         rr01 = _load_rr01()
         row = make_row_factory(
             account="新聞図書費", tax_label="課対仕入10%",
-            description="日経新聞", transaction_date=date(2025, 12, 5),
+            description="日経新聞 定期購読", transaction_date=date(2025, 12, 5),
             debit_amount=4000, credit_amount=0,
         )
         findings = rr01.run(_make_ctx(schema, [row]))

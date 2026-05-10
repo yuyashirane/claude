@@ -1,8 +1,9 @@
 {
   "_comment": "V1-3-11 軽減税率主検出 (RR-01a/b/c) で使う KW 辞書。V1-3-10 の food_keywords と独立 (Plugin 移植単位を skill 内に閉じる)。",
-  "_version": "1.0",
+  "_version": "1.1",
   "_last_updated": "2026-05-10",
-  "_source": "035-survey §3.1 / §7.4",
+  "_source": "035-survey §3.1 / §7.4 + 036.5 補修 (RR-01a 定期購読 KW 拡張)",
+  "_changes_v1_1": "newspaper_subscription に「月極」「subscription」追加 (036.5 補修)。",
 
   "newspaper_strong": [
     "新聞",
@@ -18,7 +19,9 @@
 
   "newspaper_subscription": [
     "定期購読",
-    "購読料"
+    "購読料",
+    "月極",
+    "subscription"
   ],
 
   "food_strong": [
