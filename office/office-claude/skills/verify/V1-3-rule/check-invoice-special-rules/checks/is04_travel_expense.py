@@ -117,7 +117,7 @@ def _make_is04a_finding(row, ctx, amount, matched_kws):
         sub_code="IS-04a",
         severity="🟡 Medium",
         error_type="gray_review",
-        area="A15",
+        area="A14",
         sort_priority=55,
         row=row,
         current_value=row.tax_label,

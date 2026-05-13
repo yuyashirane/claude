@@ -114,7 +114,7 @@ def _make_is01a_finding(row, ctx, amount):
         sub_code="IS-01a",
         severity="🟢 Low",
         error_type="gray_review",
-        area="A15",  # 暫定: インボイス area に併置 (040-discuss で X/Y/Z 案を再確定)
+        area="A14",  # 暫定: インボイス area に併置 (040-discuss で X/Y/Z 案を再確定)
         sort_priority=50,  # 040-discuss で再調整、現状は V1-3-20 invoice 系の後ろ
         row=row,
         current_value=row.tax_label,
@@ -142,7 +142,7 @@ def _make_is01b_finding(row, ctx, amount, txn_date):
         sub_code="IS-01b",
         severity="🟡 Medium",
         error_type="mild_warning",
-        area="A15",
+        area="A14",
         sort_priority=51,
         row=row,
         current_value=row.tax_label,

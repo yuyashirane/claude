@@ -1278,13 +1278,18 @@ def build_output(
             non_v1_3_20_findings = [
                 f for f in sorted_f if getattr(f, "tc_code", None) != "V1-3-20"
             ]
+            # 039.5: A14 で V1-3-20 系 (TC-INV) と V1-3-21 系 (IS-*) の共存を許容。
+            # 業務概念: インボイス制度 world (V1-3-20 適格判定 + V1-3-21 帳簿保存特例)。
+            # V1-3-20 は classification 軸の専用 grouping、それ以外は標準 grouping を
+            # 適用し、結果のグループを連結して 1 シートに統合する。
+            # 設計原則: area = business world (skill 単位ではなく業務概念単位)。
+            # 既存 V1-3-20 単独・V1-3-21 単独の挙動は変更なし (既存パス保持)。
             if v1_3_20_findings and non_v1_3_20_findings:
-                raise ValueError(
-                    f"Mixed tc_code in area {area}: "
-                    f"V1-3-20={len(v1_3_20_findings)}, "
-                    f"others={len(non_v1_3_20_findings)}"
-                )
-            if v1_3_20_findings:
+                v1_3_20_groups = _group_v1_3_20_findings(v1_3_20_findings)
+                other_groups = _group_findings(non_v1_3_20_findings)
+                combined_groups = list(v1_3_20_groups) + list(other_groups)
+                _fill_detail_sheet_with_groups(ws, combined_groups, ctx=ctx)
+            elif v1_3_20_findings:
                 v1_3_20_groups = _group_v1_3_20_findings(v1_3_20_findings)
                 _fill_detail_sheet_with_groups(ws, v1_3_20_groups, ctx=ctx)
             else:

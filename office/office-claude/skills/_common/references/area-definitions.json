@@ -66,13 +66,8 @@
     },
     "A14": {
       "name": "インボイス",
-      "description": "インボイス制度対応、適格/非適格事業者、経過措置、取引先未整備等に関する確認",
-      "used_by_tc": ["TC-INV"]
-    },
-    "A15": {
-      "name": "インボイス特例",
-      "description": "帳簿保存のみで仕入税額控除を許容する例外群 (少額・公共交通機関・自販機・出張旅費)。false positive world として税理士の過剰確認抑制が目的。",
-      "used_by_tc": ["V1-3-21"]
+      "description": "インボイス制度 world: 適格判定 (V1-3-20 TC-INV) + 帳簿保存特例 (V1-3-21 IS-*)。false negative (要判断) と false positive (過剰確認抑制 advisory) を同一 world で扱う。039.5 で V1-3-21 を A14 統合 (悠皓判断: 2 大 world 設計)。",
+      "used_by_tc": ["TC-INV", "V1-3-21"]
     }
   },
 

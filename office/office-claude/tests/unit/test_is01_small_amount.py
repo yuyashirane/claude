@@ -87,7 +87,7 @@ class TestIS01a:
         assert f.sub_code == "IS-01a"
         assert f.severity == "🟢 Low"
         assert f.confidence == 50
-        assert f.area == "A15"
+        assert f.area == "A14"
         assert "9,800" in f.message
         assert "少額特例" in f.message
 

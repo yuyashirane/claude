@@ -103,7 +103,7 @@ def _make_is03a_finding(row, ctx, amount, matched_kws):
         sub_code="IS-03a",
         severity="🟢 Low",
         error_type="gray_review",
-        area="A15",
+        area="A14",
         sort_priority=54,
         row=row,
         current_value=row.tax_label,
