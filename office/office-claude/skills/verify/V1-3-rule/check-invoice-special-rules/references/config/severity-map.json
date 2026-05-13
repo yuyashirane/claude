@@ -1,0 +1,44 @@
+{
+  "_comment": "V1-3-21 各 sub_code の severity / confidence デフォルト値。",
+  "_version": "1.0",
+  "_last_updated": "2026-05-13",
+  "_source": "038-survey §2.1 表のたたき台 + 悠皓判断 8 (advisory 性質)",
+  "_note": "実装上は各 check ファイル内に直接記述している。本 JSON は 040-discuss で振動するための参照点。",
+
+  "IS-01a": {
+    "severity": "🟢 Low",
+    "confidence": 50,
+    "error_type": "gray_review",
+    "rationale": "advisory: 1万円未満仕入は大量発生、過剰確認抑制が目的"
+  },
+  "IS-01b": {
+    "severity": "🟡 Medium",
+    "confidence": 90,
+    "error_type": "mild_warning",
+    "rationale": "R11/10 以降の期間外発動、通常の請求書要件適用警告"
+  },
+  "IS-02a": {
+    "severity": "🟡 Medium",
+    "confidence": 70,
+    "error_type": "gray_review",
+    "rationale": "advisory: 旅費交通費の過剰確認抑制"
+  },
+  "IS-02b": {
+    "severity": "🟠 High",
+    "confidence": 80,
+    "error_type": "invoice_warning",
+    "rationale": "negative warning: タクシー等が公共交通機関特例の対象外"
+  },
+  "IS-03a": {
+    "severity": "🟢 Low",
+    "confidence": 60,
+    "error_type": "gray_review",
+    "rationale": "advisory: 自販機購入の過剰確認抑制、件数少なく影響軽微"
+  },
+  "IS-04a": {
+    "severity": "🟡 Medium",
+    "confidence": 60,
+    "error_type": "gray_review",
+    "rationale": "advisory: 従業員精算の過剰確認抑制"
+  }
+}

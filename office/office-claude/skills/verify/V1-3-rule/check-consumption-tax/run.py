@@ -57,6 +57,7 @@ SKILL_DIR = Path(__file__).resolve().parent
 V1_3_10_DIR = PROJECT_ROOT / "skills" / "verify" / "V1-3-rule" / "check-tax-classification"
 V1_3_20_DIR = PROJECT_ROOT / "skills" / "verify" / "V1-3-rule" / "check-invoice-registration-status"
 V1_3_11_DIR = PROJECT_ROOT / "skills" / "verify" / "V1-3-rule" / "check-reduced-tax-rate"
+V1_3_21_DIR = PROJECT_ROOT / "skills" / "verify" / "V1-3-rule" / "check-invoice-special-rules"
 
 EXIT_OK = 0
 EXIT_ARGS = 1
@@ -391,6 +392,16 @@ def _load_v1_3_11_checker():
     return _load_module("v1_3_11_checker", V1_3_11_DIR / "checker.py")
 
 
+def _load_v1_3_21_checker():
+    """V1-3-21 (check-invoice-special-rules) の checker.py を動的ロード。
+
+    V1-3-11 と同様、`checks/` 衝突回避のため checker.py 内部で
+    importlib + 独立 sys.modules キー (`v1_3_21_*`) を使う。本関数は
+    checker.py 自体を一意な sys.modules キーで読むのみ。
+    """
+    return _load_module("v1_3_21_checker", V1_3_21_DIR / "checker.py")
+
+
 # ─────────────────────────────────────────────────────────────
 # checker runner functions
 # ─────────────────────────────────────────────────────────────
@@ -404,6 +415,15 @@ def _run_v1_3_10(ctx) -> list:
 def _run_v1_3_11(ctx) -> list:
     """V1-3-11 (check-reduced-tax-rate) を実行して findings を返す。"""
     return _load_v1_3_11_checker().run(ctx)
+
+
+def _run_v1_3_21(ctx) -> list:
+    """V1-3-21 (check-invoice-special-rules) を実行して findings を返す。
+
+    インボイス特例群 (少額・公共交通機関・自販機・出張旅費) の主検出
+    (IS-01a/b, IS-02a/b, IS-03a, IS-04a) を統合実行。
+    """
+    return _load_v1_3_21_checker().run(ctx)
 
 
 def _run_v1_3_20(ctx) -> list:
@@ -441,6 +461,7 @@ _INTERNAL_CHECKERS: list[tuple[str, Callable[[Any], list]]] = [
     ("V1-3-10", _run_v1_3_10),
     ("V1-3-20", _run_v1_3_20),
     ("V1-3-11", _run_v1_3_11),
+    ("V1-3-21", _run_v1_3_21),  # 039 impl: インボイス特例群 (帳簿保存特例 advisory)
 ]
 
 

@@ -1,0 +1,18 @@
+{
+  "_comment": "V1-3-21 IS-01 少額特例の適用期間設定。28改正法附則第53条の2 (経過措置)。",
+  "_version": "1.0",
+  "_last_updated": "2026-05-13",
+  "_source": "国税庁 https://www.nta.go.jp/publication/pamph/shohi/kaisei/202304/02.htm",
+  "_note": "実装上は checks/_shared.py の定数 SMALL_AMOUNT_PERIOD_START/END で扱う。本 JSON は将来の柔軟運用用 (要件改正時の参照点)。",
+
+  "small_amount_special_rule": {
+    "period_start": "2023-10-01",
+    "period_end": "2029-09-30",
+    "threshold_with_tax": 10000,
+    "eligibility_company_requirement": {
+      "base_period_taxable_sales_max": 100000000,
+      "specified_period_taxable_sales_max": 50000000,
+      "_note": "本 checker では事業者要件を判定しない (advisory 性質、悠皓判断 8)"
+    }
+  }
+}
